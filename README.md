@@ -47,7 +47,7 @@ To run the FastAPI application locally:
 
 To automatically deploy the application to Kubernetes using GitHub Actions:
 
-1. Push your changes to the `main` branch.
+1. Push your changes to the `master` branch.
 
 2. GitHub Actions will trigger the deployment workflow defined in `.github/workflows/...`.
 
