@@ -1,5 +1,0 @@
-input: {'instruments':['sitar','dhol'],
-    'type':'indian soap',
-    'intensity':'low',
-    'emotion': 'sad',
-    'bpm':100}
