@@ -1,5 +1,0 @@
-input: {'instruments':['veena','dhol'],
-    'type':'indian soap',
-    'intensity':'medium',
-    'emotion': 'happy',
-    'bpm':160}
