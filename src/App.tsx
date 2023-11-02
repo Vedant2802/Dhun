@@ -1,19 +1,26 @@
-import './App.css'
-import { useBearStore } from './zustand/zustand'
+import "./App.css";
+import AddVideo from "./components/addVideoInitial/AddVideo";
+import Header from "./components/header/Header";
+import Login from "./pages/Login/Login";
+import MainDashboard from "./pages/MainDashboard/MainDashboard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const bears = useBearStore((state) => state.bears)
-  const increase = useBearStore((state) => state.increasePopulation)
+  // const bears = useBearStore((state) => state.bears);
+  // const increase = useBearStore((state) => state.increasePopulation);
 
   return (
-    <>
-      <div className='min-h-screen flex justify-center items-center cursor-pointer' onClick={increase}>
-      <h1 className="text-3xl font-bold text-blue-600">
-        GENAI {bears}
-      </h1>
-      </div>
-    </>
-  )
+    <div className="dashboardContainer">
+      <Header />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AddVideo />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<MainDashboard />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
-export default App
+export default App;

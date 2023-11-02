@@ -1,0 +1,15 @@
+.mainDashboard {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(21, 21, 21, 1);
+    padding: 4px;
+    .resultDashboard{
+        width: 75%;
+    }
+    .generateMusic {
+        width: 25%;
+        margin-top: 6px;
+    }
+}
