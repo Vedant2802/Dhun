@@ -4,7 +4,7 @@ import raag from "../../../public/icons/raagAi.svg";
 
 const Header = () => {
   return (
-    <div className={styles.HeaderContainer}>
+    <div className={styles.headerContainer}>
       <div className={styles.HeaderTitleContainer}>
         <img src={logo} alt="appLogo" />
         <img src={raag} alt="raag" />
