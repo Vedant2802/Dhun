@@ -1,3 +1,25 @@
 .waveformContainer {
-    color: #FFF; 
+  color: #FFF;
+  width: 100%;
+  }
+  .addSongsBox {
+    background: #3c3c3c;
+    border-radius: 4px;
+    padding: 22px;
+    box-sizing: border-box;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: fit-content;
+    margin-top: 14px;
+    img {
+        max-width: fit-content;
+    }
+  }
+  .customRegion {
+    height: 75%;
+  }
+
+  .controlContainer {
+    display: flex;
+    margin-top: 14px;
   }
