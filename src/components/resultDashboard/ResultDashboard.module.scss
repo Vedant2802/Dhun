@@ -1,8 +1,38 @@
 .uploadContainer {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   width: 100%;
-  height: 60vh;
   background: #2e3033;
+  .uploadTextContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 28px;
+    padding: 20px;
+    height: 60px;
+
+    .videoFileName {
+      color: #aaaaaa;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    .replace {
+      color: #dedede;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+    }
+    .videoUpload {
+      cursor: pointer;
+      opacity: 0;
+      position: absolute;
+      height: 4vh;
+      width: 135px;
+    }
+  }
+  .videoPlayercontainer {
+
+  }
 }

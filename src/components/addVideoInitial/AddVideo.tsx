@@ -1,9 +1,11 @@
 import styles from "./addVideo.module.scss";
 import addicon from "../../../public/icons/add.svg";
 import axiosInstance from "../../axiosConfig/axiosConfig";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const AddVideo = () => {
+  const navigate = useNavigate();
+
   const onFileUpload = (event: any) => {
     const FormD: any = new FormData();
     FormD.append("file", event.target.files[0]);
@@ -11,20 +13,22 @@ const AddVideo = () => {
   };
 
   const uploadFile = async (uploadFile: any) => {
-    // const navigate = useNavigate();
     try {
       const data: any = await axiosInstance.post("/api/upload", uploadFile, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
         auth: {
           username: "raaga",
           password: "4S5Ek7un16Qc",
         },
       });
-      console.log(data, "data");
-      // navigate("/dashboard");
+      if (data && data?.data?.gcs_url) {
+        navigate("/dashboard");
+      }
       if (data) return data;
     } catch (Error) {
       console.log("Error on uploading file");
-      // navigate("/dashboard");
       return Error;
     }
   };
