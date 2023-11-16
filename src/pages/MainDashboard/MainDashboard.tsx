@@ -4,13 +4,16 @@ import ResultDashboard from "../../components/resultDashboard/ResultDashboard";
 
 const MainDashboard = () => {
   return (
-    <div className={styles.mainDashboard}>
-      <div className={styles.resultDashboard}>
-        <ResultDashboard />
+    <div className={styles.dashBoardContainer}>
+      <div className={styles.mainDashboard}>
+        <div className={styles.resultDashboard}>
+          <ResultDashboard />
+        </div>
+        <div className={styles.generateMusic}>
+          <GenerateMusic />
+        </div>
       </div>
-      <div className={styles.generateMusic}>
-        <GenerateMusic />
-      </div>
+      <div className={styles.resultControl}>zohaib</div>
     </div>
   );
 };

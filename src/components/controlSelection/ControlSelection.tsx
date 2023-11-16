@@ -57,10 +57,12 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackId }) => {
   };
 
   return (
-    <div className={styles.controlContainer}>
-      <div id="waveform" className={styles.waveformContainer} />
-      <div onClick={addRegion} className={styles.addSongsBox}>
-        <img src={addIcon} alt="addSongs" />
+    <div className={styles.musicContailer}>
+      <div className={styles.controlContainer}>
+        <div id="waveform" className={styles.waveformContainer} />
+        <div onClick={addRegion} className={styles.addSongsBox}>
+          <img src={addIcon} alt="addSongs" />
+        </div>
       </div>
     </div>
   );

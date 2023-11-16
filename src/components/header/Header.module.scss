@@ -1,14 +1,13 @@
-.HeaderContainer {
+.headerContainer {
     display: flex;
     width: 100%;
-    height: 56px;
     align-items: center;
     justify-content: space-between;
     flex-shrink: 0;
     padding: 8px 16px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     background: #2E3033;
-    padding: 0px 40px;
+    padding: 12px 40px;
   
     .HeaderTitleContainer {
       display: flex;
