@@ -28,9 +28,7 @@ const ResultDashboard = () => {
             onChange={onFileUpload}
           ></input>
         </div>
-        <div className={styles.videoPlayercontainer}>
-          <VideoPlayer />
-        </div>
+        <VideoPlayer />
       </div>
       {/* {url && <ControlPanel />} */}
       {url && <ControlSelection trackId={url} />}

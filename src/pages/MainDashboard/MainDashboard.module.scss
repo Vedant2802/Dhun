@@ -1,24 +1,25 @@
 .mainDashboard {
-    display: flex;
-    gap: 16px;
-    background-color: rgba(21, 21, 21, 1);
-    height: 70vh;
-    .resultDashboard{
-        width: 70%;
-    }
-    .generateMusic {
-        width: 30%;
-        margin-top: 6px;
-    }
+  display: flex;
+  gap: 16px;
+  background-color: rgba(21, 21, 21, 1);
+  height: 70vh;
+  .resultDashboard {
+    width: 70%;
+    // height: 67vh;
+  }
+  .generateMusic {
+    width: 30%;
+    margin-top: 6px;
+  }
 }
 .resultControl {
-    width: 100%;
-    height: 22vh;
-    background: #202020;
+  width: 100%;
+  height: 22vh;
+  background: #202020;
 }
 
 .dashBoardContainer {
-    width: 100%;
-    height: 90vh; 
-    padding: 4px 40px;
+  width: 100%;
+  height: 90vh;
+  padding: 4px 40px;
 }
