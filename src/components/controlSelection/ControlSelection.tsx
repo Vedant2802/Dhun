@@ -9,14 +9,16 @@ interface WaveformProps {
   trackId: string;
 }
 const ControlSelection: React.FC<WaveformProps> = ({ trackId }) => {
+  const [startRegion, setstartRegion] = useState(0);
   const [updatedRegion, setUpdatedRegion] = useState("5");
+
   // Timeline to create on top
   const topTimeline = TimelinePlugin.create({
     insertPosition: "beforebegin",
     height: 20,
     timeInterval: 1,
     primaryLabelInterval: 5,
-    secondaryLabelInterval: 0,
+    secondaryLabelInterval: 5,
     style: {
       fontSize: "10px",
       color: "#FFF",
@@ -29,6 +31,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackId }) => {
     // waveColor: "rgb(200, 0, 200)",
     progressColor: "rgb(100, 0, 100)",
     height: 70,
+    top: 10,
     url: trackId,
     plugins: [topTimeline],
   };
