@@ -11,7 +11,7 @@ const GenerateMusic = () => {
             <div>Music generator</div>
           </div>
 
-          <div className={styles.reference}>
+          <div className="bg-[#2c2c2c] flex justify-between text-[#dedede] text-[16px] leading-[18px] py-[24px] px-[16px] rounded">
             <div>Reference theme</div>
             <div>+</div>
           </div>
