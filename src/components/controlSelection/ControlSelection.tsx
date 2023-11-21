@@ -11,6 +11,7 @@ interface WaveformProps {
 const ControlSelection: React.FC<WaveformProps> = ({ trackId }) => {
   const [startRegion, setstartRegion] = useState(0);
   const [updatedRegion, setUpdatedRegion] = useState("5");
+  const wavesurferref = useRef(null);
 
   // Timeline to create on top
   const topTimeline = TimelinePlugin.create({
@@ -37,32 +38,30 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackId }) => {
   };
 
   useEffect(() => {
-    const waveform = WaveSurfer.create(waveformParams);
-    return () => waveform.destroy();
+    wavesurferref.current = WaveSurfer.create(waveformParams);
+    return () => wavesurferref.current.destroy();
   }, [trackId]);
 
   const addRegion = () => {
-    const waveform = WaveSurfer.create(waveformParams);
-    const wsRegions = waveform.registerPlugin(RegionsPlugin.create());
-    waveform.on("ready", () => {
-      wsRegions.addRegion({
-        start: 0,
-        end: 5,
-        color: "rgba(255, 0, 0, 0.3)",
-      });
-    });
-    wsRegions.on("region-updated", (region: any) => {
-      console.log("#Updated region", region);
-      console.log("#Updated region", region.start);
-      console.log("#Updated region", region.end);
-      console.log("#Updated region", region.totalDuration);
-    });
+    const wsRegions = wavesurferref.current.registerPlugin(RegionsPlugin.create());
+     wsRegions.addRegion({
+       start: 0,
+       end: 5,
+       color: "rgba(255, 0, 0, 0.3)",
+     });
+   wsRegions.on("region-updated", (region: any) => {
+     console.log("#Updated region", region);
+     console.log("#Updated region", region.start);
+     console.log("#Updated region", region.end);
+     console.log("#Updated region", region.totalDuration);
+   });
+    
   };
 
   return (
     <div className={styles.musicContailer}>
       <div className={styles.controlContainer}>
-        <div id="waveform" className={styles.waveformContainer} />
+        <div ref={wavesurferref} id='waveform' className={styles.waveformContainer} />
         <div onClick={addRegion} className={styles.addSongsBox}>
           <img src={addIcon} alt="addSongs" />
         </div>
