@@ -5,6 +5,7 @@ import addIcon from "../../../public/icons/addIcon.svg";
 
 import RegionsPlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/regions.esm.js";
 import TimelinePlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/timeline.esm.js";
+import * as React from "react";
 interface WaveformProps {
   trackUrl: string;
 }
@@ -12,6 +13,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [startRegion, setstartRegion] = useState(0);
   const [updatedRegion, setUpdatedRegion] = useState(5);
   const wavesurferref = useRef(null);
+  const videoElement = document.querySelector("video");
 
   // Timeline to create on top
   const topTimeline = TimelinePlugin.create({
@@ -29,12 +31,16 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   // creating a waveform on given url
   const waveformParams = {
     container: "#waveform",
-    // waveColor: "rgb(200, 0, 200)",
+    waveColor: "#7160F6",
     progressColor: "rgb(100, 0, 100)",
     height: 70,
-    top: 10,
-    // url: trackUrl,
+    minPxPerSec: 10,
+    dragToSeek: true,
+    cursorWidth: 3,
+    cursorColor: "#58B758",
     plugins: [topTimeline],
+    backend: "MediaElement",
+    media: videoElement,
   };
 
   useEffect(() => {
@@ -45,6 +51,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   }, [trackUrl]);
 
   const addRegion = () => {
+    debugger;
     const wsRegions = wavesurferref.current?.registerPlugin(
       RegionsPlugin.create()
     );

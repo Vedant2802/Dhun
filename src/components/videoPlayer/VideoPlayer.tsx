@@ -6,13 +6,15 @@ import playIcon from "../../../public/icons/playIcon.svg";
 import pauseIcon from "../../../public/icons/pause.svg";
 import volumeIcon from "../../../public/icons/volumeIcon.svg";
 import volumeMute from "../../../public/icons/volumeMute.svg";
+import * as React from "react";
 
-const VideoPlayer = () => {
+interface videoUrlProps {
+  videoUrl: string;
+}
+const VideoPlayer: React.FC<videoUrlProps> = ({ videoUrl }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef(null);
-  const videoUrl =
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
 
   useEffect(() => {
     if (videoRef.current && videoUrl) {
