@@ -1,10 +1,9 @@
 // import UploadVideo from "../uploadVideo/UploadVideo";
-import ControlPanel from "../ControlsPanel/ControlPanel";
 import VideoPlayer from "../videoPlayer/VideoPlayer";
 import styles from "./ResultDashboard.module.scss";
 import { STUDIO_CONSTANTS } from "../../utils/genAiConstant";
 import ControlSelection from "../controlSelection/ControlSelection";
-import ControlSeconds from "../controlSeconds/ControlSeconds";
+import * as React from "react";
 
 const ResultDashboard = () => {
   const onFileUpload = (event: any) => {
@@ -12,7 +11,10 @@ const ResultDashboard = () => {
     FormD.append("file", event.target.files[0]);
     // uploadFile(FormD);
   };
-  const url = "https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3";
+  const url =
+    // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+
   return (
     <>
       <div className={styles.uploadContainer}>
@@ -28,7 +30,7 @@ const ResultDashboard = () => {
             onChange={onFileUpload}
           ></input>
         </div>
-        <VideoPlayer />
+        <VideoPlayer videoUrl={url} />
       </div>
       {/* {url && <ControlPanel />} */}
       {url && <ControlSelection trackUrl={url} />}

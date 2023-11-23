@@ -4,6 +4,7 @@ import Header from "./components/header/Header";
 import Login from "./pages/Login/Login";
 import MainDashboard from "./pages/MainDashboard/MainDashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import * as React from "react";
 
 function App() {
   // const bears = useBearStore((state) => state.bears);
