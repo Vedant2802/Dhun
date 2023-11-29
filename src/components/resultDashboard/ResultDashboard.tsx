@@ -34,8 +34,8 @@ const ResultDashboard = () => {
         </div>
         <VideoPlayer videoUrl={url} />
       </div>
-      {url && <ControlPanel />}
-      {/* {url && <ControlSelection trackUrl={track} />} */}
+      {/* {url && <ControlPanel />} */}
+      {url && <ControlSelection trackUrl={track} />}
       {/* {url && <ControlSeconds trackId={url} />} */}
     </>
   );
