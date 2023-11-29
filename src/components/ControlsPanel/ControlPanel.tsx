@@ -1,18 +1,54 @@
 import styles from "./ControlPanel.module.scss";
 import addIcon from "../../../public/icons/addIcon.svg";
 import { useEffect, useRef, useState } from "react";
+import { ControlPopup } from "../controlPopup/controlPopup";
+import React from "react";
 
 const ControlPanel = () => {
   const [boxes, setBoxes] = useState<string[]>([]);
-
+  
   const [width, setWidth] = useState(100);
   const [isResizing, setIsResizing] = useState(false);
   const initialX = useRef<number | null>(null);
-
+  
+  const EMOTION = [
+    "Joy",
+    "Amazment",
+    "Love",
+    "Disgust",
+    "Sadness",
+    "Anger",
+    "Fear",
+    "Courage",
+    "Calm",
+  ];
+  const INSTRUMENTS = [
+    {value: 'none selected', label: 'None Selected'},
+    { value: "horns", label: "Horns" },
+    { value: "bansuri", label: "Bansuri" },
+    { value: "accordian", label: "Accordian" },
+    { value: "flute", label: "Flute"},
+    { value: "bells", label: "Bells" },
+    { value: "drums", label: "Drums" },
+    { value: "tabla", label: "Tabla" },
+    { value: "percussion", label: "Percussion"},
+    { value: "piano", label: "Piano" },
+    { value: "harp", label: "Harp" },
+    { value: "guitar", label: "Guitar" },
+    { value: "sitar", label: "Sitar" },
+    { value: "violin", label: "Violin" },
+    { value: "cello", label: "Cello" }
+  ]
+  const GENRE = [
+    "Adventure",
+    "Romantic",
+    "Drama",
+    "Suspenseful"
+  ]
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsResizing(true);
     initialX.current = e.clientX;
-
+    
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
   };
@@ -29,8 +65,8 @@ const ControlPanel = () => {
     }
   };
 
+
   const handleMouseUp = () => {
-    debugger;
     setIsResizing(true);
     initialX.current = null;
 
@@ -59,11 +95,13 @@ const ControlPanel = () => {
             </div>
           ))}
         </div>
-
+        <div className={styles.containeraddSongs}>
         <div className={styles.addSongsBox} onClick={addBox}>
           <img src={addIcon} alt="addSongs" />
         </div>
       </div>
+      <ControlPopup />
+        </div>
     </>
   );
 };
