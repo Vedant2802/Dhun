@@ -1,0 +1,39 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+/dist
+/logs
+/.idea
+/dist
+
+# Ignore crawling html
+/public/google6fbbb906ca9f0120.html
+/public/google5fe8b2175abe98ff.html
+/public/robots.txt
+/public/new-cast-receiver/dist/
+/public/new-cast-receiver/node_modules/
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+newrelic_agent.log
+newrelic.info.sa
+
+/nginx/access.log
+/nginx/error.log
