@@ -10,13 +10,6 @@ const ControlPanel = () => {
   const [width, setWidth] = useState(100);
   const [isResizing, setIsResizing] = useState(false);
   const initialX = useRef<number | null>(null);
-  const [emotion,setEmotion] =useState<string>("None Selected");
-  const [emotionOptionopen,setEmotionOptionOpen] = useState<boolean>(false);
-  const [instruments,setInstruments] = useState<string>("Choose Instruments");
-  const [instrumentOptionsOpen,setIntrumentOptionsOpen] = useState<boolean>(false);
-  const [genre,SetGenre] = useState("None Selected");
-  const [genreOptionsOpen,setGenreOptionsOpen] = useState<boolean>(false);
-  const [tempo,setTempo] = useState("");
   
   const EMOTION = [
     "Joy",
@@ -74,7 +67,6 @@ const ControlPanel = () => {
 
 
   const handleMouseUp = () => {
-    debugger;
     setIsResizing(true);
     initialX.current = null;
 
