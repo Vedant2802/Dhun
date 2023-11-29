@@ -68,14 +68,6 @@ const VideoPlayer: React.FC<videoUrlProps> = ({ videoUrl }) => {
           className="playPause"
         />
       </div>
-      {/* <input
-        type="range"
-        id="volumeSlider"
-        min="0"
-        max="100"
-        value={volumePercentage}
-        onChange={controlVolume}
-      /> */}
     </>
   );
 };

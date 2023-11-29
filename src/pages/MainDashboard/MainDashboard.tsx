@@ -9,9 +9,9 @@ const MainDashboard = () => {
         <div className={styles.resultDashboard}>
           <ResultDashboard />
         </div>
-        <div className={styles.generateMusic}>
+        {/* <div className={styles.generateMusic}>
           <GenerateMusic />
-        </div>
+        </div> */}
       </div>
       <div className={styles.resultControl}>Generate result</div>
     </div>
