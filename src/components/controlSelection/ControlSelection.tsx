@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 import styles from "./ConntrolSelection.module.scss";
 import addIcon from "../../../public/icons/addIcon.svg";
-
+import { ControlPopup } from "../controlPopup/controlPopup";
 import RegionsPlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/regions.esm.js";
 import TimelinePlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/timeline.esm.js";
 import * as React from "react";
@@ -13,6 +13,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [startRegion, setstartRegion] = useState(0);
   const [updatedRegion, setUpdatedRegion] = useState(5);
   const wavesurferref = useRef(null);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
   const videoElement = document.querySelector("video");
 
   // Timeline to create on top
@@ -67,6 +68,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
       setUpdatedRegion(region.end + 5);
       console.log("#Updated region", region);
     });
+    setShowPopup(true);
 
     wsRegions.on("region-clicked", (region: any) => {
       console.log("#Updated region", region);

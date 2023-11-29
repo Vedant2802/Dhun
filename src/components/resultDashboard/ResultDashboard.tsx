@@ -4,6 +4,7 @@ import styles from "./ResultDashboard.module.scss";
 import { STUDIO_CONSTANTS } from "../../utils/genAiConstant";
 import ControlSelection from "../controlSelection/ControlSelection";
 import * as React from "react";
+import ControlPanel from "../ControlsPanel/ControlPanel";
 
 const ResultDashboard = () => {
   const onFileUpload = (event: any) => {
