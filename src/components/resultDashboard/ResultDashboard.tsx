@@ -14,26 +14,20 @@ const ResultDashboard = () => {
   const url =
     // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+  const track = "https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3";
 
   return (
     <>
       <div className={styles.uploadContainer}>
-        <div className={styles.uploadTextContainer}>
-          <div className={styles.videoFileName}>final episode 2344.mp4</div>
-          <div className={styles.replace}>{STUDIO_CONSTANTS.REPLACE_VIDEO}</div>
-          <input
-            type="file"
-            id="myFile"
-            name="filename"
-            accept="video/mp4,video/x-m4v,video/*"
-            className={styles.videoUpload}
-            onChange={onFileUpload}
-          ></input>
-        </div>
         <VideoPlayer videoUrl={url} />
       </div>
+      <div className={styles.socialBehaviour}>
+        <div className={styles.comment}>Comment</div>
+        <div className={styles.comment}>Export</div>
+        <div className={styles.comment}>Share</div>
+      </div>
+      {url && <ControlSelection trackUrl={track} />}
       {/* {url && <ControlPanel />} */}
-      {url && <ControlSelection trackUrl={url} />}
       {/* {url && <ControlSeconds trackId={url} />} */}
     </>
   );

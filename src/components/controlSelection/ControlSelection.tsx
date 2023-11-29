@@ -31,13 +31,13 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   // creating a waveform on given url
   const waveformParams = {
     container: "#waveform",
-    waveColor: "#7160F6",
-    progressColor: "rgb(100, 0, 100)",
+    waveColor: "#2c2c2c",
+    progressColor: "#2c2c2c",
     height: 70,
     minPxPerSec: 10,
     dragToSeek: true,
     cursorWidth: 3,
-    cursorColor: "#58B758",
+    // cursorColor: "#58B758",
     plugins: [topTimeline],
     backend: "MediaElement",
     media: videoElement,
@@ -51,7 +51,6 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   }, [trackUrl]);
 
   const addRegion = () => {
-    debugger;
     const wsRegions = wavesurferref.current?.registerPlugin(
       RegionsPlugin.create()
     );
@@ -75,16 +74,18 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   };
 
   return (
-    <div className={styles.musicContailer}>
-      <div className={styles.controlContainer}>
-        <div
-          ref={wavesurferref}
-          id="waveform"
-          className={styles.waveformContainer}
-        />
-        <div onClick={addRegion} className={styles.addSongsBox}>
-          <img src={addIcon} alt="addSongs" />
+    <div className={styles.mainContainer}>
+      <div className={styles.musicContainer}>
+        <div className={styles.controlContainer}>
+          <div
+            ref={wavesurferref}
+            id="waveform"
+            className={styles.waveformContainer}
+          />
         </div>
+      </div>
+      <div onClick={addRegion} className={styles.addSongsBox}>
+        <img src={addIcon} alt="addSongs" />
       </div>
     </div>
   );
