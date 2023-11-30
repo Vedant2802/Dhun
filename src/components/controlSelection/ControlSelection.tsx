@@ -17,17 +17,15 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [startRegion, setstartRegion] = useState(0);
   const [updatedRegion, setUpdatedRegion] = useState(5);
   const wavesurferref = useRef(null);
-  const [showPopup, setShowPopup] = useState<boolean>(false);
   const videoElement = document.querySelector("video");
   const [openModal, setOpenModal] = useState<boolean>();
   const [items, setItems] = useState([
     { id: 1, text: 'Track 1' },
     { id: 2, text: 'Track 2' },
     { id: 3, text: 'Track 3' },
-    // Add more items as needed
   ]);
 
-  const moveItem = (fromIndex, toIndex) => {
+  const moveItem = (fromIndex: number, toIndex: number) => {
     const updatedItems = [...items];
     const [movedItem] = updatedItems.splice(fromIndex, 1);
     updatedItems.splice(toIndex, 0, movedItem);
@@ -95,12 +93,15 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
       setUpdatedRegion(region.end + 5);
       console.log("#Updated region", region);
     });
-    setShowPopup(true);
 
     wsRegions.on("region-clicked", (region: any) => {
       console.log("#Updated region", region);
       setOpenModal(true);
     });
+  };
+
+  const handleTogglePopup = () => {
+    setOpenModal(!openModal);
   };
 
   return (
@@ -118,7 +119,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
       <div onClick={addRegion} className={styles.addSongsBox}>
         <img src={addIcon} alt="addSongs" />
       </div>
-      {openModal && <ControlPopup />}
+      {openModal && <ControlPopup onClose={handleTogglePopup} />}
     </div>
     <DndProvider backend={HTML5Backend}>
         {items.map((item, index) => (
@@ -129,8 +130,14 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   );
 };
 
+type DraggableProps = {
+  id: Number,
+  text: String,
+  index: Number,
+  moveItem: Function
+}
 
-const DraggableItem = ({ id, text, index, moveItem }) => {
+const DraggableItem = ({ id, text, index, moveItem }: DraggableProps) => {
   const [, drag] = useDrag({
     type: ItemType,
     item: { id, index },
@@ -138,7 +145,7 @@ const DraggableItem = ({ id, text, index, moveItem }) => {
 
   const [, drop] = useDrop({
     accept: ItemType,
-    hover: (draggedItem) => {
+    hover: (draggedItem: any) => {
       if (draggedItem.index !== index) {
         moveItem(draggedItem.index, index);
         draggedItem.index = index;
