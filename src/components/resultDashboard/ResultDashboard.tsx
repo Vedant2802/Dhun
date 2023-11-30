@@ -5,12 +5,14 @@ import { STUDIO_CONSTANTS } from "../../utils/genAiConstant";
 import ControlSelection from "../controlSelection/ControlSelection";
 import * as React from "react";
 import ControlPanel from "../ControlsPanel/ControlPanel";
+import { useGenerateStore } from "../../stores/generateStore";
 
 const ResultDashboard = () => {
+  const { uploadFile } = useGenerateStore((state) => state);
   const onFileUpload = (event: any) => {
     const FormD: any = new FormData();
     FormD.append("file", event.target.files[0]);
-    // uploadFile(FormD);
+    uploadFile && uploadFile(FormD);
   };
   const url =
     // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
