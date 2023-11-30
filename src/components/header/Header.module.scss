@@ -1,26 +1,47 @@
 .headerContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--outline-1, rgba(255, 255, 255, 0.08));
+  background: #1b1b1b;
+  padding: 16px 40px;
+
+  .HeaderTitleContainer {
     display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
-    padding: 8px 16px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    background: #2E3033;
-    padding: 12px 40px;
-  
-    .HeaderTitleContainer {
-      display: flex;
-      gap: 12px;
-    }
-    .HeaderIcon {
-      width: 25px;
-      height: 25px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: #E5DEFF;
-      color: #5743DB
-    }
+    gap: 12px;
   }
+  .HeaderIcon {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #e5deff;
+    color: #5743db;
+  }
+  .logoName {
+    color: #fff;
+    text-align: justify;
+    font-family: Poppins;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px; /* 100% */
+    text-transform: uppercase;
+  }
+  .iconsContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 16px;
+  }
+  .icon {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+}

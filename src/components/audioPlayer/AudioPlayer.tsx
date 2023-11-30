@@ -16,7 +16,7 @@ const AudioPlayer = () => {
       const audioPlayer = videojs(audioRef.current);
       RegisterAndEvents(audioPlayer);
       audioPlayer.src({
-        src: track,
+        src: " ",
       });
       audioPlayer.play();
     }

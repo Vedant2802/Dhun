@@ -9,6 +9,8 @@ import menuIcon from "../../../public/icons/menu.svg";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import * as React from "react";
+import { useGenerateStore } from "../../stores/generateStore";
+import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 interface WaveformProps {
   trackUrl: string;
 }
@@ -19,6 +21,13 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const wavesurferref = useRef(null);
   const videoElement = document.querySelector("video");
   const [openModal, setOpenModal] = useState<boolean>();
+  const updateCurrentTimeFrameDetails = useGenerateStore(
+    (state) => state.updateCurrentTimeFrameDetails
+  );
+  const timeFrames = useGenerateStore((state) => state.timeFrameData);
+  const apiStatus = useGenerateStore((state) => state.status);
+  const addNewTimeFrame = useGenerateStore((state) => state.addNewTimeFrame);
+
   const [items, setItems] = useState([
     { id: 1, text: "Track 1" },
     { id: 2, text: "Track 2" },
@@ -78,12 +87,16 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   }, [trackUrl]);
 
   const addRegion = () => {
+    const getLastTimeFrameId = timeFrames.length
+      ? timeFrames[timeFrames.length - 1]?.id
+      : 0;
     const wsRegions = wavesurferref.current?.registerPlugin(
       RegionsPlugin.create()
     );
     wsRegions.addRegion({
       start: startRegion,
       end: updatedRegion,
+      id: "region_" + (getLastTimeFrameId + 1),
       color: "#333333",
       minLength: 3,
     });
@@ -93,18 +106,29 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     wsRegions.on("region-updated", (region: any) => {
       setstartRegion(region.end);
       setUpdatedRegion(region.end + 5);
-      console.log("#Updated region", region);
     });
+    addNewTimeFrame(getLastTimeFrameId + 1);
 
     wsRegions.on("region-clicked", (region: any) => {
       console.log("#Updated region", region);
+      const duration = region.end - region.start;
+      const id = parseInt(region.id.split("_")[1]);
+      updateCurrentTimeFrameDetails(id, duration);
       setOpenModal(true);
     });
   };
 
+  // Handle mouse click events
   const handleTogglePopup = () => {
     setOpenModal(!openModal);
   };
+
+  //Handle lifecycle hooks
+  React.useEffect(() => {
+    if (apiStatus === API_STATUS_TYPES.success) {
+      setOpenModal(false);
+    }
+  }, [apiStatus]);
 
   return (
     <div className={styles.outercontainer}>
@@ -139,11 +163,11 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
 };
 
 type DraggableProps = {
-  id: Number,
-  text: String,
-  index: Number,
-  moveItem: Function
-}
+  id: Number;
+  text: String;
+  index: Number;
+  moveItem: Function;
+};
 
 const DraggableItem = ({ id, text, index, moveItem }: DraggableProps) => {
   const [, drag] = useDrag({
