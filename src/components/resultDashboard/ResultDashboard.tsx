@@ -3,15 +3,20 @@ import VideoPlayer from "../videoPlayer/VideoPlayer";
 import styles from "./ResultDashboard.module.scss";
 import { STUDIO_CONSTANTS } from "../../utils/genAiConstant";
 import ControlSelection from "../controlSelection/ControlSelection";
-import * as React from "react";
+import React, { useState } from "react";
 import ControlPanel from "../ControlsPanel/ControlPanel";
+import { useGenerateStore } from "../../stores/generateStore";
 
 const ResultDashboard = () => {
+  const [showPlayer, setShowPlayer] = useState<boolean>(false);
+  const { uploadFile, file, status } = useGenerateStore((state) => state);
+
   const onFileUpload = (event: any) => {
     const FormD: any = new FormData();
     FormD.append("file", event.target.files[0]);
-    // uploadFile(FormD);
+    uploadFile && uploadFile(FormD);
   };
+  console.log("file", file);
   const url =
     // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
@@ -22,9 +27,26 @@ const ResultDashboard = () => {
          
 
         <div >
+        <div className={styles.uploadContainer}>
+        {!file && (
+          <div className={styles.addVideoButton}>
+            <input
+              type="file"
+              id="myFile"
+              name="filename"
+              accept="video/mp4,video/x-m4v,video/*"
+              className={styles.videoUpload}
+              onChange={onFileUpload}
+            ></input>
+            <div>+ Add video or vocals</div>
+          </div>
+        )}
+        {file && (
           <div className={styles.uploadContainer}>
             <VideoPlayer videoUrl={url} />
           </div>
+        )}
+      </div>
           <div className={styles.socialBehaviour}>
             <div className={styles.comment}>Comment</div>
             <div className={styles.comment}>Export</div>
@@ -75,6 +97,7 @@ const ResultDashboard = () => {
           {/* {url && <ControlSeconds trackId={url} />} */}
         </div>
     </div>
+
   );
 };
 

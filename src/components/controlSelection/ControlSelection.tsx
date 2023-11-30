@@ -55,7 +55,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     minPxPerSec: 10,
     dragToSeek: true,
     cursorWidth: 3,
-    // cursorColor: "#58B758",
+    cursorColor: "rgba(127, 241, 131, 1)",
     plugins: [topTimeline],
     backend: "MediaElement",
     media: videoElement,
