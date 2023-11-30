@@ -1,7 +1,8 @@
+import * as React from "react";
+import { useNavigate } from "react-router";
 import styles from "./addVideo.module.scss";
 import addicon from "../../../public/icons/add.svg";
-import axiosInstance from "../../axiosConfig/axiosConfig";
-import { useNavigate } from "react-router";
+import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 
 const AddVideo = () => {
   const navigate = useNavigate();
@@ -9,44 +10,13 @@ const AddVideo = () => {
   const onFileUpload = (event: any) => {
     const FormD: any = new FormData();
     FormD.append("file", event.target.files[0]);
-    uploadFile(FormD);
   };
 
-  const uploadFile = async (uploadFile: any) => {
-    try {
-      const data: any = await axiosInstance.post("/api/upload", uploadFile, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        auth: {
-          username: "raaga",
-          password: "4S5Ek7un16Qc",
-        },
-      });
-      if (data && data?.data?.gcs_url) {
-        navigate("/dashboard");
-      }
-      if (data) return data;
-    } catch (Error) {
-      console.log("Error on uploading file");
-      return Error;
+  React.useEffect(() => {
+    if (status === API_STATUS_TYPES.success) {
+      navigate("/dashboard");
     }
-  };
-
-  // const uploadFile = (uploadFile: any) => {
-  //   const url = "https://musicgenai.zee5.com/api/upload";
-  //   var user = "raaga";
-  //   var pass = "4S5Ek7un16Qc";
-
-  //   var authorizationBasic = window.btoa(user + ":" + pass);
-  //   return fetch(url, {
-  //     method: "POST",
-  //     body: uploadFile,
-  //     headers: {
-  //       authorization: "Basic " + authorizationBasic,
-  //     },
-  //   });
-  // };
+  }, [status]);
 
   return (
     <>

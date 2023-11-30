@@ -16,7 +16,6 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const videoElement = document.querySelector("video");
   const [openModal, setOpenModal] = useState<boolean>();
-
   // Timeline to create on top
   const topTimeline = TimelinePlugin.create({
     insertPosition: "beforebegin",
