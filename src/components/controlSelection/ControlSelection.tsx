@@ -5,10 +5,13 @@ import addIcon from "../../../public/icons/addIcon.svg";
 import { ControlPopup } from "../controlPopup/controlPopup";
 import RegionsPlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/regions.esm.js";
 import TimelinePlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/timeline.esm.js";
+import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import * as React from "react";
 interface WaveformProps {
   trackUrl: string;
 }
+const ItemType = 'ITEM';
 const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [startRegion, setstartRegion] = useState(0);
   const [updatedRegion, setUpdatedRegion] = useState(5);
@@ -16,6 +19,19 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const videoElement = document.querySelector("video");
   const [openModal, setOpenModal] = useState<boolean>();
+  const [items, setItems] = useState([
+    { id: 1, text: 'Track 1' },
+    { id: 2, text: 'Track 2' },
+    { id: 3, text: 'Track 3' },
+    // Add more items as needed
+  ]);
+
+  const moveItem = (fromIndex, toIndex) => {
+    const updatedItems = [...items];
+    const [movedItem] = updatedItems.splice(fromIndex, 1);
+    updatedItems.splice(toIndex, 0, movedItem);
+    setItems(updatedItems);
+  };
 
   // Timeline to create on top
   const topTimeline = TimelinePlugin.create({
@@ -46,10 +62,19 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   };
 
   useEffect(() => {
+    const handleEscapeKeyPress = (event) => {
+      if (event.key === 'Escape') {
+        setOpenModal(false);
+      }
+    };
     if (!trackUrl) return;
     wavesurferref.current = WaveSurfer.create(waveformParams);
     wavesurferref.current?.load(trackUrl);
-    return () => wavesurferref.current?.destroy();
+    document.addEventListener('keydown', handleEscapeKeyPress);
+    return () => {
+      wavesurferref.current?.destroy();
+      document.removeEventListener('keydown', handleEscapeKeyPress);
+    } 
   }, [trackUrl]);
 
   const addRegion = () => {
@@ -78,6 +103,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   };
 
   return (
+    <div className={styles.outercontainer}>
     <div className={styles.mainContainer}>
       <div className={styles.musicContainer}>
         <div className={styles.controlContainer}>
@@ -92,6 +118,40 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
         <img src={addIcon} alt="addSongs" />
       </div>
       {openModal && <ControlPopup />}
+    </div>
+    <DndProvider backend={HTML5Backend}>
+        {items.map((item, index) => (
+          <DraggableItem key={item.id} id={item.id} text={item.text} index={index} moveItem={moveItem} />
+        ))}
+      </DndProvider>
+    </div>
+  );
+};
+
+
+const DraggableItem = ({ id, text, index, moveItem }) => {
+  const [, drag] = useDrag({
+    type: ItemType,
+    item: { id, index },
+  });
+
+  const [, drop] = useDrop({
+    accept: ItemType,
+    hover: (draggedItem) => {
+      if (draggedItem.index !== index) {
+        moveItem(draggedItem.index, index);
+        draggedItem.index = index;
+      }
+    },
+  });
+
+  return (
+    <div ref={(node) => drag(drop(node))} className={styles.trackComposition}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M2.5 6.66675H17.5" stroke="#D6D6D6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2.5 13.3333H17.5" stroke="#D6D6D6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      {text}
     </div>
   );
 };
