@@ -1,0 +1,36 @@
+.allcomposition{
+    display: flex;
+    flex-direction: column;
+  }
+  .compositionContainer{
+    margin-top: 86px;
+    margin-left: 40px;
+    width: 20vw;
+    gap:6px;
+    display: flex;
+    flex-direction: column;
+  }
+  .composition{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+    width: 304px;
+    border-radius: 4px;
+    background-color: #000;
+    color: #C2C2C2;
+  }
+  .playButton{
+    width: 32px;
+    height: 32px;
+    padding-left: 10px;
+  }
+  .playButtonContainer{
+    display: flex;
+    flex-direction: row;
+    gap:8px;
+  }
+  .compositionText{
+    margin-top: 4px;
+  }

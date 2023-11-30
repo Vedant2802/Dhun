@@ -5,23 +5,22 @@ import { STUDIO_CONSTANTS } from "../../utils/genAiConstant";
 import ControlSelection from "../controlSelection/ControlSelection";
 import React, { useState } from "react";
 import ControlPanel from "../ControlsPanel/ControlPanel";
-import kebab from "../../../public/icons/KebabMenu-Vertical.svg";
-import playcircle from "../../../public/icons/play_circle_filled.svg";
 import { useGenerateStore } from "../../stores/generateStore";
+import CompositionContainer from "../compositionContainer/compositionContainer";
 import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 import LoadingSpin from "react-loading-spin";
 
 const ResultDashboard = () => {
   const [showPlayer, setShowPlayer] = useState<boolean>(false);
   const { uploadFile, file, status }: any = useGenerateStore((state) => state);
-
+  
   const onFileUpload = (event: any) => {
     const FormD: any = new FormData();
     FormD.append("file", event.target.files[0]);
     uploadFile && uploadFile(FormD);
   };
   console.log("file", file);
-  const url = file?.gcs_url;
+  const trackUrl = file?.gcs_url;
   // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
   // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
   const track = "https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3";
@@ -51,39 +50,18 @@ const ResultDashboard = () => {
           )}
           {file && (
             <div className={styles.uploadContainer}>
-              <VideoPlayer videoUrl={url} />
+              <VideoPlayer videoUrl={trackUrl} />
             </div>
           )}
         </div>
+
         <div className={styles.socialBehaviour}>
           <div className={styles.comment}>Comment</div>
           <div className={styles.comment}>Export</div>
           <div className={styles.comment}>Share</div>
         </div>
         <div className={styles.container}>
-          <div className={styles.compositionContainer}>
-            <div className={styles.composition}>
-              <div className={styles.playButtonContainer}>
-                <img src={playcircle} />
-                <span className={styles.compositionText}>Composition 1</span>
-              </div>
-              <img src={kebab} />
-            </div>
-            <div className={styles.composition}>
-              <div className={styles.playButtonContainer}>
-                <img src={playcircle} />
-                <span className={styles.compositionText}>Composition 2</span>
-              </div>
-              <img src={kebab} />
-            </div>
-            <div className={styles.composition}>
-              <div className={styles.playButtonContainer}>
-                <img src={playcircle} />
-                <span className={styles.compositionText}>Composition 3</span>
-              </div>
-              <img src={kebab} />
-            </div>
-          </div>
+         <CompositionContainer />
           <div className={styles.videoContainer}>
             {<ControlSelection trackUrl={track} />}
           </div>
