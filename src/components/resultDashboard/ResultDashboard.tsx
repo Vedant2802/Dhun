@@ -5,6 +5,8 @@ import { STUDIO_CONSTANTS } from "../../utils/genAiConstant";
 import ControlSelection from "../controlSelection/ControlSelection";
 import React, { useState } from "react";
 import ControlPanel from "../ControlsPanel/ControlPanel";
+import kebab from "../../../public/icons/KebabMenu-Vertical.svg";
+import playcircle from "../../../public/icons/play_circle_filled.svg";
 import { useGenerateStore } from "../../stores/generateStore";
 
 const ResultDashboard = () => {
@@ -23,8 +25,11 @@ const ResultDashboard = () => {
   const track = "https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3";
 
   return (
-    <>
-      <div className={styles.uploadContainer}>
+    <div >         
+         
+
+        <div >
+        <div className={styles.uploadContainer}>
         {!file && (
           <div className={styles.addVideoButton}>
             <input
@@ -44,14 +49,45 @@ const ResultDashboard = () => {
           </div>
         )}
       </div>
-      <div className={styles.socialBehaviour}>
-        <div className={styles.comment}>Comment</div>
-        <div className={styles.comment}>Export</div>
-        <div className={styles.comment}>Share</div>
-      </div>
-      {url && <ControlSelection trackUrl={track} />}
-      {/* {url && <ControlPanel />} */}
-    </>
+          <div className={styles.socialBehaviour}>
+            <div className={styles.comment}>Comment</div>
+            <div className={styles.comment}>Export</div>
+            <div className={styles.comment}>Share</div>
+          </div>
+          <div className={styles.container}>
+          <div className={styles.compositionContainer}>
+                <div className={styles.composition}>
+                    <div className={styles.playButtonContainer}>
+                      <img src={playcircle} />
+                      <span className={styles.compositionText}>Composition 1</span>
+                    </div>
+                    <img src={kebab} />
+                </div>
+                <div className={styles.composition}>
+                    <div className={styles.playButtonContainer}>
+                      <img src={playcircle} />
+                      <span className={styles.compositionText}>Composition 2</span>
+                    </div>
+                    <img src={kebab} />
+                </div>
+                <div className={styles.composition}>
+                    <div className={styles.playButtonContainer}>
+                      <img src={playcircle} />
+                      <span className={styles.compositionText}>Composition 3</span>
+                    </div>
+                    <img src={kebab} />
+                </div>
+            </div>
+            <div className={styles.videoContainer}>
+            {url && <ControlSelection trackUrl={track} />}
+            </div>
+            
+          </div>
+          {/* {url && <ControlPanel />} */}
+          {/* {url && <ControlSeconds trackId={url} />} */}
+        </div>
+    </div>
+
   );
 };
 
