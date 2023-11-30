@@ -22,7 +22,7 @@ const VideoPlayer: React.FC<videoUrlProps> = ({ videoUrl }) => {
       videoPlayer.src({
         src: videoUrl,
       });
-      videoPlayer.pause();
+      videoPlayer.play();
       setIsPlaying(true);
     }
   }, [videoUrl]);

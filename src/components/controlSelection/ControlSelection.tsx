@@ -19,7 +19,6 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [startRegion, setstartRegion] = useState(0);
   const [updatedRegion, setUpdatedRegion] = useState(5);
   const wavesurferref = useRef(null);
-  const [showPopup, setShowPopup] = useState<boolean>(false);
   const videoElement = document.querySelector("video");
   const [openModal, setOpenModal] = useState<boolean>();
   const updateCurrentTimeFrameDetails = useGenerateStore(
@@ -33,10 +32,9 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     { id: 1, text: "Track 1" },
     { id: 2, text: "Track 2" },
     { id: 3, text: "Track 3" },
-    // Add more items as needed
   ]);
 
-  const moveItem = (fromIndex, toIndex) => {
+  const moveItem = (fromIndex: number, toIndex: number) => {
     const updatedItems = [...items];
     const [movedItem] = updatedItems.splice(fromIndex, 1);
     updatedItems.splice(toIndex, 0, movedItem);
@@ -50,6 +48,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     timeInterval: 1,
     primaryLabelInterval: 5,
     secondaryLabelInterval: 5,
+    duration: 180,
     style: {
       fontSize: "10px",
       color: "#FFF",
@@ -59,7 +58,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   // creating a waveform on given url
   const waveformParams = {
     container: "#waveform",
-    waveColor: "#2c2c2c",
+    waveColor: "#242424",
     progressColor: "#2c2c2c",
     height: 70,
     minPxPerSec: 10,
@@ -98,7 +97,8 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
       start: startRegion,
       end: updatedRegion,
       id: "region_" + (getLastTimeFrameId + 1),
-      color: "rgba(255, 0, 0, 0.3)",
+      color: "#333333",
+      minLength: 3,
     });
     setstartRegion(updatedRegion);
     setUpdatedRegion(updatedRegion + 5);
@@ -108,7 +108,6 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
       setUpdatedRegion(region.end + 5);
     });
     addNewTimeFrame(getLastTimeFrameId + 1);
-    setShowPopup(true);
 
     wsRegions.on("region-clicked", (region: any) => {
       console.log("#Updated region", region);
@@ -120,9 +119,8 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   };
 
   // Handle mouse click events
-  const handleOnBlur = () => {
-    debugger;
-    setOpenModal(false);
+  const handleTogglePopup = () => {
+    setOpenModal(!openModal);
   };
 
   //Handle lifecycle hooks
@@ -147,7 +145,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
         <div onClick={addRegion} className={styles.addSongsBox}>
           <img src={addIcon} alt="addSongs" />
         </div>
-        {openModal && <ControlPopup handleOnBlur={handleOnBlur} />}
+        {openModal && <ControlPopup onClose={handleTogglePopup} />}
       </div>
       <DndProvider backend={HTML5Backend}>
         {items.map((item, index) => (
@@ -164,7 +162,14 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   );
 };
 
-const DraggableItem = ({ id, text, index, moveItem }) => {
+type DraggableProps = {
+  id: Number;
+  text: String;
+  index: Number;
+  moveItem: Function;
+};
+
+const DraggableItem = ({ id, text, index, moveItem }: DraggableProps) => {
   const [, drag] = useDrag({
     type: ItemType,
     item: { id, index },
@@ -172,7 +177,7 @@ const DraggableItem = ({ id, text, index, moveItem }) => {
 
   const [, drop] = useDrop({
     accept: ItemType,
-    hover: (draggedItem) => {
+    hover: (draggedItem: any) => {
       if (draggedItem.index !== index) {
         moveItem(draggedItem.index, index);
         draggedItem.index = index;

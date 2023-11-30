@@ -17,11 +17,9 @@ const uploadFileApi = async <T>(uploadFile: any): Promise<T> => {
       {
         headers: {
           "Content-Type": "multipart/form-data",
+          'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NTVkZDBhOTJlZjA2NzQ0MzU4YTk0N2EiLCJpYXQiOjE3MDEzNTAxNTAsIm5iZiI6MTcwMTM1MDE1MCwianRpIjoiNjVjZTQyZWItZDYyZC00NWFhLThhMDItY2FhYmM3MGIyZTE5IiwiZXhwIjoxNzAxMzkzMzUwLCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlLCJyb2xlIjoidXNlciIsImlzQmxvY2tlZCI6ZmFsc2V9.ypcxPRBQUXEjZwj3OCJohK9By19mL5d94lrQMVQvHcU'
         },
-        auth: {
-          username: "raaga",
-          password: "4S5Ek7un16Qc",
-        },
+
       }
     );
     return response.data;
