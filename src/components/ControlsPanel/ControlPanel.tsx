@@ -3,14 +3,17 @@ import addIcon from "../../../public/icons/addIcon.svg";
 import { useEffect, useRef, useState } from "react";
 import { ControlPopup } from "../controlPopup/controlPopup";
 import React from "react";
+import { useGenerateStore } from "../../stores/generateStore";
 
 const ControlPanel = () => {
   const [boxes, setBoxes] = useState<string[]>([]);
-  
+
   const [width, setWidth] = useState(100);
   const [isResizing, setIsResizing] = useState(false);
   const initialX = useRef<number | null>(null);
-  
+  const timeFrames = useGenerateStore((state) => state.timeFrameData);
+  const addNewTimeFrame = useGenerateStore((state) => state.addNewTimeFrame);
+
   const EMOTION = [
     "Joy",
     "Amazment",
@@ -23,32 +26,27 @@ const ControlPanel = () => {
     "Calm",
   ];
   const INSTRUMENTS = [
-    {value: 'none selected', label: 'None Selected'},
+    { value: "none selected", label: "None Selected" },
     { value: "horns", label: "Horns" },
     { value: "bansuri", label: "Bansuri" },
     { value: "accordian", label: "Accordian" },
-    { value: "flute", label: "Flute"},
+    { value: "flute", label: "Flute" },
     { value: "bells", label: "Bells" },
     { value: "drums", label: "Drums" },
     { value: "tabla", label: "Tabla" },
-    { value: "percussion", label: "Percussion"},
+    { value: "percussion", label: "Percussion" },
     { value: "piano", label: "Piano" },
     { value: "harp", label: "Harp" },
     { value: "guitar", label: "Guitar" },
     { value: "sitar", label: "Sitar" },
     { value: "violin", label: "Violin" },
-    { value: "cello", label: "Cello" }
-  ]
-  const GENRE = [
-    "Adventure",
-    "Romantic",
-    "Drama",
-    "Suspenseful"
-  ]
+    { value: "cello", label: "Cello" },
+  ];
+  const GENRE = ["Adventure", "Romantic", "Drama", "Suspenseful"];
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsResizing(true);
     initialX.current = e.clientX;
-    
+
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
   };
@@ -65,7 +63,6 @@ const ControlPanel = () => {
     }
   };
 
-
   const handleMouseUp = () => {
     setIsResizing(true);
     initialX.current = null;
@@ -75,33 +72,33 @@ const ControlPanel = () => {
   };
 
   const addBox = () => {
-    setBoxes([...boxes, "Track"]);
+    addNewTimeFrame();
   };
 
   return (
     <>
       <div className={styles.musicContailer}>
         <div className={styles.trackContainer}>
-          {boxes.map((box, index) => (
+          {timeFrames.map((timeframe, index) => (
             <div
-              key={index}
+              key={timeframe.id}
               className={styles.resizableBox}
               style={{ width: width }}
               onMouseDown={handleMouseDown}
             >
               <div className={styles.trackName}>
-                {box} {index + 1}
+                {"Track"} {index + 1}
               </div>
             </div>
           ))}
         </div>
         <div className={styles.containeraddSongs}>
-        <div className={styles.addSongsBox} onClick={addBox}>
-          <img src={addIcon} alt="addSongs" />
+          <div className={styles.addSongsBox} onClick={addBox}>
+            <img src={addIcon} alt="addSongs" />
+          </div>
         </div>
+        <ControlPopup />
       </div>
-      <ControlPopup />
-        </div>
     </>
   );
 };
