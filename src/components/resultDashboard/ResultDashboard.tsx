@@ -3,11 +3,11 @@ import VideoPlayer from "../videoPlayer/VideoPlayer";
 import styles from "./ResultDashboard.module.scss";
 import { STUDIO_CONSTANTS } from "../../utils/genAiConstant";
 import ControlSelection from "../controlSelection/ControlSelection";
+import compositionContainer from "../compositionContainer/compositionContainer";
 import React, { useState } from "react";
 import ControlPanel from "../ControlsPanel/ControlPanel";
-import kebab from "../../../public/icons/KebabMenu-Vertical.svg";
-import playcircle from "../../../public/icons/play_circle_filled.svg";
 import { useGenerateStore } from "../../stores/generateStore";
+import CompositionContainer from "../compositionContainer/compositionContainer";
 
 const ResultDashboard = () => {
   const [showPlayer, setShowPlayer] = useState<boolean>(false);
@@ -55,29 +55,7 @@ const ResultDashboard = () => {
             <div className={styles.comment}>Share</div>
           </div>
           <div className={styles.container}>
-          <div className={styles.compositionContainer}>
-                <div className={styles.composition}>
-                    <div className={styles.playButtonContainer}>
-                      <img src={playcircle} />
-                      <span className={styles.compositionText}>Composition 1</span>
-                    </div>
-                    <img src={kebab} />
-                </div>
-                <div className={styles.composition}>
-                    <div className={styles.playButtonContainer}>
-                      <img src={playcircle} />
-                      <span className={styles.compositionText}>Composition 2</span>
-                    </div>
-                    <img src={kebab} />
-                </div>
-                <div className={styles.composition}>
-                    <div className={styles.playButtonContainer}>
-                      <img src={playcircle} />
-                      <span className={styles.compositionText}>Composition 3</span>
-                    </div>
-                    <img src={kebab} />
-                </div>
-            </div>
+            <CompositionContainer />
             <div className={styles.videoContainer}>
             {url && <ControlSelection trackUrl={track} />}
             </div>
