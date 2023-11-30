@@ -11,9 +11,8 @@ import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 import LoadingSpin from "react-loading-spin";
 
 const ResultDashboard = () => {
-  const [showPlayer, setShowPlayer] = useState<boolean>(false);
   const { uploadFile, file, status }: any = useGenerateStore((state) => state);
-  
+
   const onFileUpload = (event: any) => {
     const FormD: any = new FormData();
     FormD.append("file", event.target.files[0]);
@@ -61,7 +60,7 @@ const ResultDashboard = () => {
           <div className={styles.comment}>Share</div>
         </div>
         <div className={styles.container}>
-         <CompositionContainer />
+          <CompositionContainer />
           <div className={styles.videoContainer}>
             {<ControlSelection trackUrl={track} />}
           </div>

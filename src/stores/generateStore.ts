@@ -22,7 +22,7 @@ interface IGenerateStore {
 const initialState: IGenerateStore = {
   file: null,
   status: API_STATUS_TYPES.idle,
-  error: null,
+  error: null
 };
 
 export const useGenerateStore = create<IGenerateStore>((set, get) => ({
