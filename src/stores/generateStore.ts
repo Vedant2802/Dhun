@@ -29,8 +29,9 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
   ...initialState,
   uploadFile: async (file: any) => {
     try {
+      set(() => ({ status: API_STATUS_TYPES.loading }));
       const data = await uploadFileApi<object>(file);
-      set(() => ({ status: API_STATUS_TYPES.success, data }));
+      set(() => ({ status: API_STATUS_TYPES.success, file: data }));
     } catch (error: any) {
       set(() => ({ status: API_STATUS_TYPES.failed, error }));
     }
