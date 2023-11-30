@@ -45,7 +45,7 @@ const initialState: IGenerateState = {
   timeFrameData: [],
   file: null,
   status: API_STATUS_TYPES.idle,
-  error: null,
+  error: null
 };
 
 type IGenerateStore = IGenerateState & IGenerateActions;

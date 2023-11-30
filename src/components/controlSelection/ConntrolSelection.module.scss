@@ -1,7 +1,7 @@
-.outercontainer{
+.outercontainer {
   display: flex;
   flex-direction: column;
-  gap:5px;
+  gap: 5px;
 }
 .waveformContainer {
   color: #fff;
@@ -23,7 +23,7 @@
 .customRegion {
   height: 75%;
 }
-.trackComposition{
+.trackComposition {
   display: flex;
   width: 406px;
   height: 48px;
@@ -32,7 +32,7 @@
   gap: 10px;
   border-radius: 8px;
   color: #fff;
-  background: var(--secondary-components-dark, #2D8331);
+  background: var(--secondary-components-dark, #2d8331);
 }
 .controlContainer {
   display: flex;
@@ -54,7 +54,7 @@
 .musicContainer {
   width: 100%;
   height: 10vh;
-  background: #2c2c2c;
+  background: #242424;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 2px;
