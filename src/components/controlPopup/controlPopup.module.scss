@@ -1,29 +1,29 @@
 .popupBox {
-    width:356px;
-    height: 530px;
-    border-radius: 8px;
-    position: absolute;
-    margin-top: -420px;
-    z-index: 100;
-    margin-left: 67px;
-    display: flex;
-    flex-direction: column;
-    // border: 1px solid wheat;
-    background: var(--surface-4, #1F1F1F);
-  }
-  .popuppart{
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    color: var(--text-1, #FFF);
-    // font-family: Work Sans;
-    font-weight: 400;
-    letter-spacing: 0.3px;
-    font-size: 14px;
-  }
-  .uploadfile{
+  width: 356px;
+  height: 530px;
+  border-radius: 8px;
+  position: absolute;
+  margin-top: -420px;
+  z-index: 100;
+  margin-left: 67px;
+  display: flex;
+  flex-direction: column;
+  // border: 1px solid wheat;
+  background: var(--surface-4, #1f1f1f);
+}
+.popuppart {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--text-1, #fff);
+  // font-family: Work Sans;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  font-size: 14px;
+}
+.uploadfile {
   display: flex;
   padding: 10px;
   justify-content: center;
@@ -33,78 +33,82 @@
   border: 1px dashed var(--outline-4, rgba(255, 255, 255, 0.24));
   margin: auto;
   gap: 10px;
-  }
-  .popupdropdown{
-    color: var(--text-4, #C2C2C2);
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 16px;
-    border-radius: 8px;
-    width: 332px;
-    border-radius: 8px;
-    border: 1px solid var(--outline-4, rgba(255, 255, 255, 0.24));
-    margin: auto;
-    gap: 10px;
-    }
-    .popupdropdownoptions{
-      display: flex;
-      position: absolute;
-      flex-direction: column;
-      width: 332px;
-      background-color: #1F1F1F;
-      padding-top: 10px;
-      overflow: auto;
-      height: 293px;
-      align-items: flex-start;
-      color: var(--text-4, #C2C2C2);
-      padding: 10px 16px;
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
-      width: 332px;
-      border: 1px solid var(--outline-4, rgba(255, 255, 255, 0.24));
-      margin: auto;
-      gap: 10px;
-    }
-    .popupdropdownoptions::-webkit-scrollbar {
-      display: none;
-    }
-    .popupdropdownoptionsingle{
-      display: flex;
-      width: 100%;
-    }
-    .popupcontainer{
-      display: flex;
-      flex-direction: column;
-  
-    }
-    .tempoOptions{
-      display: flex;
-      flex-direction: row;
-      gap: 8px;
-    }
-    .tempOption{
-      width: 105.3px;
-      border-radius: 8px;
-      border: 1px solid var(--outline-4, rgba(255, 255, 255, 0.24));
-      padding: 10px;
-      margin: auto;
-    }
-    .tempSelected{
-      border: 1px solid cyan;
-    }
-    .generateButton{
-      background: var(--primary-components, #7357FF);
-      width: 100%;
-      height: 51px;
-      border-bottom-right-radius: 8px;
-      border-bottom-left-radius: 8px;
-      font-size: 16px;
-      font-style: normal;
-      letter-spacing: 0.5px;
-      font-weight: 500;
-      color:white;
-      display: flex;
-      margin: 0px auto;
-      justify-content: center;
-      align-items: center;
-    }
+  cursor: pointer;
+}
+.popupdropdown {
+  color: var(--text-4, #c2c2c2);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-radius: 8px;
+  width: 332px;
+  border-radius: 8px;
+  border: 1px solid var(--outline-4, rgba(255, 255, 255, 0.24));
+  margin: auto;
+  gap: 10px;
+  cursor: pointer;
+}
+.popupdropdownoptions {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  width: 332px;
+  background-color: #1f1f1f;
+  padding-top: 10px;
+  overflow: auto;
+  height: 293px;
+  align-items: flex-start;
+  color: var(--text-4, #c2c2c2);
+  padding: 10px 16px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  width: 332px;
+  border: 1px solid var(--outline-4, rgba(255, 255, 255, 0.24));
+  margin: auto;
+  gap: 10px;
+}
+.popupdropdownoptions::-webkit-scrollbar {
+  display: none;
+}
+.popupdropdownoptionsingle {
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+}
+.popupcontainer {
+  display: flex;
+  flex-direction: column;
+}
+.tempoOptions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+.tempOption {
+  width: 105.3px;
+  border-radius: 8px;
+  border: 1px solid var(--outline-4, rgba(255, 255, 255, 0.24));
+  padding: 10px;
+  margin: auto;
+  cursor: pointer;
+}
+.tempSelected {
+  border: 1px solid cyan;
+}
+.generateButton {
+  background: var(--primary-components, #7357ff);
+  width: 100%;
+  height: 51px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  font-size: 16px;
+  font-style: normal;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  margin: 0px auto;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

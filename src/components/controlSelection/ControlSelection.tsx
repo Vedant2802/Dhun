@@ -15,7 +15,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const wavesurferref = useRef(null);
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const videoElement = document.querySelector("video");
-
+  const [openModal, setOpenModal] = useState<boolean>();
   // Timeline to create on top
   const topTimeline = TimelinePlugin.create({
     insertPosition: "beforebegin",
@@ -72,6 +72,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
 
     wsRegions.on("region-clicked", (region: any) => {
       console.log("#Updated region", region);
+      setOpenModal(true);
     });
   };
 
@@ -89,6 +90,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
       <div onClick={addRegion} className={styles.addSongsBox}>
         <img src={addIcon} alt="addSongs" />
       </div>
+      {openModal && <ControlPopup />}
     </div>
   );
 };
