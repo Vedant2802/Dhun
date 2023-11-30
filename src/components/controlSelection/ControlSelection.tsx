@@ -25,7 +25,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     { id: 3, text: "Track 3" },
   ]);
 
-  const moveItem = (fromIndex, toIndex) => {
+  const moveItem = (fromIndex: number, toIndex: number) => {
     const updatedItems = [...items];
     const [movedItem] = updatedItems.splice(fromIndex, 1);
     updatedItems.splice(toIndex, 0, movedItem);
@@ -102,6 +102,10 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     });
   };
 
+  const handleTogglePopup = () => {
+    setOpenModal(!openModal);
+  };
+
   return (
     <div className={styles.outercontainer}>
       <div className={styles.mainContainer}>
@@ -117,7 +121,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
         <div onClick={addRegion} className={styles.addSongsBox}>
           <img src={addIcon} alt="addSongs" />
         </div>
-        {openModal && <ControlPopup />}
+        {openModal && <ControlPopup onClose={handleTogglePopup} />}
       </div>
       <DndProvider backend={HTML5Backend}>
         {items.map((item, index) => (
@@ -134,7 +138,14 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   );
 };
 
-const DraggableItem = ({ id, text, index, moveItem }) => {
+type DraggableProps = {
+  id: Number,
+  text: String,
+  index: Number,
+  moveItem: Function
+}
+
+const DraggableItem = ({ id, text, index, moveItem }: DraggableProps) => {
   const [, drag] = useDrag({
     type: ItemType,
     item: { id, index },
@@ -142,7 +153,7 @@ const DraggableItem = ({ id, text, index, moveItem }) => {
 
   const [, drop] = useDrop({
     accept: ItemType,
-    hover: (draggedItem) => {
+    hover: (draggedItem: any) => {
       if (draggedItem.index !== index) {
         moveItem(draggedItem.index, index);
         draggedItem.index = index;

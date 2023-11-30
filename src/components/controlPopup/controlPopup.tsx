@@ -1,11 +1,15 @@
 import * as React from "react";
-import {useState} from "react";
+import {useState,useRef,useEffect} from "react";
 // import { useState } from "react";
 import styles from "./controlPopup.module.scss";
 import { EMOTION,INSTRUMENTS,GENRE } from "../../utils/genAiConstant";
 import { useGenerateStore } from "../../stores/generateStore";
 
-export const ControlPopup: React.FC = () => {
+type controlPopupProps = {
+  onClose: Function
+}
+
+export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
   const [emotion, setEmotion] = useState<string>("None Selected");
   const [emotionOptionopen, setEmotionOptionOpen] = useState<boolean>(false);
   const [instruments, setInstruments] = useState<string>("Choose Instruments");
@@ -15,6 +19,20 @@ export const ControlPopup: React.FC = () => {
   const [genreOptionsOpen, setGenreOptionsOpen] = useState<boolean>(false);
   const [tempo, setTempo] = useState("");
   const generateMusic = useGenerateStore((state:any) => state.generateMusic);
+  const popupRef = useRef<any>();
+
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [onClose]);
+
 
   const handleOnGenerate = () => {
     generateMusic &&
@@ -27,7 +45,7 @@ export const ControlPopup: React.FC = () => {
   };
 
   return (
-      <div className={styles.popupBox}>
+      <div ref={popupRef} className={styles.popupBox}>
         <div className={styles.popuppart}>
           <p>Reference Melody</p>
           <div className={styles.uploadfile}>
