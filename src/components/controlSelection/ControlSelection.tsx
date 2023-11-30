@@ -5,6 +5,7 @@ import addIcon from "../../../public/icons/addIcon.svg";
 import { ControlPopup } from "../controlPopup/controlPopup";
 import RegionsPlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/regions.esm.js";
 import TimelinePlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/timeline.esm.js";
+import menuIcon from "../../../public/icons/menu.svg";
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import * as React from "react";
@@ -147,10 +148,7 @@ const DraggableItem = ({ id, text, index, moveItem }) => {
 
   return (
     <div ref={(node) => drag(drop(node))} className={styles.trackComposition}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M2.5 6.66675H17.5" stroke="#D6D6D6" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M2.5 13.3333H17.5" stroke="#D6D6D6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <img src={menuIcon}/>
       {text}
     </div>
   );
