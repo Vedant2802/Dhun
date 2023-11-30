@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./controlPopup.module.scss";
-
+import { EMOTION,INSTRUMENTS,GENRE } from "../../utils/genAiConstant";
 import * as React from "react";
 
 
@@ -14,40 +14,6 @@ export const ControlPopup: React.FC = () => {
     const [genreOptionsOpen,setGenreOptionsOpen] = useState<boolean>(false);
     const [tempo,setTempo] = useState("");
 
-    const EMOTION = [
-        "Joy",
-        "Amazment",
-        "Love",
-        "Disgust",
-        "Sadness",
-        "Anger",
-        "Fear",
-        "Courage",
-        "Calm",
-      ];
-      const INSTRUMENTS = [
-        {value: 'none selected', label: 'None Selected'},
-        { value: "horns", label: "Horns" },
-        { value: "bansuri", label: "Bansuri" },
-        { value: "accordian", label: "Accordian" },
-        { value: "flute", label: "Flute"},
-        { value: "bells", label: "Bells" },
-        { value: "drums", label: "Drums" },
-        { value: "tabla", label: "Tabla" },
-        { value: "percussion", label: "Percussion"},
-        { value: "piano", label: "Piano" },
-        { value: "harp", label: "Harp" },
-        { value: "guitar", label: "Guitar" },
-        { value: "sitar", label: "Sitar" },
-        { value: "violin", label: "Violin" },
-        { value: "cello", label: "Cello" }
-      ]
-      const GENRE = [
-        "Adventure",
-        "Romantic",
-        "Drama",
-        "Suspenseful"
-      ]
 
       return <>
         <div className={styles.popupBox}>

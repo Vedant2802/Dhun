@@ -13,7 +13,7 @@ const MainDashboard = () => {
           <GenerateMusic />
         </div> */}
       </div>
-      <div className={styles.resultControl}>Generate result</div>
+      {/* <div className={styles.resultControl}>Generate result</div> */}
     </div>
   );
 };
