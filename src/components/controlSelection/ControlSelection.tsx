@@ -6,25 +6,23 @@ import { ControlPopup } from "../controlPopup/controlPopup";
 import RegionsPlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/regions.esm.js";
 import TimelinePlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/timeline.esm.js";
 import menuIcon from "../../../public/icons/menu.svg";
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider, useDrag, useDrop } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import * as React from "react";
 interface WaveformProps {
   trackUrl: string;
 }
-const ItemType = 'ITEM';
+const ItemType = "ITEM";
 const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [startRegion, setstartRegion] = useState(0);
   const [updatedRegion, setUpdatedRegion] = useState(5);
   const wavesurferref = useRef(null);
-  const [showPopup, setShowPopup] = useState<boolean>(false);
   const videoElement = document.querySelector("video");
   const [openModal, setOpenModal] = useState<boolean>();
   const [items, setItems] = useState([
-    { id: 1, text: 'Track 1' },
-    { id: 2, text: 'Track 2' },
-    { id: 3, text: 'Track 3' },
-    // Add more items as needed
+    { id: 1, text: "Track 1" },
+    { id: 2, text: "Track 2" },
+    { id: 3, text: "Track 3" },
   ]);
 
   const moveItem = (fromIndex, toIndex) => {
@@ -41,6 +39,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     timeInterval: 1,
     primaryLabelInterval: 5,
     secondaryLabelInterval: 5,
+    duration: 180,
     style: {
       fontSize: "10px",
       color: "#FFF",
@@ -50,7 +49,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   // creating a waveform on given url
   const waveformParams = {
     container: "#waveform",
-    waveColor: "#2c2c2c",
+    waveColor: "#242424",
     progressColor: "#2c2c2c",
     height: 70,
     minPxPerSec: 10,
@@ -64,18 +63,18 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
 
   useEffect(() => {
     const handleEscapeKeyPress = (event) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         setOpenModal(false);
       }
     };
     if (!trackUrl) return;
     wavesurferref.current = WaveSurfer.create(waveformParams);
     wavesurferref.current?.load(trackUrl);
-    document.addEventListener('keydown', handleEscapeKeyPress);
+    document.addEventListener("keydown", handleEscapeKeyPress);
     return () => {
       wavesurferref.current?.destroy();
-      document.removeEventListener('keydown', handleEscapeKeyPress);
-    } 
+      document.removeEventListener("keydown", handleEscapeKeyPress);
+    };
   }, [trackUrl]);
 
   const addRegion = () => {
@@ -85,7 +84,8 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     wsRegions.addRegion({
       start: startRegion,
       end: updatedRegion,
-      color: "rgba(255, 0, 0, 0.3)",
+      color: "#333333",
+      minLength: 3,
     });
     setstartRegion(updatedRegion);
     setUpdatedRegion(updatedRegion + 5);
@@ -95,7 +95,6 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
       setUpdatedRegion(region.end + 5);
       console.log("#Updated region", region);
     });
-    setShowPopup(true);
 
     wsRegions.on("region-clicked", (region: any) => {
       console.log("#Updated region", region);
@@ -105,30 +104,35 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
 
   return (
     <div className={styles.outercontainer}>
-    <div className={styles.mainContainer}>
-      <div className={styles.musicContainer}>
-        <div className={styles.controlContainer}>
-          <div
-            ref={wavesurferref}
-            id="waveform"
-            className={styles.waveformContainer}
-          />
+      <div className={styles.mainContainer}>
+        <div className={styles.musicContainer}>
+          <div className={styles.controlContainer}>
+            <div
+              ref={wavesurferref}
+              id="waveform"
+              className={styles.waveformContainer}
+            />
+          </div>
         </div>
+        <div onClick={addRegion} className={styles.addSongsBox}>
+          <img src={addIcon} alt="addSongs" />
+        </div>
+        {openModal && <ControlPopup />}
       </div>
-      <div onClick={addRegion} className={styles.addSongsBox}>
-        <img src={addIcon} alt="addSongs" />
-      </div>
-      {openModal && <ControlPopup />}
-    </div>
-    <DndProvider backend={HTML5Backend}>
+      <DndProvider backend={HTML5Backend}>
         {items.map((item, index) => (
-          <DraggableItem key={item.id} id={item.id} text={item.text} index={index} moveItem={moveItem} />
+          <DraggableItem
+            key={item.id}
+            id={item.id}
+            text={item.text}
+            index={index}
+            moveItem={moveItem}
+          />
         ))}
       </DndProvider>
     </div>
   );
 };
-
 
 const DraggableItem = ({ id, text, index, moveItem }) => {
   const [, drag] = useDrag({
@@ -148,7 +152,7 @@ const DraggableItem = ({ id, text, index, moveItem }) => {
 
   return (
     <div ref={(node) => drag(drop(node))} className={styles.trackComposition}>
-      <img src={menuIcon}/>
+      <img src={menuIcon} />
       {text}
     </div>
   );
