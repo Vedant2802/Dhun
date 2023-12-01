@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./DhunAiComponent.module.scss";
 import dhunAI from "../../../public/video/dhunAI.mp4";
+import arrow from "../../../public/icons/right-arrow.svg"; 
 import volumeUp from "../../../public/icons/volumeIcon.svg";
 import promptVideo from "../../../public/video/promptVideo.mp4";
 const DhunAiComponent = () => {
@@ -16,7 +17,9 @@ const DhunAiComponent = () => {
           Endless possibilities with Dhun.AI to turn your thoughts into magical
           melodies.{" "}
         </div>
-        <div className={styles.button} onClick={openPrompt}>
+        <div className={styles.title}>Endless possibilities with Dhun.AI
+        <br/>to turn your thoughts into magical<br/> melodies.</div>
+        <div onClick={openPrompt} className={styles.button}>Create magic now <img className={styles.arrow} src={arrow} /></div>
           Create magic now
         </div>
       </div>

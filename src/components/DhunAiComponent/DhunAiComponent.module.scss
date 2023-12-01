@@ -4,7 +4,11 @@
   justify-content: center;
   align-items: center;
   padding: 120px 10px 0px 10px;
-
+  .arrow{
+    width: 15%;
+    height: 15%;
+    margin: 5px;
+  }
   .detailDhunai {
     display: flex;
     flex-direction: column;
