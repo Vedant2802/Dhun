@@ -33,10 +33,11 @@ interface IGenerateState {
   duration?: number;
   currentMusicSrc?: string;
   isMusicPlaying?: boolean;
+  fileName: string;
 }
 
 interface IGenerateActions {
-  uploadFile: (file: any) => void;
+  uploadFile: (file: any, fileName: string) => void;
   generateMusic: (requestObj: GenerateMusicRequestObj) => void;
   setDuration: (duration: number) => void;
   addNewTimeFrame: (id: number) => void;
@@ -48,6 +49,7 @@ interface IGenerateActions {
 const initialState: IGenerateState = {
   timeFrameData: [],
   file: null,
+  fileName: "Untitled File",
   status: API_STATUS_TYPES.idle,
   error: null,
 };
@@ -56,11 +58,11 @@ type IGenerateStore = IGenerateState & IGenerateActions;
 
 export const useGenerateStore = create<IGenerateStore>((set, get) => ({
   ...initialState,
-  uploadFile: async (file: any) => {
+  uploadFile: async (file: any, fileName: string) => {
     try {
       set(() => ({ status: API_STATUS_TYPES.loading }));
       const data = await uploadFileApi<object>(file);
-      set(() => ({ status: API_STATUS_TYPES.success, file: data }));
+      set(() => ({ status: API_STATUS_TYPES.success, file: data, fileName }));
     } catch (error: any) {
       set(() => ({ status: API_STATUS_TYPES.failed, error }));
     }

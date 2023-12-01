@@ -1,0 +1,14 @@
+.trackComposition {
+  display: flex;
+  width: 406px;
+  height: 48px;
+  position: relative;
+  cursor: pointer;
+  z-index: 100;
+  padding: 13px 8px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  color: #fff;
+  background: var(--secondary-components-dark, #2d8331);
+}

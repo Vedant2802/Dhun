@@ -1,3 +1,28 @@
+.timeframeContainer {
+  background-color: #161616;
+}
+.compositionWrapper {
+  display: flex;
+  margin-top: 10px;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  gap: 9px;
+}
+.trackWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.compositionBackground {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
 .uploadContainer {
   display: flex;
   flex-direction: column;
@@ -51,25 +76,25 @@
   cursor: pointer;
 }
 .container {
-  display: flex;
-  flex-direction: row;
+  width: 100%;
 }
 .videoContainer {
   width: 80vw;
+  margin-left: auto;
+  padding-bottom: 10px;
 }
-.allcomposition{
+.allcomposition {
   display: flex;
   flex-direction: column;
 }
-.compositionContainer{
-  margin-top: 86px;
+.compositionContainer {
   margin-left: 40px;
   width: 20vw;
-  gap:6px;
+  gap: 6px;
   display: flex;
   flex-direction: column;
 }
-.composition{
+.composition {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -78,47 +103,47 @@
   width: 304px;
   border-radius: 4px;
   background-color: #000;
-  color: #C2C2C2;
+  color: #c2c2c2;
 }
-.playButton{
+.playButton {
   width: 32px;
   height: 32px;
   padding-left: 10px;
 }
-.playButtonContainer{
+.playButtonContainer {
   display: flex;
   flex-direction: row;
-  gap:8px;
+  gap: 8px;
 }
-.compositionText{
+.compositionText {
   margin-top: 4px;
-.uploadContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  .addVideoButton {
-    border: 1px rgba(255, 255, 255, 0.16) solid;
-    border-radius: 8px;
+  .uploadContainer {
+    display: flex;
     justify-content: center;
     align-items: center;
-    display: flex;
-    color: #adadad;
-    font-size: 14px;
-    font-weight: 400;
-    padding: 4px 12px;
-    border-radius: 8px;
-    width: fit-content;
     cursor: pointer;
+    .addVideoButton {
+      border: 1px rgba(255, 255, 255, 0.16) solid;
+      border-radius: 8px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      color: #adadad;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 4px 12px;
+      border-radius: 8px;
+      width: fit-content;
+      cursor: pointer;
+    }
+    .videoUpload {
+      cursor: pointer;
+      opacity: 0;
+      position: absolute;
+      height: 8vh;
+      width: 160px;
+    }
   }
-  .videoUpload {
-    cursor: pointer;
-    opacity: 0;
-    position: absolute;
-    height: 8vh;
-    width: 160px;
-  }
-}
 }
 .uploadContainer {
   display: flex;
