@@ -4,6 +4,8 @@ import spectrum from "../../../public/icons/spectrum.svg";
 import monitizeLogo from "../../../public/icons/monitizeLogo.svg";
 import arrow from "../../../public/icons/right-arrow.svg";
 import Symphonies from "../sympohonies/Symphonies";
+import DhunIcon from "../../../public/icons/Dhun Icon.svg";
+import heart from "../../../public/icons/heart.svg";
 
 const MonetizeTunes = () => {
   return (
@@ -23,6 +25,12 @@ const MonetizeTunes = () => {
             </div>
             <div className={styles.button}>Create magic now <img className={styles.arrow} src={arrow} /></div>
         </div>
+      </div>
+      <div className={styles.footer}>
+        <img src={DhunIcon} alt="DhunIcon" />
+        <div>dhun.ai &nbsp; / &nbsp; Developed with by </div>
+        <img src={heart} alt="heart" />
+        <div>zee entertainment</div>
       </div>
     </div>
   );
