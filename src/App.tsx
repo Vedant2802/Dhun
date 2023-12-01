@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="dashboardContainer">
-      <Header />
+      {/* <Header /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AddVideo />} />
