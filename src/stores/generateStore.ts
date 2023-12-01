@@ -12,7 +12,7 @@ export interface GenerateMusicRequestObj {
 }
 
 export interface GenerateMusicResponse {
-  gcs_url: string[];
+  urls: string[];
   message: string;
 }
 
@@ -31,6 +31,8 @@ interface IGenerateState {
   status: API_STATUS_TYPES;
   error?: object | null;
   duration?: number;
+  currentMusicSrc?: string;
+  isMusicPlaying?: boolean;
 }
 
 interface IGenerateActions {
@@ -39,13 +41,15 @@ interface IGenerateActions {
   setDuration: (duration: number) => void;
   addNewTimeFrame: (id: number) => void;
   updateCurrentTimeFrameDetails: (id: number, duration: number) => void;
+  updateMusicPlayingStatus: (playing: boolean) => void;
+  setCurrentMusicSrc: (src: string) => void;
 }
 
 const initialState: IGenerateState = {
   timeFrameData: [],
   file: null,
   status: API_STATUS_TYPES.idle,
-  error: null
+  error: null,
 };
 
 type IGenerateStore = IGenerateState & IGenerateActions;
@@ -63,6 +67,12 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
   },
   setDuration: (duration: number) => {
     set(() => ({ duration }));
+  },
+  setCurrentMusicSrc: (src: string) => {
+    set(() => ({ currentMusicSrc: src, isMusicPlaying: true }));
+  },
+  updateMusicPlayingStatus: (playing: boolean) => {
+    set(() => ({ isMusicPlaying: playing }));
   },
   updateCurrentTimeFrameDetails: (id: number, duration: number) => {
     set(() => ({ currentTimeFrameId: id, duration }));

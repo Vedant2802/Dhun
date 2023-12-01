@@ -1,47 +1,58 @@
 import * as React from "react";
 import styles from "./compositionContainer.module.scss";
-import kebab from "../../../public/icons/KebabMenu-Vertical.svg";
-import playcircle from "../../../public/icons/play_circle_filled.svg";
-import AudioPlayer from "../audioPlayer/AudioPlayer";
 
-const compositionContainer = () => {
-  const handlePlay = () => {
-    console.log("songs");
+import AudioPlayer from "../audioPlayer/AudioPlayer";
+import { useGenerateStore } from "../../stores/generateStore";
+import CompositionItem from "./CompositionItem";
+
+const CompositionContainer: React.FC = () => {
+  const currentTimeFrameId = useGenerateStore(
+    (state) => state.currentTimeFrameId
+  );
+  const defaultMusicCompositions = ["1", "2", "3"];
+  const timeFrameData = useGenerateStore((state) => state.timeFrameData);
+
+  const renderDefaultCompositions = () => {
+    return defaultMusicCompositions.map((url, index) => (
+      <CompositionItem
+        key={index}
+        isDefault={true}
+        musicName={"Composition " + (index + 1)}
+        musicSrc={url}
+      />
+    ));
   };
+
+  const renderMusicCompositions = () => {
+    if (!timeFrameData.length || !currentTimeFrameId) {
+      return renderDefaultCompositions();
+    }
+
+    const generatedData = timeFrameData.find(
+      (timeFrame) => timeFrame.id === currentTimeFrameId
+    )?.generatedData;
+
+    if (!generatedData) {
+      return renderDefaultCompositions();
+    }
+    return generatedData?.urls.map((url, index) => (
+      <CompositionItem
+        key={index}
+        isDefault={false}
+        musicName={"Composition " + (index + 1)}
+        musicSrc={url}
+      />
+    ));
+  };
+
   return (
     <>
       <div className={styles.compositionContainer}>
-        <div className={styles.composition}>
-          <div className={styles.playButtonContainer}>
-            <div onClick={handlePlay}>
-              <img src={playcircle} />
-            </div>
-            <span className={styles.compositionText}>Composition 1</span>
-          </div>
-          <img src={kebab} />
-        </div>
-        <div className={styles.composition}>
-          <div className={styles.playButtonContainer}>
-            <div onClick={handlePlay}>
-              <img src={playcircle} />
-            </div>
-            <span className={styles.compositionText}>Composition 2</span>
-          </div>
-          <img src={kebab} />
-        </div>
-        <div className={styles.composition}>
-          <div className={styles.playButtonContainer}>
-            <div onClick={handlePlay}>
-              <img src={playcircle} />
-            </div>
-            <span className={styles.compositionText}>Composition 3</span>
-          </div>
-          <img src={kebab} />
-        </div>
+        {renderMusicCompositions()}
       </div>
       <AudioPlayer />
     </>
   );
 };
 
-export default compositionContainer;
+export default CompositionContainer;
