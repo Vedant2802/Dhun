@@ -3,17 +3,16 @@
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 80px 10px 0px 10px;
+  padding: 120px 10px 0px 10px;
   .arrow{
     width: 15%;
     height: 15%;
     margin: 5px;
   }
   .detailDhunai {
-    // margin-top: 10%;
     display: flex;
     flex-direction: column;
-    width: 35%;
+    width: 30%;
   }
   .heading {
     color: white;
@@ -46,7 +45,7 @@
   .videoContainer {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 65%;
     .videoPart {
       width: 100%;
       height: 55vh;

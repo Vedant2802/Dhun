@@ -7,8 +7,10 @@ const DhunAiComponent = () => {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.detailDhunai}>
-        <div className={styles.heading}>
-          Creating music was never this easy!
+        <div className={styles.heading}>Craft Symphonies with a Click!</div>
+        <div className={styles.title}>
+          Endless possibilities with Dhun.AI to turn your thoughts into magical
+          melodies.{" "}
         </div>
         <div className={styles.title}>Endless possibilities with Dhun.AI
         <br/>to turn your thoughts into magical<br/> melodies.</div>
@@ -17,7 +19,7 @@ const DhunAiComponent = () => {
 
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>
-          <video autoPlay width="auto" muted loop>
+          <video width="auto" muted>
             <source src={dhunAI} type="video/mp4" />
           </video>
         </div>
