@@ -9,7 +9,6 @@ import WebModal from "../webGenerateModal/WebModal";
 const DhunAiComponent = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const openPrompt = () => {
-    console.log("gotopopup");
     setOpenModal(true);
   };
 
