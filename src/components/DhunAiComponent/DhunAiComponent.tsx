@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./DhunAiComponent.module.scss";
 import dhunAI from "../../../public/video/dhunAI.mp4";
+import arrow from "../../../public/icons/right-arrow.svg"; 
 
 const DhunAiComponent = () => {
   return (
@@ -9,8 +10,9 @@ const DhunAiComponent = () => {
         <div className={styles.heading}>
           Creating music was never this easy!
         </div>
-        <div className={styles.title}>Endless possibilities with Dhun.AI</div>
-        <div className={styles.button}>Try Dhun.AI now</div>
+        <div className={styles.title}>Endless possibilities with Dhun.AI
+        <br/>to turn your thoughts into magical<br/> melodies.</div>
+        <div className={styles.button}>Create magic now <img className={styles.arrow} src={arrow} /></div>
       </div>
 
       <div className={styles.videoContainer}>
