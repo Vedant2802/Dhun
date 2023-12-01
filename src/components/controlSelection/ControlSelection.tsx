@@ -19,7 +19,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [startRegion, setstartRegion] = useState(0);
   const [updatedRegion, setUpdatedRegion] = useState(5);
   const wavesurferref = useRef(null);
-  const videoElement = document.querySelector("video");
+  // const videoElement = document.querySelector("video");
   const [openModal, setOpenModal] = useState<boolean>();
   const updateCurrentTimeFrameDetails = useGenerateStore(
     (state) => state.updateCurrentTimeFrameDetails
@@ -66,8 +66,8 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     cursorWidth: 3,
     cursorColor: "rgba(127, 241, 131, 1)",
     plugins: [topTimeline],
-    backend: "MediaElement",
-    media: videoElement,
+    // backend: "MediaElement",
+    // media: videoElement,
   };
 
   useEffect(() => {
@@ -78,7 +78,10 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     };
     if (!trackUrl) return;
     wavesurferref.current = WaveSurfer.create(waveformParams);
-    wavesurferref.current?.load(trackUrl);
+    // setTimeout(() => {
+    // }, 500);
+    const audioUrl = trackUrl.replace(".mp4", ".mp3");
+    wavesurferref.current?.load(audioUrl);
     document.addEventListener("keydown", handleEscapeKeyPress);
     return () => {
       wavesurferref.current?.destroy();

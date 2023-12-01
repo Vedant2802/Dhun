@@ -8,7 +8,11 @@ const AudioPlayer = () => {
   const track = "https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3";
 
   const handlePlay = () => {
-    setIsplay(true);
+    if (isPlay) {
+      setIsplay(false);
+    } else {
+      setIsplay(true);
+    }
   };
 
   useEffect(() => {
@@ -16,7 +20,7 @@ const AudioPlayer = () => {
       const audioPlayer = videojs(audioRef.current);
       RegisterAndEvents(audioPlayer);
       audioPlayer.src({
-        src: " ",
+        src: "",
       });
       audioPlayer.play();
     }
