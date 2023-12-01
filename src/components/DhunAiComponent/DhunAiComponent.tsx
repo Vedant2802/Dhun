@@ -1,8 +1,13 @@
 import React from "react";
 import styles from "./DhunAiComponent.module.scss";
 import dhunAI from "../../../public/video/dhunAI.mp4";
-
+import volumeUp from "../../../public/icons/volumeIcon.svg";
+import promptVideo from "../../../public/video/promptVideo.mp4";
 const DhunAiComponent = () => {
+  const openPrompt = () => {
+    console.log("gotopopup");
+  };
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.detailDhunai}>
@@ -11,15 +16,23 @@ const DhunAiComponent = () => {
           Endless possibilities with Dhun.AI to turn your thoughts into magical
           melodies.{" "}
         </div>
-        <div className={styles.button}>Create magic now</div>
+        <div className={styles.button} onClick={openPrompt}>
+          Create magic now
+        </div>
       </div>
 
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>
-          <video width="auto" muted>
-            <source src={dhunAI} type="video/mp4" />
+          <video width="auto" muted autoPlay loop>
+            <source src={promptVideo} type="video/mp4" />
           </video>
         </div>
+        {/* <div className={styles.controls}>
+          <div className={styles.volumeCircle}>
+            <img src={volumeUp} alt="volume" />
+          </div>
+          <div></div>
+        </div> */}
         <div className={styles.videoSelection}>
           <div className={styles.contentButton}>
             Patriotic music with suspense
