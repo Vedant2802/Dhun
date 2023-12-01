@@ -36,11 +36,28 @@
     color: white;
     font-size: 16px;
     font-weight: 500;
-    background: #7357ff;
+    // background: #7357ff;
     border-radius: 100px;
     border: 1px #7357ff solid;
     margin-top: 54px;
     width: fit-content;
     padding: 12px 32px;
+    background: conic-gradient(
+      from -30deg at 118.31% 31.7%,
+      #bd4230 0deg,
+      #c2ba58 90deg,
+      #77026b 167deg,
+      #023275 238deg,
+      #2c6b02 308deg,
+      #bd4230 360deg
+    );
   }
+}
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  gap: 16px;
+  padding-bottom: 50px;
 }
