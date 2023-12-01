@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./DhunAiComponent.module.scss";
 import dhunAI from "../../../public/video/dhunAI.mp4";
 import arrow from "../../../public/icons/right-arrow.svg";
 import volumeUp from "../../../public/icons/volumeIcon.svg";
 import promptVideo from "../../../public/video/promptVideo.mp4";
+import WebModal from "../webGenerateModal/WebModal";
+
 const DhunAiComponent = () => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const openPrompt = () => {
     console.log("gotopopup");
+    setOpenModal(true);
   };
 
   return (
@@ -19,11 +23,11 @@ const DhunAiComponent = () => {
           to turn your thoughts into magical
           <br /> melodies.
         </div>
-        <div className={styles.button}>
+        <div className={styles.button} onClick={openPrompt}>
           Create magic now <img className={styles.arrow} src={arrow} />
         </div>
       </div>
-
+      {openModal && <WebModal />}
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>
           <video autoPlay width="auto" muted loop>
