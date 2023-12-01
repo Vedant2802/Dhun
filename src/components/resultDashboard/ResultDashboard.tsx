@@ -19,10 +19,13 @@ const ResultDashboard = () => {
     uploadFile && uploadFile(FormD);
   };
   console.log("file", file);
-  const trackUrl = file?.gcs_url;
+  // const trackUrl = file?.gcs_url;
   // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
   // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
   const track = "https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3";
+  const urls =
+    "http://10.39.255.16:3000/storage/sample_960x400_ocean_with_audio%20(1).mp3";
+  const url = file?.gcs_url ? file?.gcs_url : track;
 
   return (
     <div>
@@ -49,7 +52,7 @@ const ResultDashboard = () => {
           )}
           {file && (
             <div className={styles.uploadContainer}>
-              <VideoPlayer videoUrl={trackUrl} />
+              <VideoPlayer videoUrl={url} />
             </div>
           )}
         </div>
@@ -62,7 +65,7 @@ const ResultDashboard = () => {
         <div className={styles.container}>
           <CompositionContainer />
           <div className={styles.videoContainer}>
-            {<ControlSelection trackUrl={track} />}
+            {<ControlSelection trackUrl={url} />}
           </div>
         </div>
         {/* {url && <ControlPanel />} */}

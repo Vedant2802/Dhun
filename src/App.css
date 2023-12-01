@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Work+Sans:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Work+Sans:wght@600&display=swap");
 
 #root {
   width: 100%;
   margin: 0 auto;
   /* padding: 2rem; */
-  text-align: center;
+  /* text-align: center; */
 }
 
 .logo {
@@ -44,6 +44,7 @@
 }
 
 .dashboardContainer {
-  background-color: rgb(21, 21, 21);
-  height: 100vh;
+  /* background-color: rgb(21, 21, 21); */
+  /* height: 100vh; */
+  background: #000;
 }
