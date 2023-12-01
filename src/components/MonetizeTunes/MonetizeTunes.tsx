@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./MonetizeTunes.module.scss";
 import spectrum from "../../../public/icons/spectrum.svg";
 import monitizeLogo from "../../../public/icons/monitizeLogo.svg";
+import Symphonies from "../sympohonies/Symphonies";
 
 const MonetizeTunes = () => {
   return (
@@ -9,7 +10,7 @@ const MonetizeTunes = () => {
       <div className={styles.spectrumContainer}>
         <img src={spectrum} alt="" className={styles.spectrumImage} />
       </div>
-
+      <Symphonies />
       <div className={styles.monetizeMainContainer}>
         <div className={styles.monetizeContainer}>
           <div className={styles.header}>

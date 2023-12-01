@@ -1,0 +1,61 @@
+.symphonyContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+}
+.craftText{
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 105%;
+    color: #fff;
+    margin-bottom: 34px;
+}
+.symphonyText{
+    color: #9F9CB4;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 70px;
+}
+.options{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.adOption{
+    position: relative;
+    top:70px;
+    transition: transform 0.5s ease;
+}
+.adOption:hover {
+  transform: scale(1.2);
+}
+.contentCreators{
+    position: relative;
+    bottom: 40px;
+    right: 35px;
+    transition: transform 0.5s ease;
+}
+.contentCreators:hover {
+    transform: scale(1.2);
+  }
+.singers{
+    position: relative;
+    top: 30px;
+    right: 35px;
+    transition: transform 0.5s ease;
+}
+.singers:hover {
+    transform: scale(1.2);
+  }
+.production{
+    position: relative;
+    left: 35px;
+    transition: transform 0.5s ease;
+}
+.production:hover {
+    transform: scale(1.2);
+  }
