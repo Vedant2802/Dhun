@@ -2,6 +2,11 @@ import React from "react";
 import styles from "./OurFeature.module.scss";
 import prompt from "../../../public/icons/prompt.svg";
 import hummed from "../../../public/icons/hummed.svg";
+import arrow from "../../../public/icons/right-arrow-black.svg";
+import texttoMusic from "../../../public/icons/Text to Music.svg";
+import tuneVariations from "../../../public/icons/Tune variations.svg";
+import videocomposition from "../../../public/icons/Video composition.svg"
+import hum from "../../../public/icons/HumtoMusic.svg"
 import variation from "../../../public/icons/variation.svg";
 import composiotion from "../../../public/icons/composiotion.svg";
 import promptVideo from "../../../public/video/promptVideo.mp4";
@@ -24,7 +29,7 @@ const OurFeature = () => {
         <div className={styles.promptMainContainer}>
           <div className={styles.promptTopContainer}>
             <div>
-              <img src={prompt} alt="promptIcon" />
+              <img src={texttoMusic} alt="promptIcon" />
             </div>
             <div className={styles.promptDetails}>
               <div className={styles.promptHeader}>TEXT TO MUSIC</div>
@@ -40,13 +45,13 @@ const OurFeature = () => {
             </video>
           </div>
           <div className={styles.break} />
-          <div className={styles.tryButton}>Try now</div>
+          <div className={styles.tryButton}>Try now <img className={styles.arrow} src={arrow} /></div>
         </div>
 
         <div className={styles.promptMainContainer}>
           <div className={styles.promptTopContainer}>
             <div>
-              <img src={hummed} alt="promptIcon" />
+              <img src={tuneVariations} alt="promptIcon" />
             </div>
             <div className={styles.promptDetails}>
               <div className={styles.promptHeader}>Tune Variations </div>
@@ -62,7 +67,7 @@ const OurFeature = () => {
             </video>
           </div>
           <div className={styles.break} />
-          <div className={styles.tryButton}>Try now</div>
+          <div className={styles.tryButton}>Try now <img className={styles.arrow}  src={arrow} /></div>
         </div>
       </div>
 
@@ -71,7 +76,7 @@ const OurFeature = () => {
         <div className={styles.promptMainContainer}>
           <div className={styles.promptTopContainer}>
             <div>
-              <img src={variation} alt="variationIcon" />
+              <img src={hum} alt="variationIcon" />
             </div>
             <div className={styles.promptDetails}>
               <div className={styles.promptHeader}>hum to music </div>
@@ -88,7 +93,7 @@ const OurFeature = () => {
         <div className={styles.promptMainContainer}>
           <div className={styles.promptTopContainer}>
             <div>
-              <img src={composiotion} alt="composiotionIcon" />
+              <img src={videocomposition} alt="composiotionIcon" />
             </div>
             <div className={styles.promptDetails}>
               <div className={styles.promptHeader}>Video Sync Composition</div>
