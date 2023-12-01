@@ -85,8 +85,7 @@ const OurFeature = () => {
             <div className={styles.promptDetails}>
               <div className={styles.promptHeader}>hum to music </div>
               <div className={styles.propmtTitle}>
-                Input original track, get unique variations, expand creativity,
-                keep essence.
+              Hum a tune, a spontaneous composition is created which can be used for capturing and expanding on musical ideas. 
               </div>
             </div>
           </div>
