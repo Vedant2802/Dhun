@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./DhunAiComponent.module.scss";
 import dhunAI from "../../../public/video/dhunAI.mp4";
 import arrow from "../../../public/icons/right-arrow.svg";
@@ -11,6 +11,18 @@ const DhunAiComponent = () => {
   const openPrompt = () => {
     setOpenModal(true);
   };
+
+  useEffect(() => {
+    const handleEscapeKeyPress = (event: any) => {
+      if (event.key === "Escape") {
+        setOpenModal(false);
+      }
+    };
+    document.addEventListener("keydown", handleEscapeKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKeyPress);
+    };
+  }, []);
 
   return (
     <div className={styles.mainContainer}>
