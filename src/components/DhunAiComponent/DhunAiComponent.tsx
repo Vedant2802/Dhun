@@ -1,22 +1,33 @@
 import React from "react";
 import styles from "./DhunAiComponent.module.scss";
 import dhunAI from "../../../public/video/dhunAI.mp4";
-
+import arrow from "../../../public/icons/right-arrow.svg";
+import volumeUp from "../../../public/icons/volumeIcon.svg";
+import promptVideo from "../../../public/video/promptVideo.mp4";
 const DhunAiComponent = () => {
+  const openPrompt = () => {
+    console.log("gotopopup");
+  };
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.detailDhunai}>
-        <div className={styles.heading}>
-          Creating music was never this easy!
+        <div className={styles.heading}>Craft Symphonies with a Click!</div>
+        <div className={styles.title}>
+          Endless possibilities with Dhun.AI
+          <br />
+          to turn your thoughts into magical
+          <br /> melodies.
         </div>
-        <div className={styles.title}>Endless possibilities with Dhun.AI</div>
-        <div className={styles.button}>Try Dhun.AI now</div>
+        <div className={styles.button}>
+          Create magic now <img className={styles.arrow} src={arrow} />
+        </div>
       </div>
 
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>
           <video autoPlay width="auto" muted loop>
-            <source src={dhunAI} type="video/mp4" />
+            <source src={promptVideo} type="video/mp4" />
           </video>
         </div>
         <div className={styles.videoSelection}>

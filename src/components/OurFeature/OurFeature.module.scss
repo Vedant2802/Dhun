@@ -1,5 +1,13 @@
 .featureContainer {
   padding: 100px 64px 0px 64px;
+  background-image: url(/public/icons/sitar.svg);
+  background-repeat: no-repeat;
+  background-position: top right;
+}
+.arrow{
+  width: 20px;
+  height: 20px;
+  margin: 10px 12px;
 }
 .topContainer {
   display: flex;
