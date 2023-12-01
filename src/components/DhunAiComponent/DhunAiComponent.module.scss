@@ -41,12 +41,18 @@
     color: white;
     font-size: 16px;
     font-weight: 500;
-    background: #7357ff;
+    // background: #7357ff;
     border-radius: 100px;
-    border: 1px #7357ff solid;
+    // border: 1px #7357ff solid;
     margin-top: 70px;
     width: fit-content;
     padding: 12px 32px;
+    background: linear-gradient(
+      90deg,
+      #925b2f -2.59%,
+      #af4633 21.46%,
+      #5b2346 100%
+    );
   }
   .videoContainer {
     display: flex;
