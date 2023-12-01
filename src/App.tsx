@@ -13,12 +13,20 @@ function App() {
 
   return (
     <div className="dashboardContainer">
-      <Header />
+      {/* <Header /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AddVideo />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<MainDashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <>
+                <Header />
+                <MainDashboard />
+              </>
+            }
+          />
           <Route path="/dhunai" element={<DhunAi />} />
         </Routes>
       </BrowserRouter>
