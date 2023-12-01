@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Work+Sans:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&family=Work+Sans:wght@400;600&display=swap");
 
 #root {
   width: 100%;
@@ -45,6 +45,12 @@
 
 .dashboardContainer {
   /* background-color: rgb(21, 21, 21); */
-  /* height: 100vh; */
+  height: 100vh;
   background: #000;
+  font-family: Work Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.3px;
 }

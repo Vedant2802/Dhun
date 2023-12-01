@@ -1,15 +1,7 @@
 .popupBox {
-  width: 356px;
-  height: 530px;
-  border-radius: 8px;
-  position: absolute;
-  margin-top: -420px;
-  z-index: 100;
-  margin-left: 67px;
-  display: flex;
-  flex-direction: column;
-  // border: 1px solid wheat;
-  background: var(--surface-4, #1f1f1f);
+  background: #1f1f1f;
+  border-radius: 10px;
+  border: 1px solid #7357ff;
 }
 .popuppart {
   padding: 12px;

@@ -1,35 +1,65 @@
 // import UploadVideo from "../uploadVideo/UploadVideo";
 import VideoPlayer from "../videoPlayer/VideoPlayer";
 import styles from "./ResultDashboard.module.scss";
-import { STUDIO_CONSTANTS } from "../../utils/genAiConstant";
 import ControlSelection from "../controlSelection/ControlSelection";
-import React, { useState } from "react";
-import ControlPanel from "../ControlsPanel/ControlPanel";
+import React from "react";
 import { useGenerateStore } from "../../stores/generateStore";
 import CompositionContainer from "../compositionContainer/compositionContainer";
 import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 import LoadingSpin from "react-loading-spin";
-
+import compositionBackground from "../../../public/timeframeBackground.svg";
+import { DndProvider, useDrag } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import DraggableItem from "../DraggableItem/DraggableItem";
 const ResultDashboard = () => {
-  const { uploadFile, file, status }: any = useGenerateStore((state) => state);
+  const { uploadFile, file, status } = useGenerateStore((state) => state);
+  const timeFrames = useGenerateStore((state) => state.timeFrameData);
+  // const currentTimeFrameId = useGenerateStore(
+  //   (state) => state.currentTimeFrameId
+  // );
 
   const onFileUpload = (event: any) => {
     const FormD: any = new FormData();
+    const fileName = event.target.files[0].name;
     FormD.append("file", event.target.files[0]);
-    uploadFile && uploadFile(FormD);
+    uploadFile(FormD, fileName);
+  };
+
+  const moveItem = (fromIndex: number, toIndex: number) => {
+    // const updatedItems = [...trackItems];
+    // const [movedItem] = updatedItems.splice(fromIndex, 1);
+    // updatedItems.splice(toIndex, 0, movedItem);
+    // setItems(updatedItems);
   };
   console.log("file", file);
   // const trackUrl = file?.gcs_url;
   // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
   // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
   const track = "https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3";
-  const urls =
-    "http://10.39.255.16:3000/storage/sample_960x400_ocean_with_audio%20(1).mp3";
+  // const urls =
+  //   "http://10.39.255.16:3000/storage/sample_960x400_ocean_with_audio%20(1).mp3";
   const url = file?.gcs_url ? file?.gcs_url : track;
 
+  const renderDraggableItem = (urls: string[]) => {
+    if (!urls) {
+      return null;
+    }
+    return urls.map((url, index) => {
+      return (
+        <DraggableItem
+          key={url}
+          id={index}
+          text={"Track" + (index + 1)}
+          index={index}
+          moveItem={moveItem}
+        />
+      );
+    });
+  };
+
   return (
-    <div>
-      <div>
+    <section>
+      <div className={styles.timeframeContainer}>
         <div className={styles.uploadContainer}>
           {!file && (
             <div className={styles.addVideoButton}>
@@ -44,7 +74,7 @@ const ResultDashboard = () => {
               <div>+ Add video or vocals</div>
             </div>
           )}
-          {status === API_STATUS_TYPES.loading && (
+          {!file && status === API_STATUS_TYPES.loading && (
             <div className={styles.loader}>
               <LoadingSpin primaryColor="#b8b6b6" size="30px" />
               Uploading video...
@@ -63,15 +93,30 @@ const ResultDashboard = () => {
           <div className={styles.comment}>Share</div>
         </div>
         <div className={styles.container}>
-          <CompositionContainer />
           <div className={styles.videoContainer}>
             {<ControlSelection trackUrl={url} />}
           </div>
         </div>
-        {/* {url && <ControlPanel />} */}
-        {/* {url && <ControlSeconds trackId={url} />} */}
       </div>
-    </div>
+      <div className={styles.compositionWrapper}>
+        <img
+          className={styles.compositionBackground}
+          src={compositionBackground}
+          alt="composition-background"
+        />
+        <CompositionContainer />
+        {timeFrames?.length &&
+          timeFrames?.map((timeFrame, index) => (
+            <div className={styles.trackWrapper}>
+              <DndProvider backend={HTML5Backend}>
+                {renderDraggableItem(timeFrame.generatedData?.urls as string[])}
+              </DndProvider>
+            </div>
+          ))}
+      </div>
+      {/* {url && <ControlPanel />} */}
+      {/* {url && <ControlSeconds trackId={url} />} */}
+    </section>
   );
 };
 

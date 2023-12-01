@@ -34,13 +34,14 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
   }, [onClose]);
 
   const handleOnGenerate = () => {
+    const genreValue = genre !== "None Selected" ? genre : "";
+    const instrumentsValue = instruments !== "None Selected" ? instruments : "";
+    const prompt = [emotion, genreValue, instrumentsValue].join(",");
     generateMusic &&
       generateMusic({
         email: "test@gmail.com",
-        prompt: emotion,
+        prompt,
         image_url: "",
-        // genre,
-        // instrument: instruments,
         tempo,
       });
   };
