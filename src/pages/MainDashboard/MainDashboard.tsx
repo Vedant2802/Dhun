@@ -1,6 +1,6 @@
 import styles from "./MainDashboard.module.scss";
-import GenerateMusic from "../../components/generateMusic/GenerateMusic";
 import ResultDashboard from "../../components/resultDashboard/ResultDashboard";
+import React from "react";
 
 const MainDashboard = () => {
   return (

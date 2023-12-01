@@ -1,36 +1,36 @@
-.allcomposition{
-    display: flex;
-    flex-direction: column;
-  }
-  .compositionContainer{
-    margin-top: 86px;
-    margin-left: 40px;
-    width: 20vw;
-    gap:6px;
-    display: flex;
-    flex-direction: column;
-  }
-  .composition{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 48px;
-    width: 304px;
-    border-radius: 4px;
-    background-color: #000;
-    color: #C2C2C2;
-  }
-  .playButton{
-    width: 32px;
-    height: 32px;
-    padding-left: 10px;
-  }
-  .playButtonContainer{
-    display: flex;
-    flex-direction: row;
-    gap:8px;
-  }
-  .compositionText{
-    margin-top: 4px;
-  }
+.allcomposition {
+  display: flex;
+  flex-direction: column;
+}
+.compositionContainer {
+  margin-left: 40px;
+  width: 20vw;
+  gap: 6px;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  position: relative;
+}
+.composition {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Work Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 8px;
+  letter-spacing: 0.3px;
+  color: #c2c2c2;
+}
+.playButton {
+  cursor: pointer;
+}
+.playButtonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
