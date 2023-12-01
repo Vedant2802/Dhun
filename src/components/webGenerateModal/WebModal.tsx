@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./WebModal.module.scss";
 
 const WebModal = () => {
-  //   const;
   return (
     <div className={styles.generatePopup}>
       <div className={styles.topCard}></div>
