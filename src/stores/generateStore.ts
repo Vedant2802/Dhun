@@ -52,6 +52,7 @@ interface IGenerateActions {
   updateMusicPlayingStatus: (playing: boolean) => void;
   setCurrentMusicSrc: (src: string) => void;
   generateMusicForWebsite: (requestObj: GenerateMusicRequestObj) => void;
+  resetWebsiteData: () => void;
 }
 
 const initialState: IGenerateState = {
@@ -121,6 +122,15 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
     } catch (error: any) {
       set(() => ({ status: API_STATUS_TYPES.failed, error }));
     }
+  },
+  resetWebsiteData: () => {
+    set(() => ({
+      websiteData: {
+        status: API_STATUS_TYPES.idle,
+        musicUrls: [],
+      },
+      isMusicPlaying: false,
+    }));
   },
   generateMusicForWebsite: async (requestObj: GenerateMusicRequestObj) => {
     try {
