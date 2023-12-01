@@ -1,0 +1,49 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 96px;
+  width: 95vw;
+  margin: auto;
+  position: relative;
+  top: 24px;
+  padding: 24px 40px;
+  color: #fff;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: space-between;
+  backdrop-filter: blur(15px);
+  border-radius: 100px;
+}
+.dhuntext {
+  margin-left: 14px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.dhunContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+}
+.menuItems {
+  font-size: 14px;
+}
+.login {
+  color: black;
+  border-radius: 100px;
+  font-size: 14px;
+  padding: 10px 24px;
+  margin-left: 8px;
+  background: #fff;
+  font-weight: 400;
+  width: 148px;
+  align-items: center;
+  text-align: center;
+}

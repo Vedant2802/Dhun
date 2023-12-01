@@ -3,6 +3,7 @@ import AddVideo from "./components/addVideoInitial/AddVideo";
 import Header from "./components/header/Header";
 import Login from "./pages/Login/Login";
 import MainDashboard from "./pages/MainDashboard/MainDashboard";
+import DhunAi from "./pages/DhunAi/DhunAi";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import * as React from "react";
 
@@ -12,12 +13,13 @@ function App() {
 
   return (
     <div className="dashboardContainer">
-      <Header />
+      {/* <Header /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AddVideo />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<MainDashboard />} />
+          <Route path="/dhunai" element={<DhunAi />} />
         </Routes>
       </BrowserRouter>
     </div>

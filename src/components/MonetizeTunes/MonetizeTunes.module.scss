@@ -1,0 +1,46 @@
+.spectrumContainer {
+  margin-top: 100px;
+  .spectrumImage {
+    width: 100%;
+  }
+}
+
+.monetizeMainContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px 64px;
+}
+.monetizeContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  .header {
+    color: white;
+    font-size: 56px;
+    font-weight: 900;
+    text-transform: capitalize;
+    line-height: 58.8px;
+  }
+  .title {
+    color: #9f9cb4;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 21px;
+    margin-top: 15px;
+  }
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    background: #7357ff;
+    border-radius: 100px;
+    border: 1px #7357ff solid;
+    margin-top: 54px;
+    width: fit-content;
+    padding: 12px 32px;
+  }
+}
