@@ -12,7 +12,7 @@ function App() {
   // const increase = useBearStore((state) => state.increasePopulation);
 
   return (
-    <div className="dashboardContainer">
+    <div>
       {/* <Header /> */}
       <BrowserRouter>
         <Routes>
@@ -21,10 +21,10 @@ function App() {
           <Route
             path="/dashboard"
             element={
-              <>
+              <main className="dashboardContainer">
                 <Header />
                 <MainDashboard />
-              </>
+              </main>
             }
           />
           <Route path="/dhunai" element={<DhunAi />} />

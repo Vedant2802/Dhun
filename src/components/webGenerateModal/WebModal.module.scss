@@ -1,3 +1,18 @@
+.webDialog {
+  position: fixed;
+  top: 50%;
+  font-family: Work Sans;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
 .generatePopup {
   position: absolute;
   width: 500px;
@@ -9,7 +24,7 @@
     background: #8b8b8b;
     border-radius: 20px 20px 0px 0px;
   }
-  .chipButton {
+  .chipWrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,11 +35,63 @@
   .chip {
     color: #9f9cb4;
     font-size: 16px;
+    width: 100%;
     font-weight: 400;
+    background: #0f0f0f;
+    padding: 24px;
+    border: 1px rgba(71.32, 71.32, 71.32, 0.69) solid;
+    border-radius: 42px;
+    border: 1px solid #9f9cb4;
+    box-shadow: 0px 0px 4px 0px #655ab4;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .chipBtn {
+    color: #9f9cb4;
+    font-size: 16px;
+    width: 100%;
+    font-weight: 400;
+    background: #0f0f0f;
     padding: 16px 24px;
     border: 1px rgba(71.32, 71.32, 71.32, 0.69) solid;
-    border-radius: 24px;
+    border-radius: 42px;
+    border: 1px solid #9f9cb4;
+    text-align: left;
+    &:focus {
+      outline: none;
+    }
   }
+  .loadingBtn {
+    display: flex;
+    padding: 16px 32px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 42px;
+    background: linear-gradient(
+      90deg,
+      rgba(71, 71, 71, 0.42) 1.34%,
+      rgba(71, 71, 71, 0.17) 98.34%
+    );
+    &:focus {
+      outline: none;
+    }
+  }
+  .chibBtnActive {
+    color: #535165;
+    font-size: 16px;
+    width: 100%;
+    font-weight: 400;
+    background: #101d28;
+    padding: 16px 24px;
+    border: 1px rgba(71, 71, 71, 0.69) solid;
+    border-radius: 42px;
+    /* border: 1px solid #9f9cb4; */
+    text-align: left;
+    border: none;
+  }
+
   .createButton {
     padding: 24px 30px;
     background: #fff;
