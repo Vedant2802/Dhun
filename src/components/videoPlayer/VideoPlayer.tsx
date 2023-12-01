@@ -53,7 +53,13 @@ const VideoPlayer: React.FC<videoUrlProps> = ({ videoUrl }) => {
 
   return (
     <>
-      <video className="video-js" width="100%" height="auto" ref={videoRef} />
+      <video
+        className="video-js"
+        width="100%"
+        height="auto"
+        muted
+        ref={videoRef}
+      />
       <div className="videoControls">
         <img
           src={isMuted ? volumeMute : volumeIcon}

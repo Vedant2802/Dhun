@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./DhunAiComponent.module.scss";
+import dhunAI from "../../../public/video/dhunAI.mp4";
 
 const DhunAiComponent = () => {
   return (
@@ -14,11 +15,8 @@ const DhunAiComponent = () => {
 
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>
-          <video width="auto" controls>
-            <source
-              src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-              type="video/mp4"
-            />
+          <video autoPlay width="auto" muted loop>
+            <source src={dhunAI} type="video/mp4" />
           </video>
         </div>
         <div className={styles.videoSelection}>

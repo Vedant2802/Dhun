@@ -35,7 +35,7 @@ const OurFeature = () => {
             </div>
           </div>
           <div className={styles.promptVideo}>
-            <video autoPlay width="auto" muted>
+            <video autoPlay width="auto" muted loop>
               <source src={promptVideo} type="video/mp4" />
             </video>
           </div>
@@ -57,7 +57,7 @@ const OurFeature = () => {
             </div>
           </div>
           <div className={styles.promptVideo}>
-            <video autoPlay width="auto" muted>
+            <video autoPlay width="auto" muted loop>
               <source src={hummedVideo} type="video/mp4" />
             </video>
           </div>
