@@ -82,7 +82,8 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
                 {EMOTION.map((item, index) => (
                   <li
                     className={styles.popupdropdownoptionsingle}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setEmotionOptionOpen(false);
                       setEmotion(item);
                     }}
@@ -123,7 +124,8 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
                 {INSTRUMENTS.map((item, index) => (
                   <li
                     className={styles.popupdropdownoptionsingle}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setIntrumentOptionsOpen(false);
                       setInstruments(item.label);
                     }}
@@ -161,7 +163,8 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
                 {GENRE.map((item, index) => (
                   <li
                     className={styles.popupdropdownoptionsingle}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setGenreOptionsOpen(false);
                       SetGenre(item);
                     }}
