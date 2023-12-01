@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./DhunAiComponent.module.scss";
-import dhunAI from "../../../public/video/dhunAI.mp4";
+// import dhunAI from "../../../public/video/dhunAI.mp4";
 import arrow from "../../../public/icons/right-arrow.svg";
 import volumeUp from "../../../public/icons/volumeIcon.svg";
 import promptVideo from "../../../public/video/promptVideo.mp4";
 import WebModal from "../webGenerateModal/WebModal";
+import dhunAI from "../../../public/video/rrradhun.mp4";
 
 const DhunAiComponent = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const openPrompt = () => {
     setOpenModal(true);
   };
+
+  useEffect(() => {
+    const handleEscapeKeyPress = (event: any) => {
+      if (event.key === "Escape") {
+        setOpenModal(false);
+      }
+    };
+    document.addEventListener("keydown", handleEscapeKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKeyPress);
+    };
+  }, []);
 
   return (
     <div className={styles.mainContainer}>
@@ -30,7 +43,7 @@ const DhunAiComponent = () => {
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>
           <video autoPlay width="auto" muted loop>
-            <source src={promptVideo} type="video/mp4" />
+            <source src={dhunAI} type="video/mp4" />
           </video>
         </div>
         <div className={styles.videoSelection}>

@@ -50,7 +50,7 @@
     color: white;
     font-size: 16px;
     font-weight: 500;
-    background: #7357ff;
+    // background: #7357ff;
     border-radius: 100px;
     border: 1px #7357ff solid;
     width: fit-content;
@@ -69,4 +69,13 @@
     height: 20px;
   }
 }
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  gap: 16px;
+  padding-bottom: 50px;
+}
+
 
