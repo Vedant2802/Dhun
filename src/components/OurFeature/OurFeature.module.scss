@@ -1,10 +1,10 @@
 .featureContainer {
-  padding: 100px 64px 0px 64px;
+  padding: 120px 64px 0px 64px;
   background-image: url(/public/icons/sitar.svg);
   background-repeat: no-repeat;
   background-position: top right;
 }
-.arrow{
+.arrow {
   width: 20px;
   height: 20px;
   margin: 10px 12px;
@@ -19,8 +19,10 @@
     color: white;
     font-size: 56px;
     font-weight: 900;
-    text-transform: capitalize;
     line-height: 58.8px;
+    .dhunText {
+      color: #b3563f;
+    }
   }
   .title {
     color: #9f9cb4;
@@ -35,7 +37,8 @@
   display: flex;
   justify-content: space-between;
   gap: 32px;
-  margin-top: 32px;
+  margin-top: 70px;
+
   .promptMainContainer {
     padding: 16px;
     border-radius: 42px;
@@ -92,5 +95,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 12px;
   }
 }

@@ -1,14 +1,12 @@
 import React from "react";
 import styles from "./OurFeature.module.scss";
-import prompt from "../../../public/icons/prompt.svg";
-import hummed from "../../../public/icons/hummed.svg";
 import arrow from "../../../public/icons/right-arrow-black.svg";
 import texttoMusic from "../../../public/icons/Text to Music.svg";
 import tuneVariations from "../../../public/icons/Tune variations.svg";
-import videocomposition from "../../../public/icons/Video composition.svg"
-import hum from "../../../public/icons/HumtoMusic.svg"
-import variation from "../../../public/icons/variation.svg";
-import composiotion from "../../../public/icons/composiotion.svg";
+import videocomposition from "../../../public/icons/Video composition.svg";
+import hum from "../../../public/icons/HumtoMusic.svg";
+import leftWing from "../../../public/icons/leftWing.svg";
+import rightWing from "../../../public/icons/rightWing.svg";
 import promptVideo from "../../../public/video/promptVideo.mp4";
 import hummedVideo from "../../../public/video/hummed.mp4";
 
@@ -16,7 +14,9 @@ const OurFeature = () => {
   return (
     <div className={styles.featureContainer}>
       <div className={styles.topContainer}>
-        <div className={styles.heading}>With Dhun.AI You Create... </div>
+        <div className={styles.heading}>
+          With <span className={styles.dhunText}>Dhun.AI</span> You Create...{" "}
+        </div>
         {/* <div className={styles.title}>
           Dhun.ai is a revolutionary music studio that combines the artistry of
           human creativity with the precision of cutting-edge technology. We
@@ -45,7 +45,9 @@ const OurFeature = () => {
             </video>
           </div>
           <div className={styles.break} />
-          <div className={styles.tryButton}>Try now <img className={styles.arrow} src={arrow} /></div>
+          <div className={styles.tryButton}>
+            Try now <img className={styles.arrow} src={arrow} />
+          </div>
         </div>
 
         <div className={styles.promptMainContainer}>
@@ -67,7 +69,9 @@ const OurFeature = () => {
             </video>
           </div>
           <div className={styles.break} />
-          <div className={styles.tryButton}>Try now <img className={styles.arrow}  src={arrow} /></div>
+          <div className={styles.tryButton}>
+            Try now <img className={styles.arrow} src={arrow} />
+          </div>
         </div>
       </div>
 
@@ -87,7 +91,11 @@ const OurFeature = () => {
             </div>
           </div>
           <div className={styles.break} />
-          <div className={styles.comingSoon}>Coming soon</div>
+          <div className={styles.comingSoon}>
+            <img src={leftWing} alt="wing" />
+            <div>Coming soon</div>
+            <img src={rightWing} alt="wing" />
+          </div>
         </div>
 
         <div className={styles.promptMainContainer}>
@@ -104,7 +112,11 @@ const OurFeature = () => {
             </div>
           </div>
           <div className={styles.break} />
-          <div className={styles.comingSoon}>Coming soon</div>
+          <div className={styles.comingSoon}>
+            <img src={leftWing} alt="wing" />
+            <div>Coming soon</div>
+            <img src={rightWing} alt="wing" />
+          </div>
         </div>
       </div>
     </div>
