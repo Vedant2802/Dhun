@@ -3,6 +3,8 @@ import styles from "./MonetizeTunes.module.scss";
 import spectrum from "../../../public/icons/spectrum.svg";
 import monitizeLogo from "../../../public/icons/monitizeLogo.svg";
 import Symphonies from "../sympohonies/Symphonies";
+import DhunIcon from "../../../public/icons/Dhun Icon.svg";
+import heart from "../../../public/icons/heart.svg";
 
 const MonetizeTunes = () => {
   return (
@@ -24,6 +26,12 @@ const MonetizeTunes = () => {
         <div>
           <img src={monitizeLogo} alt="monitizeLogo" />
         </div>
+      </div>
+      <div className={styles.footer}>
+        <img src={DhunIcon} alt="DhunIcon" />
+        <div>dhun.ai &nbsp; / &nbsp; Developed with by </div>
+        <img src={heart} alt="heart" />
+        <div>zee entertainment</div>
       </div>
     </div>
   );

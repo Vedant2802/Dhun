@@ -4,7 +4,10 @@
   justify-content: center;
   align-items: center;
   padding: 120px 10px 0px 10px;
-  .arrow{
+  background-image: url(/public/icons/headerTop.svg);
+  background-repeat: no-repeat;
+  background-position: top left;
+  .arrow {
     width: 15%;
     height: 15%;
     margin: 5px;
