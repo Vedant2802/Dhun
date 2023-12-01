@@ -7,32 +7,41 @@
 
 .monetizeMainContainer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin: 100px auto;
+  background: url('../../../public/icons/create_background.png');
+  background-repeat: no-repeat;
+  width: 653px;
+  height: 653px;
   padding: 100px 64px;
 }
-.arrow{
-  width: 15%;
-  height: 15%;
-  margin: 5px;
-}
-.monetizeContainer {
+
+.monetizeContainer{
+  position: absolute;
   display: flex;
+  gap: 45px;
   flex-direction: column;
-  width: 50%;
-  .header {
-    color: white;
+  align-items: center;
+  right:14%;
+  width: 1142px;
+  height: 463px;
+  border: 1px solid #181818;
+  background: radial-gradient(362.39% 64.39% at 13.26% 82.74%, rgba(21, 21, 21, 0.70) 0%, rgba(0, 0, 0, 0.70) 100%);
+  backdrop-filter: blur(20px);
+  .createText{
+    color: var(--color-white-white-100, #FFF);
+    text-align: center;
+    margin-top: 90px;
+    font-family: Poppins;
     font-size: 56px;
+    font-style: normal;
     font-weight: 900;
-    text-transform: capitalize;
-    line-height: 58.8px;
   }
-  .title {
-    color: #9f9cb4;
+  .createSubText{
+    color: #9F9CB4;
+    text-align: center;
     font-size: 20px;
+    font-style: normal;
     font-weight: 400;
-    line-height: 21px;
-    margin-top: 15px;
   }
   .button {
     display: flex;
@@ -44,8 +53,20 @@
     background: #7357ff;
     border-radius: 100px;
     border: 1px #7357ff solid;
-    margin-top: 54px;
     width: fit-content;
     padding: 12px 32px;
+    cursor: pointer;
+    background: linear-gradient(
+      90deg,
+      #925b2f -2.59%,
+      #af4633 21.46%,
+      #5b2346 100%
+    );
+  }
+  .arrow{
+    width: 20px;
+    margin-left: 10px;
+    height: 20px;
   }
 }
+
