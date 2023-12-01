@@ -1,30 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import videojs from "video.js";
-import playcircle from "../../../public/icons/play_circle_filled.svg";
+import { useGenerateStore } from "../../stores/generateStore";
 
 const AudioPlayer = () => {
-  const [isPlay, setIsplay] = useState<boolean>(false);
   const audioRef = useRef(null);
-  const track = "https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3";
-
-  const handlePlay = () => {
-    if (isPlay) {
-      setIsplay(false);
-    } else {
-      setIsplay(true);
-    }
-  };
+  const track = useGenerateStore((state) => state.currentMusicSrc);
+  // const musicPlaying = useGenerateStore((state) => state.isMusicPlaying);
 
   useEffect(() => {
-    if (audioRef.current) {
+    if (audioRef.current && track) {
       const audioPlayer = videojs(audioRef.current);
       RegisterAndEvents(audioPlayer);
       audioPlayer.src({
-        src: "",
+        src: track,
       });
       audioPlayer.play();
     }
-  }, [isPlay]);
+  }, [track]);
 
   const RegisterAndEvents = (audioPlayer: any) => {
     const audio = audioPlayer;
@@ -59,9 +51,6 @@ const AudioPlayer = () => {
           display: "none",
         }}
       />
-      <div onClick={handlePlay}>
-        <img src={playcircle} />
-      </div>
     </div>
   );
 };

@@ -25,14 +25,15 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     (state) => state.updateCurrentTimeFrameDetails
   );
   const timeFrames = useGenerateStore((state) => state.timeFrameData);
+  const currentTimeFrameId = useGenerateStore(
+    (state) => state.currentTimeFrameId
+  );
   const apiStatus = useGenerateStore((state) => state.status);
   const addNewTimeFrame = useGenerateStore((state) => state.addNewTimeFrame);
 
-  const [items, setItems] = useState([
-    { id: 1, text: "Track 1" },
-    { id: 2, text: "Track 2" },
-    { id: 3, text: "Track 3" },
-  ]);
+  const trackItems = timeFrames.find(
+    (timeFrame) => timeFrame.id === currentTimeFrameId
+  )?.generatedData;
 
   const moveItem = (fromIndex: number, toIndex: number) => {
     const updatedItems = [...items];
@@ -151,11 +152,11 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
         {openModal && <ControlPopup onClose={handleTogglePopup} />}
       </div>
       <DndProvider backend={HTML5Backend}>
-        {items.map((item, index) => (
+        {trackItems?.urls.map((item, index) => (
           <DraggableItem
-            key={item.id}
-            id={item.id}
-            text={item.text}
+            key={item}
+            id={currentTimeFrameId as number}
+            text={"Track" + (index + 1)}
             index={index}
             moveItem={moveItem}
           />
