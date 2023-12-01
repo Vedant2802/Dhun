@@ -23,6 +23,12 @@ export interface TimeFrameData {
   generatedData?: GenerateMusicResponse;
 }
 
+export interface WebsiteData {
+  musicUrls?: string[];
+  status: API_STATUS_TYPES;
+  error?: any;
+}
+
 interface IGenerateState {
   timeFrameData: TimeFrameData[];
   file?: object | null;
@@ -34,6 +40,7 @@ interface IGenerateState {
   currentMusicSrc?: string;
   isMusicPlaying?: boolean;
   fileName: string;
+  websiteData: WebsiteData;
 }
 
 interface IGenerateActions {
@@ -44,6 +51,7 @@ interface IGenerateActions {
   updateCurrentTimeFrameDetails: (id: number, duration: number) => void;
   updateMusicPlayingStatus: (playing: boolean) => void;
   setCurrentMusicSrc: (src: string) => void;
+  generateMusicForWebsite: (requestObj: GenerateMusicRequestObj) => void;
 }
 
 const initialState: IGenerateState = {
@@ -52,6 +60,10 @@ const initialState: IGenerateState = {
   fileName: "Untitled File",
   status: API_STATUS_TYPES.idle,
   error: null,
+  websiteData: {
+    status: API_STATUS_TYPES.idle,
+    musicUrls: [],
+  },
 };
 
 type IGenerateStore = IGenerateState & IGenerateActions;
@@ -108,6 +120,33 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       }));
     } catch (error: any) {
       set(() => ({ status: API_STATUS_TYPES.failed, error }));
+    }
+  },
+  generateMusicForWebsite: async (requestObj: GenerateMusicRequestObj) => {
+    try {
+      set(() => ({
+        websiteData: {
+          status: API_STATUS_TYPES.loading,
+        },
+      }));
+      const data: any = await generateMusicApi<object>({
+        ...requestObj,
+        duration: 10,
+      });
+
+      set(() => ({
+        websiteData: {
+          musicUrls: data?.urls,
+          status: API_STATUS_TYPES.success,
+        },
+      }));
+    } catch (error: any) {
+      set(() => ({
+        websiteData: {
+          status: API_STATUS_TYPES.failed,
+          error,
+        },
+      }));
     }
   },
 }));

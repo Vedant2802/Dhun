@@ -5,6 +5,7 @@ import arrow from "../../../public/icons/right-arrow.svg";
 import volumeUp from "../../../public/icons/volumeIcon.svg";
 import promptVideo from "../../../public/video/promptVideo.mp4";
 import WebModal from "../webGenerateModal/WebModal";
+import { createPortal } from "react-dom";
 
 const DhunAiComponent = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -26,7 +27,7 @@ const DhunAiComponent = () => {
           Create magic now <img className={styles.arrow} src={arrow} />
         </div>
       </div>
-      {openModal && <WebModal />}
+      {openModal && createPortal(<WebModal />, document.body)}
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>
           <video autoPlay width="auto" muted loop>
