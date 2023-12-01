@@ -5,16 +5,14 @@ import addIcon from "../../../public/icons/addIcon.svg";
 import { ControlPopup } from "../controlPopup/controlPopup";
 import RegionsPlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/regions.esm.js";
 import TimelinePlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/timeline.esm.js";
-import menuIcon from "../../../public/icons/menu.svg";
-import { DndProvider, useDrag, useDrop } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import * as React from "react";
+import { createPortal } from "react-dom";
+
 import { useGenerateStore } from "../../stores/generateStore";
 import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 interface WaveformProps {
   trackUrl: string;
 }
-const ItemType = "ITEM";
 const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [startRegion, setstartRegion] = useState(0);
   const [updatedRegion, setUpdatedRegion] = useState(5);
@@ -34,13 +32,6 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const trackItems = timeFrames.find(
     (timeFrame) => timeFrame.id === currentTimeFrameId
   )?.generatedData;
-
-  const moveItem = (fromIndex: number, toIndex: number) => {
-    const updatedItems = [...items];
-    const [movedItem] = updatedItems.splice(fromIndex, 1);
-    updatedItems.splice(toIndex, 0, movedItem);
-    setItems(updatedItems);
-  };
 
   // Timeline to create on top
   const topTimeline = TimelinePlugin.create({
@@ -149,50 +140,15 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
         <div onClick={addRegion} className={styles.addSongsBox}>
           <img src={addIcon} alt="addSongs" />
         </div>
-        {openModal && <ControlPopup onClose={handleTogglePopup} />}
+        crea
+        {openModal &&
+          createPortal(
+            <div className={styles.popupContainer}>
+              <ControlPopup onClose={handleTogglePopup} />,
+            </div>,
+            document.body
+          )}
       </div>
-      <DndProvider backend={HTML5Backend}>
-        {trackItems?.urls.map((item, index) => (
-          <DraggableItem
-            key={item}
-            id={currentTimeFrameId as number}
-            text={"Track" + (index + 1)}
-            index={index}
-            moveItem={moveItem}
-          />
-        ))}
-      </DndProvider>
-    </div>
-  );
-};
-
-type DraggableProps = {
-  id: Number;
-  text: String;
-  index: Number;
-  moveItem: Function;
-};
-
-const DraggableItem = ({ id, text, index, moveItem }: DraggableProps) => {
-  const [, drag] = useDrag({
-    type: ItemType,
-    item: { id, index },
-  });
-
-  const [, drop] = useDrop({
-    accept: ItemType,
-    hover: (draggedItem: any) => {
-      if (draggedItem.index !== index) {
-        moveItem(draggedItem.index, index);
-        draggedItem.index = index;
-      }
-    },
-  });
-
-  return (
-    <div ref={(node) => drag(drop(node))} className={styles.trackComposition}>
-      <img src={menuIcon} />
-      {text}
     </div>
   );
 };

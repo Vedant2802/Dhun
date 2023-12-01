@@ -1,6 +1,5 @@
 import * as React from "react";
 import styles from "./compositionContainer.module.scss";
-
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 import { useGenerateStore } from "../../stores/generateStore";
 import CompositionItem from "./CompositionItem";

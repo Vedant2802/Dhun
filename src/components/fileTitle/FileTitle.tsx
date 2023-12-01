@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useGenerateStore } from "../../stores/generateStore";
 import styles from "./FileTitle.module.scss";
 const FileTitle = () => {
-  const [fileTitle, setFileTitle] = useState("Untitled file");
+  const fileName = useGenerateStore((state) => state.fileName);
+  const [fileTitle, setFileTitle] = useState(fileName);
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target?.value;
     setFileTitle(value);
   };
+
+  useEffect(() => {
+    setFileTitle(fileName);
+  }, [fileName]);
   return (
     <div>
       <input

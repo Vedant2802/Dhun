@@ -3,6 +3,20 @@
   flex-direction: column;
   gap: 5px;
 }
+
+.popupContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
 .waveformContainer {
   color: #fff;
   width: 100%;
@@ -22,17 +36,6 @@
 }
 .customRegion {
   height: 75%;
-}
-.trackComposition {
-  display: flex;
-  width: 406px;
-  height: 48px;
-  padding: 13px 8px;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  color: #fff;
-  background: var(--secondary-components-dark, #2d8331);
 }
 .controlContainer {
   display: flex;

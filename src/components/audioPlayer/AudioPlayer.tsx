@@ -3,12 +3,12 @@ import videojs from "video.js";
 import { useGenerateStore } from "../../stores/generateStore";
 
 const AudioPlayer = () => {
-  const audioRef = useRef(null);
+  const audioRef = useRef<any>(null);
   const track = useGenerateStore((state) => state.currentMusicSrc);
-  // const musicPlaying = useGenerateStore((state) => state.isMusicPlaying);
+  const musicPlaying = useGenerateStore((state) => state.isMusicPlaying);
 
   useEffect(() => {
-    if (audioRef.current && track) {
+    if (audioRef.current && track && musicPlaying) {
       const audioPlayer = videojs(audioRef.current);
       RegisterAndEvents(audioPlayer);
       audioPlayer.src({
@@ -16,7 +16,12 @@ const AudioPlayer = () => {
       });
       audioPlayer.play();
     }
-  }, [track]);
+    if (!musicPlaying) {
+      debugger;
+      const audioPlayer = videojs(audioRef.current);
+      audioPlayer?.pause();
+    }
+  }, [track, musicPlaying]);
 
   const RegisterAndEvents = (audioPlayer: any) => {
     const audio = audioPlayer;
