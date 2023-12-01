@@ -36,3 +36,4 @@ export const GENRE = [
   "Drama",
   "Suspenseful"
 ];
+export const MENUITEMS = ['How it works','Features','About','Contact'];
