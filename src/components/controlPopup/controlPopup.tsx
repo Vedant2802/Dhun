@@ -20,16 +20,10 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
   const [tempo, setTempo] = useState("");
   const generateMusic = useGenerateStore((state: any) => state.generateMusic);
   const popupRef = useRef<any>();
-  const instrumentRef = useRef<any>();
-  const emotionRef = useRef<any>();
-  const regionRef = useRef<any>();
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
-      if (popupRef.current && !popupRef.current.contains(event.target) && 
-      instrumentRef.current && !instrumentRef.current.contains(event.target) &&
-      emotionRef.current && !emotionRef.current.contains(event.target) &&
-      regionRef.current && !regionRef.current.contains(event.target)) {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
         onClose();
       }
     };
@@ -84,11 +78,12 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
               </svg>
             </div>
             {emotionOptionopen && (
-              <ul ref={emotionRef} className={styles.popupdropdownoptions}>
+              <ul className={styles.popupdropdownoptions}>
                 {EMOTION.map((item, index) => (
                   <li
                     className={styles.popupdropdownoptionsingle}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setEmotionOptionOpen(false);
                       setEmotion(item);
                     }}
@@ -125,11 +120,12 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
               </svg>
             </div>
             {instrumentOptionsOpen && (
-              <ul ref={instrumentRef} className={styles.popupdropdownoptions}>
+              <ul className={styles.popupdropdownoptions}>
                 {INSTRUMENTS.map((item, index) => (
                   <li
                     className={styles.popupdropdownoptionsingle}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setIntrumentOptionsOpen(false);
                       setInstruments(item.label);
                     }}
@@ -163,11 +159,12 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
               </svg>
             </div>
             {genreOptionsOpen && (
-              <ul ref={regionRef} className={styles.popupdropdownoptions}>
+              <ul className={styles.popupdropdownoptions}>
                 {GENRE.map((item, index) => (
                   <li
                     className={styles.popupdropdownoptionsingle}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setGenreOptionsOpen(false);
                       SetGenre(item);
                     }}
