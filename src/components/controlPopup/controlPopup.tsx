@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import styles from "./controlPopup.module.scss";
 import { EMOTION, INSTRUMENTS, GENRE } from "../../utils/genAiConstant";
 import { useGenerateStore } from "../../stores/generateStore";
+import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 
 type controlPopupProps = {
   onClose: Function;
@@ -20,6 +21,7 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
   const [tempo, setTempo] = useState("");
   const generateMusic = useGenerateStore((state: any) => state.generateMusic);
   const popupRef = useRef<any>();
+  const apiStatus = useGenerateStore((state) => state.status);
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -208,7 +210,9 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
           </div>
         </div>
         <div className={styles.generateButton} onClick={handleOnGenerate}>
-          Generate
+          {apiStatus === API_STATUS_TYPES.loading
+            ? "Generating..."
+            : "Generate"}
         </div>
       </div>
     </>

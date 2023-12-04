@@ -5,6 +5,7 @@ import styles from "./WebModal.module.scss";
 import playIcon from "../../../public/icons/play.svg";
 import pauseIcon from "../../../public/icons/pauseWhite.svg";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
+import dhunAI from "../../../public/video/rrradhun.mp4";
 
 enum DEFAULT_PROMPTS {
   prompt1 = "Upbeat, spiritual music",
@@ -123,7 +124,13 @@ const WebModal = () => {
   return (
     <dialog className={styles.webDialog}>
       <form className={styles.generatePopup} onSubmit={handleOnSubmit}>
-        <div className={styles.topCard}></div>
+        <div className={styles.topCard}>
+          {/* <div className={styles.videoPart}> */}
+          <video autoPlay width="auto" muted loop>
+            <source src={dhunAI} type="video/mp4" />
+          </video>
+          {/* </div> */}
+        </div>
         {status === API_STATUS_TYPES.success && musicUrls?.length ? (
           renderMusicUrls()
         ) : (

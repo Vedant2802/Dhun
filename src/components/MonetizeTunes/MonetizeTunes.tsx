@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./MonetizeTunes.module.scss";
 import spectrum from "../../../public/icons/spectrum.svg";
 import monitizeLogo from "../../../public/icons/monitizeLogo.svg";
@@ -6,8 +6,26 @@ import arrow from "../../../public/icons/right-arrow.svg";
 import Symphonies from "../sympohonies/Symphonies";
 import DhunIcon from "../../../public/icons/Dhun Icon.svg";
 import heart from "../../../public/icons/heart.svg";
+import WebModal from "../webGenerateModal/WebModal";
+import { createPortal } from "react-dom";
 
 const MonetizeTunes = () => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const openPrompt = () => {
+    setOpenModal(true);
+  };
+
+  useEffect(() => {
+    const handleEscapeKeyPress = (event: any) => {
+      if (event.key === "Escape") {
+        setOpenModal(false);
+      }
+    };
+    document.addEventListener("keydown", handleEscapeKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKeyPress);
+    };
+  }, []);
   return (
     <div>
       <div className={styles.spectrumContainer}>
@@ -16,14 +34,17 @@ const MonetizeTunes = () => {
       <Symphonies />
       <div className={styles.monetizeMainContainer}>
         <div className={styles.monetizeContainer}>
-            <div className={styles.createText}>
-            Ready to create, own &<br/>
-             monetise your tunes?
-            </div>
-            <div className={styles.createSubText}>
-            Join Dhun.ai and unlock the magic of creating music. 
-            </div>
-            <div className={styles.button}>Create magic now <img className={styles.arrow} src={arrow} /></div>
+          <div className={styles.createText}>
+            Ready to create, own &<br />
+            monetise your tunes?
+          </div>
+          <div className={styles.createSubText}>
+            Join Dhun.ai and unlock the magic of creating music.
+          </div>
+          <div className={styles.button} onClick={openPrompt}>
+            Create magic now <img className={styles.arrow} src={arrow} />
+          </div>
+          {openModal && createPortal(<WebModal />, document.body)}
         </div>
       </div>
       <div className={styles.footer}>
