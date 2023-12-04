@@ -1,6 +1,12 @@
 import { create } from "zustand";
-import { API_STATUS_TYPES } from "../assets/constants/apiContants";
-import { uploadFileApi, generateMusicApi } from "../services/axiosService";
+import { API_STATUS_TYPES,AUTH_ENDPOINTS } from "../assets/constants/apiContants";
+
+import { uploadFileApi, generateMusicApi,registerApi } from "../services/axiosService";
+
+interface IUserTokenRequest {
+  requestBody: object;
+  AUTH_ENDPOINT: string;
+}
 
 export interface GenerateMusicRequestObj {
   referenceFileUrl?: string;
@@ -41,6 +47,7 @@ interface IGenerateState {
   isMusicPlaying?: boolean;
   fileName: string;
   websiteData: WebsiteData;
+  userData: any;
 }
 
 interface IGenerateActions {
@@ -53,6 +60,7 @@ interface IGenerateActions {
   setCurrentMusicSrc: (src: string) => void;
   generateMusicForWebsite: (requestObj: GenerateMusicRequestObj) => void;
   resetWebsiteData: () => void;
+  getUserToken: ({requestBody,AUTH_ENDPOINT}:IUserTokenRequest) => void; 
 }
 
 const initialState: IGenerateState = {
@@ -65,6 +73,7 @@ const initialState: IGenerateState = {
     status: API_STATUS_TYPES.idle,
     musicUrls: [],
   },
+  userData: {}
 };
 
 type IGenerateStore = IGenerateState & IGenerateActions;
@@ -159,4 +168,11 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       }));
     }
   },
+  getUserToken: async ({ requestBody,AUTH_ENDPOINT }: IUserTokenRequest) => {
+    const user = await registerApi({ AUTH_ENDPOINT,requestBody})
+      set(() => ({
+        userData: user
+      }));
+  }
 }));
+

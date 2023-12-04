@@ -5,6 +5,11 @@ export enum API_STATUS_TYPES {
   failed = "failed",
 }
 
+export enum AUTH_ENDPOINTS {
+  register = "/api/auth/register",
+  login = "/api/auth/login",
+}
+
 export enum API_ENDPOINTS {
   uploadVideo = "/api/upload",
   generateMusicV4 = "/api/v4/music_studio/generate",

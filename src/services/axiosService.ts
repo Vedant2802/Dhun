@@ -1,7 +1,6 @@
 import axios from "axios";
 import { API_ENDPOINTS } from "../assets/constants/apiContants";
 import { GenerateMusicRequestObj } from "../stores/generateStore";
-
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_GEN_API_BASE_URL,
 });
@@ -28,6 +27,19 @@ const uploadFileApi = async <T>(uploadFile: any): Promise<T> => {
   }
 };
 
+const registerApi = async ({requestBody,AUTH_ENDPOINT}: any) => {
+
+  try{
+    const { data } = await axiosInstance.post(AUTH_ENDPOINT, requestBody);
+    if (data?.access_token) {
+      localStorage.setItem("token", data?.access_token);
+    }
+    return data;
+  }catch(err){
+    throw err;
+  }
+}  
+
 const generateMusicApi = async <T>(
   requestObj: GenerateMusicRequestObj
 ): Promise<T> => {
@@ -49,4 +61,4 @@ const generateMusicApi = async <T>(
   }
 };
 
-export { uploadFileApi, generateMusicApi };
+export { uploadFileApi, generateMusicApi,registerApi };
