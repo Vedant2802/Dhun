@@ -9,6 +9,8 @@ import leftWing from "../../../public/icons/leftWing.svg";
 import rightWing from "../../../public/icons/rightWing.svg";
 import promptVideo from "../../../public/video/promptVideo.mp4";
 import hummedVideo from "../../../public/video/hummed.mp4";
+import usecase1 from "../../../public/video/usecase1.mp4";
+import usecase2 from "../../../public/video/usecase2.mp4";
 
 const OurFeature = () => {
   return (
@@ -41,7 +43,7 @@ const OurFeature = () => {
           </div>
           <div className={styles.promptVideo}>
             <video autoPlay width="auto" muted loop>
-              <source src={promptVideo} type="video/mp4" />
+              <source src={usecase1} type="video/mp4" />
             </video>
           </div>
           <div className={styles.break} />
@@ -65,7 +67,7 @@ const OurFeature = () => {
           </div>
           <div className={styles.promptVideo}>
             <video autoPlay width="auto" muted loop>
-              <source src={hummedVideo} type="video/mp4" />
+              <source src={usecase2} type="video/mp4" />
             </video>
           </div>
           <div className={styles.break} />
@@ -85,7 +87,8 @@ const OurFeature = () => {
             <div className={styles.promptDetails}>
               <div className={styles.promptHeader}>hum to music </div>
               <div className={styles.propmtTitle}>
-              Hum a tune, a spontaneous composition is created which can be used for capturing and expanding on musical ideas. 
+                Hum a tune, a spontaneous composition is created which can be
+                used for capturing and expanding on musical ideas.
               </div>
             </div>
           </div>

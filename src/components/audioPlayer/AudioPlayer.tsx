@@ -17,7 +17,6 @@ const AudioPlayer = () => {
       audioPlayer.play();
     }
     if (!musicPlaying) {
-      debugger;
       const audioPlayer = videojs(audioRef.current);
       audioPlayer?.pause();
     }

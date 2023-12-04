@@ -17,7 +17,7 @@ const uploadFileApi = async <T>(uploadFile: any): Promise<T> => {
       {
         headers: {
           "Content-Type": "multipart/form-data",
-          'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NTVkZDBhOTJlZjA2NzQ0MzU4YTk0N2EiLCJpYXQiOjE3MDE0MTE2MjQsIm5iZiI6MTcwMTQxMTYyNCwianRpIjoiYWEwZjBmMWMtM2EzMS00M2ZmLWFlNGYtYjZlOGVhZWE2ODY4IiwiZXhwIjoxNzAxNDU0ODI0LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlLCJyb2xlIjoidXNlciIsImlzQmxvY2tlZCI6ZmFsc2V9.IgYOReSCQl--RzhGZlorPS98dZSay-bubgIk79T9TI0'
+          'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NTVkZDBhOTJlZjA2NzQ0MzU4YTk0N2EiLCJpYXQiOjE3MDE2ODY2MzYsIm5iZiI6MTcwMTY4NjYzNiwianRpIjoiZjg0MTAwNmQtNTA4NS00NWFmLTlmY2ItNGY4MjliMmQ3YWE4IiwiZXhwIjoxNzAxNzI5ODM2LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlLCJyb2xlIjoidXNlciIsImlzQmxvY2tlZCI6ZmFsc2V9.Sky-nFGqy5d-kD5IEuYsb7dcdDwNHJpWTZWpZh2CSbQ'
         },
 
       }
@@ -39,7 +39,7 @@ const generateMusicApi = async <T>(
         headers: {
           "Content-Type": "application/json",
           Authorization:
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NTVkZDBhOTJlZjA2NzQ0MzU4YTk0N2EiLCJpYXQiOjE3MDEzNjI1MzAsIm5iZiI6MTcwMTM2MjUzMCwianRpIjoiOTM2MWVlOTQtZDcwNi00ZDFkLWEwZTEtY2EwZWY4ZWQ5NmU0IiwiZXhwIjoxNzAxNDA1NzMwLCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlLCJyb2xlIjoidXNlciIsImlzQmxvY2tlZCI6ZmFsc2V9.r8OtJtUd21nPbhv-C6zR9k13EsVbCATKavLVGdPuxG8",
+            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NTVkZDBhOTJlZjA2NzQ0MzU4YTk0N2EiLCJpYXQiOjE3MDE2ODY2MzYsIm5iZiI6MTcwMTY4NjYzNiwianRpIjoiZjg0MTAwNmQtNTA4NS00NWFmLTlmY2ItNGY4MjliMmQ3YWE4IiwiZXhwIjoxNzAxNzI5ODM2LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlLCJyb2xlIjoidXNlciIsImlzQmxvY2tlZCI6ZmFsc2V9.Sky-nFGqy5d-kD5IEuYsb7dcdDwNHJpWTZWpZh2CSbQ",
         },
       }
     );
