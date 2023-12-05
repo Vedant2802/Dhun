@@ -6,6 +6,7 @@ import MainDashboard from "./pages/MainDashboard/MainDashboard";
 import DhunAi from "./pages/DhunAi/DhunAi";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import * as React from "react";
+import AudioPlayer from "./components/audioPlayer/AudioPlayer";
 
 function App() {
   // const bears = useBearStore((state) => state.bears);
@@ -24,6 +25,7 @@ function App() {
               <main className="dashboardContainer">
                 <Header />
                 <MainDashboard />
+                <AudioPlayer />
               </main>
             }
           />

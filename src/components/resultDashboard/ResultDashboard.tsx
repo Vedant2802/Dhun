@@ -40,7 +40,7 @@ const ResultDashboard = () => {
   //   "http://10.39.255.16:3000/storage/sample_960x400_ocean_with_audio%20(1).mp3";
   const url = file?.gcs_url ? file?.gcs_url : track;
 
-  const renderDraggableItem = (urls: string[]) => {
+  const renderDraggableItem = (urls: string[], timeFrameId: number) => {
     if (!urls) {
       return null;
     }
@@ -49,6 +49,7 @@ const ResultDashboard = () => {
         <DraggableItem
           key={url}
           id={index}
+          timeFrameId={timeFrameId}
           text={"Track" + (index + 1)}
           index={index}
           moveItem={moveItem}
@@ -109,7 +110,10 @@ const ResultDashboard = () => {
           timeFrames?.map((timeFrame, index) => (
             <div className={styles.trackWrapper}>
               <DndProvider backend={HTML5Backend}>
-                {renderDraggableItem(timeFrame.generatedData?.urls as string[])}
+                {renderDraggableItem(
+                  timeFrame.generatedData?.urls as string[],
+                  timeFrame.id
+                )}
               </DndProvider>
             </div>
           ))}

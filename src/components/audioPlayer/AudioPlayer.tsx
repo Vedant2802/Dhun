@@ -6,18 +6,36 @@ const AudioPlayer = () => {
   const audioRef = useRef<any>(null);
   const track = useGenerateStore((state) => state.currentMusicSrc);
   const musicPlaying = useGenerateStore((state) => state.isMusicPlaying);
+  const playNextTrack = useGenerateStore((state) => state.playNextTrack);
+  const [audioPlayer, setAudioPlayer] = useState<any>(null);
+  const [isMusicEnded, setMusicEnded] = useState(false);
 
   useEffect(() => {
-    if (audioRef.current && track && musicPlaying) {
+    if (audioRef.current) {
       const audioPlayer = videojs(audioRef.current);
       RegisterAndEvents(audioPlayer);
+      setAudioPlayer(audioPlayer);
+    }
+    return () => {
+      audioPlayer && audioPlayer.dispose();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isMusicEnded) {
+      playNextTrack();
+    }
+  }, [isMusicEnded]);
+
+  useEffect(() => {
+    if (audioPlayer && track && musicPlaying) {
       audioPlayer.src({
         src: track,
       });
       audioPlayer.play();
+      setMusicEnded(false);
     }
-    if (!musicPlaying) {
-      const audioPlayer = videojs(audioRef.current);
+    if (!musicPlaying && audioPlayer) {
       audioPlayer?.pause();
     }
   }, [track, musicPlaying]);
@@ -31,7 +49,9 @@ const AudioPlayer = () => {
       audioPlayer.on("loadeddata", audio.onPlayerEvents);
     };
 
-    audio.onPlayEndedEvent = function (e: any) {};
+    audio.onPlayEndedEvent = function (e: any) {
+      setMusicEnded(true);
+    };
     audio.onPlayEvent = function () {
       console.log("play");
     };

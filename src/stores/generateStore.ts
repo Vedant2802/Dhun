@@ -40,7 +40,9 @@ interface IGenerateState {
   currentMusicSrc?: string;
   isMusicPlaying?: boolean;
   fileName: string;
+  currentMusicIndex?: number;
   websiteData: WebsiteData;
+  compositionIndex?: number;
 }
 
 interface IGenerateActions {
@@ -50,9 +52,14 @@ interface IGenerateActions {
   addNewTimeFrame: (id: number) => void;
   updateCurrentTimeFrameDetails: (id: number, duration: number) => void;
   updateMusicPlayingStatus: (playing: boolean) => void;
-  setCurrentMusicSrc: (src: string) => void;
+  setCurrentMusicSrc: (
+    src: string,
+    musicIndex: number,
+    compositionIndex?: number
+  ) => void;
   generateMusicForWebsite: (requestObj: GenerateMusicRequestObj) => void;
   resetWebsiteData: () => void;
+  playNextTrack: () => void;
 }
 
 const initialState: IGenerateState = {
@@ -65,6 +72,7 @@ const initialState: IGenerateState = {
     status: API_STATUS_TYPES.idle,
     musicUrls: [],
   },
+  currentMusicIndex: 0,
 };
 
 type IGenerateStore = IGenerateState & IGenerateActions;
@@ -83,8 +91,17 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
   setDuration: (duration: number) => {
     set(() => ({ duration }));
   },
-  setCurrentMusicSrc: (src: string) => {
-    set(() => ({ currentMusicSrc: src, isMusicPlaying: true }));
+  setCurrentMusicSrc: (
+    src: string,
+    musicIndex: number,
+    compositionIndex?: number
+  ) => {
+    set(() => ({
+      currentMusicSrc: src,
+      isMusicPlaying: true,
+      compositionIndex: compositionIndex,
+      currentMusicIndex: musicIndex,
+    }));
   },
   updateMusicPlayingStatus: (playing: boolean) => {
     set(() => ({ isMusicPlaying: playing }));
@@ -158,5 +175,24 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
         },
       }));
     }
+  },
+  playNextTrack: () => {
+    const compositionIndex = get().compositionIndex as number;
+    const timeFrameData = get().timeFrameData;
+    const currentTimeFrameId = get().currentTimeFrameId;
+    const nextTimeFrameIndex =
+      timeFrameData.findIndex((item) => item.id === currentTimeFrameId) + 1;
+    const isNextTrackAvailable = timeFrameData.length >= nextTimeFrameIndex + 1;
+    if (isNextTrackAvailable) {
+      const nextMusicTrack =
+        timeFrameData[nextTimeFrameIndex].generatedData?.urls[compositionIndex];
+      return set(() => ({
+        currentMusicSrc: nextMusicTrack,
+        currentTimeFrameId: timeFrameData[nextTimeFrameIndex].id,
+      }));
+    }
+    set(() => ({
+      isMusicPlaying: false,
+    }));
   },
 }));
