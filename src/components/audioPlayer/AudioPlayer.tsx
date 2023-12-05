@@ -7,6 +7,8 @@ const AudioPlayer = () => {
   const track = useGenerateStore((state) => state.currentMusicSrc);
   const musicPlaying = useGenerateStore((state) => state.isMusicPlaying);
 
+  console.log(track, musicPlaying);
+
   useEffect(() => {
     if (audioRef.current && track && musicPlaying) {
       const audioPlayer = videojs(audioRef.current);
