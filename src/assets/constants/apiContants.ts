@@ -13,4 +13,5 @@ export enum AUTH_ENDPOINTS {
 export enum API_ENDPOINTS {
   uploadVideo = "/api/upload",
   generateMusicV4 = "/api/v4/music_studio/generate",
+  contactus = "/api/contactus"
 }
