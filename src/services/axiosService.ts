@@ -27,6 +27,23 @@ const uploadFileApi = async <T>(uploadFile: any): Promise<T> => {
   }
 };
 
+const contactApi = async <T>(contactDetails: any): Promise<T> => {
+  try {
+    const response = await axiosInstance.post(
+      API_ENDPOINTS.contactus,
+      contactDetails,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const registerApi = async ({requestBody,AUTH_ENDPOINT}: any) => {
 
   try{
@@ -61,4 +78,4 @@ const generateMusicApi = async <T>(
   }
 };
 
-export { uploadFileApi, generateMusicApi,registerApi };
+export { uploadFileApi, generateMusicApi,registerApi, contactApi };

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./Login.module.scss";
-import login from "../../../public/icons/login.png";
+import login from "../../../public/icons/Register-background.png";
 import { useGenerateStore } from "../../stores/generateStore";
 import { AUTH_ENDPOINTS,API_STATUS_TYPES } from "../../components/utilConstants/apiConstants";
 import { useNavigate } from "react-router-dom";
@@ -41,8 +41,7 @@ const Login: React.FC = () => {
 
       <div className={styles.formContainer}>
         <div className={styles.formSubContainer}>
-          <div className={styles.mainHeader}>Raag.ai</div>
-          <div className={styles.loginHeader}>Login</div>
+          {/* <div className={styles.loginHeader}>Login</div> */}
           <div className={styles.inputField}>
             <div className={styles.inputContainer}>
               <input
@@ -72,9 +71,9 @@ const Login: React.FC = () => {
             Login
           </div>
           <div className={styles.signupContainer}>
-            <div className={styles.signupContent}>Don’t have an account?</div>
+            {/* <div className={styles.signupContent}>Don’t have an account?</div> */}
             <span className={styles.signupLink} onClick={() => navigate('/register')}>
-              Sign up
+              Create a new account
             </span>
           </div>
         </div>

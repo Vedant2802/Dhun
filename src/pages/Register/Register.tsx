@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "./Register.module.scss";
-import login from "../../../public/icons/login.png";
+import login from "../../../public/icons/Register-background.png";
 import { useGenerateStore } from "../../stores/generateStore";
 import { AUTH_ENDPOINTS,API_STATUS_TYPES,REGISTER_PAGE_CONSTANTS } from "../../components/utilConstants/apiConstants";
 import { useNavigate } from "react-router-dom";
@@ -43,7 +43,6 @@ const RegisterPage = () => {
 
         <div className={styles.formContainer}>
           <div className={styles.formSubContainer}>
-            <div className={styles.mainHeader}>Raag.ai</div>
             <div className={styles.loginHeader}>
               {REGISTER_PAGE_CONSTANTS.title}
             </div>
@@ -101,13 +100,13 @@ const RegisterPage = () => {
             <div className={styles.loginButton} onClick={handleSubmit}>
               {REGISTER_PAGE_CONSTANTS.buttonText}
             </div>
-            <div className={styles.loginContainer}>
+            <div className={styles.loginContain}>
               <div className={styles.loginContent}>
                 {REGISTER_PAGE_CONSTANTS.existingUserText}
-              </div>
               <span className={styles.loginLink} onClick={() => navigate("/login")}>
                 {REGISTER_PAGE_CONSTANTS.loginLinkText}
               </span>
+              </div>
             </div>
           </div>
         </div>

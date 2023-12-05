@@ -8,17 +8,18 @@ export enum AUTH_ENDPOINTS {
     loading = "loading",
     success = "success",
     failure = "failure",
+    incorrect = "Incorrect Email or Password"
   }
 
   export enum REGISTER_PAGE_CONSTANTS {
-    usernamePlaceholder = "Enter your name",
-    emailPlaceholder = "Enter your email",
-    passwordPlaceholder = "Enter your password",
+    usernamePlaceholder = "Name",
+    emailPlaceholder = "Email",
+    passwordPlaceholder = "Password",
     usernameLabel = "Name",
     emailLabel = "Email",
     passwordLabel = "Password",
-    title = "Register",
-    buttonText = "Register",
+    title = "Create a Dhun.ai account",
+    buttonText = "Create",
     existingUserText = "Already have an account? ",
     loginLinkText = "Login",
   }
