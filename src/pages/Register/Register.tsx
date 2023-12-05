@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Register.module.scss";
 import login from "../../../public/icons/login.png";
 import { useGenerateStore } from "../../stores/generateStore";
-import { REGISTER_PAGE_CONSTANTS } from "../../components/utilConstants/authConstants";
-import { AUTH_ENDPOINTS,API_STATUS_TYPES } from "../../components/utilConstants/apiConstants";
+import { AUTH_ENDPOINTS,API_STATUS_TYPES,REGISTER_PAGE_CONSTANTS } from "../../components/utilConstants/apiConstants";
 import { useNavigate } from "react-router-dom";
 
 
