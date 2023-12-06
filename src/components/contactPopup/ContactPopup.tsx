@@ -25,41 +25,78 @@ const ContactPopup: React.FC<any> = ({ onClose }) => {
     }
   };
 
-    return (<div className={styles.webDialog}>
-        <div className={styles.contactcontainer}>
-            <img onClick={() => onClose()} src={closeicon} className={styles.closeIcon} />
-            <div className={styles.contactHeader}>
-            Connect with us for More
-            </div>
-            <div className={styles.inputtop}>
-                <div className={styles.inputContainer}>
-                    <span className={styles.inputlabel}>FULL NAME <span className={styles.astrek}>*</span></span>
-                    <input onChange={(e)=> setName(e.target.value) } id="name" className={styles.inputbox} type="text" value={name}  />
-                </div>
-                <div className={styles.inputContainer}>
-                    <span className={styles.inputlabel}>EMAIL <span className={styles.astrek}>*</span></span>
-                    <input onChange={(e)=> setEmail(e.target.value) } id="email" className={styles.inputbox} type="text" value={email}  />
-                </div>
-                <div className={styles.inputContainer}>
-                    <span className={styles.inputlabel}>PHONE</span>
-                    <input onChange={(e)=> setNumber(e.target.value) } className={styles.inputbox} type="number" value={number} />
-                </div>
-            </div>
-            <div className={styles.inputbottom}>
-                <span className={styles.inputlabel}>LEAVE A NOTE</span>
-                <input onChange={(e)=> setNote(e.target.value) } className={styles.inputnote} type="text" value={note} />
-            </div>
-            <div className={styles.footer}>
-                <span className={styles.contactinfo}>You can call us on +1 891 989-11-91 <br/> 
-                        or write your queries to us at hello@adpod.ai </span>
-                <button onClick={() => handleSend() } className={styles.sendButton}> Send </button>
-            </div>
-            {success && <div className={styles.successmessage}>
-             <img src={check} /> Thanks for showing interest in DhunAI. We will get in touch with you shortly!   
-            </div> }
+  return (
+    <div className={styles.webDialog}>
+      <div className={styles.contactcontainer}>
+        <img
+          onClick={() => onClose()}
+          src={closeicon}
+          className={styles.closeIcon}
+        />
+        <div className={styles.contactHeader}>Connect with us for More</div>
+        <div className={styles.inputtop}>
+          <div className={styles.inputContainer}>
+            <span className={styles.inputlabel}>
+              FULL NAME <span className={styles.astrek}>*</span>
+            </span>
+            <input
+              onChange={(e) => setName(e.target.value)}
+              id="name"
+              className={styles.inputbox}
+              type="text"
+              value={name}
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <span className={styles.inputlabel}>
+              EMAIL <span className={styles.astrek}>*</span>
+            </span>
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+              className={styles.inputbox}
+              type="text"
+              value={email}
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <span className={styles.inputlabel}>PHONE</span>
+            <input
+              onChange={(e) => setNumber(e.target.value)}
+              className={styles.inputbox}
+              type="number"
+              value={number}
+            />
+          </div>
         </div>
-    </div>)
-
-    }
+        <div className={styles.inputbottom}>
+          <span className={styles.inputlabel}>LEAVE A NOTE</span>
+          <input
+            onChange={(e) => setNote(e.target.value)}
+            className={styles.inputnote}
+            type="text"
+            value={note}
+          />
+        </div>
+        <div className={styles.footer}>
+          <span className={styles.contactinfo}>
+            You can call us on +1 891 989-11-91 <br />
+            or write your queries to us at hello@adpod.ai{" "}
+          </span>
+          <button onClick={() => handleSend()} className={styles.sendButton}>
+            {" "}
+            Send{" "}
+          </button>
+        </div>
+        {success && (
+          <div className={styles.successmessage}>
+            <img src={check} /> Thanks for showing interest in DhunAI. We will
+            get in touch with you shortly!
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default ContactPopup;
