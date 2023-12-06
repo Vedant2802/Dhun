@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import React from "react";
 // import WaveSurfer from "wavesurfer.js";
+// @ts-ignore
 import TimelinePlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/timeline.esm.js";
 import WaveSurfer from "wavesurfer.js";
 import styles from "../controlSelection/ConntrolSelection.module.scss";

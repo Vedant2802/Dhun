@@ -5,35 +5,51 @@ import pause from "../../../public/icons/pause.svg";
 import playcircle from "../../../public/icons/play_circle_filled.svg";
 import { useGenerateStore } from "../../stores/generateStore";
 interface CompositionItemProps {
-  musicSrc: string;
-  musicName: string;
   isDefault: boolean;
+  compositionIndex: number;
+  compositionName: string;
 }
 
 const CompositionItem: React.FC<CompositionItemProps> = ({
-  musicSrc,
-  musicName,
+  compositionName,
+  compositionIndex,
   isDefault,
 }) => {
   const setCurrentMusicSrc = useGenerateStore(
     (state) => state.setCurrentMusicSrc
   );
-  const currentMusicSrc = useGenerateStore((state) => state.currentMusicSrc);
+  const currentCompositionIndex = useGenerateStore(
+    (state) => state.compositionIndex
+  );
+  const currentTimeFrameId = useGenerateStore(
+    (state) => state.currentTimeFrameId
+  );
+  const timeFrameData = useGenerateStore((state) => state.timeFrameData);
   const isMusicPlaying = useGenerateStore((state) => state.isMusicPlaying);
   const updateMusicPlayingStatus = useGenerateStore(
     (state) => state.updateMusicPlayingStatus
   );
   const handlePlay = () => {
-    if (!isDefault && currentMusicSrc === musicSrc) {
+    if (
+      !isDefault &&
+      compositionIndex === currentCompositionIndex &&
+      isMusicPlaying
+    ) {
       return updateMusicPlayingStatus(!isMusicPlaying);
     }
     if (!isDefault) {
-      setCurrentMusicSrc(musicSrc);
+      const currentTimeFrameData = timeFrameData.find(
+        (item) => item.id === currentTimeFrameId
+      );
+      const musicSrc = currentTimeFrameData?.generatedData?.urls[
+        compositionIndex
+      ] as string;
+      setCurrentMusicSrc(musicSrc, compositionIndex, compositionIndex);
     }
   };
 
   const getMusicIcon = () => {
-    if (isMusicPlaying && currentMusicSrc === musicSrc) {
+    if (isMusicPlaying && currentCompositionIndex === compositionIndex) {
       return <img className={styles.playButton} src={pause} />;
     }
     return <img className={styles.playButton} src={playcircle} />;
@@ -42,7 +58,7 @@ const CompositionItem: React.FC<CompositionItemProps> = ({
     <div className={styles.composition}>
       <div className={styles.playButtonContainer}>
         <div onClick={handlePlay}>{getMusicIcon()}</div>
-        <span className={styles.compositionText}>{musicName}</span>
+        <span className={styles.compositionText}>{compositionName}</span>
       </div>
       <img src={kebab} />
     </div>

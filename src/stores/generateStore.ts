@@ -1,7 +1,14 @@
 import { create } from "zustand";
-import { API_STATUS_TYPES,AUTH_ENDPOINTS } from "../assets/constants/apiContants";
+import {
+  API_STATUS_TYPES,
+  AUTH_ENDPOINTS,
+} from "../assets/constants/apiContants";
 
-import { uploadFileApi, generateMusicApi,registerApi } from "../services/axiosService";
+import {
+  uploadFileApi,
+  generateMusicApi,
+  registerApi,
+} from "../services/axiosService";
 
 interface IUserTokenRequest {
   requestBody: object;
@@ -46,7 +53,9 @@ interface IGenerateState {
   currentMusicSrc?: string;
   isMusicPlaying?: boolean;
   fileName: string;
+  currentMusicIndex?: number;
   websiteData: WebsiteData;
+  compositionIndex?: number;
   userData: any;
 }
 
@@ -57,10 +66,15 @@ interface IGenerateActions {
   addNewTimeFrame: (id: number) => void;
   updateCurrentTimeFrameDetails: (id: number, duration: number) => void;
   updateMusicPlayingStatus: (playing: boolean) => void;
-  setCurrentMusicSrc: (src: string) => void;
+  setCurrentMusicSrc: (
+    src: string,
+    musicIndex?: number,
+    compositionIndex?: number
+  ) => void;
   generateMusicForWebsite: (requestObj: GenerateMusicRequestObj) => void;
   resetWebsiteData: () => void;
-  getUserToken: ({requestBody,AUTH_ENDPOINT}:IUserTokenRequest) => void; 
+  playNextTrack: () => void;
+  getUserToken: ({ requestBody, AUTH_ENDPOINT }: IUserTokenRequest) => void;
 }
 
 const initialState: IGenerateState = {
@@ -73,7 +87,8 @@ const initialState: IGenerateState = {
     status: API_STATUS_TYPES.idle,
     musicUrls: [],
   },
-  userData: {}
+  currentMusicIndex: 0,
+  userData: {},
 };
 
 type IGenerateStore = IGenerateState & IGenerateActions;
@@ -92,8 +107,17 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
   setDuration: (duration: number) => {
     set(() => ({ duration }));
   },
-  setCurrentMusicSrc: (src: string) => {
-    set(() => ({ currentMusicSrc: src, isMusicPlaying: true }));
+  setCurrentMusicSrc: (
+    src: string,
+    musicIndex: number = 0,
+    compositionIndex?: number
+  ) => {
+    set(() => ({
+      currentMusicSrc: src,
+      isMusicPlaying: true,
+      compositionIndex: compositionIndex,
+      currentMusicIndex: musicIndex,
+    }));
   },
   updateMusicPlayingStatus: (playing: boolean) => {
     set(() => ({ isMusicPlaying: playing }));
@@ -168,11 +192,29 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       }));
     }
   },
-  getUserToken: async ({ requestBody,AUTH_ENDPOINT }: IUserTokenRequest) => {
-    const user = await registerApi({ AUTH_ENDPOINT,requestBody})
-      set(() => ({
-        userData: user
+  playNextTrack: () => {
+    const compositionIndex = get().compositionIndex as number;
+    const timeFrameData = get().timeFrameData;
+    const currentTimeFrameId = get().currentTimeFrameId;
+    const nextTimeFrameIndex =
+      timeFrameData.findIndex((item) => item.id === currentTimeFrameId) + 1;
+    const isNextTrackAvailable = timeFrameData.length >= nextTimeFrameIndex + 1;
+    if (isNextTrackAvailable) {
+      const nextMusicTrack =
+        timeFrameData[nextTimeFrameIndex].generatedData?.urls[compositionIndex];
+      return set(() => ({
+        currentMusicSrc: nextMusicTrack,
+        currentTimeFrameId: timeFrameData[nextTimeFrameIndex].id,
       }));
-  }
+    }
+    set(() => ({
+      isMusicPlaying: false,
+    }));
+  },
+  getUserToken: async ({ requestBody, AUTH_ENDPOINT }: IUserTokenRequest) => {
+    const user = await registerApi({ AUTH_ENDPOINT, requestBody });
+    set(() => ({
+      userData: user,
+    }));
+  },
 }));
-
