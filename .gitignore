@@ -37,3 +37,6 @@ newrelic.info.sa
 
 /nginx/access.log
 /nginx/error.log
+
+# build files
+/src/**/*.js
