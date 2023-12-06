@@ -13,12 +13,12 @@ const CompositionContainer: React.FC = () => {
   const timeFrameData = useGenerateStore((state) => state.timeFrameData);
 
   const renderDefaultCompositions = () => {
-    return defaultMusicCompositions.map((url, index) => (
+    return defaultMusicCompositions.map((_, index) => (
       <CompositionItem
         key={index}
         isDefault={true}
-        musicName={"Composition " + (index + 1)}
-        musicSrc={url}
+        compositionIndex={index}
+        compositionName={"Composition " + (index + 1)}
       />
     ));
   };
@@ -35,12 +35,12 @@ const CompositionContainer: React.FC = () => {
     if (!generatedData) {
       return renderDefaultCompositions();
     }
-    return generatedData?.urls.map((url, index) => (
+    return generatedData?.urls.map((_, index) => (
       <CompositionItem
         key={index}
         isDefault={false}
-        musicName={"Composition " + (index + 1)}
-        musicSrc={url}
+        compositionIndex={index}
+        compositionName={"Composition " + (index + 1)}
       />
     ));
   };
@@ -50,7 +50,6 @@ const CompositionContainer: React.FC = () => {
       <div className={styles.compositionContainer}>
         {renderMusicCompositions()}
       </div>
-      <AudioPlayer />
     </>
   );
 };
