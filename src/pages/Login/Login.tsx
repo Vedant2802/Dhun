@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Login.module.scss";
 import login from "../../../public/icons/Register-background.png";
 import { useGenerateStore } from "../../stores/generateStore";
-import { AUTH_ENDPOINTS,API_STATUS_TYPES } from "../../components/utilConstants/apiConstants";
+import { AUTH_ENDPOINTS,API_STATUS_TYPES,REGISTER_PAGE_CONSTANTS } from "../../components/utilConstants/apiConstants";
 import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
@@ -41,6 +41,7 @@ const Login: React.FC = () => {
 
       <div className={styles.formContainer}>
         <div className={styles.formSubContainer}>
+          <div className={styles.loginHeader}>{REGISTER_PAGE_CONSTANTS.login}</div>
           {/* <div className={styles.loginHeader}>Login</div> */}
           <div className={styles.inputField}>
             <div className={styles.inputContainer}>

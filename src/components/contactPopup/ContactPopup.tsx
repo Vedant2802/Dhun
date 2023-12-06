@@ -26,7 +26,7 @@ const ContactPopup = ({onClose}) => {
         }
     }
 
-    return (<>
+    return (<div className={styles.webDialog}>
         <div className={styles.contactcontainer}>
             <img onClick={() => onClose()} src={closeicon} className={styles.closeIcon} />
             <div className={styles.contactHeader}>
@@ -59,7 +59,7 @@ const ContactPopup = ({onClose}) => {
              <img src={check} /> Thanks for showing interest in DhunAI. We will get in touch with you shortly!   
             </div> }
         </div>
-    </>)
+    </div>)
 
 }
 
