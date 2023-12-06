@@ -26,7 +26,7 @@ const ContactPopup: React.FC<any> = ({ onClose }) => {
   };
 
   return (
-    <>
+    <div className={styles.webDialog}>
       <div className={styles.contactcontainer}>
         <img
           onClick={() => onClose()}
@@ -95,7 +95,7 @@ const ContactPopup: React.FC<any> = ({ onClose }) => {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

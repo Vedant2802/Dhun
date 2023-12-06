@@ -147,7 +147,7 @@ const DhunAiComponent = () => {
           Create magic now <img className={styles.arrow} src={arrow} />
         </div>
       </div>
-      {openModal && createPortal(<WebModal />, document.body)}
+      {openModal && createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>
           <video ref={videoRef} autoPlay width="auto" loop>
