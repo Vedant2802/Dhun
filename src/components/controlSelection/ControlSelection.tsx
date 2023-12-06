@@ -17,7 +17,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [startRegion, setstartRegion] = useState(0);
   const [updatedRegion, setUpdatedRegion] = useState(5);
   const wavesurferref = useRef(null);
-  // const videoElement = document.querySelector("video");
+  const videoElement = document.querySelector("video");
   const [openModal, setOpenModal] = useState<boolean>();
   const updateCurrentTimeFrameDetails = useGenerateStore(
     (state) => state.updateCurrentTimeFrameDetails
@@ -51,15 +51,15 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const waveformParams = {
     container: "#waveform",
     waveColor: "#242424",
-    progressColor: "#2c2c2c",
+    progressColor: "#242424",
     height: 70,
     minPxPerSec: 10,
     dragToSeek: true,
     cursorWidth: 3,
     cursorColor: "rgba(127, 241, 131, 1)",
     plugins: [topTimeline],
-    // backend: "MediaElement",
-    // media: videoElement,
+    backend: "MediaElement",
+    media: videoElement,
   };
 
   useEffect(() => {
@@ -70,10 +70,8 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     };
     if (!trackUrl) return;
     wavesurferref.current = WaveSurfer.create(waveformParams);
-    // setTimeout(() => {
-    // }, 500);
-    const audioUrl = trackUrl.replace(".mp4", ".mp3");
-    wavesurferref.current?.load(audioUrl);
+    // const audioUrl = trackUrl.replace(".mp4", ".mp3");
+    wavesurferref.current?.load(trackUrl);
     document.addEventListener("keydown", handleEscapeKeyPress);
     return () => {
       wavesurferref.current?.destroy();
@@ -105,7 +103,6 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     addNewTimeFrame(getLastTimeFrameId + 1);
 
     wsRegions.on("region-clicked", (region: any) => {
-      console.log("#Updated region", region);
       const duration = region.end - region.start;
       const id = parseInt(region.id.split("_")[1]);
       updateCurrentTimeFrameDetails(id, duration);

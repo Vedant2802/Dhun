@@ -2,9 +2,10 @@ import * as React from "react";
 import styles from "./homeHeader.module.scss";
 import DhunIcon from "../../../public/icons/Dhun Icon.svg";
 import { MENUITEMS } from "../../utils/genAiConstant";
+import { useNavigate } from "react-router-dom";
 
-const HomeHeader = () => {
-
+const HomeHeader = ({setShowContactPopup}) => {
+    const navigate = useNavigate();
 
     return (
         <>
@@ -15,9 +16,9 @@ const HomeHeader = () => {
             </div>
             <div className={styles.menu}>
                     {MENUITEMS.map((item,index) => (
-                        <div className={styles.menuItems} id={String(index)}>{item}</div>
+                        <div onClick={(e)=>{ if(item ==="Contact"){ setShowContactPopup(true) }}} className={styles.menuItems} id={String(index)}>{item}</div>
                     ))}
-                    <div className={styles.login}>
+                    <div onClick={() => navigate('/login') } className={styles.login}>
                         Login/Register
                     </div>
             </div>
