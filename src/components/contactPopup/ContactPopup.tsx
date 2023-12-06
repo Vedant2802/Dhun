@@ -60,4 +60,6 @@ const ContactPopup: React.FC<any> = ({ onClose }) => {
         </div>
     </div>)
 
+    }
+
 export default ContactPopup;

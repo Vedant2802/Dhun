@@ -44,7 +44,7 @@ const MonetizeTunes = () => {
           <div className={styles.button} onClick={openPrompt}>
             Create magic now <img className={styles.arrow} src={arrow} />
           </div>
-          {openModal && createPortal(<WebModal />, document.body)}
+          {openModal && createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
         </div>
       </div>
       <div className={styles.footer}>
