@@ -68,7 +68,7 @@ interface IGenerateActions {
   updateMusicPlayingStatus: (playing: boolean) => void;
   setCurrentMusicSrc: (
     src: string,
-    musicIndex: number,
+    musicIndex?: number,
     compositionIndex?: number
   ) => void;
   generateMusicForWebsite: (requestObj: GenerateMusicRequestObj) => void;
@@ -109,7 +109,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
   },
   setCurrentMusicSrc: (
     src: string,
-    musicIndex: number,
+    musicIndex: number = 0,
     compositionIndex?: number
   ) => {
     set(() => ({

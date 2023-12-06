@@ -13,7 +13,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import DraggableItem from "../DraggableItem/DraggableItem";
 import ControlPanel from "../ControlsPanel/ControlPanel";
 const ResultDashboard = () => {
-  const { uploadFile, file, status } = useGenerateStore((state) => state);
+  const { uploadFile, file, status }: any = useGenerateStore((state) => state);
   const timeFrames = useGenerateStore((state) => state.timeFrameData);
   // const currentTimeFrameId = useGenerateStore(
   //   (state) => state.currentTimeFrameId

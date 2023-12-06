@@ -1,3 +1,4 @@
+import React from "react";
 import ResultDashboard from "../resultDashboard/ResultDashboard";
 import GenerateMusic from "../generateMusic/GenerateMusic";
 import styles from "./Dashboard.module.scss";
