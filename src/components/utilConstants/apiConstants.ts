@@ -19,6 +19,7 @@ export enum AUTH_ENDPOINTS {
     emailLabel = "Email",
     passwordLabel = "Password",
     title = "Create a Dhun.ai account",
+    login = "Login to Dhun.ai account",
     buttonText = "Create",
     existingUserText = "Already have an account? ",
     loginLinkText = "Login",

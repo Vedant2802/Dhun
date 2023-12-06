@@ -6,6 +6,7 @@ import playIcon from "../../../public/icons/play.svg";
 import pauseIcon from "../../../public/icons/pauseWhite.svg";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 import dhunAI from "../../../public/video/rrradhun.mp4";
+import closeicon from "../../../public/icons/cross-circle.svg";
 
 enum DEFAULT_PROMPTS {
   prompt1 = "Upbeat, spiritual music",
@@ -17,7 +18,11 @@ const defaultReqObj = {
   image_url: "",
 };
 
-const WebModal = () => {
+type webmodalprops = {
+  closePopup: Function
+}
+
+const WebModal = ({closePopup}: webmodalprops) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isChibBtn1Selected, setChibBtn1Selected] = useState<boolean>(false);
   const [isChibBtn2Selected, setChibBtn2Selected] = useState<boolean>(false);
@@ -123,6 +128,7 @@ const WebModal = () => {
 
   return (
     <dialog className={styles.webDialog}>
+      <img className={styles.closeIcon} src={closeicon} onClick={() => closePopup(false)} />
       <form className={styles.generatePopup} onSubmit={handleOnSubmit}>
         <div className={styles.topCard}>
           {/* <div className={styles.videoPart}> */}
