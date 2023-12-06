@@ -10,6 +10,8 @@ const AudioPlayer = () => {
   const [audioPlayer, setAudioPlayer] = useState<any>(null);
   const [isMusicEnded, setMusicEnded] = useState(false);
 
+  console.log(track, musicPlaying);
+
   useEffect(() => {
     if (audioRef.current) {
       const audioPlayer = videojs(audioRef.current);

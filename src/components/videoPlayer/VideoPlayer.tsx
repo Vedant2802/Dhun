@@ -7,14 +7,20 @@ import pauseIcon from "../../../public/icons/pause.svg";
 import volumeIcon from "../../../public/icons/volumeIcon.svg";
 import volumeMute from "../../../public/icons/volumeMute.svg";
 import * as React from "react";
+import { useGenerateStore } from "../../stores/generateStore";
 
 interface videoUrlProps {
   videoUrl: string;
 }
 const VideoPlayer: React.FC<videoUrlProps> = ({ videoUrl }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const musicPlaying = useGenerateStore((state) => state.isMusicPlaying);
+  const currentMusicSrc = useGenerateStore((state) => state.currentMusicSrc);
   const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef(null);
+
+  console.log("##getplayFlag", musicPlaying);
+  console.log("##current", currentMusicSrc);
 
   useEffect(() => {
     if (videoRef.current && videoUrl) {
@@ -26,6 +32,15 @@ const VideoPlayer: React.FC<videoUrlProps> = ({ videoUrl }) => {
       setIsPlaying(true);
     }
   }, [videoUrl]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      const videoPlayer = videojs(videoRef.current);
+      if (musicPlaying === false) {
+        videoPlayer.pause();
+      }
+    }
+  }, [musicPlaying]);
 
   const playVideoPlayer = () => {
     if (videoRef.current) {
@@ -51,6 +66,19 @@ const VideoPlayer: React.FC<videoUrlProps> = ({ videoUrl }) => {
     }
   };
 
+  useEffect(() => {
+    if (musicPlaying) {
+      restartVideo();
+    }
+  }, [musicPlaying, currentMusicSrc]);
+
+  const restartVideo = () => {
+    if (videoRef.current) {
+      const videoPlayer = videojs(videoRef.current);
+      videoPlayer.currentTime(0);
+      videoPlayer.play();
+    }
+  };
   return (
     <>
       <video

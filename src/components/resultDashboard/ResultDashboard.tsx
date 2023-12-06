@@ -11,6 +11,7 @@ import compositionBackground from "../../../public/timeframeBackground.svg";
 import { DndProvider, useDrag } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import DraggableItem from "../DraggableItem/DraggableItem";
+import ControlPanel from "../ControlsPanel/ControlPanel";
 const ResultDashboard = () => {
   const { uploadFile, file, status } = useGenerateStore((state) => state);
   const timeFrames = useGenerateStore((state) => state.timeFrameData);
@@ -32,10 +33,8 @@ const ResultDashboard = () => {
     // setItems(updatedItems);
   };
   console.log("file", file);
-  // const trackUrl = file?.gcs_url;
-  // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
-  // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-  const track = "https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3";
+  const track =
+    "http://10.39.255.16:3000/storage/sample_960x400_ocean_with_audio (1).mp3";
   // const urls =
   //   "http://10.39.255.16:3000/storage/sample_960x400_ocean_with_audio%20(1).mp3";
   const url = file?.gcs_url ? file?.gcs_url : track;
@@ -72,7 +71,7 @@ const ResultDashboard = () => {
                 className={styles.videoUpload}
                 onChange={onFileUpload}
               ></input>
-              <div>+ Add video or vocals</div>
+              <div>+ Add video </div>
             </div>
           )}
           {!file && status === API_STATUS_TYPES.loading && (
@@ -93,9 +92,11 @@ const ResultDashboard = () => {
           <div className={styles.comment}>Export</div>
           <div className={styles.comment}>Share</div>
         </div>
+
         <div className={styles.container}>
           <div className={styles.videoContainer}>
-            {<ControlSelection trackUrl={url} />}
+            {<ControlSelection trackUrl={track} />}
+            {/* <ControlPanel /> */}
           </div>
         </div>
       </div>
@@ -118,7 +119,7 @@ const ResultDashboard = () => {
             </div>
           ))}
       </div>
-      {/* {url && <ControlPanel />} */}
+
       {/* {url && <ControlSeconds trackId={url} />} */}
     </section>
   );

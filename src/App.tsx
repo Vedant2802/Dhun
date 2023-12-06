@@ -4,13 +4,12 @@ import Header from "./components/header/Header";
 import Login from "./pages/Login/Login";
 import MainDashboard from "./pages/MainDashboard/MainDashboard";
 import DhunAi from "./pages/DhunAi/DhunAi";
+import RegisterPage from "./pages/Register/Register";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import * as React from "react";
 import AudioPlayer from "./components/audioPlayer/AudioPlayer";
 
 function App() {
-  // const bears = useBearStore((state) => state.bears);
-  // const increase = useBearStore((state) => state.increasePopulation);
 
   return (
     <div>
@@ -30,6 +29,7 @@ function App() {
             }
           />
           <Route path="/dhunai" element={<DhunAi />} />
+          <Route path="/Register" element={<RegisterPage />} />
         </Routes>
       </BrowserRouter>
     </div>
