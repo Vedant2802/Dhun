@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./DhunAiComponent.module.scss";
-// import dhunAI from "../../../public/video/dhunAI.mp4";
 import arrow from "../../../public/icons/right-arrow.svg";
-import volumeUp from "../../../public/icons/volumeIcon.svg";
-import promptVideo from "../../../public/video/promptVideo.mp4";
 import WebModal from "../webGenerateModal/WebModal";
 import { createPortal } from "react-dom";
 import dhunAI from "../../../public/video/rrradhun.mp4";

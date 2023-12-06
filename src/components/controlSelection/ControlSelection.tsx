@@ -3,7 +3,9 @@ import WaveSurfer from "wavesurfer.js";
 import styles from "./ConntrolSelection.module.scss";
 import addIcon from "../../../public/icons/addIcon.svg";
 import { ControlPopup } from "../controlPopup/controlPopup";
+// @ts-ignore
 import RegionsPlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/regions.esm.js";
+// @ts-ignore
 import TimelinePlugin from "https://unpkg.com/wavesurfer.js@7/dist/plugins/timeline.esm.js";
 import * as React from "react";
 import { createPortal } from "react-dom";
@@ -16,7 +18,7 @@ interface WaveformProps {
 const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [startRegion, setstartRegion] = useState(0);
   const [updatedRegion, setUpdatedRegion] = useState(5);
-  const wavesurferref = useRef(null);
+  const wavesurferref = useRef<any>(null);
   const videoElement = document.querySelector("video");
   const [openModal, setOpenModal] = useState<boolean>();
   const updateCurrentTimeFrameDetails = useGenerateStore(
@@ -63,13 +65,13 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   };
 
   useEffect(() => {
-    const handleEscapeKeyPress = (event) => {
+    const handleEscapeKeyPress = (event: any) => {
       if (event.key === "Escape") {
         setOpenModal(false);
       }
     };
     if (!trackUrl) return;
-    wavesurferref.current = WaveSurfer.create(waveformParams);
+    wavesurferref.current = WaveSurfer.create(waveformParams as any);
     // const audioUrl = trackUrl.replace(".mp4", ".mp3");
     wavesurferref.current?.load(trackUrl);
     document.addEventListener("keydown", handleEscapeKeyPress);
