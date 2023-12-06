@@ -7,6 +7,7 @@ import DhunAi from "./pages/DhunAi/DhunAi";
 import RegisterPage from "./pages/Register/Register";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import * as React from "react";
+import AudioPlayer from "./components/audioPlayer/AudioPlayer";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
               <main className="dashboardContainer">
                 <Header />
                 <MainDashboard />
+                <AudioPlayer />
               </main>
             }
           />

@@ -1,30 +1,29 @@
-import React, { useState,useRef,useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./ContactPopup.module.scss";
 import closeicon from "../../../public/icons/cross-circle.svg";
 import check from "../../../public/icons/TickFilled.png";
-import { contactApi } from '../../services/axiosService';
+import { contactApi } from "../../services/axiosService";
 
-const ContactPopup = ({onClose}) => {
+const ContactPopup: React.FC<any> = ({ onClose }) => {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [number, setNumber] = useState("");
+  const [note, setNote] = useState<string>("");
+  const [success, setSuccess] = useState<boolean>(false);
 
-    const [name,setName] = useState<string>("");
-    const [email,setEmail] = useState<string>("");
-    const [number,setNumber] = useState("");
-    const [note,setNote] = useState<string>("");
-    const [success,setSuccess] = useState<boolean>(false);
-
-    const handleSend = async () => {
-        const contactDetails = {
-            "name":name,
-            "email":email,
-            "phone_no": number,
-            "note": note
-        }
-        const data: any = await contactApi(contactDetails);
-        const data2 = await data.json();
-        if(data2.message){
-            setSuccess(true);
-        }
+  const handleSend = async () => {
+    const contactDetails = {
+      name: name,
+      email: email,
+      phone_no: number,
+      note: note,
+    };
+    const data: any = await contactApi(contactDetails);
+    const data2 = await data.json();
+    if (data2.message) {
+      setSuccess(true);
     }
+  };
 
     return (<div className={styles.webDialog}>
         <div className={styles.contactcontainer}>
@@ -60,7 +59,5 @@ const ContactPopup = ({onClose}) => {
             </div> }
         </div>
     </div>)
-
-}
 
 export default ContactPopup;
