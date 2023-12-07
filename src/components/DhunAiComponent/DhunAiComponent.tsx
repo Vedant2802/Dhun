@@ -12,10 +12,15 @@ import audio1 from "../../../public/video/anger.wav";
 import audio2 from "../../../public/video/anticipation.wav";
 import { useGenerateStore } from "../../stores/generateStore";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
+import { useNavigate } from "react-router";
 
 const DhunAiComponent = () => {
   const waveformRef = useRef<WaveSurfer | null>(null);
   const videoRef = useRef(null);
+  const navigate = useNavigate();
+  const userData = useGenerateStore((state) => state.userData);
+  const setUser = useGenerateStore((state) => state.setUser);
+  const [volume, setVolume] = useState(1);
   const videoElements = document.querySelector("video");
   const [isMuted, setIsMuted] = useState(false);
   const track =
@@ -30,7 +35,11 @@ const DhunAiComponent = () => {
   );
   const isMusicPlaying = useGenerateStore((state) => state.isMusicPlaying);
   const openPrompt = () => {
-    setOpenModal(true);
+    if (userData?.data) {
+      setOpenModal(true);
+    } else {
+      navigate("/register");
+    }
   };
 
   useEffect(() => {
@@ -40,6 +49,10 @@ const DhunAiComponent = () => {
       }
     };
     document.addEventListener("keydown", handleEscapeKeyPress);
+    const user = localStorage.getItem("user");
+    if (user) {
+      setUser(user);
+    }
     return () => {
       document.removeEventListener("keydown", handleEscapeKeyPress);
     };
@@ -164,6 +177,7 @@ const DhunAiComponent = () => {
         </div>
       </div>
       {openModal &&
+        userData?.data &&
         createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>

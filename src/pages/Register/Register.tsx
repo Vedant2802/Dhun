@@ -3,9 +3,12 @@ import React, { useEffect, useState } from "react";
 import styles from "./Register.module.scss";
 import login from "../../../public/icons/Register-background.png";
 import { useGenerateStore } from "../../stores/generateStore";
-import { AUTH_ENDPOINTS,API_STATUS_TYPES,REGISTER_PAGE_CONSTANTS } from "../../components/utilConstants/apiConstants";
+import {
+  AUTH_ENDPOINTS,
+  API_STATUS_TYPES,
+  REGISTER_PAGE_CONSTANTS,
+} from "../../components/utilConstants/apiConstants";
 import { useNavigate } from "react-router-dom";
-
 
 const RegisterPage = () => {
   const [name, setName] = useState<string>("");
@@ -22,15 +25,15 @@ const RegisterPage = () => {
       password: password,
       passwordConfirm: password,
     };
-      getUserToken({
-        requestBody: registerObject,
-        "AUTH_ENDPOINT": AUTH_ENDPOINTS.register
-      });
+    getUserToken({
+      requestBody: registerObject,
+      AUTH_ENDPOINT: AUTH_ENDPOINTS.register,
+    });
   };
 
   useEffect(() => {
     if (user?.status === API_STATUS_TYPES.success) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [user]);
 
@@ -100,12 +103,16 @@ const RegisterPage = () => {
             <div className={styles.loginButton} onClick={handleSubmit}>
               {REGISTER_PAGE_CONSTANTS.buttonText}
             </div>
+            <hr className={styles.thematicBreak} />
             <div className={styles.loginContain}>
               <div className={styles.loginContent}>
                 {REGISTER_PAGE_CONSTANTS.existingUserText}
-              <span className={styles.loginLink} onClick={() => navigate("/login")}>
-                {REGISTER_PAGE_CONSTANTS.loginLinkText}
-              </span>
+                <span
+                  className={styles.loginLink}
+                  onClick={() => navigate("/login")}
+                >
+                  {REGISTER_PAGE_CONSTANTS.loginLinkText}
+                </span>
               </div>
             </div>
           </div>
