@@ -189,6 +189,13 @@ const WebModal = ({ closePopup }: webmodalprops) => {
               suggestion.
             </p>
           )}
+         { status === API_STATUS_TYPES.success &&  <div className={styles.uploadButton}>
+            <img src={uploadbutton}  />
+            <span>Upload your own video </span>
+          </div> }
+          { status === API_STATUS_TYPES.loading &&  <div className={styles.uploadButton}>
+            <span className={styles.generating}> Generating . . . </span>
+          </div> }
         </div>
         {status === API_STATUS_TYPES.success && musicUrls?.length ? (
           renderMusicUrls()
