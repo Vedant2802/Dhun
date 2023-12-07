@@ -16,8 +16,8 @@ import AudioPlayer from "../audioPlayer/AudioPlayer";
 const DhunAiComponent = () => {
   const waveformRef = useRef<WaveSurfer | null>(null);
   const videoRef = useRef(null);
-  const videoElement = document.querySelector("video");
-  const [volume, setVolume] = useState(1);
+  const videoElements = document.querySelector("video");
+  const [isMuted, setIsMuted] = useState(false);
   const track =
     "http://10.39.255.16:3000/storage/sample_960x400_ocean_with_audio (1).mp3";
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -45,37 +45,51 @@ const DhunAiComponent = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const videoElement: any = videoRef.current;
-  //   if (videoElement) {
-  //     videoElement.play();
-  //   }
-  // }, []);
-
-  const waveformParams = {
-    container: "#waveform",
-    progressColor: "#FCEF79",
-    waveColor: "rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)",
-    height: 55,
-    normalize: true,
-    cursorColor: "#ddd5e9",
-    cursorWidth: 2,
-    barWidth: 4,
-    barGap: 3,
-    barRadius: 100,
-    barHeight: 1,
-    minPxPerSec: 1,
-    backend: "MediaElement",
-    media: videoElement as any,
-    url: dhunAI,
-  };
+  useEffect(() => {
+    waveformRef.current = WaveSurfer.create({
+      container: "#waveform",
+      progressColor: "#FCEF79",
+      waveColor: "rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)",
+      height: 55,
+      normalize: true,
+      cursorColor: "#ddd5e9",
+      cursorWidth: 2,
+      barWidth: 4,
+      barGap: 3,
+      barRadius: 100,
+      barHeight: 1,
+      minPxPerSec: 1,
+      backend: "MediaElement",
+      media: videoElements as any,
+    });
+    waveformRef.current.load(dhunAI);
+    waveformRef.current.on("ready", () => {
+      waveformRef.current?.play();
+      // waveformRef.current?.setVolume(0);
+      // const videoElement: any = videoRef.current;
+      // if (videoElement) {
+      //   videoElement.play();
+      // }
+    });
+    return () => {
+      waveformRef.current?.destroy();
+      const videoElement: any = videoRef.current;
+      if (videoElement) {
+        videoElement.pause();
+      }
+      videoRef.current = null;
+    };
+  }, [dhunAI]);
 
   useEffect(() => {
-    if (waveformRef.current) {
-      waveformRef.current?.destroy();
+    const videoElement: any = videoRef.current;
+    if (videoElement) {
+      videoElement.play();
     }
-    waveformRef.current = WaveSurfer.create(waveformParams);
-  }, [dhunAI]);
+    if (waveformRef?.current) {
+      waveformRef.current.play();
+    }
+  }, [waveformRef.current]);
 
   // useEffect(() => {
   //   const videoElement: any = videoRef.current;
@@ -109,11 +123,14 @@ const DhunAiComponent = () => {
   };
 
   const restartVideo = () => {
+    debugger;
     const videoElement: any = videoRef.current;
-    if (videoElement && waveformRef?.current) {
+    if (videoElement) {
       videoElement.currentTime = 0;
       videoElement.play();
-      waveformRef?.current.play();
+    }
+    if (waveformRef?.current) {
+      waveformRef.current.play();
     }
   };
 
@@ -125,11 +142,10 @@ const DhunAiComponent = () => {
   };
 
   const volumeControl = () => {
-    if (videoElement) {
-      const newVolume = videoElement.muted ? 1 : 0;
-      setVolume(newVolume);
-      videoElement.volume = newVolume;
-      videoElement.muted = !videoElement.muted;
+    if (waveformRef?.current) {
+      const newIsMuted = !isMuted;
+      setIsMuted(newIsMuted);
+      waveformRef.current?.setVolume(newIsMuted ? 0 : 1);
     }
   };
 
@@ -147,7 +163,8 @@ const DhunAiComponent = () => {
           Create magic now <img className={styles.arrow} src={arrow} />
         </div>
       </div>
-      {openModal && createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
+      {openModal &&
+        createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>
           <video ref={videoRef} autoPlay width="auto" loop>
@@ -155,7 +172,7 @@ const DhunAiComponent = () => {
           </video>
           <div className={styles.controls}>
             <div className={styles.volume} onClick={volumeControl}>
-              <img src={volume ? volumeUp : volumeMute} alt="volumeIcon" />
+              <img src={isMuted ? volumeMute : volumeUp} alt="volumeIcon" />
             </div>
             <div className={styles.visualitation} id="waveform"></div>
           </div>
