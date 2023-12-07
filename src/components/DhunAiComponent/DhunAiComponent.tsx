@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./DhunAiComponent.module.scss";
+import WaveSurfer from "wavesurfer.js";
 import arrow from "../../../public/icons/right-arrow.svg";
+import volumeUp from "../../../public/icons/volumeIcon.svg";
+import volumeMute from "../../../public/icons/volumeMute.svg";
+import promptVideo from "../../../public/video/promptVideo.mp4";
 import WebModal from "../webGenerateModal/WebModal";
 import { createPortal } from "react-dom";
 import dhunAI from "../../../public/video/rrradhun.mp4";
@@ -10,6 +14,12 @@ import { useGenerateStore } from "../../stores/generateStore";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 
 const DhunAiComponent = () => {
+  const waveformRef = useRef<WaveSurfer | null>(null);
+  const videoRef = useRef(null);
+  const videoElements = document.querySelector("video");
+  const [isMuted, setIsMuted] = useState(false);
+  const track =
+    "http://10.39.255.16:3000/storage/sample_960x400_ocean_with_audio (1).mp3";
   const [openModal, setOpenModal] = useState<boolean>(false);
   const setCurrentMusicSrc = useGenerateStore(
     (state) => state.setCurrentMusicSrc
@@ -35,19 +45,109 @@ const DhunAiComponent = () => {
     };
   }, []);
 
+  useEffect(() => {
+    waveformRef.current = WaveSurfer.create({
+      container: "#waveform",
+      progressColor: "#FCEF79",
+      waveColor: "rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)",
+      height: 55,
+      normalize: true,
+      cursorColor: "#ddd5e9",
+      cursorWidth: 2,
+      barWidth: 4,
+      barGap: 3,
+      barRadius: 100,
+      barHeight: 1,
+      minPxPerSec: 1,
+      backend: "MediaElement",
+      media: videoElements as any,
+    });
+    waveformRef.current.load(dhunAI);
+    waveformRef.current.on("ready", () => {
+      waveformRef.current?.play();
+      // waveformRef.current?.setVolume(0);
+      // const videoElement: any = videoRef.current;
+      // if (videoElement) {
+      //   videoElement.play();
+      // }
+    });
+    return () => {
+      waveformRef.current?.destroy();
+      const videoElement: any = videoRef.current;
+      if (videoElement) {
+        videoElement.pause();
+      }
+      videoRef.current = null;
+    };
+  }, [dhunAI]);
+
+  useEffect(() => {
+    const videoElement: any = videoRef.current;
+    if (videoElement) {
+      videoElement.play();
+    }
+    if (waveformRef?.current) {
+      waveformRef.current.play();
+    }
+  }, [waveformRef.current]);
+
+  // useEffect(() => {
+  //   const videoElement: any = videoRef.current;
+  //   videoElement.play();
+
+  //   const timeoutId = setTimeout(() => {
+  //     if (waveformRef?.current && videoElement) {
+  //       waveformRef.current.play();
+  //     }
+  //   }, 1000);
+  //   return () => clearTimeout(timeoutId);
+  // }, [waveformRef?.current]);
+
+  const handlePlayOriginal = () => {
+    const videoElement: any = videoRef.current;
+    if (videoElement) {
+      videoElement.currentTime = 0;
+      videoElement.play();
+    }
+    if (waveformRef?.current) {
+      waveformRef.current.play();
+    }
+  };
+
   const handlePromptOnClick = (musicSrc: string) => {
     if (currentMusicSrc === musicSrc && isMusicPlaying) {
       return updateMusicPlayingStatus(false);
     }
+    restartVideo();
     setCurrentMusicSrc(musicSrc);
   };
+
+  const restartVideo = () => {
+    debugger;
+    const videoElement: any = videoRef.current;
+    if (videoElement) {
+      videoElement.currentTime = 0;
+      videoElement.play();
+    }
+    if (waveformRef?.current) {
+      waveformRef.current.play();
+    }
+  };
+
   const getBtnStyle = (musicSrc: string) => {
     if (currentMusicSrc === musicSrc && isMusicPlaying) {
       return styles.active;
     }
     return styles.contentButton;
   };
-  console.log("currentMusicSrc", currentMusicSrc);
+
+  const volumeControl = () => {
+    if (waveformRef?.current) {
+      const newIsMuted = !isMuted;
+      setIsMuted(newIsMuted);
+      waveformRef.current?.setVolume(newIsMuted ? 0 : 1);
+    }
+  };
 
   return (
     <div className={styles.mainContainer}>
@@ -63,14 +163,24 @@ const DhunAiComponent = () => {
           Create magic now <img className={styles.arrow} src={arrow} />
         </div>
       </div>
-      {openModal && createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
+      {openModal &&
+        createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>
-          <video autoPlay width="auto" muted loop>
+          <video ref={videoRef} autoPlay width="auto" loop>
             <source src={dhunAI} type="video/mp4" />
           </video>
+          <div className={styles.controls}>
+            <div className={styles.volume} onClick={volumeControl}>
+              <img src={isMuted ? volumeMute : volumeUp} alt="volumeIcon" />
+            </div>
+            <div className={styles.visualitation} id="waveform"></div>
+          </div>
         </div>
         <div className={styles.videoSelection}>
+          <div className={styles.active} onClick={() => handlePlayOriginal()}>
+            Original audio
+          </div>
           <div
             className={getBtnStyle(audio1)}
             onClick={() => handlePromptOnClick(audio1)}
@@ -85,18 +195,6 @@ const DhunAiComponent = () => {
             <span className={styles.promptText}>Prompt :</span> Intence scene
             with Confidence & Aggression
           </div>
-          {/* <div
-            className={styles.contentButton}
-            onClick={() => handlePromptOnClick(audio1)}
-          >
-            Political moment that ends up in a win
-          </div>
-          <div
-            className={styles.contentButton}
-            onClick={() => handlePromptOnClick(audio2)}
-          >
-            Political moment that ends up in a win
-          </div> */}
         </div>
       </div>
       <AudioPlayer />

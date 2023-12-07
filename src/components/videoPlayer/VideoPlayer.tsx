@@ -19,9 +19,6 @@ const VideoPlayer: React.FC<videoUrlProps> = ({ videoUrl }) => {
   const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef(null);
 
-  console.log("##getplayFlag", musicPlaying);
-  console.log("##current", currentMusicSrc);
-
   useEffect(() => {
     if (videoRef.current && videoUrl) {
       const videoPlayer = videojs(videoRef.current);
