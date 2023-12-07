@@ -10,13 +10,12 @@ import * as React from "react";
 import AudioPlayer from "./components/audioPlayer/AudioPlayer";
 
 function App() {
-
   return (
     <div>
       {/* <Header /> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AddVideo />} />
+          {/* <Route path="/" element={<AddVideo />} /> */}
           <Route path="/login" element={<Login />} />
           <Route
             path="/dashboard"
@@ -28,7 +27,7 @@ function App() {
               </main>
             }
           />
-          <Route path="/dhunai" element={<DhunAi />} />
+          <Route path="/" element={<DhunAi />} />
           <Route path="/Register" element={<RegisterPage />} />
         </Routes>
       </BrowserRouter>

@@ -3,10 +3,27 @@ import styles from "./homeHeader.module.scss";
 import DhunIcon from "../../../public/icons/Dhun Icon.svg";
 import { MENUITEMS } from "../../utils/genAiConstant";
 import { useNavigate } from "react-router-dom";
+import { useGenerateStore } from "../../stores/generateStore";
 
 const HomeHeader: React.FC<any> = ({ setShowContactPopup }) => {
   const navigate = useNavigate();
+  const userData = useGenerateStore((state) => state.userData);
+  const removeUser = useGenerateStore((state) => state.removeUser);
+  const renderCTA = () => {
+    if (userData?.data) {
+      return (
+        <div onClick={() => removeUser()} className={styles.login}>
+          {"Logout"}
+        </div>
+      );
+    }
 
+    return (
+      <div onClick={() => navigate("/login")} className={styles.login}>
+        {"Login/Register"}
+      </div>
+    );
+  };
   return (
     <>
       <div className={styles.header}>
@@ -28,9 +45,7 @@ const HomeHeader: React.FC<any> = ({ setShowContactPopup }) => {
               {item}
             </div>
           ))}
-          <div onClick={() => navigate("/login")} className={styles.login}>
-            Login/Register
-          </div>
+          {renderCTA()}
         </div>
       </div>
     </>
