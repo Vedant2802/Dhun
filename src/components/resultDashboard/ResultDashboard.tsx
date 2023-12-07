@@ -8,6 +8,7 @@ import CompositionContainer from "../compositionContainer/compositionContainer";
 import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 import LoadingSpin from "react-loading-spin";
 import compositionBackground from "../../../public/timeframeBackground.svg";
+import close from "../../../public/icons/Close.png";
 import { DndProvider, useDrag } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import DraggableItem from "../DraggableItem/DraggableItem";
@@ -59,6 +60,12 @@ const ResultDashboard = () => {
 
   return (
     <section>
+       <div className={styles.exportPopup}>
+          <div className={styles.exportHead}>
+             <span className={styles.exportName}>Export</span>
+             <img src={close} className={styles.closeButton} />
+          </div>
+       </div>
       <div className={styles.timeframeContainer}>
         <div className={styles.uploadContainer}>
           {!file && (
@@ -86,7 +93,6 @@ const ResultDashboard = () => {
             </div>
           )}
         </div>
-
         <div className={styles.socialBehaviour}>
           <div className={styles.comment}>Comment</div>
           <div className={styles.comment}>Export</div>
