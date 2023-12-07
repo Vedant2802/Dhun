@@ -12,10 +12,14 @@ import audio1 from "../../../public/video/anger.wav";
 import audio2 from "../../../public/video/anticipation.wav";
 import { useGenerateStore } from "../../stores/generateStore";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
+import { useNavigate } from "react-router";
 
 const DhunAiComponent = () => {
   const waveformRef = useRef<WaveSurfer | null>(null);
   const videoRef = useRef(null);
+  const navigate = useNavigate();
+  const userData = useGenerateStore((state) => state.userData);
+  const setUser = useGenerateStore((state) => state.setUser);
   const videoElement = document.querySelector("video");
   const [volume, setVolume] = useState(1);
   const track =
@@ -30,7 +34,11 @@ const DhunAiComponent = () => {
   );
   const isMusicPlaying = useGenerateStore((state) => state.isMusicPlaying);
   const openPrompt = () => {
-    setOpenModal(true);
+    if (userData?.data) {
+      setOpenModal(true);
+    } else {
+      navigate("/register");
+    }
   };
 
   useEffect(() => {
@@ -40,6 +48,10 @@ const DhunAiComponent = () => {
       }
     };
     document.addEventListener("keydown", handleEscapeKeyPress);
+    const user = localStorage.getItem("user");
+    if (user) {
+      setUser(user);
+    }
     return () => {
       document.removeEventListener("keydown", handleEscapeKeyPress);
     };
@@ -74,7 +86,7 @@ const DhunAiComponent = () => {
     if (waveformRef.current) {
       waveformRef.current?.destroy();
     }
-    waveformRef.current = WaveSurfer.create(waveformParams);
+    waveformRef.current = WaveSurfer.create(waveformParams as any);
   }, [dhunAI]);
 
   // useEffect(() => {
@@ -147,7 +159,9 @@ const DhunAiComponent = () => {
           Create magic now <img className={styles.arrow} src={arrow} />
         </div>
       </div>
-      {openModal && createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
+      {openModal &&
+        userData?.data &&
+        createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>
           <video ref={videoRef} autoPlay width="auto" loop>

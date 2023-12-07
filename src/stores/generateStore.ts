@@ -8,6 +8,7 @@ import {
   uploadFileApi,
   generateMusicApi,
   registerApi,
+  setAccessToken,
 } from "../services/axiosService";
 
 interface IUserTokenRequest {
@@ -75,6 +76,8 @@ interface IGenerateActions {
   resetWebsiteData: () => void;
   playNextTrack: () => void;
   getUserToken: ({ requestBody, AUTH_ENDPOINT }: IUserTokenRequest) => void;
+  setUser: (user: any) => void;
+  removeUser: () => void;
 }
 
 const initialState: IGenerateState = {
@@ -88,7 +91,9 @@ const initialState: IGenerateState = {
     musicUrls: [],
   },
   currentMusicIndex: 0,
-  userData: {},
+  userData: {
+    status: API_STATUS_TYPES.idle,
+  },
 };
 
 type IGenerateStore = IGenerateState & IGenerateActions;
@@ -212,9 +217,40 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
     }));
   },
   getUserToken: async ({ requestBody, AUTH_ENDPOINT }: IUserTokenRequest) => {
-    const user = await registerApi({ AUTH_ENDPOINT, requestBody });
     set(() => ({
-      userData: user,
+      status: API_STATUS_TYPES.loading,
     }));
+    const user = await registerApi({ AUTH_ENDPOINT, requestBody });
+    if (AUTH_ENDPOINT == AUTH_ENDPOINTS.login) {
+      set(() => ({
+        userData: {
+          data: user,
+          status: API_STATUS_TYPES.success,
+        },
+      }));
+      setAccessToken(user?.access_token);
+      localStorage.setItem("user", user);
+    } else {
+      set(() => ({
+        status: API_STATUS_TYPES.success,
+      }));
+    }
+  },
+  setUser: (user: any) => {
+    set(() => ({
+      userData: {
+        data: user,
+        status: API_STATUS_TYPES.success,
+      },
+    }));
+  },
+  removeUser: () => {
+    set(() => ({
+      userData: {
+        data: null,
+        status: API_STATUS_TYPES.idle,
+      },
+    }));
+    localStorage.removeItem("user");
   },
 }));
