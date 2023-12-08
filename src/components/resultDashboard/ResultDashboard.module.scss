@@ -1,3 +1,25 @@
+.exportPopup{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  right:0;
+  background-color: #333;
+  z-index: 10;
+  width: 412px;
+  height: 100%;
+  .exportHead{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .exportName{
+    color: #fff;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+  }
+}
 .timeframeContainer {
   background-color: #000;
 }
