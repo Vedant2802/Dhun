@@ -5,6 +5,7 @@
   padding: 32px;
   right:0;
   background-color: #333;
+  gap: 16px;
   z-index: 10;
   width: 412px;
   height: 100%;
@@ -19,6 +20,33 @@
     font-style: normal;
     font-weight: 600;
   }
+  .checkwrp{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #fff;
+    font-size: 14px;
+    gap: 8px;
+    font-weight: 500;
+    .chckbox{
+      cursor: pointer;
+    }
+  }
+  .exportbtn{
+    display: flex;
+    width: 356px;
+    height: 40px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    border-radius: 8px;
+    background: var(--primary-components, #7357FF);
+  }
+}
+.dn{
+  display: none;
 }
 .timeframeContainer {
   background-color: #000;
