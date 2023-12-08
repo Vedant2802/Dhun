@@ -4,32 +4,37 @@ import React, { useEffect, useState } from "react";
 import styles from "./Login.module.scss";
 import login from "../../../public/icons/Register-background.png";
 import { useGenerateStore } from "../../stores/generateStore";
-import { AUTH_ENDPOINTS,API_STATUS_TYPES,REGISTER_PAGE_CONSTANTS } from "../../components/utilConstants/apiConstants";
+import {
+  AUTH_ENDPOINTS,
+  API_STATUS_TYPES,
+  REGISTER_PAGE_CONSTANTS,
+} from "../../components/utilConstants/apiConstants";
 import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [createPending,setCreatePending] = useState(false);
   const { getUserToken } = useGenerateStore((state) => state);
   const user = useGenerateStore((state) => state.userData);
   const navigate = useNavigate();
   const handleLogin = async () => {
-    const requestBody = {
-      email: email,
-      password: password,
-    };
+    setCreatePending(true);
+    if(!createPending){    
+      const requestBody = {
+        email: email,
+        password: password,
+      };
       getUserToken({
         requestBody,
-        "AUTH_ENDPOINT": AUTH_ENDPOINTS.login
-      })
+        AUTH_ENDPOINT: AUTH_ENDPOINTS.login,
+      });
+    }
   };
 
   useEffect(() => {
-    if (
-      user?.status === API_STATUS_TYPES.success &&
-      user?.access_token
-    ) {
-      navigate('/dashboard');
+    if (user?.status === API_STATUS_TYPES.success && user?.access_token) {
+      navigate("/editor-dashboard");
     }
   }, [user]);
 
@@ -41,7 +46,9 @@ const Login: React.FC = () => {
 
       <div className={styles.formContainer}>
         <div className={styles.formSubContainer}>
-          <div className={styles.loginHeader}>{REGISTER_PAGE_CONSTANTS.login}</div>
+          <div className={styles.loginHeader}>
+            {REGISTER_PAGE_CONSTANTS.login}
+          </div>
           {/* <div className={styles.loginHeader}>Login</div> */}
           <div className={styles.inputField}>
             <div className={styles.inputContainer}>
@@ -69,11 +76,14 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className={styles.loginButton} onClick={handleLogin}>
-            Login
+           {!createPending ? "Login" : "Loggin In..."} 
           </div>
           <div className={styles.signupContainer}>
             {/* <div className={styles.signupContent}>Don’t have an account?</div> */}
-            <span className={styles.signupLink} onClick={() => navigate('/register')}>
+            <span
+              className={styles.signupLink}
+              onClick={() => navigate("/register")}
+            >
               Create a new account
             </span>
           </div>

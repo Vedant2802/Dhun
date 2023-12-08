@@ -18,6 +18,7 @@ import ControlPanel from "../ControlsPanel/ControlPanel";
 const ResultDashboard = () => {
   const { uploadFile, file, status }: any = useGenerateStore((state) => state);
   const timeFrames = useGenerateStore((state) => state.timeFrameData);
+  const [exportComp,setExportComp] = useState<boolean>(false);
   const [trackSelected,setTrackSelected] = useState<Array<string>>([]);
   // const currentTimeFrameId = useGenerateStore(
   //   (state) => state.currentTimeFrameId
@@ -72,12 +73,16 @@ const ResultDashboard = () => {
     });
   };
 
+  const exportMusic = () => {
+      console.log(timeFrames)
+  }
+
   return (
     <section>
-       <div className={styles.exportPopup}>
+     {exportComp &&   <div className={styles.exportPopup}>
           <div className={styles.exportHead}>
              <span className={styles.exportName}>Export</span>
-             <img src={close} className={styles.closeButton} />
+             <img onClick={() => setExportComp(false)} src={close} className={styles.closeButton} />
           </div>
           <div onClick={() => handleTrackSelection("Composition 1") } className={styles.checkwrp}>
               <img className={styles.chckbox} src={`${trackSelected.indexOf("Composition 1")===-1 ? `${Emptycheckbox}`: `${checkbox}`}`} />
@@ -91,8 +96,8 @@ const ResultDashboard = () => {
               <img className={styles.chckbox} src={`${trackSelected.indexOf("Composition 3")===-1 ? `${Emptycheckbox}`: `${checkbox}`}`} />
               <p>Composition 3</p>
           </div>
-          <button className={styles.exportbtn} >Export Selected</button>
-       </div>
+          <button onClick={() => exportMusic()} className={styles.exportbtn} >Export Selected</button>
+       </div> }
       <div className={styles.timeframeContainer}>
         <div className={styles.uploadContainer}>
           {!file && (
@@ -122,7 +127,7 @@ const ResultDashboard = () => {
         </div>
         <div className={styles.socialBehaviour}>
           <div className={styles.comment}>Comment</div>
-          <div className={styles.comment}>Export</div>
+          <div onClick={() => setExportComp(true) } className={styles.comment}>Export</div>
           <div className={styles.comment}>Share</div>
         </div>
 

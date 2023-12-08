@@ -3,34 +3,42 @@ import React, { useEffect, useState } from "react";
 import styles from "./Register.module.scss";
 import login from "../../../public/icons/Register-background.png";
 import { useGenerateStore } from "../../stores/generateStore";
-import { AUTH_ENDPOINTS,API_STATUS_TYPES,REGISTER_PAGE_CONSTANTS } from "../../components/utilConstants/apiConstants";
+import {
+  AUTH_ENDPOINTS,
+  API_STATUS_TYPES,
+  REGISTER_PAGE_CONSTANTS,
+} from "../../components/utilConstants/apiConstants";
 import { useNavigate } from "react-router-dom";
-
 
 const RegisterPage = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [createPending,setCreatePending] = useState(false);
   const { getUserToken } = useGenerateStore((state) => state);
   const user = useGenerateStore((state) => state.userData);
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const registerObject = {
-      name: name,
-      email: email,
-      password: password,
-      passwordConfirm: password,
-    };
+    setCreatePending(true);
+    if(!createPending){
+      const registerObject = {
+        name: name,
+        email: email,
+        password: password,
+        passwordConfirm: password,
+      };
       getUserToken({
         requestBody: registerObject,
-        "AUTH_ENDPOINT": AUTH_ENDPOINTS.register
+        AUTH_ENDPOINT: AUTH_ENDPOINTS.register,
       });
+    }
   };
 
   useEffect(() => {
     if (user?.status === API_STATUS_TYPES.success) {
-      navigate('/login');
+      setCreatePending(false);
+      navigate("/login");
     }
   }, [user]);
 
@@ -98,14 +106,18 @@ const RegisterPage = () => {
             </div>
             <br />
             <div className={styles.loginButton} onClick={handleSubmit}>
-              {REGISTER_PAGE_CONSTANTS.buttonText}
+             {!createPending ? REGISTER_PAGE_CONSTANTS.buttonText : REGISTER_PAGE_CONSTANTS.buttonTextPending }
             </div>
+            <hr className={styles.thematicBreak} />
             <div className={styles.loginContain}>
               <div className={styles.loginContent}>
                 {REGISTER_PAGE_CONSTANTS.existingUserText}
-              <span className={styles.loginLink} onClick={() => navigate("/login")}>
-                {REGISTER_PAGE_CONSTANTS.loginLinkText}
-              </span>
+                <span
+                  className={styles.loginLink}
+                  onClick={() => navigate("/login")}
+                >
+                  {REGISTER_PAGE_CONSTANTS.loginLinkText}
+                </span>
               </div>
             </div>
           </div>
