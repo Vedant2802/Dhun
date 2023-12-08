@@ -24,17 +24,42 @@
   border-radius: 20px;
   z-index: 999;
   top: 50px;
+  .uploadButton{
+    position: absolute;
+    top: 240px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-left: 127px;
+    color: #908DA3;
+    font-size: 16px;
+    font-weight: 400;
+    .generating{
+      margin-left: 55px;
+    }
+  }
   .topCard {
     width: 500px;
-    // height: 300px;
-    background: #8b8b8b;
+    height: 280px;
+    background: radial-gradient(102.26% 84.3% at 50% 50%, rgba(18, 18, 18, 0.90) 0%, rgba(34, 34, 34, 0.87) 100%);
     border-radius: 20px 20px 0px 0px;
+    .topCardText{
+      color:  #fff;
+      font-size: 24px;
+      font-weight: 600;
+      padding: 166px 30px 20px;
+    }
     img,
     video {
       max-width: 100%;
       height: auto;
       border-radius: 16px 16px 0px 0px;
     }
+  }
+  .topcardloaded{
+    background-image: url('../../../public/icons/music\ visualize.png');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .chipWrapper {
     display: flex;
@@ -43,36 +68,130 @@
     gap: 24px;
     background: #000;
     padding: 24px;
+    padding-bottom: 12px;
+  }
+  .chipinputwrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
   }
   .chip {
-    color: #9f9cb4;
-    font-size: 16px;
-    width: 100%;
-    font-weight: 400;
-    background: #0f0f0f;
-    padding: 24px;
-    border: 1px rgba(71.32, 71.32, 71.32, 0.69) solid;
+    display: flex;
+    height: 48px;
+    align-items: center;
+    gap: 8px;
+    width: 384px;
     border-radius: 42px;
-    border: 1px solid #9f9cb4;
-    box-shadow: 0px 0px 4px 0px #655ab4;
+    border: 1px solid #BD4230;
+    background: #0F0F0F;
+    .chipInput {
+      color: #9f9cb4;
+      padding: 0px 16px;
+      font-size: 16px;
+      height: 100%;
+      width: 100%;
+      font-weight: 400;
+      background: #0f0f0f;
+      border-radius: inherit;
+      &:focus {
+        outline: none;
+        box-shadow: 0px 0px 0px 4px rgba(189, 66, 48, 0.36);
+      }
+  }
+
+
+  .uploadContainer{
+    background: url("../../../public/icons/upload-button.svg");
+    background-repeat: no-repeat;
+    margin-left: 24px;
+    width: 40px;
+    height: 4vh;
+    cursor: pointer;
+
+  }
+  // .uploadContainer:hover .uploadPromptmessage{
+  //   display: flex;
+  // }
+}
+.videoUpload{
+  opacity: 0;
+  height: 4vh;
+  width: 30px;
+  cursor: pointer;
+  position: absolute;
+}
+
+  .suggestionbtns{
+    padding-top: 16px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    column-gap: 3px;
+  }
+  .chipBtn {
+    display: flex;
+    align-items: center;
+    color: #9f9cb4;
+    font-size: 14px;
+    height: 40px;
+    font-weight: 400;
+    padding: 12px 16px;
+    background: rgba(71, 71, 71, 0.30);
+    border-radius: 42px;
+    text-align: left;
     &:focus {
       outline: none;
     }
   }
 
-  .chipBtn {
-    color: #9f9cb4;
-    font-size: 16px;
-    width: 100%;
+  .suggestiontext{
+    position: absolute;
+    color: #908DA3;
+    font-size: 14px;
     font-weight: 400;
-    background: #0f0f0f;
-    padding: 16px 24px;
-    border: 1px rgba(71.32, 71.32, 71.32, 0.69) solid;
-    border-radius: 42px;
-    border: 1px solid #9f9cb4;
-    text-align: left;
-    &:focus {
-      outline: none;
+    top: 362px;
+    left: 32px;
+  }
+
+  .chipbtn3{
+    width: 333px;
+  }
+  .chipbtn24{
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  .optionswrapper{
+    display: flex;
+    flex-direction: row;
+  }
+  .uploadbtn{
+    display: flex;
+    background-image: url("../../../public/icons/upload-button.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    padding: 4px;
+    padding-left: 24px;
+    width: 37px;
+    margin-top: 5px;
+    background-color: rgba(71, 71, 71, 0.6);
+    height: 34px;
+    align-items: center;
+    cursor: pointer;
+  }
+    .uploadbtn:hover .uploadPromptmessage{
+    display: flex;
+  }
+  .fileSizeError{
+    position: absolute;
+    color: #BD4230;
+    font-size: 13px;
+    font-weight: 400;
+    top: 473px;
+    left:23px;
+    .info{
+      display: inline;
     }
   }
   .overlayBtn {
@@ -94,7 +213,7 @@
   }
   .loadingBtn {
     display: flex;
-    padding: 16px 32px;
+    padding: 28px 32px;
     align-items: center;
     gap: 8px;
     border-radius: 42px;
@@ -123,12 +242,13 @@
 
   .createButton {
     padding: 16px 24px;
-    background: #fff;
+    background: #000;
     border-radius: 100px;
     justify-content: center;
     align-items: center;
     display: flex;
-    color: #000;
+    color: #fff;
+    border: 1px solid #908DA3;
     cursor: pointer;
   }
   .loadingChip {
@@ -196,4 +316,69 @@
       gap: 16px;
     }
   }
+}
+.footersuggestions{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: black;
+  padding: 0 24px 24px;
+  margin-bottom: 24px;
+  .suggestionoption{
+    color: #908DA3;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .suggestionwrp{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    overflow: hidden;
+  }
+}
+.audiofiles{
+  display: flex;
+  cursor: pointer;
+  flex-direction: row;
+  align-items: center;
+}
+.artistimg{
+  display: inline;
+  height: 34px;
+}
+.artistsongtext{
+  color: #908DA3;
+  font-size: 14px;
+  border-radius: 0 42px 42px 0;
+  background: rgba(71, 71, 71, 0.30);
+  width: 159px;
+  padding: 12px 16px;
+}
+.uploadPromptmessage{
+  top: 465px;
+position: absolute;
+ display: none; 
+width: 218px;
+margin-top: 4px;
+  top: 462px;
+  background: #313033;
+  padding: 6px;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  font-size: 12px;
+  font-weight: 400;
+}
+.fileName{
+  color: #908DA3;
+  width: fit-content;
+  font-size: 14px;
+  background: rgba(71, 71, 71, 0.60);
+  border-radius: 42px;
+  border: 1px solid #908DA3;
+  display: flex;
+  padding: 8px 6px;
+  align-items: center;
+  gap: 4px;
+  // margin-left: 25px;
 }
