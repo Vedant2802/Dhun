@@ -23,6 +23,9 @@ export interface GenerateMusicRequestObj {
   genre?: string;
   tempo?: string;
   duration?: number;
+  image_url?: string;
+  email?: string;
+  file_path?: string;
 }
 
 export interface GenerateMusicResponse {
@@ -78,6 +81,7 @@ interface IGenerateActions {
   getUserToken: ({ requestBody, AUTH_ENDPOINT }: IUserTokenRequest) => void;
   setUser: (user: any) => void;
   removeUser: () => void;
+  uploadFileForWebsite: (file: any) => void;
 }
 
 const initialState: IGenerateState = {
@@ -107,6 +111,36 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       set(() => ({ status: API_STATUS_TYPES.success, file: data, fileName }));
     } catch (error: any) {
       set(() => ({ status: API_STATUS_TYPES.failed, error }));
+    }
+  },
+  uploadFileForWebsite: async (file: any) => {
+    try {
+      set(() => ({
+        websiteData: {
+          status: API_STATUS_TYPES.loading,
+        },
+      }));
+      const data: any = await uploadFileApi<object>(file);
+      const musicData: any = await generateMusicApi({
+        email: "",
+        image_url: "",
+        prompt: "",
+        duration: 10,
+        file_path: data?.gcs_url,
+      });
+
+      set(() => ({
+        websiteData: {
+          musicUrls: musicData?.urls,
+          status: API_STATUS_TYPES.success,
+        },
+      }));
+    } catch (error: any) {
+      set(() => ({
+        websiteData: {
+          status: API_STATUS_TYPES.failed,
+        },
+      }));
     }
   },
   setDuration: (duration: number) => {
@@ -182,12 +216,14 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
         duration: 10,
       });
 
-      set(() => ({
-        websiteData: {
-          musicUrls: data?.urls,
-          status: API_STATUS_TYPES.success,
-        },
-      }));
+      if (get().websiteData.status !== API_STATUS_TYPES.idle) {
+        set(() => ({
+          websiteData: {
+            musicUrls: data?.urls,
+            status: API_STATUS_TYPES.success,
+          },
+        }));
+      }
     } catch (error: any) {
       set(() => ({
         websiteData: {

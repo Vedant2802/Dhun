@@ -5,16 +5,17 @@ import styles from "./WebModal.module.scss";
 import playIcon from "../../../public/icons/play.svg";
 import pauseIcon from "../../../public/icons/pauseWhite.svg";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
-import dhunAI from "../../../public/video/rrradhun.mp4";
 import closeicon from "../../../public/icons/cross-circle.svg";
-import musicbutton from "../../../public/icons/music-button.png";
+import musicbutton from "../../../public/icons/music-button.svg";
 import artistimage from "../../../public/icons/Artist image.png";
 import uploadbutton from "../../../public/icons/upload-button.svg";
-import check from "../../../public/icons/Check-popup.svg";
+import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
 import info from "../../../public/icons/Info-popup (2).svg";
-import musciVisual from "../../../public/icons/music visualize.png";
-import BrunoMars from "../../../public/audio/Bruno-Mars grenade.wav";
-import GOTMusic from "../../../public/audio/GOT music.wav";
+
+enum UPLOADED_DEFAULT_MUSIC_REFERENCES {
+  brunoMars = "http://10.39.255.16:3000/storage/Bruno-Mars grenade.wav",
+  gotMusic = "http://10.39.255.16:3000/storage/GOT music.wav",
+}
 
 enum DEFAULT_PROMPTS {
   prompt1 = "Upbeat, spiritual music",
@@ -39,7 +40,9 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   const [fileSizeError, setFileSizeError] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState("");
   const [fileName, setFileName] = useState("");
-  const { uploadFile, file }: any = useGenerateStore((state) => state);
+  const uploadFileForWebsite = useGenerateStore(
+    (state) => state.uploadFileForWebsite
+  );
   const generateMusic = useGenerateStore(
     (state) => state.generateMusicForWebsite
   );
@@ -74,19 +77,22 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     setFileSizeError("");
     setUploadSuccess("Reference added");
     FormD.append("file", event.target.files[0]);
-    uploadFile(FormD, fileName);
+    uploadFileForWebsite(FormD);
   };
 
   const audioUpload = (audio: string) => {
-    const FormD: any = new FormData();
     if (audio === "GOT") {
-      FormD.append("file", GOTMusic);
-      const fileName = "GOT";
-      uploadFile(FormD, fileName);
+      generateMusic({
+        ...defaultReqObj,
+        prompt: "",
+        file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.gotMusic,
+      });
     } else {
-      FormD.append("file", BrunoMars);
-      const fileName = "Bruno";
-      uploadFile(FormD, fileName);
+      generateMusic({
+        ...defaultReqObj,
+        prompt: "",
+        file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.brunoMars,
+      });
     }
   };
 
@@ -126,6 +132,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     setChibBtn1Selected(false);
     setChibBtn2Selected(false);
     setPrompt("");
+    setFileName("");
   };
 
   const getMusicIcon = (musicSrc: string) => {
@@ -146,14 +153,14 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <div>Track 1</div>
           </div>
           <div
-            className={styles.chip2}
+            className={styles.chip1}
             onClick={() => togglePlay(musicUrls[1])}
           >
             <img src={getMusicIcon(musicUrls[1])} alt="playIcon" />
             <div>Track 2</div>
           </div>
           <div
-            className={styles.chip3}
+            className={styles.chip1}
             onClick={() => togglePlay(musicUrls[2])}
           >
             <img src={getMusicIcon(musicUrls[2])} alt="playIcon" />
@@ -170,12 +177,14 @@ const WebModal = ({ closePopup }: webmodalprops) => {
 
   return (
     <dialog className={styles.webDialog}>
-      <img
-        className={styles.closeIcon}
-        src={closeicon}
-        onClick={() => closePopup(false)}
-      />
       <form className={styles.generatePopup} onSubmit={handleOnSubmit}>
+        <div className={styles.closeIconWrapper}>
+          <img
+            className={styles.closeIcon}
+            src={closeicon}
+            onClick={() => closePopup(false)}
+          />
+        </div>
         <div
           className={`${styles.topCard} ${
             ((musicUrls && musicUrls?.length > 0) ||
@@ -189,13 +198,17 @@ const WebModal = ({ closePopup }: webmodalprops) => {
               suggestion.
             </p>
           )}
-         { status === API_STATUS_TYPES.success &&  <div className={styles.uploadButton}>
-            <img src={uploadbutton}  />
-            <span>Upload your own video </span>
-          </div> }
-          { status === API_STATUS_TYPES.loading &&  <div className={styles.uploadButton}>
-            <span className={styles.generating}> Generating . . . </span>
-          </div> }
+          {status === API_STATUS_TYPES.success && (
+            <div className={styles.uploadButton}>
+              <img src={uploadbutton} />
+              <span>Upload your own video </span>
+            </div>
+          )}
+          {status === API_STATUS_TYPES.loading && (
+            <div className={styles.uploadButton}>
+              <span className={styles.generating}> Generating . . . </span>
+            </div>
+          )}
         </div>
         {status === API_STATUS_TYPES.success && musicUrls?.length ? (
           renderMusicUrls()
@@ -203,7 +216,16 @@ const WebModal = ({ closePopup }: webmodalprops) => {
           <>
             <div className={styles.chipWrapper}>
               {status === API_STATUS_TYPES.loading ? (
-                renderLoadingBtns()
+                <>
+                  {renderLoadingBtns()}
+                  <button
+                    className={styles.stopCreatingBtn}
+                    onClick={() => resetState()}
+                  >
+                    <img src={stopCreatingSvg} alt="stop creating" />
+                    Stop creating
+                  </button>
+                </>
               ) : (
                 <>
                   <div className={styles.chipinputwrapper}>
@@ -215,52 +237,58 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                         placeholder="What melody do you want to create? "
                       />
                     </div>
-                    <img src={musicbutton} onClick={(e) => handleOnSubmit(e)} />
+                    <img
+                      className={styles.musicButton}
+                      src={musicbutton}
+                      onClick={(e) => handleOnSubmit(e)}
+                    />
                   </div>
-                  <div className={styles.suggestionbtns}>
+                  <div>
                     <p className={styles.suggestiontext}>Suggestions</p>
-                    <button
-                      className={chibBtnStyle(isChibBtn1Selected)}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setChibBtn1Selected(!isChibBtn1Selected);
-                      }}
-                    >
-                      Upbeat, spiritual music
-                    </button>
-                    <button
-                      className={`${chibBtnStyle(isChibBtn2Selected)} ${
-                        styles.chipbtn24
-                      }`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setChibBtn2Selected(!isChibBtn2Selected);
-                      }}
-                    >
-                      Indian, soulful, timeless, melody
-                    </button>
-                    <button
-                      className={`${chibBtnStyle(isChibBtn1Selected)} ${
-                        styles.chipbtn3
-                      }`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setChibBtn1Selected(!isChibBtn1Selected);
-                      }}
-                    >
-                      Upbeat, spiritual music, Upbeat music
-                    </button>
-                    <button
-                      className={`${chibBtnStyle(isChibBtn1Selected)} ${
-                        styles.chipbtn24
-                      }`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setChibBtn1Selected(!isChibBtn1Selected);
-                      }}
-                    >
-                      Indian, soul
-                    </button>
+                    <div className={styles.suggestionbtns}>
+                      <button
+                        className={chibBtnStyle(isChibBtn1Selected)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setChibBtn1Selected(!isChibBtn1Selected);
+                        }}
+                      >
+                        Upbeat, spiritual music
+                      </button>
+                      <button
+                        className={`${chibBtnStyle(isChibBtn2Selected)} ${
+                          styles.chipbtn24
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setChibBtn2Selected(!isChibBtn2Selected);
+                        }}
+                      >
+                        Indian, soulful, timeless, melody
+                      </button>
+                      <button
+                        className={`${chibBtnStyle(isChibBtn1Selected)} ${
+                          styles.chipbtn3
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setChibBtn1Selected(!isChibBtn1Selected);
+                        }}
+                      >
+                        Upbeat, spiritual music, Upbeat music
+                      </button>
+                      <button
+                        className={`${chibBtnStyle(isChibBtn1Selected)} ${
+                          styles.chipbtn24
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setChibBtn1Selected(!isChibBtn1Selected);
+                        }}
+                      >
+                        Indian, soul
+                      </button>
+                    </div>
                   </div>
                 </>
               )}
@@ -286,9 +314,9 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                       </div>
                       <input
                         type="file"
-                        id="myFile"
+                        id="uploadReferenceFile"
                         name="filename"
-                        accept="audio/mp3,video/mp4,video/x-m4v,video/*"
+                        accept="audio/mp3,.wav,video/mp4,video/x-m4v,video/*"
                         onChange={onFileUpload}
                         className={styles.videoUpload}
                       />
