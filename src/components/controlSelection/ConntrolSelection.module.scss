@@ -31,6 +31,7 @@
   box-sizing: border-box;
   width: fit-content;
   margin: 14px 0px;
+  display: flex;
   img {
     max-width: fit-content;
   }
@@ -46,6 +47,9 @@
     height: 70%;
     top: 20%;
     border-radius: 8px;
+  }
+  .waveformContainer ::part(scroll) {
+    overflow-x: scroll;
   }
 }
 

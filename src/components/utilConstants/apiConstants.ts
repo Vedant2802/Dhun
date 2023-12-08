@@ -21,6 +21,7 @@ export enum AUTH_ENDPOINTS {
     title = "Create a Dhun.ai account",
     login = "Login to Dhun.ai account",
     buttonText = "Create",
+    buttonTextPending = "Creating...",
     existingUserText = "Already have an account? ",
     loginLinkText = "Login",
   }
