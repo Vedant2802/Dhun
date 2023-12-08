@@ -84,13 +84,13 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     if (audio === "GOT") {
       generateMusic({
         ...defaultReqObj,
-        prompt: "",
+        prompt: prompt || "",
         file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.gotMusic,
       });
     } else {
       generateMusic({
         ...defaultReqObj,
-        prompt: "",
+        prompt: prompt || "",
         file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.brunoMars,
       });
     }
@@ -194,12 +194,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   };
 
   useEffect(() => {
-    if (currentMusicSrc && isMusicPlaying) {
-      debugger;
+    if (currentMusicSrc && isMusicPlaying && videoRef?.current) {
       videoRef.current.currentTime = 0;
       videoRef?.current?.play();
     }
-    if (!isMusicPlaying) {
+    if (!isMusicPlaying && videoRef?.current) {
       videoRef?.current?.pause();
     }
   }, [currentMusicSrc, isMusicPlaying]);
