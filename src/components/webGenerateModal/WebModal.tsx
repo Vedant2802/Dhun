@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 import { useGenerateStore } from "../../stores/generateStore";
 import styles from "./WebModal.module.scss";
@@ -11,6 +11,7 @@ import artistimage from "../../../public/icons/Artist image.png";
 import uploadbutton from "../../../public/icons/upload-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
 import info from "../../../public/icons/Info-popup (2).svg";
+import VideoPlayer from "../videoPlayer/VideoPlayer";
 
 enum UPLOADED_DEFAULT_MUSIC_REFERENCES {
   brunoMars = "http://10.39.255.16:3000/storage/Bruno-Mars grenade.wav",
@@ -38,8 +39,9 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   const [isChibBtn1Selected, setChibBtn1Selected] = useState<boolean>(false);
   const [isChibBtn2Selected, setChibBtn2Selected] = useState<boolean>(false);
   const [fileSizeError, setFileSizeError] = useState("");
-  const [uploadSuccess, setUploadSuccess] = useState("");
   const [fileName, setFileName] = useState("");
+  const videoRef: any = useRef<any>(null);
+  const [videoPath, setVideoPath] = useState("");
   const uploadFileForWebsite = useGenerateStore(
     (state) => state.uploadFileForWebsite
   );
@@ -67,7 +69,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
 
   const onFileUpload = (event: any) => {
     if (event.target.files[0].size > 10485760) {
-      setUploadSuccess("");
       setFileSizeError("Kindly upload a file under 10mb");
       return;
     }
@@ -75,7 +76,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     const fileName = event.target.files[0].name;
     setFileName(fileName);
     setFileSizeError("");
-    setUploadSuccess("Reference added");
     FormD.append("file", event.target.files[0]);
     uploadFileForWebsite(FormD);
   };
@@ -133,6 +133,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     setChibBtn2Selected(false);
     setPrompt("");
     setFileName("");
+    setVideoPath("");
   };
 
   const getMusicIcon = (musicSrc: string) => {
@@ -175,6 +176,34 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     return null;
   };
 
+  const renderVideo = () => {
+    if (videoPath) {
+      return (
+        <video ref={videoRef} width="auto" muted loop>
+          <source src={videoPath} type="video/mp4" />
+        </video>
+      );
+    }
+    return null;
+  };
+
+  const onVideoFileUpload = (input: any) => {
+    const file = input.target?.files[0];
+    const fileURL = URL.createObjectURL(file);
+    setVideoPath(fileURL);
+  };
+
+  useEffect(() => {
+    if (currentMusicSrc && isMusicPlaying) {
+      debugger;
+      videoRef.current.currentTime = 0;
+      videoRef?.current?.play();
+    }
+    if (!isMusicPlaying) {
+      videoRef?.current?.pause();
+    }
+  }, [currentMusicSrc, isMusicPlaying]);
+
   return (
     <dialog className={styles.webDialog}>
       <form className={styles.generatePopup} onSubmit={handleOnSubmit}>
@@ -185,31 +214,42 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             onClick={() => closePopup(false)}
           />
         </div>
-        <div
-          className={`${styles.topCard} ${
-            ((musicUrls && musicUrls?.length > 0) ||
-              status === API_STATUS_TYPES.loading) &&
-            `${styles.topcardloaded}`
-          }  `}
-        >
-          {musicUrls?.length === 0 && (
-            <p className={styles.topCardText}>
-              Hello, Describe the kind of melody you wish to create or pick a
-              suggestion.
-            </p>
-          )}
-          {status === API_STATUS_TYPES.success && (
-            <div className={styles.uploadButton}>
-              <img src={uploadbutton} />
-              <span>Upload your own video </span>
-            </div>
-          )}
-          {status === API_STATUS_TYPES.loading && (
-            <div className={styles.uploadButton}>
-              <span className={styles.generating}> Generating . . . </span>
-            </div>
-          )}
-        </div>
+        {renderVideo()}
+        {!videoPath && (
+          <div
+            className={`${styles.topCard} ${
+              ((musicUrls && musicUrls?.length > 0) ||
+                status === API_STATUS_TYPES.loading) &&
+              `${styles.topcardloaded}`
+            }  `}
+          >
+            {musicUrls?.length === 0 && (
+              <p className={styles.topCardText}>
+                Hello, Describe the kind of melody you wish to create or pick a
+                suggestion.
+              </p>
+            )}
+            {status === API_STATUS_TYPES.success && (
+              <div className={styles.uploadButton}>
+                <img src={uploadbutton} />
+                <span>Upload your own video </span>
+                <input
+                  type="file"
+                  id="uploadVideo"
+                  name="filename"
+                  accept="video/mp4,video/x-m4v,video/*"
+                  onChange={onVideoFileUpload}
+                  className={styles.videoUpload}
+                />
+              </div>
+            )}
+            {status === API_STATUS_TYPES.loading && (
+              <div className={styles.uploadButton}>
+                <span className={styles.generating}> Generating . . . </span>
+              </div>
+            )}
+          </div>
+        )}
         {status === API_STATUS_TYPES.success && musicUrls?.length ? (
           renderMusicUrls()
         ) : (
