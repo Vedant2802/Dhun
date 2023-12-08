@@ -18,7 +18,7 @@ function App() {
           {/* <Route path="/" element={<AddVideo />} /> */}
           <Route path="/login" element={<Login />} />
           <Route
-            path="/dashboard"
+            path="/editor-dashboard"
             element={
               <main className="dashboardContainer">
                 <Header />

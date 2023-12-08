@@ -60,12 +60,12 @@ const ResultDashboard = () => {
 
   return (
     <section>
-       <div className={styles.exportPopup}>
-          <div className={styles.exportHead}>
-             <span className={styles.exportName}>Export</span>
-             <img src={close} className={styles.closeButton} />
-          </div>
-       </div>
+      <div className={styles.exportPopup}>
+        <div className={styles.exportHead}>
+          <span className={styles.exportName}>Export</span>
+          <img src={close} className={styles.closeButton} />
+        </div>
+      </div>
       <div className={styles.timeframeContainer}>
         <div className={styles.uploadContainer}>
           {!file && (
@@ -102,28 +102,27 @@ const ResultDashboard = () => {
         <div className={styles.container}>
           <div className={styles.videoContainer}>
             {<ControlSelection trackUrl={track} />}
-            {/* <ControlPanel /> */}
+          </div>
+          <div className={styles.compositionWrapper}>
+            <img
+              className={styles.compositionBackground}
+              src={compositionBackground}
+              alt="composition-background"
+            />
+            <CompositionContainer />
+            {timeFrames?.length &&
+              timeFrames?.map((timeFrame, index) => (
+                <div className={styles.trackWrapper}>
+                  <DndProvider backend={HTML5Backend}>
+                    {renderDraggableItem(
+                      timeFrame.generatedData?.urls as string[],
+                      timeFrame.id
+                    )}
+                  </DndProvider>
+                </div>
+              ))}
           </div>
         </div>
-      </div>
-      <div className={styles.compositionWrapper}>
-        <img
-          className={styles.compositionBackground}
-          src={compositionBackground}
-          alt="composition-background"
-        />
-        <CompositionContainer />
-        {timeFrames?.length &&
-          timeFrames?.map((timeFrame, index) => (
-            <div className={styles.trackWrapper}>
-              <DndProvider backend={HTML5Backend}>
-                {renderDraggableItem(
-                  timeFrame.generatedData?.urls as string[],
-                  timeFrame.id
-                )}
-              </DndProvider>
-            </div>
-          ))}
       </div>
 
       {/* {url && <ControlSeconds trackId={url} />} */}
