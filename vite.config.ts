@@ -8,5 +8,5 @@ export default defineConfig({
   build: {
     outDir: "./dist",
   },
-  basePath: "/app"
+  base: "/app"
 });
