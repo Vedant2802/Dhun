@@ -265,10 +265,12 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
         },
       }));
       setAccessToken(user?.access_token);
-      localStorage.setItem("user", user);
+      localStorage.setItem("user", JSON.stringify(user));
     } else {
       set(() => ({
-        status: API_STATUS_TYPES.success,
+        userData: {
+          status: API_STATUS_TYPES.success,
+        },
       }));
     }
   },

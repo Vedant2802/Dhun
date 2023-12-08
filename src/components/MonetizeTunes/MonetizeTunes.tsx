@@ -8,10 +8,17 @@ import DhunIcon from "../../../public/icons/Dhun Icon.svg";
 import heart from "../../../public/icons/heart.svg";
 import WebModal from "../webGenerateModal/WebModal";
 import { createPortal } from "react-dom";
+import { useGenerateStore } from "../../stores/generateStore";
+import { useNavigate } from "react-router";
 
 const MonetizeTunes = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const userData = useGenerateStore((state) => state.userData);
+  const navigate = useNavigate();
   const openPrompt = () => {
+    if (!userData?.data) {
+      return navigate("/login");
+    }
     setOpenModal(true);
   };
 
@@ -44,7 +51,9 @@ const MonetizeTunes = () => {
           <div className={styles.button} onClick={openPrompt}>
             Create magic now <img className={styles.arrow} src={arrow} />
           </div>
-          {openModal && createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
+          {openModal &&
+            userData?.data &&
+            createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
         </div>
       </div>
       <div className={styles.footer}>

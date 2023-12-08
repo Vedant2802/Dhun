@@ -8,6 +8,15 @@ const axiosInstance = axios.create({
 axiosInstance.defaults.headers.common["Accept"] = "application/json";
 axiosInstance.defaults.headers.common["Content-Type"] = "application/json";
 
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status === 401) {
+      window.location.href = "/login";
+    }
+  }
+);
+
 const setAccessToken = (token: string) => {
   axiosInstance.defaults.headers.common["authorization"] = `Bearer ${token}`;
 };
@@ -63,7 +72,7 @@ const generateMusicApi = async <T>(
 ): Promise<T> => {
   try {
     const response = await axiosInstance.post(
-      API_ENDPOINTS.generateMusicV4,
+      API_ENDPOINTS.generateMusicV3,
       requestObj,
       {
         headers: {

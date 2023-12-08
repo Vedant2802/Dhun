@@ -48,7 +48,7 @@ const DhunAiComponent = () => {
       }
     };
     document.addEventListener("keydown", handleEscapeKeyPress);
-    const user = localStorage.getItem("user");
+    const user = JSON.parse(localStorage.getItem("user") as any);
     if (user) {
       setUser(user);
     }
