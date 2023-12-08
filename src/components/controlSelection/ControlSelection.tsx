@@ -17,7 +17,7 @@ interface WaveformProps {
 }
 const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [startRegion, setstartRegion] = useState(0);
-  const [updatedRegion, setUpdatedRegion] = useState(5);
+  const [updatedRegion, setUpdatedRegion] = useState(10);
   const wavesurferref = useRef<any>(null);
   const videoElement = document.querySelector("video");
   const [openModal, setOpenModal] = useState<boolean>();
@@ -42,7 +42,6 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     timeInterval: 1,
     primaryLabelInterval: 5,
     secondaryLabelInterval: 5,
-    duration: 180,
     style: {
       fontSize: "10px",
       color: "#FFF",
@@ -55,7 +54,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     waveColor: "#242424",
     progressColor: "#242424",
     height: 70,
-    minPxPerSec: 10,
+    minPxPerSec: 40,
     dragToSeek: true,
     cursorWidth: 3,
     cursorColor: "rgba(127, 241, 131, 1)",
@@ -81,6 +80,15 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     };
   }, [trackUrl]);
 
+  useEffect(() => {
+    setstartRegion(0);
+    setUpdatedRegion(10);
+    const timeoutId = setTimeout(() => {
+      addRegion();
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [wavesurferref.current]);
+
   const addRegion = () => {
     const getLastTimeFrameId = timeFrames.length
       ? timeFrames[timeFrames.length - 1]?.id
@@ -93,14 +101,14 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
       end: updatedRegion,
       id: "region_" + (getLastTimeFrameId + 1),
       color: "#333333",
-      minLength: 3,
+      minLength: 5,
     });
     setstartRegion(updatedRegion);
-    setUpdatedRegion(updatedRegion + 5);
+    setUpdatedRegion(updatedRegion + 10);
 
     wsRegions.on("region-updated", (region: any) => {
       setstartRegion(region.end);
-      setUpdatedRegion(region.end + 5);
+      setUpdatedRegion(region.end + 10);
     });
     addNewTimeFrame(getLastTimeFrameId + 1);
 
@@ -125,30 +133,32 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   }, [apiStatus]);
 
   return (
-    <div className={styles.outercontainer}>
-      <div className={styles.mainContainer}>
-        <div className={styles.musicContainer}>
-          <div className={styles.controlContainer}>
-            <div
-              ref={wavesurferref}
-              id="waveform"
-              className={styles.waveformContainer}
-            />
+    <>
+      <div className={styles.outercontainer}>
+        <div className={styles.mainContainer}>
+          <div className={styles.musicContainer}>
+            <div className={styles.controlContainer}>
+              <div
+                ref={wavesurferref}
+                id="waveform"
+                className={styles.waveformContainer}
+              />
+            </div>
           </div>
+
+          {openModal &&
+            createPortal(
+              <div className={styles.popupContainer}>
+                <ControlPopup onClose={handleTogglePopup} />,
+              </div>,
+              document.body
+            )}
         </div>
-        <div onClick={addRegion} className={styles.addSongsBox}>
-          <img src={addIcon} alt="addSongs" />
-        </div>
-        crea
-        {openModal &&
-          createPortal(
-            <div className={styles.popupContainer}>
-              <ControlPopup onClose={handleTogglePopup} />,
-            </div>,
-            document.body
-          )}
       </div>
-    </div>
+      <div onClick={addRegion} className={styles.addSongsBox}>
+        <img src={addIcon} alt="addSongs" />
+      </div>
+    </>
   );
 };
 
