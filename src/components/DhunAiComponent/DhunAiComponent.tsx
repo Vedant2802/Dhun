@@ -24,6 +24,7 @@ const DhunAiComponent = () => {
   const videoElements = document.querySelector("video");
   const [isMuted, setIsMuted] = useState(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [videoCurrentTime, setVideoCurrentTime] = useState(0);
   const setCurrentMusicSrc = useGenerateStore(
     (state) => state.setCurrentMusicSrc
   );
@@ -31,6 +32,10 @@ const DhunAiComponent = () => {
   const updateMusicPlayingStatus = useGenerateStore(
     (state) => state.updateMusicPlayingStatus
   );
+
+  useEffect(() => {
+    if (videoCurrentTime > 0) waveformRef.current?.setTime(videoCurrentTime);
+  }, [videoCurrentTime]);
 
   const isMusicPlaying = useGenerateStore((state) => state.isMusicPlaying);
   const openPrompt = () => {
@@ -72,8 +77,6 @@ const DhunAiComponent = () => {
       barRadius: 100,
       barHeight: 1,
       minPxPerSec: 1,
-      backend: "MediaElement",
-      media: videoElements as any,
     };
 
     waveformRef.current = WaveSurfer.create(WaveSurferParams);
@@ -182,7 +185,14 @@ const DhunAiComponent = () => {
         createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
       <div className={styles.videoContainer}>
         <div className={styles.videoPart}>
-          <video ref={videoRef} autoPlay width="auto" muted loop>
+          <video
+            ref={videoRef}
+            autoPlay
+            width="auto"
+            muted
+            loop
+            onTimeUpdate={(e: any) => setVideoCurrentTime(e.target.currentTime)}
+          >
             <source src={dhunAI} type="video/mp4" />
           </video>
           <div className={styles.controls}>
