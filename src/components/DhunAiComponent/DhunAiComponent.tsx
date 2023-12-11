@@ -157,13 +157,12 @@ const DhunAiComponent = () => {
   const volumeControl = () => {
     if (waveformRef?.current) {
       const newIsMuted = !isMuted;
-      console.log("newIsMuted", newIsMuted);
       setIsMuted(newIsMuted);
     }
   };
 
   useEffect(() => {
-    waveformRef.current?.setVolume(isMuted ? 0 : 1);
+    waveformRef.current?.setVolume(isMuted ? 1 : 0);
   }, [isMuted]);
 
   return (
