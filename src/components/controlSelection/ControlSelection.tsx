@@ -13,7 +13,7 @@ import { createPortal } from "react-dom";
 import { useGenerateStore } from "../../stores/generateStore";
 import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 interface WaveformProps {
-  trackUrl: string;
+  trackUrl?: string;
 }
 const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const [startRegion, setstartRegion] = useState(0);
@@ -21,6 +21,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const wavesurferref = useRef<any>(null);
   const videoElement = document.querySelector("video");
   const [openModal, setOpenModal] = useState<boolean>();
+  const [isMuted, setIsMuted] = useState<boolean>(false);
   const updateCurrentTimeFrameDetails = useGenerateStore(
     (state) => state.updateCurrentTimeFrameDetails
   );
@@ -30,6 +31,9 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   );
   const apiStatus = useGenerateStore((state) => state.status);
   const addNewTimeFrame = useGenerateStore((state) => state.addNewTimeFrame);
+
+  const musicPlaying = useGenerateStore((state) => state.isMusicPlaying);
+  console.log("musicPlaying", musicPlaying);
 
   const trackItems = timeFrames.find(
     (timeFrame) => timeFrame.id === currentTimeFrameId
@@ -61,6 +65,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     plugins: [topTimeline],
     backend: "MediaElement",
     media: videoElement,
+    hideScrollbar: true,
   };
 
   useEffect(() => {
@@ -74,6 +79,11 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     // const audioUrl = trackUrl.replace(".mp4", ".mp3");
     wavesurferref.current?.load(trackUrl);
     document.addEventListener("keydown", handleEscapeKeyPress);
+    // if (wavesurferref.current) {
+    //   const volume = isMuted ? 0 : 1;
+    //   wavesurferref.current.setVolume(volume);
+    // }
+
     return () => {
       wavesurferref.current?.destroy();
       document.removeEventListener("keydown", handleEscapeKeyPress);
@@ -81,13 +91,23 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   }, [trackUrl]);
 
   useEffect(() => {
-    setstartRegion(0);
-    setUpdatedRegion(10);
-    const timeoutId = setTimeout(() => {
-      addRegion();
-    }, 1000);
-    return () => clearTimeout(timeoutId);
-  }, [wavesurferref.current]);
+    if (musicPlaying) {
+      wavesurferref.current?.play();
+      wavesurferref.current.setTime(0);
+      wavesurferref.current.setVolume(0);
+    } else {
+      wavesurferref.current?.pause();
+    }
+  }, [musicPlaying]);
+
+  // useEffect(() => {
+  //   setstartRegion(0);
+  //   setUpdatedRegion(10);
+  //   const timeoutId = setTimeout(() => {
+  //     addRegion();
+  //   }, 1000);
+  //   return () => clearTimeout(timeoutId);
+  // }, [trackUrl]);
 
   const addRegion = () => {
     const getLastTimeFrameId = timeFrames.length

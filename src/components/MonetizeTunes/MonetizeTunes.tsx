@@ -60,7 +60,7 @@ const MonetizeTunes = () => {
         <img src={DhunIcon} alt="DhunIcon" />
         <div>dhun.ai &nbsp; / &nbsp; Developed with by </div>
         <img src={heart} alt="heart" />
-        <div>zee entertainment</div>
+        <div>Zee Entertainment</div>
       </div>
     </div>
   );
