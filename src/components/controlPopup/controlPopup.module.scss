@@ -67,6 +67,23 @@
   width: 100%;
   cursor: pointer;
 }
+
+.chipInput {
+  color: var(--text-4, #c2c2c2);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  width: 332px;
+  border-radius: 8px;
+  border: 1px solid var(--outline-4, rgba(255, 255, 255, 0.24));
+  margin: auto;
+  gap: 10px;
+  cursor: pointer;
+  background: transparent;
+  &:focus {
+    outline: none;
+  }
+}
 .popupcontainer {
   display: flex;
   flex-direction: column;
