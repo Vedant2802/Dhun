@@ -101,7 +101,7 @@ const ResultDashboard = () => {
 
         <div className={styles.container}>
           <div className={styles.videoContainer}>
-            {<ControlSelection trackUrl={track} />}
+            {<ControlSelection trackUrl={url} />}
           </div>
           <div className={styles.compositionWrapper}>
             <img

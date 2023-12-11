@@ -11,6 +11,7 @@ type controlPopupProps = {
 };
 
 export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
+  const [prompt, setPrompt] = useState<string>("");
   const [emotion, setEmotion] = useState<string>("None Selected");
   const [emotionOptionopen, setEmotionOptionOpen] = useState<boolean>(false);
   const [instruments, setInstruments] = useState<string>("Choose Instruments");
@@ -37,12 +38,16 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
 
   const handleOnGenerate = () => {
     const genreValue = genre !== "None Selected" ? genre : "";
-    const instrumentsValue = instruments !== "None Selected" ? instruments : "";
-    const prompt = [emotion, genreValue, instrumentsValue].join(",");
+    const instrumentsValue =
+      instruments !== "Choose Instruments" ? instruments : "";
+    const emotionValue = emotion !== "None Selected" ? emotion : "";
+    const prompts = [emotionValue, genreValue, prompt, instrumentsValue].join(
+      ","
+    );
     generateMusic &&
       generateMusic({
         email: "test@gmail.com",
-        prompt,
+        prompt: prompts,
         image_url: "",
         tempo,
       });
@@ -56,6 +61,15 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
           <div className={styles.uploadfile}>
             <p>Upload reference file</p>
           </div>
+        </div>
+
+        <div>
+          <input
+            name="prompt"
+            className={styles.chipInput}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="Enter Prompt "
+          />
         </div>
         <div className={styles.popuppart}>
           <p>Emotion of the scene</p>

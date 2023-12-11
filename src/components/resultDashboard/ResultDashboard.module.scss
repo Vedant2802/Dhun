@@ -1,19 +1,19 @@
-.exportPopup{
+.exportPopup {
   position: absolute;
-  display: flex;
+  display: none;
   flex-direction: column;
   padding: 32px;
-  right:0;
+  right: 0;
   background-color: #333;
   z-index: 10;
   width: 412px;
   height: 100%;
-  .exportHead{
+  .exportHead {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
-  .exportName{
+  .exportName {
     color: #fff;
     font-size: 20px;
     font-style: normal;
@@ -31,7 +31,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  gap: 9px;
+  gap: 2px;
 }
 .trackWrapper {
   display: flex;
@@ -108,42 +108,43 @@
   // padding-bottom: 10px;
   display: flex;
   justify-content: flex-end;
+  gap: 4px;
 }
 .allcomposition {
   display: flex;
   flex-direction: column;
 }
-.compositionContainer {
-  margin-left: 40px;
-  width: 16vw;
-  gap: 6px;
-  display: flex;
-  flex-direction: column;
-}
-.composition {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 48px;
-  width: 304px;
-  border-radius: 4px;
-  background-color: #000;
-  color: #c2c2c2;
-}
-.playButton {
-  width: 32px;
-  height: 32px;
-  padding-left: 10px;
-}
-.playButtonContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-}
-.compositionText {
-  margin-top: 4px;
-}
+// .compositionContainer {
+//   margin-left: 40px;
+//   width: 16vw;
+//   gap: 6px;
+//   display: flex;
+//   flex-direction: column;
+// }
+// .composition {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: center;
+//   height: 48px;
+//   width: 304px;
+//   border-radius: 4px;
+//   background-color: #000;
+//   color: #c2c2c2;
+// }
+// .playButton {
+//   width: 32px;
+//   height: 32px;
+//   padding-left: 10px;
+// }
+// .playButtonContainer {
+//   display: flex;
+//   flex-direction: row;
+//   gap: 8px;
+// }
+// .compositionText {
+//   margin-top: 4px;
+// }
 .uploadContainer {
   display: flex;
   justify-content: center;
