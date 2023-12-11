@@ -87,7 +87,7 @@ const DhunAiComponent = () => {
       if (videoElement) {
         videoElement.pause();
       }
-      videoRef.current = null;
+      // videoRef.current = null;
     };
   }, [dhunAI]);
 
@@ -140,7 +140,7 @@ const DhunAiComponent = () => {
       videoElement.play();
     }
     if (waveformRef?.current) {
-      waveformRef.current.play();
+      waveformRef.current.play;
     }
   };
 
@@ -152,14 +152,16 @@ const DhunAiComponent = () => {
   };
 
   const volumeControl = () => {
-    debugger;
     if (waveformRef?.current) {
       const newIsMuted = !isMuted;
       console.log("newIsMuted", newIsMuted);
       setIsMuted(newIsMuted);
-      waveformRef.current?.setVolume(isMuted ? 0 : 1);
     }
   };
+
+  useEffect(() => {
+    waveformRef.current?.setVolume(isMuted ? 0 : 1);
+  }, [isMuted]);
 
   return (
     <div className={styles.mainContainer}>
