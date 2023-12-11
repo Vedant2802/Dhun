@@ -213,15 +213,15 @@ const DhunAiComponent = () => {
             className={getBtnStyle(audio1)}
             onClick={() => handlePromptOnClick(audio1)}
           >
-            <span className={styles.promptText}>Prompt :</span> Fierce scene
-            with Anger, Greatness & Patriotism
+            {/* <span className={styles.promptText}>Prompt :</span>  */}
+            Fierce scene with Anger, Greatness & Patriotism
           </div>
           <div
             className={getBtnStyle(audio2)}
             onClick={() => handlePromptOnClick(audio2)}
           >
-            <span className={styles.promptText}>Prompt :</span> Intence scene
-            with Confidence & Aggression
+            {/* <span className={styles.promptText}>Prompt :</span>  */}
+            Intense scene with Confidence & Aggression
           </div>
         </div>
       </div>
