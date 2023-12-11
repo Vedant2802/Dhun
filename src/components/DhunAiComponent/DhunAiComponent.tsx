@@ -8,7 +8,7 @@ import promptVideo from "../../../public/video/promptVideo.mp4";
 import WebModal from "../webGenerateModal/WebModal";
 import { createPortal } from "react-dom";
 import dhunAI from "../../../public/video/rrradhun.mp4";
-import audio1 from "../../../public/video/anger.wav";
+import audio1 from "../../../public/video/prompt1.wav";
 import audio2 from "../../../public/video/anticipation.wav";
 import { useGenerateStore } from "../../stores/generateStore";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
@@ -213,14 +213,14 @@ const DhunAiComponent = () => {
             className={getBtnStyle(audio1)}
             onClick={() => handlePromptOnClick(audio1)}
           >
-            {/* <span className={styles.promptText}>Prompt :</span>  */}
-            Fierce scene with Anger, Greatness & Patriotism
+            <span className={styles.promptText}>Prompt : </span>
+            Upbeat, patriotic, intense, suspense
           </div>
           <div
             className={getBtnStyle(audio2)}
             onClick={() => handlePromptOnClick(audio2)}
           >
-            {/* <span className={styles.promptText}>Prompt :</span>  */}
+            <span className={styles.promptText}>Prompt : </span>
             Intense scene with Confidence & Aggression
           </div>
         </div>
