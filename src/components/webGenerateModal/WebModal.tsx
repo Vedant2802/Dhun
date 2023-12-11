@@ -11,11 +11,10 @@ import artistimage from "../../../public/icons/Artist image.png";
 import uploadbutton from "../../../public/icons/upload-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
 import info from "../../../public/icons/Info-popup (2).svg";
-import VideoPlayer from "../videoPlayer/VideoPlayer";
 
 enum UPLOADED_DEFAULT_MUSIC_REFERENCES {
-  brunoMars = "http://10.39.255.16:3000/storage/Bruno-Mars grenade.wav",
-  gotMusic = "http://10.39.255.16:3000/storage/GOT music.wav",
+  brunoMars = "http://dhun.centralindia.cloudapp.azure.com/storage/grenade 2.wav",
+  gotMusic = "http://dhun.centralindia.cloudapp.azure.com/storage/Game of thrones 1.wav",
 }
 
 enum DEFAULT_PROMPTS {
@@ -68,10 +67,10 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   };
 
   const onFileUpload = (event: any) => {
-    if (event.target.files[0].size > 10485760) {
-      setFileSizeError("Kindly upload a file under 10mb");
-      return;
-    }
+    // if (event.target.files[0].size > 10485760) {
+    //   setFileSizeError("Kindly upload a file under 10mb");
+    //   return;
+    // }
     const FormD: any = new FormData();
     const fileName = event.target.files[0].name;
     setFileName(fileName);
@@ -84,13 +83,15 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     if (audio === "GOT") {
       generateMusic({
         ...defaultReqObj,
-        prompt: prompt || "",
+        prompt: prompt || "upbeat, neutral, driving",
         file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.gotMusic,
       });
     } else {
       generateMusic({
         ...defaultReqObj,
-        prompt: prompt || "",
+        prompt:
+          prompt ||
+          "joyful, medium tempo, high pitch, classical, sitar, tabla, harmonium, uplifting, melodic, rhythmic",
         file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.brunoMars,
       });
     }

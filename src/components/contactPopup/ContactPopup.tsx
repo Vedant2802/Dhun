@@ -81,7 +81,7 @@ const ContactPopup: React.FC<any> = ({ onClose }) => {
         <div className={styles.footer}>
           <span className={styles.contactinfo}>
             You can call us on +1 891 989-11-91 <br />
-            or write your queries to us at hello@adpod.ai{" "}
+            or write your queries to us at musicstudio@zee.ai{" "}
           </span>
           <button onClick={() => handleSend()} className={styles.sendButton}>
             {" "}
