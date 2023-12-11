@@ -125,7 +125,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
         email: "",
         image_url: "",
         prompt: "",
-        duration: 10,
+        duration: 30,
         file_path: data?.gcs_url,
       });
 
@@ -213,7 +213,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       }));
       const data: any = await generateMusicApi<object>({
         ...requestObj,
-        duration: 10,
+        duration: 30,
       });
 
       if (get().websiteData.status !== API_STATUS_TYPES.idle) {
