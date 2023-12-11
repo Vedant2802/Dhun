@@ -14,13 +14,13 @@ import { useNavigate } from "react-router-dom";
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [createPending,setCreatePending] = useState(false);
+  const [createPending, setCreatePending] = useState(false);
   const { getUserToken } = useGenerateStore((state) => state);
   const user = useGenerateStore((state) => state.userData);
   const navigate = useNavigate();
   const handleLogin = async () => {
     setCreatePending(true);
-    if(!createPending){    
+    if (!createPending) {
       const requestBody = {
         email: email,
         password: password,
@@ -33,8 +33,8 @@ const Login: React.FC = () => {
   };
 
   useEffect(() => {
-    if (user?.status === API_STATUS_TYPES.success && user?.access_token) {
-      navigate("/editor-dashboard");
+    if (user?.status === API_STATUS_TYPES.success && user?.data?.access_token) {
+      navigate("/");
     }
   }, [user]);
 
@@ -76,7 +76,7 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className={styles.loginButton} onClick={handleLogin}>
-           {!createPending ? "Login" : "Loggin In..."} 
+            {!createPending ? "Login" : "Loggin In..."}
           </div>
           <div className={styles.signupContainer}>
             {/* <div className={styles.signupContent}>Don’t have an account?</div> */}
