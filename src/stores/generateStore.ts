@@ -105,6 +105,7 @@ type IGenerateStore = IGenerateState & IGenerateActions;
 export const useGenerateStore = create<IGenerateStore>((set, get) => ({
   ...initialState,
   uploadFile: async (file: any, fileName: string) => {
+    debugger
     try {
       set(() => ({ status: API_STATUS_TYPES.loading }));
       const data = await uploadFileApi<object>(file);
@@ -281,6 +282,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
         status: API_STATUS_TYPES.success,
       },
     }));
+    setAccessToken(user?.access_token);
   },
   removeUser: () => {
     set(() => ({
