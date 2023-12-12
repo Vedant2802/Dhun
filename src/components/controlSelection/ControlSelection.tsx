@@ -22,6 +22,8 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const videoElement = document.querySelector("video");
   const [openModal, setOpenModal] = useState<boolean>();
   const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [regionBar,setRegionBar] = useState([]);
+  // const [regionChange,setRegionChange] = useState()
   const updateCurrentTimeFrameDetails = useGenerateStore(
     (state) => state.updateCurrentTimeFrameDetails
   );
@@ -33,7 +35,7 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const addNewTimeFrame = useGenerateStore((state) => state.addNewTimeFrame);
 
   const musicPlaying = useGenerateStore((state) => state.isMusicPlaying);
-  console.log("musicPlaying", musicPlaying);
+ 
 
   const trackItems = timeFrames.find(
     (timeFrame) => timeFrame.id === currentTimeFrameId
@@ -109,6 +111,14 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   //   return () => clearTimeout(timeoutId);
   // }, [trackUrl]);
 
+  const regionChange = (id: any) => {
+    const divElement = document.getElementById(id);
+    if (divElement) {
+      const rect = divElement.getBoundingClientRect();
+      console.log('Element coordinates:', rect);
+    }
+  }
+
   const addRegion = () => {
     const getLastTimeFrameId = timeFrames.length
       ? timeFrames[timeFrames.length - 1]?.id
@@ -129,6 +139,8 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     wsRegions.on("region-updated", (region: any) => {
       setstartRegion(region.end);
       setUpdatedRegion(region.end + 10);
+      console.log(region)
+      regionChange(region.id)
     });
     addNewTimeFrame(getLastTimeFrameId + 1);
 
