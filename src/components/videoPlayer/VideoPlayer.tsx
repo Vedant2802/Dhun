@@ -3,7 +3,7 @@ import videojs from "video.js";
 import { useEffect, useRef, useState } from "react";
 import "./VideoPlayer.scss";
 import playIcon from "../../../public/icons/playIcon.svg";
-import pauseIcon from "../../../public/icons/pause.svg";
+import pauseIcon from "../../../public/icons/pausegrey.svg";
 import volumeIcon from "../../../public/icons/volumeIcon.svg";
 import volumeMute from "../../../public/icons/volumeMute.svg";
 import * as React from "react";
@@ -35,6 +35,7 @@ const VideoPlayer: React.FC<videoUrlProps> = ({ videoUrl }) => {
       const videoPlayer = videojs(videoRef.current);
       if (musicPlaying === false) {
         videoPlayer.pause();
+        setIsPlaying(false);
       }
     }
   }, [musicPlaying]);
