@@ -41,7 +41,9 @@ const CompositionItem: React.FC<CompositionItemProps> = ({
       // const currentTimeFrameData = timeFrameData.find(
       //   (item) => item.id === currentTimeFrameId
       // );
-      const musicSrc = timeFrameData[0]?.generatedData?.urls[0] as string;
+      const musicSrc = timeFrameData[0]?.generatedData?.urls[
+        compositionIndex
+      ] as string;
       setCurrentMusicSrc(musicSrc, compositionIndex, compositionIndex);
     }
   };

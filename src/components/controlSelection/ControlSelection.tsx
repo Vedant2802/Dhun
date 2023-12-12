@@ -101,6 +101,12 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
     }
   }, [compositionIndex]);
 
+  useEffect(() => {
+    if (musicPlaying === false) {
+      wavesurferref.current?.pause();
+    }
+  }, [musicPlaying]);
+
   // useEffect(() => {
   //   setstartRegion(0);
   //   setUpdatedRegion(10);
