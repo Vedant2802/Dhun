@@ -21,9 +21,9 @@ const CompositionItem: React.FC<CompositionItemProps> = ({
   const currentCompositionIndex = useGenerateStore(
     (state) => state.compositionIndex
   );
-  const currentTimeFrameId = useGenerateStore(
-    (state) => state.currentTimeFrameId
-  );
+  // const currentTimeFrameId = useGenerateStore(
+  //   (state) => state.currentTimeFrameId
+  // );
   const timeFrameData = useGenerateStore((state) => state.timeFrameData);
   const isMusicPlaying = useGenerateStore((state) => state.isMusicPlaying);
   const updateMusicPlayingStatus = useGenerateStore(
@@ -38,12 +38,10 @@ const CompositionItem: React.FC<CompositionItemProps> = ({
       return updateMusicPlayingStatus(!isMusicPlaying);
     }
     if (!isDefault) {
-      const currentTimeFrameData = timeFrameData.find(
-        (item) => item.id === currentTimeFrameId
-      );
-      const musicSrc = currentTimeFrameData?.generatedData?.urls[
-        compositionIndex
-      ] as string;
+      // const currentTimeFrameData = timeFrameData.find(
+      //   (item) => item.id === currentTimeFrameId
+      // );
+      const musicSrc = timeFrameData[0]?.generatedData?.urls[0] as string;
       setCurrentMusicSrc(musicSrc, compositionIndex, compositionIndex);
     }
   };

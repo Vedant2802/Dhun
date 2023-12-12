@@ -20,7 +20,7 @@
     font-style: normal;
     font-weight: 600;
   }
-  .checkwrp{
+  .checkwrp {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -28,11 +28,11 @@
     font-size: 14px;
     gap: 8px;
     font-weight: 500;
-    .chckbox{
+    .chckbox {
       cursor: pointer;
     }
   }
-  .exportbtn{
+  .exportbtn {
     display: flex;
     width: 356px;
     height: 40px;
@@ -42,10 +42,10 @@
     gap: 10px;
     color: #fff;
     border-radius: 8px;
-    background: var(--primary-components, #7357FF);
+    background: var(--primary-components, #7357ff);
   }
 }
-.dn{
+.dn {
   display: none;
 }
 .timeframeContainer {
@@ -78,7 +78,7 @@
   flex-direction: column;
   width: 100%;
   height: 40vh;
-  padding: 24px;
+  padding: 12px;
   background-color: #000;
   .uploadTextContainer {
     display: flex;
