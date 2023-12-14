@@ -109,7 +109,6 @@ type IGenerateStore = IGenerateState & IGenerateActions;
 export const useGenerateStore = create<IGenerateStore>((set, get) => ({
   ...initialState,
   uploadFile: async (file: any, fileName: string) => {
-    debugger
     try {
       set(() => ({ status: API_STATUS_TYPES.loading }));
       const data = await uploadFileApi<object>(file);
@@ -159,9 +158,19 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
     set(() => ({
       currentMusicSrc: src,
       isMusicPlaying: true,
-      compositionIndex: compositionIndex,
       currentMusicIndex: musicIndex,
     }));
+    if(compositionIndex){
+      set(() => ({
+        currentTimeFrameId:get().timeFrameData[0].id,
+        compositionIndex:compositionIndex
+      }));
+    }else{
+      set(() => ({
+        compositionIndex:0,
+        currentTimeFrameId:get().timeFrameData[0].id,
+      }));
+    }
   },
   updateMusicPlayingStatus: (playing: boolean) => {
     set(() => ({ isMusicPlaying: playing }));
@@ -251,11 +260,13 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       return set(() => ({
         currentMusicSrc: nextMusicTrack,
         currentTimeFrameId: timeFrameData[nextTimeFrameIndex].id,
+        isMusicPlaying:true
+      }));
+    }else{
+      set(() => ({
+        isMusicPlaying: false,
       }));
     }
-    set(() => ({
-      isMusicPlaying: false,
-    }));
   },
   getUserToken: async ({ requestBody, AUTH_ENDPOINT }: IUserTokenRequest) => {
     set(() => ({

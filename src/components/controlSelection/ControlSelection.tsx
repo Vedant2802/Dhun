@@ -27,6 +27,9 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   const updateCurrentTimeFrameDetails = useGenerateStore(
     (state) => state.updateCurrentTimeFrameDetails
   );
+  const compositionIndex = useGenerateStore(
+    (state) => state.compositionIndex
+  ) as number;
   const timeFrames = useGenerateStore((state) => state.timeFrameData);
   const currentTimeFrameId = useGenerateStore(
     (state) => state.currentTimeFrameId
@@ -93,11 +96,15 @@ const ControlSelection: React.FC<WaveformProps> = ({ trackUrl }) => {
   }, [trackUrl]);
 
   useEffect(() => {
-    if (musicPlaying) {
+    if (compositionIndex >= 0 && musicPlaying) {
       wavesurferref.current?.play();
       wavesurferref.current.setTime(0);
       wavesurferref.current.setVolume(0);
-    } else {
+    }
+  }, [compositionIndex]);
+
+  useEffect(() => {
+    if (musicPlaying === false) {
       wavesurferref.current?.pause();
     }
   }, [musicPlaying]);
