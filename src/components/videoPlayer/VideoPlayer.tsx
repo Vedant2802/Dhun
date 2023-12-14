@@ -15,6 +15,7 @@ interface videoUrlProps {
 const VideoPlayer: React.FC<videoUrlProps> = ({ videoUrl }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const musicPlaying = useGenerateStore((state) => state.isMusicPlaying);
+  const compositionIndex = useGenerateStore((state) => state.compositionIndex);
   const currentMusicSrc = useGenerateStore((state) => state.currentMusicSrc);
   const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef(null);
@@ -65,10 +66,10 @@ const VideoPlayer: React.FC<videoUrlProps> = ({ videoUrl }) => {
   };
 
   useEffect(() => {
-    if (musicPlaying) {
+    if (compositionIndex >= 0 && musicPlaying) {
       restartVideo();
     }
-  }, [musicPlaying, currentMusicSrc]);
+  }, [compositionIndex, musicPlaying]);
 
   const restartVideo = () => {
     if (videoRef.current) {
