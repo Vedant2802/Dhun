@@ -16,7 +16,8 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import DraggableItem from "../DraggableItem/DraggableItem";
 import DraggableWrapper from "../DraggableWrapper/DraggableWrapper";
 const ResultDashboard = () => {
-  const { uploadFile, file, status,exportMusicData,exportedMusicData }: any = useGenerateStore((state) => state);
+  const { uploadFile, file, status, exportMusicData, exportedMusicData }: any =
+    useGenerateStore((state: any) => state);
   const timeFrames = useGenerateStore((state) => state.timeFrameData);
   const setUser = useGenerateStore((state) => state.setUser);
   const [exportComp, setExportComp] = useState<boolean>(false);
@@ -77,13 +78,20 @@ const ResultDashboard = () => {
   const exportMusicHandle = (e: any) => {
     e.preventDefault();
     let app = timeFrames?.[0]?.generatedData?.urls;
-    if(app && Array.isArray(app)){
+    if (app && Array.isArray(app)) {
       const req = {
-        "audio_urls": [...app]
-      }
+        audio_urls: [...app],
+      };
       exportMusicData(req);
     }
-  }
+  };
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") as any);
+    if (user) {
+      setUser(user);
+    }
+  }, []);
 
   return (
     <section>
@@ -139,8 +147,14 @@ const ResultDashboard = () => {
             />
             <p>Composition 3</p>
           </div>
-          <button onClick={(e) => exportMusicHandle(e)} className={styles.exportbtn} >Export Selected</button>
-       </div> )}
+          <button
+            onClick={(e) => exportMusicHandle(e)}
+            className={styles.exportbtn}
+          >
+            Export Selected
+          </button>
+        </div>
+      )}
       <div className={styles.timeframeContainer}>
         <div className={styles.uploadContainer}>
           {!file && (
@@ -188,10 +202,13 @@ const ResultDashboard = () => {
             />
             <CompositionContainer />
             {timeFrames?.length &&
-              timeFrames?.map((timeFrame, index) => (
+              timeFrames?.map((timeFrame: any, index: number) => (
                 <div className={styles.trackWrapper}>
                   <DndProvider backend={HTML5Backend}>
-                    <DraggableWrapper urls={timeFrame.generatedData?.urls  as string[]} id={timeFrame.id}  />
+                    <DraggableWrapper
+                      urls={timeFrame.generatedData?.urls as string[]}
+                      id={timeFrame.id}
+                    />
                     {/* {renderDraggableItem(
                       timeFrame.generatedData?.urls as string[],
                       timeFrame.id

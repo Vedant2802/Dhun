@@ -35,7 +35,7 @@ const VideoPlayer: React.FC<videoUrlProps> = ({ videoUrl }) => {
       const videoPlayer = videojs(videoRef.current);
       if (musicPlaying === false) {
         videoPlayer.pause();
-        setIsPlaying(false);
+        // setIsPlaying(false);
       }
     }
   }, [musicPlaying]);

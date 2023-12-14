@@ -44,6 +44,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   const uploadFileForWebsite = useGenerateStore(
     (state) => state.uploadFileForWebsite
   );
+  const setUser = useGenerateStore((state) => state.setUser);
   const generateMusic = useGenerateStore(
     (state) => state.generateMusicForWebsite
   );
@@ -105,6 +106,13 @@ const WebModal = ({ closePopup }: webmodalprops) => {
       generateMusic({ ...defaultReqObj, prompt: DEFAULT_PROMPTS.prompt2 });
     }
   }, [isChibBtn1Selected, isChibBtn2Selected]);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") as any);
+    if (user) {
+      setUser(user);
+    }
+  }, []);
 
   const chibBtnStyle = (selected: boolean) => {
     // if (prompt) {
