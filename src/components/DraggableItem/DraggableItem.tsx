@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { useDrag, useDrop } from "react-dnd";
 import styles from "./DraggableItem.module.scss";
 import menuIcon from "../../../public/icons/menu.svg";
@@ -30,6 +30,8 @@ const DraggableItem = ({
     type: ItemType,
     item: { id, index },
   });
+
+  const [width, setWidth] = useState(200); 
 
   const [, drop] = useDrop({
     accept: ItemType,

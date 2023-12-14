@@ -86,10 +86,28 @@ const generateMusicApi = async <T>(
   }
 };
 
+const exportMusic = async (requestObj: any): Promise<any> => {
+  try {
+    const response = await axiosInstance.post(
+      API_ENDPOINTS.exportMusic,
+      requestObj,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export {
   uploadFileApi,
   generateMusicApi,
   registerApi,
   contactApi,
   setAccessToken,
+  exportMusic
 };

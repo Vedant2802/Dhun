@@ -9,6 +9,7 @@ import {
   generateMusicApi,
   registerApi,
   setAccessToken,
+  exportMusic
 } from "../services/axiosService";
 
 interface IUserTokenRequest {
@@ -61,6 +62,7 @@ interface IGenerateState {
   websiteData: WebsiteData;
   compositionIndex?: number;
   userData: any;
+  exportedMusicData: any;
 }
 
 interface IGenerateActions {
@@ -82,6 +84,7 @@ interface IGenerateActions {
   setUser: (user: any) => void;
   removeUser: () => void;
   uploadFileForWebsite: (file: any) => void;
+  exportMusicData: (url: any) => void;
 }
 
 const initialState: IGenerateState = {
@@ -98,6 +101,7 @@ const initialState: IGenerateState = {
   userData: {
     status: API_STATUS_TYPES.idle,
   },
+  exportedMusicData: {}
 };
 
 type IGenerateStore = IGenerateState & IGenerateActions;
@@ -265,7 +269,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
           status: API_STATUS_TYPES.success,
         },
       }));
-      setAccessToken(user?.access_token);
+      setAccessToken(user?.data.access_token);
       localStorage.setItem("user", JSON.stringify(user));
     } else {
       set(() => ({
@@ -274,6 +278,14 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
         },
       }));
     }
+  },
+  exportMusicData: async (url: any) => {
+      const exportedMusic = await exportMusic(url);
+      set(()=> ({
+        exportedMusicData : {
+          data: exportedMusic
+        }
+      }))
   },
   setUser: (user: any) => {
     set(() => ({

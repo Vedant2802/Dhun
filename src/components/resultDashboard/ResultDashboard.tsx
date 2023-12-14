@@ -14,9 +14,9 @@ import close from "../../../public/icons/Close.png";
 import { DndProvider, useDrag } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import DraggableItem from "../DraggableItem/DraggableItem";
-import ControlPanel from "../ControlsPanel/ControlPanel";
+import DraggableWrapper from "../DraggableWrapper/DraggableWrapper";
 const ResultDashboard = () => {
-  const { uploadFile, file, status }: any = useGenerateStore((state) => state);
+  const { uploadFile, file, status,exportMusicData,exportedMusicData }: any = useGenerateStore((state) => state);
   const timeFrames = useGenerateStore((state) => state.timeFrameData);
   const setUser = useGenerateStore((state) => state.setUser);
   const [exportComp, setExportComp] = useState<boolean>(false);
@@ -44,12 +44,12 @@ const ResultDashboard = () => {
   };
 
   const moveItem = (fromIndex: number, toIndex: number) => {
-    // const updatedItems = [...trackItems];
+    // const urls: any = timeFrames?.[0]?.generatedData?.urls
+    // const updatedItems = [...urls];
     // const [movedItem] = updatedItems.splice(fromIndex, 1);
     // updatedItems.splice(toIndex, 0, movedItem);
     // setItems(updatedItems);
   };
-  console.log("file", file);
   const track =
     "http://10.39.255.16:3000/storage/sample_960x400_ocean_with_audio (1).mp3";
   // const urls =
@@ -74,16 +74,16 @@ const ResultDashboard = () => {
     });
   };
 
-  const exportMusic = () => {
-    console.log(timeFrames);
-  };
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user") as any);
-    if (user) {
-      setUser(user);
+  const exportMusicHandle = (e: any) => {
+    e.preventDefault();
+    let app = timeFrames?.[0]?.generatedData?.urls;
+    if(app && Array.isArray(app)){
+      const req = {
+        "audio_urls": [...app]
+      }
+      exportMusicData(req);
     }
-  }, []);
+  }
 
   return (
     <section>
@@ -139,11 +139,8 @@ const ResultDashboard = () => {
             />
             <p>Composition 3</p>
           </div>
-          <button onClick={() => exportMusic()} className={styles.exportbtn}>
-            Export Selected
-          </button>
-        </div>
-      )}
+          <button onClick={(e) => exportMusicHandle(e)} className={styles.exportbtn} >Export Selected</button>
+       </div> )}
       <div className={styles.timeframeContainer}>
         <div className={styles.uploadContainer}>
           {!file && (
@@ -194,10 +191,11 @@ const ResultDashboard = () => {
               timeFrames?.map((timeFrame, index) => (
                 <div className={styles.trackWrapper}>
                   <DndProvider backend={HTML5Backend}>
-                    {renderDraggableItem(
+                    <DraggableWrapper urls={timeFrame.generatedData?.urls  as string[]} id={timeFrame.id}  />
+                    {/* {renderDraggableItem(
                       timeFrame.generatedData?.urls as string[],
                       timeFrame.id
-                    )}
+                    )} */}
                   </DndProvider>
                 </div>
               ))}

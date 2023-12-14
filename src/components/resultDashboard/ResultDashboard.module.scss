@@ -1,12 +1,12 @@
 .exportPopup {
   position: absolute;
-  display: none;
+  display: flex;
   flex-direction: column;
   padding: 32px;
   right: 0;
   background-color: #333;
   gap: 16px;
-  z-index: 10;
+  z-index: 999;
   width: 412px;
   height: 100%;
   .exportHead {
