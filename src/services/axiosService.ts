@@ -29,7 +29,9 @@ const uploadFileApi = async <T>(uploadFile: any): Promise<T> => {
       {
         headers: {
           "Content-Type": "multipart/form-data",
+          authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NTcxYTJjODE5NzM3NWVlYTEwMTYxZGIiLCJpYXQiOjE3MDI1NjA4MzYsIm5iZiI6MTcwMjU2MDgzNiwianRpIjoiMWRjZmFhZDUtMDFlMi00NzAyLTk5MzAtOGIxMWY5ZjVmZTUyIiwiZXhwIjoxNzAyNjA0MDM2LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlLCJyb2xlIjoidXNlciIsImlzQmxvY2tlZCI6ZmFsc2V9.nxyyKKjlsDPxfLFugzcYyoN9sTJ-QV-hsNfcq3RJDMA'
         },
+
       }
     );
     return response.data;
@@ -77,6 +79,7 @@ const generateMusicApi = async <T>(
       {
         headers: {
           "Content-Type": "application/json",
+           authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NTcxYTJjODE5NzM3NWVlYTEwMTYxZGIiLCJpYXQiOjE3MDI1NjA4MzYsIm5iZiI6MTcwMjU2MDgzNiwianRpIjoiMWRjZmFhZDUtMDFlMi00NzAyLTk5MzAtOGIxMWY5ZjVmZTUyIiwiZXhwIjoxNzAyNjA0MDM2LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlLCJyb2xlIjoidXNlciIsImlzQmxvY2tlZCI6ZmFsc2V9.nxyyKKjlsDPxfLFugzcYyoN9sTJ-QV-hsNfcq3RJDMA'
         },
       }
     );
