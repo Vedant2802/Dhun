@@ -38,7 +38,7 @@ const AudioPlayer = () => {
     if (!musicPlaying && audioPlayer) {
       audioPlayer?.pause();
     }
-  }, [track, musicPlaying]);
+  }, [track]);
 
   const RegisterAndEvents = (audioPlayer: any) => {
     const audio = audioPlayer;
