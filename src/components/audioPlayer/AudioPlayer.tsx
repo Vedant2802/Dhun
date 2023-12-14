@@ -40,6 +40,14 @@ const AudioPlayer = () => {
     }
   }, [track]);
 
+  useEffect(() => {
+    if (musicPlaying) {
+      audioPlayer?.play();
+    } else {
+      audioPlayer?.pause();
+    }
+  }, [musicPlaying]);
+
   const RegisterAndEvents = (audioPlayer: any) => {
     const audio = audioPlayer;
     audio.registerVideoListeners = function () {
