@@ -28,10 +28,8 @@ const uploadFileApi = async <T>(uploadFile: any): Promise<T> => {
       uploadFile,
       {
         headers: {
-          "Content-Type": "multipart/form-data",
-          authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NTcxYTJjODE5NzM3NWVlYTEwMTYxZGIiLCJpYXQiOjE3MDI1NjA4MzYsIm5iZiI6MTcwMjU2MDgzNiwianRpIjoiMWRjZmFhZDUtMDFlMi00NzAyLTk5MzAtOGIxMWY5ZjVmZTUyIiwiZXhwIjoxNzAyNjA0MDM2LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlLCJyb2xlIjoidXNlciIsImlzQmxvY2tlZCI6ZmFsc2V9.nxyyKKjlsDPxfLFugzcYyoN9sTJ-QV-hsNfcq3RJDMA'
-        },
-
+          "Content-Type": "multipart/form-data"
+         },
       }
     );
     return response.data;
@@ -60,9 +58,9 @@ const contactApi = async <T>(contactDetails: any): Promise<T> => {
 const registerApi = async ({ requestBody, AUTH_ENDPOINT }: any) => {
   try {
     const { data } = await axiosInstance.post(AUTH_ENDPOINT, requestBody);
-    if (data?.access_token) {
-      localStorage.setItem("token", data?.access_token);
-    }
+    // if (data?.access_token) {
+    //   localStorage.setItem("token", data?.access_token);
+    // }
     return data;
   } catch (err) {
     throw err;
@@ -78,8 +76,7 @@ const generateMusicApi = async <T>(
       requestObj,
       {
         headers: {
-          "Content-Type": "application/json",
-           authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NTcxYTJjODE5NzM3NWVlYTEwMTYxZGIiLCJpYXQiOjE3MDI1NjA4MzYsIm5iZiI6MTcwMjU2MDgzNiwianRpIjoiMWRjZmFhZDUtMDFlMi00NzAyLTk5MzAtOGIxMWY5ZjVmZTUyIiwiZXhwIjoxNzAyNjA0MDM2LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlLCJyb2xlIjoidXNlciIsImlzQmxvY2tlZCI6ZmFsc2V9.nxyyKKjlsDPxfLFugzcYyoN9sTJ-QV-hsNfcq3RJDMA'
+          "Content-Type": "application/json"
         },
       }
     );

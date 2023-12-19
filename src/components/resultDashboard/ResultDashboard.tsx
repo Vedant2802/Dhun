@@ -3,7 +3,6 @@ import VideoPlayer from "../videoPlayer/VideoPlayer";
 import styles from "./ResultDashboard.module.scss";
 import ControlSelection from "../controlSelection/ControlSelection";
 import React, { useEffect, useState } from "react";
-import { useGenerateStore } from "../../stores/generateStore";
 import CompositionContainer from "../compositionContainer/compositionContainer";
 import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 import LoadingSpin from "react-loading-spin";
@@ -15,6 +14,8 @@ import { DndProvider, useDrag } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import DraggableItem from "../DraggableItem/DraggableItem";
 import DraggableWrapper from "../DraggableWrapper/DraggableWrapper";
+import { useGenerateStore } from "../../stores/generateStore";
+
 const ResultDashboard = () => {
   const { uploadFile, file, status, exportMusicData, exportedMusicData }: any =
     useGenerateStore((state: any) => state);
@@ -88,6 +89,7 @@ const ResultDashboard = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user") as any);
+    console.log("user", user);
     if (user) {
       setUser(user);
     }
