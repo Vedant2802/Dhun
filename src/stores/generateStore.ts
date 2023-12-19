@@ -117,6 +117,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       set(() => ({ status: API_STATUS_TYPES.failed, error }));
     }
   },
+
   uploadFileForWebsite: async (file: any) => {
     try {
       set(() => ({
@@ -147,9 +148,11 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       }));
     }
   },
+
   setDuration: (duration: number) => {
     set(() => ({ duration }));
   },
+
   setCurrentMusicSrc: (
     src: string,
     musicIndex: number = 0,
@@ -172,17 +175,21 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       }));
     }
   },
+
   updateMusicPlayingStatus: (playing: boolean) => {
     set(() => ({ isMusicPlaying: playing }));
   },
+
   updateCurrentTimeFrameDetails: (id: number, duration: number) => {
     set(() => ({ currentTimeFrameId: id, duration }));
   },
+
   addNewTimeFrame: (id: number) => {
     const timeFrameData = get().timeFrameData;
     const newTimeFrameData = { id };
     set(() => ({ timeFrameData: [...timeFrameData, newTimeFrameData] }));
   },
+
   generateMusic: async (requestObj: GenerateMusicRequestObj) => {
     try {
       set(() => ({ status: API_STATUS_TYPES.loading }));
@@ -209,6 +216,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       set(() => ({ status: API_STATUS_TYPES.failed, error }));
     }
   },
+  
   resetWebsiteData: () => {
     set(() => ({
       websiteData: {
@@ -280,7 +288,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
           status: API_STATUS_TYPES.success,
         },
       }));
-      setAccessToken(user?.data.access_token);
+      setAccessToken(user?.access_token);
       localStorage.setItem("user", JSON.stringify(user));
     } else {
       set(() => ({
