@@ -221,8 +221,6 @@ const ResultDashboard = () => {
           </div>
         </div>
       </div>
-
-      {/* {url && <ControlSeconds trackId={url} />} */}
     </section>
   );
 };
