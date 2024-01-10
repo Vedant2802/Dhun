@@ -18,7 +18,7 @@ const VideoComponent = () => {
 
   return (
     <div className={styles.video}>
-      <video ref={videoRef} src="public/video/hummed.mp4" width="100%">
+      <video ref={videoRef} src="public/video/video.mp4" width="100%">
         Sorry, your browser doesn't support embedded videos and watch it with
         your favorite video player!
       </video>
