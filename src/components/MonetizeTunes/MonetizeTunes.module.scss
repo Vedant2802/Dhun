@@ -4,11 +4,21 @@
     width: 100%;
   }
 }
+.mainTune {
+  position: relative;
+}
+.image {
+  opacity: 0.1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+}
 .tunes {
   width: 100vw;
-  background-image: url(/public/icons/contactPage.svg);
+  position: relative;
 }
-
 .monetizeMainContainer {
   display: flex;
   justify-content: center;
@@ -85,5 +95,4 @@
   color: #fff;
   gap: 16px;
   margin-top: 30px;
-  background-color: rgba(0, 0, 0, 0.95);
 }

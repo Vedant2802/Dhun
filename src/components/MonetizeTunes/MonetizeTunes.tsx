@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./MonetizeTunes.module.scss";
-import spectrum from "../../../public/icons/spectrum.svg";
+import contactUs from "../../../public/icons/contactPage.svg";
 import monitizeLogo from "../../../public/icons/monitizeLogo.svg";
 import arrow from "../../../public/icons/right-arrow.svg";
 import Symphonies from "../sympohonies/Symphonies";
@@ -34,13 +34,16 @@ const MonetizeTunes = () => {
     };
   }, []);
   return (
-    <div className={styles.tunes}>
-      <Symphonies />
-      <div className={styles.footer}>
-        <img src={DhunIcon} alt="DhunIcon" />
-        <div>dhun.ai &nbsp; / &nbsp; Developed With</div>
-        <img src={heart} alt="heart" />
-        <div>By Zee Entertainment</div>
+    <div className={styles.mainTune}>
+      <img className={styles.image} src={contactUs} />
+      <div className={styles.tunes}>
+        <Symphonies />
+        <div className={styles.footer}>
+          <img src={DhunIcon} alt="DhunIcon" />
+          <div>dhun.ai &nbsp; / &nbsp; Developed With</div>
+          <img src={heart} alt="heart" />
+          <div>By Zee Entertainment</div>
+        </div>
       </div>
     </div>
   );
