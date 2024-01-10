@@ -4,6 +4,10 @@
     width: 100%;
   }
 }
+.tunes {
+  width: 100vw;
+  background-image: url(/public/icons/contactPage.svg);
+}
 
 .monetizeMainContainer {
   display: flex;
@@ -80,5 +84,6 @@
   align-items: center;
   color: #fff;
   gap: 16px;
-  padding-bottom: 50px;
+  margin-top: 30px;
+  background-color: rgba(0, 0, 0, 0.95);
 }

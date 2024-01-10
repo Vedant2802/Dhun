@@ -16,7 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* <Route path="/" element={<AddVideo />} /> */}
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<Login />} /> */}
           <Route
             path="/editor-dashboard"
             element={

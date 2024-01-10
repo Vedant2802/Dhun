@@ -1,8 +1,15 @@
+.symphony {
+  border-radius: 42px;
+  display: flex;
+  width: fit-content;
+  margin: auto;
+  margin-top: 120px;
+  padding-top: 140px;
+}
 .symphonyContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 80px;
+  background-color: black;
 }
 .craftText {
   font-size: 56px;
@@ -10,7 +17,16 @@
   font-weight: 900;
   line-height: 105%;
   color: #fff;
-  margin-bottom: 34px;
+  padding: 40px;
+  padding-left: 36px;
+  border-radius: 45px 45px 0 0;
+  background-image: linear-gradient(
+    to right,
+    rgba(18, 18, 18, 0.9) 0%,
+    rgba(34, 34, 34, 0.87) 50%,
+    #c2ba58 75%,
+    #2c6b02 100%
+  );
 }
 .symphonyText {
   color: #9f9cb4;
@@ -24,6 +40,8 @@
   flex-direction: row;
   margin-top: 50px;
   margin-bottom: 50px;
+  font-size: 14px;
+  color: #c0c0c0;
   cursor: pointer;
 }
 .adOption {
@@ -59,4 +77,55 @@
 }
 .production:hover {
   transform: scale(1.2);
+}
+.label {
+  color: #c0c0c0;
+  font-size: 14px;
+}
+.formGroup {
+  padding: 24px;
+}
+.contactForm {
+  display: flex;
+  flex-direction: row;
+  padding-left: 10px;
+}
+.input,
+.note {
+  color: white;
+  padding-left: 17px;
+  font-size: 18px;
+  margin-top: 8px;
+  font-weight: 500;
+  display: flex;
+  border-radius: 16px;
+  width: 20vw;
+  height: 60px;
+  background-color: transparent;
+  border: 1px solid #727272;
+}
+.note {
+  width: 67vw;
+  height: 120px;
+}
+.queries {
+  color: white;
+  padding-top: 60px;
+  padding-left: 36px;
+  padding-bottom: 36px;
+}
+.submit {
+  display: flex;
+  justify-content: space-between;
+}
+.sendButton {
+  padding-right: 36px;
+  color: black;
+}
+.buttonText {
+  background-color: white;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px 25px;
+  border-radius: 100px;
 }

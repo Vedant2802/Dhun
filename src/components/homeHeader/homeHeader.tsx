@@ -9,21 +9,21 @@ const HomeHeader: React.FC<any> = ({ setShowContactPopup }) => {
   const navigate = useNavigate();
   const userData = useGenerateStore((state) => state.userData);
   const removeUser = useGenerateStore((state) => state.removeUser);
-  const renderCTA = () => {
-    if (userData?.data) {
-      return (
-        <div onClick={() => removeUser()} className={styles.login}>
-          {"Logout"}
-        </div>
-      );
-    }
+  // const renderCTA = () => {
+  //   if (userData?.data) {
+  //     return (
+  //       <div onClick={() => removeUser()} className={styles.login}>
+  //         {"Logout"}
+  //       </div>
+  //     );
+  //   }
 
-    return (
-      <div onClick={() => navigate("/login")} className={styles.login}>
-        {"Login/Register"}
-      </div>
-    );
-  };
+  //   return (
+  //     <div onClick={() => navigate("/login")} className={styles.login}>
+  //       {"Login/Register"}
+  //     </div>
+  //   );
+  // };
   return (
     <>
       <div className={styles.header}>
@@ -45,7 +45,7 @@ const HomeHeader: React.FC<any> = ({ setShowContactPopup }) => {
               {item}
             </div>
           ))}
-          {renderCTA()}
+          {/* {renderCTA()} */}
         </div>
       </div>
     </>

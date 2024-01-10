@@ -1,13 +1,20 @@
 .featureContainer {
   padding: 120px 64px 0px 64px;
-  background-image: url(/public/icons/sitar.svg);
   background-repeat: no-repeat;
   background-position: top right;
+  background-image: linear-gradient(
+    to bottom right,
+    #f76049 0%,
+    5%,
+    #121212 20%,
+    90%,
+    #304e79 95%
+  );
 }
 .arrow {
-  width: 20px;
-  height: 20px;
-  margin: 10px 12px;
+  width: 32px;
+  height: 32px;
+  margin: 10px 8px;
 }
 .topContainer {
   display: flex;
@@ -16,13 +23,11 @@
   justify-self: center;
 
   .heading {
-    color: white;
-    font-size: 56px;
-    font-weight: 900;
-    line-height: 58.8px;
-    .dhunText {
-      color: #b3563f;
-    }
+    color: #fff;
+    text-align: center;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
   }
   .title {
     color: #9f9cb4;
@@ -38,14 +43,14 @@
   justify-content: space-between;
   gap: 32px;
   margin-top: 70px;
+  flex-direction: column;
 
   .promptMainContainer {
-    padding: 16px;
-    border-radius: 42px;
-    background: rgba(71, 71, 71, 0.6);
-    border: 1px rgba(71.32, 71.32, 71.32, 0.6) solid;
-    width: fit-content;
+    padding: 32px;
+    background: #121212;
     width: 50%;
+    border-radius: 8px;
+    box-shadow: 0px 0px 8px 0px rgba(189, 66, 48, 0.25);
     .promptTopContainer {
       display: flex;
       justify-content: space-between;
@@ -97,5 +102,30 @@
     justify-content: center;
     align-items: center;
     gap: 12px;
+  }
+  .promptBottom {
+    display: flex;
+    margin-top: 24px;
+    .span {
+      color: #fff;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 600;
+    }
+  }
+  .promptAbout {
+    margin-top: 16px;
+    .spanAbout {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 22px;
+    }
+  }
+  .row,
+  .column {
+    display: flex;
+    gap: 32px;
   }
 }

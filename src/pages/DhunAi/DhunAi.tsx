@@ -5,9 +5,10 @@ import MonetizeTunes from "../../components/MonetizeTunes/MonetizeTunes";
 import HomeHeader from "../../components/homeHeader/homeHeader";
 import ContactPopup from "../../components/contactPopup/ContactPopup";
 import styles from "./DhunAi.module.scss";
+import VideoComponent from "../../components/videoComponent/VideoComponent";
 
 const DhunAi = () => {
-  const [showContactPopup,setShowContactPopup] = useState<boolean>(false);
+  const [showContactPopup, setShowContactPopup] = useState<boolean>(false);
 
   const handleTogglePopup = () => {
     setShowContactPopup(!showContactPopup);
@@ -19,9 +20,10 @@ const DhunAi = () => {
         <HomeHeader setShowContactPopup={setShowContactPopup} />
       </div>
       <div className={styles.popup}>
-      {showContactPopup &&  <ContactPopup onClose={handleTogglePopup} />}
+        {showContactPopup && <ContactPopup onClose={handleTogglePopup} />}
       </div>
-      <DhunAiComponent />
+      {/* <DhunAiComponent /> */}
+      <VideoComponent />
       <OurFeature />
       <MonetizeTunes />
     </div>

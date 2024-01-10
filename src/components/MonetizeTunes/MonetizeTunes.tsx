@@ -34,33 +34,13 @@ const MonetizeTunes = () => {
     };
   }, []);
   return (
-    <div>
-      <div className={styles.spectrumContainer}>
-        <img src={spectrum} alt="" className={styles.spectrumImage} />
-      </div>
+    <div className={styles.tunes}>
       <Symphonies />
-      <div className={styles.monetizeMainContainer}>
-        <div className={styles.monetizeContainer}>
-          <div className={styles.createText}>
-            Ready to create, own &<br />
-            monetise your tunes?
-          </div>
-          <div className={styles.createSubText}>
-            Join Dhun.ai and unlock the magic of creating music.
-          </div>
-          <div className={styles.button} onClick={openPrompt}>
-            Create magic now <img className={styles.arrow} src={arrow} />
-          </div>
-          {openModal &&
-            userData?.data &&
-            createPortal(<WebModal closePopup={setOpenModal} />, document.body)}
-        </div>
-      </div>
       <div className={styles.footer}>
         <img src={DhunIcon} alt="DhunIcon" />
-        <div>dhun.ai &nbsp; / &nbsp; Developed with by </div>
+        <div>dhun.ai &nbsp; / &nbsp; Developed With</div>
         <img src={heart} alt="heart" />
-        <div>Zee Entertainment</div>
+        <div>By Zee Entertainment</div>
       </div>
     </div>
   );
