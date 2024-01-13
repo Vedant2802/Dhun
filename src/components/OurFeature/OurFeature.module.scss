@@ -2,41 +2,87 @@
   padding: 120px 64px 0px 64px;
   background-repeat: no-repeat;
   background-position: top right;
-  background-image: linear-gradient(
-    to bottom right,
-    #f76049 0%,
-    5%,
-    #121212 20%,
-    90%,
-    #304e79 95%
-  );
 }
 .arrow {
   width: 32px;
   height: 32px;
   margin: 10px 8px;
 }
-.topContainer {
+.exportbtn {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 24px;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  color: white;
+}
+.featureContainerHead {
+  display: flex;
+  flex-direction: row;
+  margin: 100px;
+  @media screen and (max-width: 900px) {
+    display: flex;
+    flex-direction: row;
+    margin: 100px;
+    flex-wrap: wrap;
+    gap: 70px;
+  }
+}
+.featureContainerdiv {
+  width: 186px;
+  height: 186px;
+  background-color: #48d67f;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.featureContainerImg {
+  width: 102px;
+  height: 102px;
+}
+.featureContainerText {
+  color: white;
+  text-align: center;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  margin-top: 10vh;
+  line-height: 48px;
+}
+.featureContainerAboutText {
+  color: #ccc;
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+  width: 75%;
+  margin-top: 16px;
+}
+.featureContainerAbout {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-self: center;
-
-  .heading {
-    color: #fff;
-    text-align: center;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 400;
+}
+.exploreText {
+  color: white;
+  text-align: center;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  @media screen and (max-width: 600px) {
+    display: none;
   }
-  .title {
-    color: #9f9cb4;
-    font-size: 20px;
-    font-weight: 400;
-    margin: 20px 0px 32px 0px;
-    width: 50%;
-    text-align: center;
-  }
+}
+.exportbtn:hover {
+  background: #48d67e;
+  color: black;
+  border: none;
 }
 .prompt {
   display: flex;
@@ -48,13 +94,10 @@
 
   .promptMainContainer {
     padding: 32px;
-    background: #121212;
     width: 75vw;
     border-radius: 8px;
-    box-shadow: 0px 0px 8px 0px rgba(189, 66, 48, 0.25);
+    border: 2px solid #4a4a4a;
     .promptTopContainer {
-      display: flex;
-      justify-content: space-between;
       gap: 16px;
       align-items: center;
     }

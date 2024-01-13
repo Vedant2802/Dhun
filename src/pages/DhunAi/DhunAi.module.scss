@@ -3,9 +3,9 @@
   font-family: "Quicksand";
   font-weight: 400;
   .topHeader {
-    position: fixed;
+    position: absolute;
     z-index: 200;
-    padding: 24px;
+    background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 100%);
   }
 }
 .popup {
