@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./OurFeature.module.scss";
 import arrow from "../../../public/icons/featureArrow.svg";
 import featureIcon1 from "../../../public/icons/featureIcon1.svg";
@@ -8,8 +8,18 @@ import feature1 from "../../../public/icons/feature1.svg";
 import feature2 from "../../../public/icons/feature2.svg";
 import feature3 from "../../../public/icons/feature3.svg";
 import feature4 from "../../../public/icons/feature4.svg";
+import { createPortal } from "react-dom";
+import Login from "../../pages/Login/Login";
 
 const OurFeature = () => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const openPrompt = () => {
+    setOpenModal(true);
+  };
+  const getOpenModal = () => {
+    return createPortal(<Login closePopup={setOpenModal} />, document.body);
+  };
+
   return (
     <>
       <div className={styles.featureContainerHead}>
@@ -79,10 +89,7 @@ const OurFeature = () => {
                   music instantly 
                 </span>
               </div>
-              <button
-                onClick={() => alert("sample now")}
-                className={styles.exportbtn}
-              >
+              <button onClick={openPrompt} className={styles.exportbtn}>
                 <span className={styles.exportbtnText}>Sample Now</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -99,6 +106,7 @@ const OurFeature = () => {
                   />
                 </svg>
               </button>
+              {openModal && getOpenModal()}
             </div>
 
             <div className={styles.promptMainContainer}>
@@ -116,10 +124,7 @@ const OurFeature = () => {
                   instantly
                 </span>
               </div>
-              <button
-                onClick={() => alert("sample now")}
-                className={styles.exportbtn}
-              >
+              <button onClick={openPrompt} className={styles.exportbtn}>
                 <span className={styles.exportbtnText}>Sample Now</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -136,6 +141,7 @@ const OurFeature = () => {
                   />
                 </svg>
               </button>
+              {openModal && getOpenModal()}
             </div>
           </div>
           <div className={styles.column}>
@@ -155,10 +161,7 @@ const OurFeature = () => {
                   Type text describing a sound effect and generate it instantly 
                 </span>
               </div>
-              <button
-                onClick={() => alert("sample now")}
-                className={styles.exportbtn}
-              >
+              <button onClick={openPrompt} className={styles.exportbtn}>
                 <span className={styles.exportbtnText}>Sample Now</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -175,6 +178,7 @@ const OurFeature = () => {
                   />
                 </svg>
               </button>
+              {openModal && getOpenModal()}
             </div>
 
             <div className={styles.promptMainContainer}>
@@ -192,10 +196,7 @@ const OurFeature = () => {
                   eventually 
                 </span>
               </div>
-              <button
-                onClick={() => alert("sample now")}
-                className={styles.exportbtn}
-              >
+              <button onClick={openPrompt} className={styles.exportbtn}>
                 <span className={styles.exportbtnText}>Sample Now</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -212,6 +213,7 @@ const OurFeature = () => {
                   />
                 </svg>
               </button>
+              {openModal && getOpenModal()}
             </div>
           </div>
         </div>

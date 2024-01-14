@@ -94,16 +94,6 @@ const DhunAiComponent = () => {
     };
   }, [dhunAI]);
 
-  // useEffect(() => {
-  //   const videoElement: any = videoRef.current;
-  //   if (videoElement) {
-  //     videoElement.play();
-  //   }
-  //   if (waveformRef?.current) {
-  //     waveformRef.current.play();
-  //   }
-  // }, [waveformRef.current, videoRef.current]);
-
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       const videoElement: any = videoRef.current;

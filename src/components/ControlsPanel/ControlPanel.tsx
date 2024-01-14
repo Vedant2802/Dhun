@@ -8,7 +8,7 @@ import WaveSurfer from "wavesurfer.js";
 import styles from "../controlSelection/ConntrolSelection.module.scss";
 
 interface WaveformProps {
-  audioUrl?: string; // Make the audioUrl prop optional
+  audioUrl?: string;
 }
 const ControlPanel: React.FC<WaveformProps> = ({ audioUrl }) => {
   const waveformRef = useRef<WaveSurfer | null>(null);

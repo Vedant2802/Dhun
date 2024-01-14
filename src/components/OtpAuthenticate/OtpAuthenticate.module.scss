@@ -8,12 +8,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 1500;
   background-color: rgba(0, 0, 0, 0.4);
 
   .formContainer {
     width: 80%;
-    height: 75%;
+    height: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,8 +49,7 @@
         background: #0f0f0f;
       }
 
-      .input,
-      .inputMobile {
+      .input {
         height: 48px;
         width: 100%;
         border: 1px solid #c0c0c0;
@@ -79,26 +78,14 @@
         background-color: #0f0f0f;
         font-size: 16px;
       }
-      .inputMobile,
-      .label .text {
-        // font-family: "Segoe UI";
-        color: #797680;
-        background-color: #0f0f0f;
-        font-size: 16px;
-      }
       .input {
         border: 1px solid #797680;
       }
-      .inputMobile {
-        border: 1px solid #797680;
-        padding-left: 50px;
-      }
+
       .input::placeholder {
         color: green;
       }
-      .inputMobile::placeholder {
-        color: green;
-      }
+
       .input:focus {
         outline: none;
         color: #c2c2c2;
@@ -112,13 +99,6 @@
       }
 
       .input:focus + .label .text {
-        font-size: 12px;
-        transform: translate(0, -50%);
-        padding-left: 4px;
-        padding-right: 4px;
-        color: #47464e;
-      }
-      .inputMobile:focus + .label .text {
         font-size: 12px;
         transform: translate(0, -50%);
         padding-left: 4px;
@@ -141,17 +121,6 @@
       .input:focus + .label .text {
         color: #47464e;
       }
-      .inputMobile:focus + .label .text,
-      :not(input[value=""]) + .label .text {
-        font-size: 12px;
-        transform: translate(0, -150%);
-        padding-left: 4px;
-        padding-right: 4px;
-      }
-
-      .inputMobile:focus + .label .text {
-        color: #47464e;
-      }
     }
     .loginButton {
       width: 100%;
@@ -168,27 +137,6 @@
       background: #48d67e;
       cursor: pointer;
     }
-    .signupContainer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      width: 100%;
-      font-weight: 500;
-      font-size: 14px;
-      margin-top: 32px;
-    }
-    .signupContent {
-      color: #000;
-      line-height: 24px;
-      font-style: normal;
-      letter-spacing: 0.3px;
-    }
-    .signupLink {
-      color: #7ff183;
-      text-decoration: none;
-      cursor: pointer;
-    }
   }
   .loginOTPMessage {
     color: white;
@@ -202,7 +150,6 @@
 }
 .closeIconWrapper {
   position: absolute;
-  top: 17%;
+  top: 23%;
   right: 13%;
-  cursor: pointer;
 }
