@@ -1,19 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 import { useGenerateStore } from "../../stores/generateStore";
-import styles from "./WebModal.module.scss";
+import styles from "./webModal4.module.scss";
 import playIcon from "../../../public/icons/play.svg";
 import pauseIcon from "../../../public/icons/pauseWhite.svg";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 import closeicon from "../../../public/icons/close.svg";
-import musicbutton from "../../../public/icons/music-button.svg";
-import uploadbutton from "../../../public/icons/upload-button.svg";
+import sing from "../../../public/icons/sing.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
-
-enum UPLOADED_DEFAULT_MUSIC_REFERENCES {
-  brunoMars = "http://dhun.centralindia.cloudapp.azure.com/storage/grenade 2.wav",
-  gotMusic = "http://dhun.centralindia.cloudapp.azure.com/storage/Game of thrones 1.wav",
-}
 
 enum DEFAULT_PROMPTS {
   prompt1 = "Upbeat, spiritual music",
@@ -31,12 +25,10 @@ type webmodalprops = {
   closePopup: Function;
 };
 
-const WebModal = ({ closePopup }: webmodalprops) => {
+const WebModal4 = ({ closePopup }: webmodalprops) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isChibBtn1Selected, setChibBtn1Selected] = useState<boolean>(false);
   const [isChibBtn2Selected, setChibBtn2Selected] = useState<boolean>(false);
-  const [fileSizeError, setFileSizeError] = useState("");
-  const [fileName, setFileName] = useState("");
   const videoRef: any = useRef<any>(null);
   const [videoPath, setVideoPath] = useState("");
   const uploadFileForWebsite = useGenerateStore(
@@ -63,19 +55,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
     generateMusic({ ...defaultReqObj, prompt });
-  };
-
-  const onFileUpload = (event: any) => {
-    // if (event.target.files[0].size > 10485760) {
-    //   setFileSizeError("Kindly upload a file under 10mb");
-    //   return;
-    // }
-    const FormD: any = new FormData();
-    const fileName = event.target.files[0].name;
-    setFileName(fileName);
-    setFileSizeError("");
-    FormD.append("file", event.target.files[0]);
-    uploadFileForWebsite(FormD);
   };
 
   const audioUpload = (audio: string) => {
@@ -110,13 +89,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     }
   }, []);
 
-  const chibBtnStyle = (selected: boolean) => {
-    // if (prompt) {
-    //   return styles.overlayBtn;
-    // }
-    return selected ? styles.chibBtnActive : styles.chipBtn;
-  };
-
   const renderLoadingBtns = () => {
     return Array(3)
       .fill("")
@@ -137,7 +109,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     setChibBtn1Selected(false);
     setChibBtn2Selected(false);
     setPrompt("");
-    setFileName("");
     setVideoPath("");
   };
 
@@ -223,7 +194,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <div className={styles.topCardDiv}>
               <div className={styles.topDiv}>
                 <p className={styles.closeIconwhite}></p>
-                <p className={styles.topCardText}>Create text &rarr; music</p>
+                <p className={styles.topCardText}>Turn humming &rarr; music</p>
               </div>
 
               <button className={styles.closeIconWrapper}>
@@ -234,26 +205,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                 />
               </button>
             </div>
-
-            {status === API_STATUS_TYPES.success && (
-              <div className={styles.uploadButton}>
-                <img src={uploadbutton} />
-                <span>Upload your own video </span>
-                <input
-                  type="file"
-                  id="uploadVideo"
-                  name="filename"
-                  accept="video/mp4,video/x-m4v,video/*"
-                  onChange={onVideoFileUpload}
-                  className={styles.videoUpload}
-                />
-              </div>
-            )}
-            {status === API_STATUS_TYPES.loading && (
-              <div className={styles.uploadButton}>
-                <span className={styles.generating}> Generating . . . </span>
-              </div>
-            )}
           </div>
         )}
         {status === API_STATUS_TYPES.success && musicUrls?.length ? (
@@ -275,66 +226,14 @@ const WebModal = ({ closePopup }: webmodalprops) => {
               ) : (
                 <>
                   <div className={styles.chipinputwrapper}>
-                    <div className={styles.chip}>
-                      <input
-                        name="prompt"
-                        className={styles.chipInput}
-                        onChange={(e) => setPrompt(e.target.value)}
-                        placeholder="What melody do you wish to create? "
-                      />
+                    <button className={styles.chip}>
                       <img
                         className={styles.musicButton}
-                        src={musicbutton}
+                        src={sing}
                         onClick={(e) => handleOnSubmit(e)}
                       />
-                    </div>
-                  </div>
-                  <div>
-                    <p className={styles.suggestiontext}>Suggestions</p>
-                    <div className={styles.suggestionbtns}>
-                      <button
-                        className={chibBtnStyle(isChibBtn1Selected)}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setChibBtn1Selected(!isChibBtn1Selected);
-                        }}
-                      >
-                        Upbeat, spiritual music
-                      </button>
-                      <button
-                        className={`${chibBtnStyle(isChibBtn2Selected)} ${
-                          styles.chipbtn24
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setChibBtn2Selected(!isChibBtn2Selected);
-                        }}
-                      >
-                        Indian, soulful, timeless, melody
-                      </button>
-                      <button
-                        className={`${chibBtnStyle(isChibBtn1Selected)} ${
-                          styles.chipbtn3
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setChibBtn1Selected(!isChibBtn1Selected);
-                        }}
-                      >
-                        Upbeat, spiritual music, Upbeat music
-                      </button>
-                      <button
-                        className={`${chibBtnStyle(isChibBtn1Selected)} ${
-                          styles.chipbtn24
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setChibBtn1Selected(!isChibBtn1Selected);
-                        }}
-                      >
-                        Indian, soul
-                      </button>
-                    </div>
+                      <span>Start Humming</span>
+                    </button>
                   </div>
                 </>
               )}
@@ -347,4 +246,4 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   );
 };
 
-export default WebModal;
+export default WebModal4;

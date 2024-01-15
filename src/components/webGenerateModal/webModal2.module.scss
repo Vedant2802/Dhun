@@ -31,7 +31,6 @@
   width: 32px;
   height: 32px;
   background: white;
-  border-radius: 50%;
 }
 .generatePopup {
   width: 80%;
@@ -41,16 +40,13 @@
   border-radius: 8px;
   background: #121212;
   .uploadButton {
-    position: absolute;
-    top: 240px;
     display: flex;
-    flex-direction: row;
-    gap: 5px;
-    margin-left: 127px;
-    color: #908da3;
-    font-size: 16px;
-    font-weight: 400;
-    cursor: pointer;
+    align-items: center;
+    height: 48px;
+    gap: 8px;
+    width: 100%;
+    border-radius: 8px;
+    background: #1f1f1f;
     .generating {
       margin-left: 55px;
     }
@@ -114,6 +110,7 @@
       border-radius: inherit;
       &:focus {
         outline: none;
+        box-shadow: 0px 0px 0px 4px rgba(72, 214, 126, 0.36);
       }
     }
 
@@ -125,9 +122,9 @@
       height: 4vh;
       cursor: pointer;
     }
-  }
-  .chip:focus-within {
-    box-shadow: 0px 0px 0px 4px rgba(72, 214, 126, 0.36);
+    // .uploadContainer:hover .uploadPromptmessage{
+    //   display: flex;
+    // }
   }
   .videoUpload {
     opacity: 0;
@@ -137,7 +134,12 @@
     cursor: pointer;
     position: absolute;
   }
-
+  .suggestionbtn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px;
+  }
   .suggestionbtns {
     display: flex;
     flex-direction: column;
@@ -161,10 +163,9 @@
   }
 
   .suggestiontext {
-    color: #908da3;
+    color: #fff;
     font-size: 14px;
     font-weight: 400;
-    margin-bottom: 8px;
   }
 
   .chipbtn24 {
@@ -297,7 +298,6 @@
   .suggestionoption {
     color: #908da3;
     font-size: 14px;
-    margin-bottom: 8px;
     font-weight: 400;
   }
   .suggestionwrp {
@@ -382,4 +382,18 @@
   margin-left: auto;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
+}
+.musicButtonUpload {
+  height: inherit;
+  cursor: pointer;
+  background-color: #48d67e;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.musicButtonText {
+  color: #bcbcbc;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }

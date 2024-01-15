@@ -9,7 +9,7 @@ import {
   generateMusicApi,
   registerApi,
   setAccessToken,
-  exportMusic
+  exportMusic,
 } from "../services/axiosService";
 
 interface IUserTokenRequest {
@@ -27,6 +27,8 @@ export interface GenerateMusicRequestObj {
   image_url?: string;
   email?: string;
   file_path?: string;
+  generation_type?: string;
+  file_name?: string;
 }
 
 export interface GenerateMusicResponse {
@@ -101,7 +103,7 @@ const initialState: IGenerateState = {
   userData: {
     status: API_STATUS_TYPES.idle,
   },
-  exportedMusicData: {}
+  exportedMusicData: {},
 };
 
 type IGenerateStore = IGenerateState & IGenerateActions;
@@ -127,11 +129,9 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       }));
       const data: any = await uploadFileApi<object>(file);
       const musicData: any = await generateMusicApi({
-        email: "",
-        image_url: "",
+        generation_type: "text-to-music",
+        file_name: "",
         prompt: "",
-        duration: 30,
-        file_path: data?.gcs_url,
       });
 
       set(() => ({
@@ -163,15 +163,15 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       isMusicPlaying: true,
       currentMusicIndex: musicIndex,
     }));
-    if(compositionIndex){
+    if (compositionIndex) {
       set(() => ({
-        currentTimeFrameId:get().timeFrameData[0].id,
-        compositionIndex:compositionIndex
+        currentTimeFrameId: get().timeFrameData[0].id,
+        compositionIndex: compositionIndex,
       }));
-    }else{
+    } else {
       set(() => ({
-        compositionIndex:0,
-        currentTimeFrameId:get().timeFrameData[0].id,
+        compositionIndex: 0,
+        currentTimeFrameId: get().timeFrameData[0].id,
       }));
     }
   },
@@ -195,7 +195,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       set(() => ({ status: API_STATUS_TYPES.loading }));
       const data: any = await generateMusicApi<object>({
         ...requestObj,
-        duration: get().duration,
+        // duration: get().duration,
       });
       const updateTimeFrames = get().timeFrameData.map(
         (timeFrame: TimeFrameData) => {
@@ -216,7 +216,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       set(() => ({ status: API_STATUS_TYPES.failed, error }));
     }
   },
-  
+
   resetWebsiteData: () => {
     set(() => ({
       websiteData: {
@@ -235,7 +235,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       }));
       const data: any = await generateMusicApi<object>({
         ...requestObj,
-        duration: 30,
+        // duration: 30,
       });
 
       if (get().websiteData.status !== API_STATUS_TYPES.idle) {
@@ -268,9 +268,9 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       return set(() => ({
         currentMusicSrc: nextMusicTrack,
         currentTimeFrameId: timeFrameData[nextTimeFrameIndex].id,
-        isMusicPlaying:true
+        isMusicPlaying: true,
       }));
-    }else{
+    } else {
       set(() => ({
         isMusicPlaying: false,
       }));
@@ -299,12 +299,12 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
     }
   },
   exportMusicData: async (url: any) => {
-      const exportedMusic = await exportMusic(url);
-      set(()=> ({
-        exportedMusicData : {
-          data: exportedMusic
-        }
-      }))
+    const exportedMusic = await exportMusic(url);
+    set(() => ({
+      exportedMusicData: {
+        data: exportedMusic,
+      },
+    }));
   },
   setUser: (user: any) => {
     set(() => ({

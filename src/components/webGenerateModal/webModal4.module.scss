@@ -35,7 +35,7 @@
 }
 .generatePopup {
   width: 80%;
-  gap: 32px;
+  gap: 300px;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -102,7 +102,10 @@
     width: 100%;
     border: 1px solid #48d67e;
     border-radius: 8px;
-    background: #0f0f0f;
+    background: #48d67e;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     .chipInput {
       color: #9f9cb4;
       padding: 0px 16px;
@@ -379,7 +382,6 @@
 .musicButton {
   cursor: pointer;
   background-color: #48d67e;
-  margin-left: auto;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
 }

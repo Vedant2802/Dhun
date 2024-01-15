@@ -9,15 +9,47 @@ import feature2 from "../../../public/icons/feature2.svg";
 import feature3 from "../../../public/icons/feature3.svg";
 import feature4 from "../../../public/icons/feature4.svg";
 import { createPortal } from "react-dom";
-import Login from "../../pages/Login/Login";
+import { useGenerateStore } from "../../stores/generateStore";
+import WebModal from "../webGenerateModal/WebModal";
+import WebModal3 from "../webGenerateModal/webModal3";
+import WebModal2 from "../webGenerateModal/WebModal2";
+import WebModal4 from "../webGenerateModal/webModal4";
 
 const OurFeature = () => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const openPrompt = () => {
-    setOpenModal(true);
+  const userData = useGenerateStore((state) => state.userData);
+  const [openModal1, setOpenModal1] = useState<boolean>(false);
+  const [openModal2, setOpenModal2] = useState<boolean>(false);
+  const [openModal3, setOpenModal3] = useState<boolean>(false);
+  const [openModal4, setOpenModal4] = useState<boolean>(false);
+  const openPrompt1 = () => {
+    setOpenModal1(true);
   };
-  const getOpenModal = () => {
-    return createPortal(<Login closePopup={setOpenModal} />, document.body);
+  const getOpenModal1 = () => {
+    return createPortal(<WebModal closePopup={setOpenModal1} />, document.body);
+  };
+  const openPrompt2 = () => {
+    setOpenModal2(true);
+  };
+  const getOpenModal2 = () => {
+    return createPortal(
+      <WebModal2 closePopup={setOpenModal2} />,
+      document.body
+    );
+  };
+  const openPrompt3 = () => {
+    setOpenModal3(true);
+  };
+  const getOpenModal3 = () => {
+    return createPortal(
+      <WebModal3 closePopup={setOpenModal3} />,
+      document.body
+    );
+  };
+  const openPrompt4 = () => {
+    setOpenModal4(true);
+  };
+  const getOpenModal4 = () => {
+    return createPortal(<WebModal4 closePopup={setOpenModal4} />, document.body);
   };
 
   return (
@@ -89,7 +121,7 @@ const OurFeature = () => {
                   music instantly 
                 </span>
               </div>
-              <button onClick={openPrompt} className={styles.exportbtn}>
+              <button onClick={openPrompt1} className={styles.exportbtn}>
                 <span className={styles.exportbtnText}>Sample Now</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +138,7 @@ const OurFeature = () => {
                   />
                 </svg>
               </button>
-              {openModal && getOpenModal()}
+              {openModal1 && getOpenModal1()}
             </div>
 
             <div className={styles.promptMainContainer}>
@@ -124,7 +156,7 @@ const OurFeature = () => {
                   instantly
                 </span>
               </div>
-              <button onClick={openPrompt} className={styles.exportbtn}>
+              <button onClick={openPrompt2} className={styles.exportbtn}>
                 <span className={styles.exportbtnText}>Sample Now</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +173,7 @@ const OurFeature = () => {
                   />
                 </svg>
               </button>
-              {openModal && getOpenModal()}
+              {openModal2 && getOpenModal2()}
             </div>
           </div>
           <div className={styles.column}>
@@ -161,7 +193,7 @@ const OurFeature = () => {
                   Type text describing a sound effect and generate it instantly 
                 </span>
               </div>
-              <button onClick={openPrompt} className={styles.exportbtn}>
+              <button onClick={openPrompt3} className={styles.exportbtn}>
                 <span className={styles.exportbtnText}>Sample Now</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +210,7 @@ const OurFeature = () => {
                   />
                 </svg>
               </button>
-              {openModal && getOpenModal()}
+              {openModal3 && getOpenModal3()}
             </div>
 
             <div className={styles.promptMainContainer}>
@@ -196,7 +228,7 @@ const OurFeature = () => {
                   eventually 
                 </span>
               </div>
-              <button onClick={openPrompt} className={styles.exportbtn}>
+              <button onClick={openPrompt4} className={styles.exportbtn}>
                 <span className={styles.exportbtnText}>Sample Now</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +245,7 @@ const OurFeature = () => {
                   />
                 </svg>
               </button>
-              {openModal && getOpenModal()}
+              {openModal4 && getOpenModal4()}
             </div>
           </div>
         </div>

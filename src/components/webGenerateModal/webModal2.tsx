@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { API_STATUS_TYPES } from "../../assets/constants/apiContants";
 import { useGenerateStore } from "../../stores/generateStore";
-import styles from "./WebModal.module.scss";
+import styles from "./webModal2.module.scss";
 import playIcon from "../../../public/icons/play.svg";
 import pauseIcon from "../../../public/icons/pauseWhite.svg";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 import closeicon from "../../../public/icons/close.svg";
 import musicbutton from "../../../public/icons/music-button.svg";
+import plus from "../../../public/icons/plus.svg";
 import uploadbutton from "../../../public/icons/upload-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
 
@@ -31,7 +32,7 @@ type webmodalprops = {
   closePopup: Function;
 };
 
-const WebModal = ({ closePopup }: webmodalprops) => {
+const WebModal2 = ({ closePopup }: webmodalprops) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isChibBtn1Selected, setChibBtn1Selected] = useState<boolean>(false);
   const [isChibBtn2Selected, setChibBtn2Selected] = useState<boolean>(false);
@@ -223,7 +224,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <div className={styles.topCardDiv}>
               <div className={styles.topDiv}>
                 <p className={styles.closeIconwhite}></p>
-                <p className={styles.topCardText}>Create text &rarr; music</p>
+                <p className={styles.topCardText}>Create melody &rarr; music</p>
               </div>
 
               <button className={styles.closeIconWrapper}>
@@ -280,7 +281,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                         name="prompt"
                         className={styles.chipInput}
                         onChange={(e) => setPrompt(e.target.value)}
-                        placeholder="What melody do you wish to create? "
+                        placeholder="Describe the music you wish to create. Try an Indian variation of the song"
                       />
                       <img
                         className={styles.musicButton}
@@ -290,50 +291,28 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                     </div>
                   </div>
                   <div>
-                    <p className={styles.suggestiontext}>Suggestions</p>
-                    <div className={styles.suggestionbtns}>
-                      <button
-                        className={chibBtnStyle(isChibBtn1Selected)}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setChibBtn1Selected(!isChibBtn1Selected);
-                        }}
-                      >
-                        Upbeat, spiritual music
-                      </button>
-                      <button
-                        className={`${chibBtnStyle(isChibBtn2Selected)} ${
-                          styles.chipbtn24
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setChibBtn2Selected(!isChibBtn2Selected);
-                        }}
-                      >
-                        Indian, soulful, timeless, melody
-                      </button>
-                      <button
-                        className={`${chibBtnStyle(isChibBtn1Selected)} ${
-                          styles.chipbtn3
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setChibBtn1Selected(!isChibBtn1Selected);
-                        }}
-                      >
-                        Upbeat, spiritual music, Upbeat music
-                      </button>
-                      <button
-                        className={`${chibBtnStyle(isChibBtn1Selected)} ${
-                          styles.chipbtn24
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setChibBtn1Selected(!isChibBtn1Selected);
-                        }}
-                      >
-                        Indian, soul
-                      </button>
+                    <div className={styles.suggestionbtn}>
+                      <img src={plus} />
+                      <p className={styles.suggestiontext}>
+                        Add reference music
+                      </p>
+                    </div>
+                    <div className={styles.uploadButton}>
+                      <img
+                        className={styles.musicButtonUpload}
+                        src={uploadbutton}
+                      />
+                      <span className={styles.musicButtonText}>
+                        Upload your music
+                      </span>
+                      <input
+                        type="file"
+                        id="uploadVideo"
+                        name="filename"
+                        accept="video/mp4,video/x-m4v,video/*"
+                        onChange={onVideoFileUpload}
+                        className={styles.videoUpload}
+                      />
                     </div>
                   </div>
                 </>
@@ -347,4 +326,4 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   );
 };
 
-export default WebModal;
+export default WebModal2;

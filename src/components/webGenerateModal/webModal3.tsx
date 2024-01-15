@@ -31,7 +31,7 @@ type webmodalprops = {
   closePopup: Function;
 };
 
-const WebModal = ({ closePopup }: webmodalprops) => {
+const WebModal3 = ({ closePopup }: webmodalprops) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isChibBtn1Selected, setChibBtn1Selected] = useState<boolean>(false);
   const [isChibBtn2Selected, setChibBtn2Selected] = useState<boolean>(false);
@@ -223,7 +223,9 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <div className={styles.topCardDiv}>
               <div className={styles.topDiv}>
                 <p className={styles.closeIconwhite}></p>
-                <p className={styles.topCardText}>Create text &rarr; music</p>
+                <p className={styles.topCardText}>
+                  Create text &rarr; sfx and foley
+                </p>
               </div>
 
               <button className={styles.closeIconWrapper}>
@@ -280,7 +282,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                         name="prompt"
                         className={styles.chipInput}
                         onChange={(e) => setPrompt(e.target.value)}
-                        placeholder="What melody do you wish to create? "
+                        placeholder="What sound effects do you wish to create? "
                       />
                       <img
                         className={styles.musicButton}
@@ -299,7 +301,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        Upbeat, spiritual music
+                        Laughing baby girl
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn2Selected)} ${
@@ -310,7 +312,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn2Selected(!isChibBtn2Selected);
                         }}
                       >
-                        Indian, soulful, timeless, melody
+                        Old man waking
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn1Selected)} ${
@@ -321,18 +323,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        Upbeat, spiritual music, Upbeat music
-                      </button>
-                      <button
-                        className={`${chibBtnStyle(isChibBtn1Selected)} ${
-                          styles.chipbtn24
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setChibBtn1Selected(!isChibBtn1Selected);
-                        }}
-                      >
-                        Indian, soul
+                        Noise in Mumbai city
                       </button>
                     </div>
                   </div>
@@ -347,4 +338,4 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   );
 };
 
-export default WebModal;
+export default WebModal3;
