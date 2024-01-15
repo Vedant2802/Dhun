@@ -24,7 +24,7 @@ enum DEFAULT_PROMPTS {
 }
 
 const defaultReqObj = {
-  generation_type: "text-to-music",
+  generation_type: "melody-to-music",
   file_name: "",
 };
 

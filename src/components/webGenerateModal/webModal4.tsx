@@ -6,8 +6,8 @@ import playIcon from "../../../public/icons/play.svg";
 import pauseIcon from "../../../public/icons/pauseWhite.svg";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 import closeicon from "../../../public/icons/close.svg";
-import sing from "../../../public/icons/sing.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
+import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 
 enum DEFAULT_PROMPTS {
   prompt1 = "Upbeat, spiritual music",
@@ -17,8 +17,7 @@ enum DEFAULT_PROMPTS {
 }
 
 const defaultReqObj = {
-  generation_type: "text-to-music",
-  file_name: "",
+  generation_type: "Hmm-to-music",
 };
 
 type webmodalprops = {
@@ -26,14 +25,21 @@ type webmodalprops = {
 };
 
 const WebModal4 = ({ closePopup }: webmodalprops) => {
-  const [prompt, setPrompt] = useState<string>("");
   const [isChibBtn1Selected, setChibBtn1Selected] = useState<boolean>(false);
+  const [filePath, setFilePath] = useState<string>("");
   const [isChibBtn2Selected, setChibBtn2Selected] = useState<boolean>(false);
   const videoRef: any = useRef<any>(null);
   const [videoPath, setVideoPath] = useState("");
-  const uploadFileForWebsite = useGenerateStore(
-    (state) => state.uploadFileForWebsite
-  );
+  const recorderControls = useAudioRecorder();
+  const addAudioElement = (blob: any) => {
+    const url = URL.createObjectURL(blob);
+    const audio = document.createElement("audio");
+    audio.src = url;
+    audio.controls = true;
+    document.body.appendChild(audio);
+    setFilePath(audio.src);
+  };
+
   const setUser = useGenerateStore((state) => state.setUser);
   const generateMusic = useGenerateStore(
     (state) => state.generateMusicForWebsite
@@ -54,24 +60,16 @@ const WebModal4 = ({ closePopup }: webmodalprops) => {
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
-    generateMusic({ ...defaultReqObj, prompt });
   };
 
-  const audioUpload = (audio: string) => {
-    if (audio === "GOT") {
+  useEffect(() => {
+    filePath &&
       generateMusic({
-        ...defaultReqObj,
-        prompt: prompt || "upbeat, neutral, driving",
+        generation_type: "Hmm-to-music",
+        prompt: "",
+        file_name: filePath,
       });
-    } else {
-      generateMusic({
-        ...defaultReqObj,
-        prompt:
-          prompt ||
-          "joyful, medium tempo, high pitch, classical, sitar, tabla, harmonium, uplifting, melodic, rhythmic",
-      });
-    }
-  };
+  }, [filePath]);
 
   useEffect(() => {
     if (isChibBtn1Selected) {
@@ -108,8 +106,8 @@ const WebModal4 = ({ closePopup }: webmodalprops) => {
     resetWebsiteData();
     setChibBtn1Selected(false);
     setChibBtn2Selected(false);
-    setPrompt("");
     setVideoPath("");
+    setFilePath("");
   };
 
   const getMusicIcon = (musicSrc: string) => {
@@ -227,10 +225,9 @@ const WebModal4 = ({ closePopup }: webmodalprops) => {
                 <>
                   <div className={styles.chipinputwrapper}>
                     <button className={styles.chip}>
-                      <img
-                        className={styles.musicButton}
-                        src={sing}
-                        onClick={(e) => handleOnSubmit(e)}
+                      <AudioRecorder
+                        onRecordingComplete={(blob) => addAudioElement(blob)}
+                        recorderControls={recorderControls}
                       />
                       <span>Start Humming</span>
                     </button>
