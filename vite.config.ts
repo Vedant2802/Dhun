@@ -8,5 +8,11 @@ export default defineConfig({
   build: {
     outDir: "./dist",
   },
+  server: {
+    port: 3333
+  },
+  preview: {
+    port: 8888
+  }
   // base: "/app"
 });
