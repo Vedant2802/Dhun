@@ -6,7 +6,7 @@ import pauseIcon from "../../../public/icons/pausegrey.svg";
 const VideoComponent = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(true);
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const playVideoPlayer = () => {
     setIsPlaying((prev: boolean) => !prev);

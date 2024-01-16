@@ -12,7 +12,7 @@ import { createPortal } from "react-dom";
 import { useGenerateStore } from "../../stores/generateStore";
 import WebModal from "../webGenerateModal/WebModal";
 import WebModal3 from "../webGenerateModal/webModal3";
-import WebModal2 from "../webGenerateModal/WebModal2";
+import WebModal2 from "../webGenerateModal/webModal2";
 import WebModal4 from "../webGenerateModal/webModal4";
 
 const OurFeature = () => {
