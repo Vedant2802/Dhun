@@ -1,37 +1,45 @@
 .webDialog {
+  height: 100vh;
+  width: 100vw;
   position: fixed;
   top: 50%;
-  font-family: Work Sans;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
-  height: 100vh;
   justify-content: center;
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.8);
-  width: 100%;
   .closeIconWrapper {
-    position: absolute;
-    top: -70px;
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
+    justify-content: flex-end;
+    width: 25%;
+    margin-right: 30px;
   }
   .closeIcon {
     cursor: pointer;
   }
 }
-
+.topCardDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.closeIconwhite {
+  width: 32px;
+  height: 32px;
+  background: white;
+  border-radius: 50%;
+}
 .generatePopup {
-  width: 500px;
-  border-radius: 20px;
-  z-index: 999;
-  top: 50px;
-  border: 1px solid #47474799;
-  background-color: #0f0f0f;
-  position: relative;
+  width: 80%;
+  gap: 32px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background: #121212;
   .uploadButton {
     position: absolute;
     top: 240px;
@@ -47,20 +55,20 @@
       margin-left: 55px;
     }
   }
+  .topDiv {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+  }
   .topCard {
-    width: 500px;
-    height: 280px;
-    background: linear-gradient(
-      60deg,
-      rgba(15, 15, 15, 1) 54%,
-      rgba(189, 66, 48, 1) 100%
-    );
-    border-radius: 20px 20px 0px 0px;
+    padding-top: 32px;
+    padding-left: 32px;
     .topCardText {
       color: #fff;
+      padding-left: 10px;
       font-size: 24px;
       font-weight: 600;
-      padding: 166px 30px 20px;
+      width: 50%;
     }
     img,
     video {
@@ -70,7 +78,6 @@
     }
   }
   .topcardloaded {
-    background-image: url("../../../public/icons/music\ visualize.png");
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -78,7 +85,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 8px;
+    gap: 32px;
     background: #0f0f0f;
     padding: 24px;
     padding-bottom: 12px;
@@ -91,11 +98,10 @@
   .chip {
     display: flex;
     height: 48px;
-    align-items: center;
     gap: 8px;
-    width: 384px;
-    border-radius: 42px;
-    border: 1px solid #bd4230;
+    width: 100%;
+    border: 1px solid #48d67e;
+    border-radius: 8px;
     background: #0f0f0f;
     .chipInput {
       color: #9f9cb4;
@@ -108,7 +114,6 @@
       border-radius: inherit;
       &:focus {
         outline: none;
-        box-shadow: 0px 0px 0px 4px rgba(189, 66, 48, 0.36);
       }
     }
 
@@ -120,9 +125,9 @@
       height: 4vh;
       cursor: pointer;
     }
-    // .uploadContainer:hover .uploadPromptmessage{
-    //   display: flex;
-    // }
+  }
+  .chip:focus-within {
+    box-shadow: 0px 0px 0px 4px rgba(72, 214, 126, 0.36);
   }
   .videoUpload {
     opacity: 0;
@@ -135,7 +140,7 @@
 
   .suggestionbtns {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 5px;
     column-gap: 3px;
@@ -149,7 +154,6 @@
     font-weight: 400;
     padding: 12px 16px;
     background: rgba(71, 71, 71, 0.3);
-    border-radius: 42px;
     text-align: left;
     &:focus {
       outline: none;
@@ -163,9 +167,6 @@
     margin-bottom: 8px;
   }
 
-  .chipbtn3 {
-    width: 333px;
-  }
   .chipbtn24 {
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
@@ -268,21 +269,19 @@
     justify-content: center;
     gap: 10px;
     padding: 20px;
-    background: #000;
     .chip1 {
-      color: #000;
+      color: white;
       font-size: 16px;
       font-weight: 400;
       padding: 12px 20px;
       border: 1px rgba(71.32, 71.32, 71.32, 0.69) solid;
-      border-radius: 42px;
+      border-radius: 8px;
       background: linear-gradient(
-        90.4deg,
-        #e48b84 0.21%,
-        #f86a63 41.79%,
-        #d6798c 73.49%,
-        #6930f6 100%
-      );
+          0deg,
+          rgba(189, 66, 48, 0) 0%,
+          rgba(189, 66, 48, 0) 100%
+        ),
+        #333;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       cursor: pointer;
       display: flex;
@@ -379,5 +378,8 @@
 }
 .musicButton {
   cursor: pointer;
+  background-color: #48d67e;
   margin-left: auto;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }

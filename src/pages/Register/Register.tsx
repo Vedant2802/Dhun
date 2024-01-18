@@ -14,14 +14,14 @@ const RegisterPage = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [createPending,setCreatePending] = useState(false);
+  const [createPending, setCreatePending] = useState(false);
   const { getUserToken } = useGenerateStore((state) => state);
   const user = useGenerateStore((state) => state.userData);
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
     setCreatePending(true);
-    if(!createPending){
+    if (!createPending) {
       const registerObject = {
         name: name,
         email: email,
@@ -106,7 +106,9 @@ const RegisterPage = () => {
             </div>
             <br />
             <div className={styles.loginButton} onClick={handleSubmit}>
-             {!createPending ? REGISTER_PAGE_CONSTANTS.buttonText : REGISTER_PAGE_CONSTANTS.buttonTextPending }
+              {!createPending
+                ? REGISTER_PAGE_CONSTANTS.buttonText
+                : REGISTER_PAGE_CONSTANTS.buttonTextPending}
             </div>
             <hr className={styles.thematicBreak} />
             <div className={styles.loginContain}>

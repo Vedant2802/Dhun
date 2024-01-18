@@ -28,8 +28,8 @@ const uploadFileApi = async <T>(uploadFile: any): Promise<T> => {
       uploadFile,
       {
         headers: {
-          "Content-Type": "multipart/form-data"
-         },
+          "Content-Type": "multipart/form-data",
+        },
       }
     );
     return response.data;
@@ -76,7 +76,7 @@ const generateMusicApi = async <T>(
       requestObj,
       {
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
       }
     );
@@ -101,7 +101,17 @@ const exportMusic = async (requestObj: any): Promise<any> => {
   } catch (error) {
     throw error;
   }
-}
+};
+
+const getotp = async ({ requestBody, AUTH_ENDPOINT }: any) => {
+  try {
+    const response = await axiosInstance.post(AUTH_ENDPOINT, requestBody);
+    return response.data.token;
+  } catch (error) {
+    console.error("Error fetching user token:", error);
+    throw error;
+  }
+};
 
 export {
   uploadFileApi,
@@ -109,5 +119,6 @@ export {
   registerApi,
   contactApi,
   setAccessToken,
-  exportMusic
+  exportMusic,
+  getotp,
 };

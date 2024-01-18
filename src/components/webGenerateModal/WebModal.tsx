@@ -5,12 +5,10 @@ import styles from "./WebModal.module.scss";
 import playIcon from "../../../public/icons/play.svg";
 import pauseIcon from "../../../public/icons/pauseWhite.svg";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
-import closeicon from "../../../public/icons/cross-circle.svg";
+import closeicon from "../../../public/icons/close.svg";
 import musicbutton from "../../../public/icons/music-button.svg";
-import artistimage from "../../../public/icons/Artist image.png";
 import uploadbutton from "../../../public/icons/upload-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
-import info from "../../../public/icons/Info-popup (2).svg";
 
 enum UPLOADED_DEFAULT_MUSIC_REFERENCES {
   brunoMars = "http://dhun.centralindia.cloudapp.azure.com/storage/grenade 2.wav",
@@ -25,8 +23,8 @@ enum DEFAULT_PROMPTS {
 }
 
 const defaultReqObj = {
-  email: "test@gmail.com",
-  image_url: "",
+  generation_type: "text-to-music",
+  file_name: "",
 };
 
 type webmodalprops = {
@@ -85,7 +83,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
       generateMusic({
         ...defaultReqObj,
         prompt: prompt || "upbeat, neutral, driving",
-        file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.gotMusic,
       });
     } else {
       generateMusic({
@@ -93,7 +90,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
         prompt:
           prompt ||
           "joyful, medium tempo, high pitch, classical, sitar, tabla, harmonium, uplifting, melodic, rhythmic",
-        file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.brunoMars,
       });
     }
   };
@@ -215,13 +211,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   return (
     <dialog className={styles.webDialog}>
       <form className={styles.generatePopup} onSubmit={handleOnSubmit}>
-        <div className={styles.closeIconWrapper}>
-          <img
-            className={styles.closeIcon}
-            src={closeicon}
-            onClick={() => closePopup(false)}
-          />
-        </div>
         {renderVideo()}
         {!videoPath && (
           <div
@@ -231,12 +220,21 @@ const WebModal = ({ closePopup }: webmodalprops) => {
               `${styles.topcardloaded}`
             }  `}
           >
-            {musicUrls?.length === 0 && (
-              <p className={styles.topCardText}>
-                Hello, Describe the kind of melody you wish to create or pick a
-                suggestion.
-              </p>
-            )}
+            <div className={styles.topCardDiv}>
+              <div className={styles.topDiv}>
+                <p className={styles.closeIconwhite}></p>
+                <p className={styles.topCardText}>Create text &rarr; music</p>
+              </div>
+
+              <button className={styles.closeIconWrapper}>
+                <img
+                  className={styles.closeIcon}
+                  src={closeicon}
+                  onClick={() => closePopup(false)}
+                />
+              </button>
+            </div>
+
             {status === API_STATUS_TYPES.success && (
               <div className={styles.uploadButton}>
                 <img src={uploadbutton} />
@@ -282,14 +280,14 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                         name="prompt"
                         className={styles.chipInput}
                         onChange={(e) => setPrompt(e.target.value)}
-                        placeholder="What melody do you want to create? "
+                        placeholder="What melody do you wish to create? "
+                      />
+                      <img
+                        className={styles.musicButton}
+                        src={musicbutton}
+                        onClick={(e) => handleOnSubmit(e)}
                       />
                     </div>
-                    <img
-                      className={styles.musicButton}
-                      src={musicbutton}
-                      onClick={(e) => handleOnSubmit(e)}
-                    />
                   </div>
                   <div>
                     <p className={styles.suggestiontext}>Suggestions</p>
@@ -341,54 +339,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                 </>
               )}
             </div>
-            {status !== API_STATUS_TYPES.loading && (
-              <div className={styles.footersuggestions}>
-                {fileSizeError.length > 0 && (
-                  <span className={styles.fileSizeError}>
-                    <img src={info} className={styles.info} /> {fileSizeError}
-                  </span>
-                )}
-                <p className={styles.suggestionoption}>
-                  Influence your music (optional)
-                </p>
-                <div className={styles.suggestionwrp}>
-                  {fileName.length > 0 ? (
-                    <p className={styles.fileName}>{fileName}</p>
-                  ) : (
-                    <div className={styles.uploadbtn}>
-                      <div className={styles.uploadPromptmessage}>
-                        You can upload a music reference
-                        <br /> (.mp3, .wav, .mp4)
-                      </div>
-                      <input
-                        type="file"
-                        id="uploadReferenceFile"
-                        name="filename"
-                        accept="audio/mp3,.wav,video/mp4,video/x-m4v,video/*"
-                        onChange={onFileUpload}
-                        className={styles.videoUpload}
-                      />
-                    </div>
-                  )}
-                  <div
-                    onClick={() => audioUpload("Bruno")}
-                    className={styles.audiofiles}
-                  >
-                    <img src={artistimage} className={styles.artistimg} />
-                    <span className={styles.artistsongtext}>Bruno Mars</span>
-                  </div>
-                  <div
-                    onClick={() => audioUpload("GOT")}
-                    className={styles.audiofiles}
-                  >
-                    <img src={artistimage} className={styles.artistimg} />
-                    <span className={styles.artistsongtext}>GOT Theme</span>
-                  </div>
-                </div>
-
-                <div></div>
-              </div>
-            )}
           </>
         )}
       </form>

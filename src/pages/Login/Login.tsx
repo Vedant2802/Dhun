@@ -2,55 +2,73 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./Login.module.scss";
-import login from "../../../public/icons/Register-background.png";
 import { useGenerateStore } from "../../stores/generateStore";
+import closeicon from "../../../public/icons/close.svg";
 import {
   AUTH_ENDPOINTS,
   API_STATUS_TYPES,
   REGISTER_PAGE_CONSTANTS,
 } from "../../components/utilConstants/apiConstants";
 import { useNavigate } from "react-router-dom";
+import { getotp } from "../../services/axiosService";
+import { createPortal } from "react-dom";
+import OtpAuthenticate from "../../components/OtpAuthenticate/OtpAuthenticate";
 
-const Login: React.FC = () => {
+type webmodalprops = {
+  closePopup: Function;
+};
+
+const Login = ({ closePopup }: webmodalprops) => {
+  const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [mobile, setMobile] = useState<string>("");
   const [createPending, setCreatePending] = useState(false);
-  const { getUserToken } = useGenerateStore((state) => state);
+  const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
+
   const user = useGenerateStore((state) => state.userData);
-  const navigate = useNavigate();
   const handleLogin = async () => {
     setCreatePending(true);
     if (!createPending) {
       const requestBody = {
-        email: email,
-        password: password,
+        mobile: mobile,
       };
-      getUserToken({
+      await getotp({
         requestBody,
-        AUTH_ENDPOINT: AUTH_ENDPOINTS.login,
+        AUTH_ENDPOINT: AUTH_ENDPOINTS.getotp,
       });
     }
+    setOpenAuthModal(true);
   };
 
   useEffect(() => {
-    if (user?.status === API_STATUS_TYPES.success && user?.data?.access_token) {
-      navigate("/");
+    if (openAuthModal) {
+      createPortal(
+        <OtpAuthenticate closePopup={setOpenAuthModal} />,
+        document.body
+      );
     }
-  }, [user]);
+  }, [openAuthModal]);
 
   return (
     <div className={styles.loginContainer}>
-      <div className={styles.imageContainer}>
-        <img src={login} alt="login" className={styles.loginImage} />
-      </div>
-
       <div className={styles.formContainer}>
         <div className={styles.formSubContainer}>
           <div className={styles.loginHeader}>
             {REGISTER_PAGE_CONSTANTS.login}
           </div>
-          {/* <div className={styles.loginHeader}>Login</div> */}
           <div className={styles.inputField}>
+            <div className={styles.inputContainer}>
+              <input
+                className={styles.input}
+                type="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <label className={styles.label} id="label-fname">
+                <div className={styles.text}>Name</div>
+              </label>
+            </div>
+
             <div className={styles.inputContainer}>
               <input
                 className={styles.input}
@@ -64,29 +82,38 @@ const Login: React.FC = () => {
             </div>
 
             <div className={styles.inputContainer}>
+              <label className={styles.label} id="label-fname">
+                <div className={styles.text}>+91</div>
+              </label>
               <input
-                className={styles.input}
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                className={styles.inputMobile}
+                type="mobile"
+                value={mobile}
+                onChange={(e) => {
+                  const value = e.target.value
+                    .replace(/[^0-9]/g, "")
+                    .slice(0, 10);
+                  setMobile(value);
+                }}
               />
               <label className={styles.label} id="label-fname">
-                <div className={styles.text}>Password</div>
+                <div className={styles.text}>Mobile Number</div>
               </label>
             </div>
           </div>
+          <div className={styles.loginOTPMessage}>
+            We will send an OTP on the entered mobile number
+          </div>
           <div className={styles.loginButton} onClick={handleLogin}>
-            {!createPending ? "Login" : "Loggin In..."}
+            Request OTP
           </div>
-          <div className={styles.signupContainer}>
-            {/* <div className={styles.signupContent}>Don’t have an account?</div> */}
-            <span
-              className={styles.signupLink}
-              onClick={() => navigate("/register")}
-            >
-              Create a new account
-            </span>
-          </div>
+        </div>
+        <div className={styles.closeIconWrapper}>
+          <img
+            className={styles.closeIcon}
+            src={closeicon}
+            onClick={() => closePopup(false)}
+          />
         </div>
       </div>
     </div>

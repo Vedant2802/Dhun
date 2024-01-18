@@ -46,10 +46,13 @@ export const ControlPopup: React.FC<controlPopupProps> = ({ onClose }) => {
     );
     generateMusic &&
       generateMusic({
-        email: "test@gmail.com",
+        // email: "test@gmail.com",
+        // prompt: prompts,
+        // image_url: "",
+        // tempo,
+        generation_type: "text-to-music",
         prompt: prompts,
-        image_url: "",
-        tempo,
+        file_name: "",
       });
   };
 

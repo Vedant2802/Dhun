@@ -1,10 +1,11 @@
 .dhunai {
   background-color: #000;
-  font-family: "Poppins";
+  font-family: "Quicksand";
   font-weight: 400;
   .topHeader {
-    position: fixed;
+    position: absolute;
     z-index: 200;
+    background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 100%);
   }
 }
 .popup {
