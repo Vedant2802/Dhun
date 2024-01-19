@@ -62,8 +62,14 @@ const MonetizeTunes = () => {
       <div className={styles.footer}>
         <div className={styles.footerHead1}>
           <span>SITEMAP</span>
-          <span className={styles.footerHeadmap1}>Product / Let's Talk /</span>
+          <span className={styles.footerHeadmap1}>Product / Let's Talk </span>
           {/* <span className={styles.footerHeadmap2}>Login / Register</span> */}
+          <button
+            onClick={() => navigate("/login")}
+            className={styles.footerHeadmap2}
+          >
+            Login / Register
+          </button>
         </div>
         <div className={styles.footerHead2}>
           <div className={styles.footerContact}>

@@ -1,7 +1,7 @@
 import "./App.css";
 // import AddVideo from "./components/addVideoInitial/AddVideo";
 import Header from "./components/header/Header";
-// import Login from "./pages/Login/Login";
+import Login from "./pages/Login/Login";
 import MainDashboard from "./pages/MainDashboard/MainDashboard";
 import DhunAi from "./pages/DhunAi/DhunAi";
 // import RegisterPage from "./pages/Register/Register";
@@ -16,7 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* <Route path="/" element={<AddVideo />} /> */}
-          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/login" element={<Login closePopup={undefined} />} />
           <Route
             path="/editor-dashboard"
             element={
