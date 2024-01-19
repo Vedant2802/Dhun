@@ -14,6 +14,7 @@ export enum API_ENDPOINTS {
   uploadVideo = "/api/upload",
   generateMusicV4 = "/api/v4/music_studio/generate",
   generateMusicV3 = "/api/v3/music_studio/generate",
+  
   contactus = "/api/contactus",
   exportMusic = "/api/utils/combineaudio"
 }

@@ -1,5 +1,5 @@
 .featureContainer {
-  padding: 120px 64px 0px 64px;
+  padding: 0px 24px;
   background-repeat: no-repeat;
   background-position: top right;
 }
@@ -23,11 +23,12 @@
 .featureContainerHead {
   display: flex;
   flex-direction: row;
-  margin: 100px;
+  margin: 180px 0px;
   @media screen and (max-width: 900px) {
+    margin: 100px 0px;
     display: flex;
     flex-direction: row;
-    margin: 100px;
+    // margin: 100px;
     flex-wrap: wrap;
     gap: 70px;
   }
@@ -51,7 +52,7 @@
   font-size: 36px;
   font-style: normal;
   font-weight: 700;
-  margin-top: 10vh;
+  margin-top: 32px;
   line-height: 48px;
 }
 .featureContainerAboutText {
@@ -61,7 +62,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 26px;
-  width: 75%;
+  width: 85%;
   margin-top: 16px;
 }
 .featureContainerAbout {
@@ -88,13 +89,13 @@
   display: flex;
   justify-content: space-between;
   gap: 32px;
-  margin-top: 70px;
-  padding-bottom: 100px;
+  margin-top: 64px;
+  // padding-bottom: 100px;
   flex-direction: column;
 
   .promptMainContainer {
     padding: 32px;
-    width: 75vw;
+    width: 100%;
     border-radius: 8px;
     border: 2px solid #4a4a4a;
     .promptTopContainer {

@@ -29,36 +29,41 @@ const MonetizeTunes = () => {
     };
   }, []);
   return (
-    <div className={styles.mainTune}>
-      <img className={styles.dhunImage} src={dhun2} />
-      <div className={styles.mainTuneText}>
-        <div className={styles.text}>Music creation made easy for everyone</div>
-        <button
-          onClick={() => alert("Let's talk")}
-          className={styles.exportbtn}
-        >
-          <span className={styles.exportbtnText}>Let's talk</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
+    <div>
+      <div className={styles.mainTune}>
+        <img className={styles.dhunImage} src={dhun2} />
+        <div className={styles.mainTuneText}>
+          <div className={styles.text}>
+            Music creation made easy for everyone
+          </div>
+          <button
+            onClick={() => alert("Let's talk")}
+            className={styles.exportbtn}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-            />
-          </svg>
-        </button>
+            <span className={styles.exportbtnText}>Let's talk</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
+
       <div className={styles.footer}>
         <div className={styles.footerHead1}>
           <span>SITEMAP</span>
           <span className={styles.footerHeadmap1}>Product / Let's Talk /</span>
-          <span className={styles.footerHeadmap2}>Login / Register</span>
+          {/* <span className={styles.footerHeadmap2}>Login / Register</span> */}
         </div>
         <div className={styles.footerHead2}>
           <div className={styles.footerContact}>
@@ -73,7 +78,7 @@ const MonetizeTunes = () => {
             </div>
             <div className={styles.adpod}>
               <img className={styles.adpodImg} src={adpod} />
-              <span className={styles.adpodText}>AdPod AI</span>
+              <span className={styles.adpodText}>DHUN.AI</span>
             </div>
             <div className={styles.addressBar}>
               <div className={styles.address}>

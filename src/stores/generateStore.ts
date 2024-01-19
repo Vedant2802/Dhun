@@ -231,6 +231,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
     }));
   },
   generateMusicForWebsite: async (requestObj: GenerateMusicRequestObj) => {
+    debugger
     try {
       set(() => ({
         websiteData: {

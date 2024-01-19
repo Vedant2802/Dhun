@@ -235,7 +235,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
               </button>
             </div>
 
-            {status === API_STATUS_TYPES.success && (
+            {/* {status === API_STATUS_TYPES.success && (
               <div className={styles.uploadButton}>
                 <img src={uploadbutton} />
                 <span>Upload your own video </span>
@@ -248,12 +248,12 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                   className={styles.videoUpload}
                 />
               </div>
-            )}
-            {status === API_STATUS_TYPES.loading && (
+            )} */}
+            {/* {status === API_STATUS_TYPES.loading && (
               <div className={styles.uploadButton}>
                 <span className={styles.generating}> Generating . . . </span>
               </div>
-            )}
+            )} */}
           </div>
         )}
         {status === API_STATUS_TYPES.success && musicUrls?.length ? (
@@ -282,11 +282,13 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                         onChange={(e) => setPrompt(e.target.value)}
                         placeholder="What melody do you wish to create? "
                       />
-                      <img
-                        className={styles.musicButton}
-                        src={musicbutton}
-                        onClick={(e) => handleOnSubmit(e)}
-                      />
+                      <div className={styles.musicButton}>
+                        <img
+                          src={musicbutton}
+                          onClick={(e) => handleOnSubmit(e)}
+                        />
+                        <div>Generate</div>
+                      </div>
                     </div>
                   </div>
                   <div>
