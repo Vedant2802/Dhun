@@ -44,7 +44,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   );
   const setUser = useGenerateStore((state) => state.setUser);
   const generateMusic = useGenerateStore(
-    (state) => state.generateMusicForWebsite
+    (state) => state.generateMusicForWebsiteTask
   );
   const setCurrentMusicSrc = useGenerateStore(
     (state) => state.setCurrentMusicSrc
@@ -287,7 +287,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           src={musicbutton}
                           onClick={(e) => handleOnSubmit(e)}
                         />
-                        <div>Generate</div>
+                        <div className={styles.generate}>Generate</div>
                       </div>
                     </div>
                   </div>

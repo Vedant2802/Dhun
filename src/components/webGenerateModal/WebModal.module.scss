@@ -40,6 +40,9 @@
   flex-direction: column;
   border-radius: 8px;
   background: #121212;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
   .uploadButton {
     position: absolute;
     top: 240px;
@@ -68,7 +71,8 @@
       padding-left: 10px;
       font-size: 24px;
       font-weight: 600;
-      width: 50%;
+      // width: 50%;
+      white-space: nowrap;
     }
     img,
     video {
@@ -385,5 +389,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   padding: 20px;
+}
+.generate {
+  color: #121212;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 }

@@ -10,6 +10,8 @@ import {
   registerApi,
   setAccessToken,
   exportMusic,
+  generateMusicTask,
+  getGeneratedMusic
 } from "../services/axiosService";
 
 interface IUserTokenRequest {
@@ -80,6 +82,7 @@ interface IGenerateActions {
     compositionIndex?: number
   ) => void;
   generateMusicForWebsite: (requestObj: GenerateMusicRequestObj) => void;
+  generateMusicForWebsiteTask: (requestObj: GenerateMusicRequestObj) => void;
   resetWebsiteData: () => void;
   playNextTrack: () => void;
   getUserToken: ({ requestBody, AUTH_ENDPOINT }: IUserTokenRequest) => void;
@@ -230,8 +233,8 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       isMusicPlaying: false,
     }));
   },
+
   generateMusicForWebsite: async (requestObj: GenerateMusicRequestObj) => {
-    debugger
     try {
       set(() => ({
         websiteData: {
@@ -260,6 +263,77 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       }));
     }
   },
+
+  generateMusicForWebsiteTask: async (requestObj: GenerateMusicRequestObj) => {
+    try {
+      set(() => ({
+        websiteData: {
+          status: API_STATUS_TYPES.loading,
+        },
+      }));
+      const data: any = await generateMusicTask<object>({
+        ...requestObj,
+      });
+
+      if(data?.message === "Task Submitted") {
+        const task_id = data?.task_id;
+        let status = '';
+        while (status !== 'Completed') {
+          try {
+            const response: any = await getGeneratedMusic(task_id);
+            console.log('response', response)
+            status = response?.status;
+            await new Promise(resolve => setTimeout(resolve, 2000)); 
+            if (response?.status === 'Completed') {
+              set(() => ({
+                websiteData: {
+                  musicUrls: response?.urls,
+                  status: API_STATUS_TYPES.success,
+                },
+              }));
+            }
+          } catch (error) {
+            console.log(error)
+          }
+        }
+        // const response: any = await getGeneratedMusic(task_id);
+
+        // console.log('response', response)
+      }
+
+      // if (get().websiteData.status !== API_STATUS_TYPES.idle) {
+      //   set(() => ({
+      //     websiteData: {
+      //       musicUrls: data?.urls,
+      //       status: API_STATUS_TYPES.success,
+      //     },
+      //   }));
+      // }
+    } catch (error: any) {
+      set(() => ({
+        websiteData: {
+          status: API_STATUS_TYPES.failed,
+          error,
+        },
+      }));
+    }
+  },
+
+  // const pollUntilCompleted = async () => {
+  //   let status = '';
+    
+  //   while (status !== 'Completed') {
+  //     try {
+  //       const response: any = await getGeneratedMusic(task_id);
+  //       console.log('response', response)
+  //       status = response.data.status;
+  
+  //       await new Promise(resolve => setTimeout(resolve, 1000)); 
+  //     } catch (error) {
+  //       error,
+  //     }
+  //   },
+
   playNextTrack: () => {
     const compositionIndex = get().compositionIndex as number;
     const timeFrameData = get().timeFrameData;

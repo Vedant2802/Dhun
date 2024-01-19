@@ -283,11 +283,13 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                         onChange={(e) => setPrompt(e.target.value)}
                         placeholder="Describe the music you wish to create. Try an Indian variation of the song"
                       />
-                      <img
-                        className={styles.musicButton}
-                        src={musicbutton}
-                        onClick={(e) => handleOnSubmit(e)}
-                      />
+                      <div className={styles.musicButton}>
+                        <img
+                          src={musicbutton}
+                          onClick={(e) => handleOnSubmit(e)}
+                        />
+                        <div className={styles.generate}>Generate</div>
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -298,10 +300,9 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                       </p>
                     </div>
                     <div className={styles.uploadButton}>
-                      <img
-                        className={styles.musicButtonUpload}
-                        src={uploadbutton}
-                      />
+                      <div className={styles.musicButtonUpload}>
+                        <img className={styles.uploadIcon} src={uploadbutton} />
+                      </div>
                       <span className={styles.musicButtonText}>
                         Upload your music
                       </span>

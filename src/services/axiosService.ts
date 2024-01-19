@@ -86,6 +86,45 @@ const generateMusicApi = async <T>(
   }
 };
 
+const generateMusicTask = async <T>(
+  requestObj: GenerateMusicRequestObj
+): Promise<T> => {
+  try {
+    const response = await axiosInstance.post(
+      API_ENDPOINTS.generateTask,
+      requestObj,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getGeneratedMusic = async <T>(
+  requestObj: any
+): Promise<T> => {
+  try {
+    const response = await axiosInstance.get(
+      `${API_ENDPOINTS.getGeneratedStatus}${requestObj}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    // console.log("response", response)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 const exportMusic = async (requestObj: any): Promise<any> => {
   try {
     const response = await axiosInstance.post(
@@ -116,9 +155,12 @@ const getotp = async ({ requestBody, AUTH_ENDPOINT }: any) => {
 export {
   uploadFileApi,
   generateMusicApi,
+  generateMusicTask,
+  getGeneratedMusic,
   registerApi,
   contactApi,
   setAccessToken,
   exportMusic,
   getotp,
+
 };
