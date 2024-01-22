@@ -39,6 +39,9 @@
   flex-direction: column;
   border-radius: 8px;
   background: #121212;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
   .uploadButton {
     display: flex;
     align-items: center;
@@ -64,7 +67,8 @@
       padding-left: 10px;
       font-size: 24px;
       font-weight: 600;
-      width: 50%;
+      // width: 50%;
+      white-space: nowrap;
     }
     img,
     video {
@@ -163,9 +167,11 @@
   }
 
   .suggestiontext {
-    color: #fff;
-    font-size: 14px;
+    color: #bcbcbc;
+    font-size: 16px;
+    font-family: Work Sans;
     font-weight: 400;
+    word-wrap: break-word;
   }
 
   .chipbtn24 {
@@ -376,19 +382,17 @@
     margin-right: 8px;
   }
 }
-.musicButton {
-  cursor: pointer;
-  background-color: #48d67e;
-  margin-left: auto;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
 .musicButtonUpload {
   height: inherit;
   cursor: pointer;
   background-color: #48d67e;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
+  padding: 12px;
+}
+.uploadIcon {
+  width: 24px;
+  height: 24px;
 }
 .musicButtonText {
   color: #bcbcbc;
@@ -396,4 +400,25 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.musicButton {
+  cursor: pointer;
+  background-color: #48d67e;
+  margin-left: auto;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 20px;
+}
+.generate {
+  color: #121212;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 }

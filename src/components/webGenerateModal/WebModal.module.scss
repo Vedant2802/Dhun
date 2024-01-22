@@ -40,6 +40,12 @@
   flex-direction: column;
   border-radius: 8px;
   background: #121212;
+  padding: 32px;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    gap: 24px;
+    padding: 24px 16px;
+  }
   .uploadButton {
     position: absolute;
     top: 240px;
@@ -61,14 +67,15 @@
     width: 75%;
   }
   .topCard {
-    padding-top: 32px;
-    padding-left: 32px;
+    // padding-top: 32px;
+    // padding-left: 32px;
     .topCardText {
       color: #fff;
       padding-left: 10px;
       font-size: 24px;
       font-weight: 600;
-      width: 50%;
+      // width: 50%;
+      white-space: nowrap;
     }
     img,
     video {
@@ -87,8 +94,11 @@
     justify-content: center;
     gap: 32px;
     background: #0f0f0f;
-    padding: 24px;
+    // padding: 24px;
     padding-bottom: 12px;
+    @media screen and (max-width: 600px) {
+      padding: 0px;
+    }
   }
   .chipinputwrapper {
     display: flex;
@@ -142,7 +152,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 8px;
     column-gap: 3px;
   }
   .chipBtn {
@@ -155,6 +165,8 @@
     padding: 12px 16px;
     background: rgba(71, 71, 71, 0.3);
     text-align: left;
+    border-radius: 8px;
+
     &:focus {
       outline: none;
     }
@@ -385,5 +397,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   padding: 20px;
+}
+.generate {
+  color: #121212;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 }
