@@ -61,7 +61,7 @@ const MonetizeTunes: React.FC<any> = ({ setShowContactPopup }) => {
       </div>
 
       <div className={styles.footer}>
-        <div className={styles.footerDetails}>
+       <div className={styles.footerDetails}>
           <div className={styles.footerFlex}>
             <span className={styles.sitemap}>SITEMAP</span>
             <span className={styles.footerHeadmap1}>

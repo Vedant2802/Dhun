@@ -15,7 +15,7 @@ import { createPortal } from "react-dom";
 import OtpAuthenticate from "../../components/OtpAuthenticate/OtpAuthenticate";
 
 type webmodalprops = {
-  closePopup: Function;
+  closePopup: any;
 };
 
 const Login = ({ closePopup }: webmodalprops) => {
