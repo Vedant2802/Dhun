@@ -282,11 +282,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                         onChange={(e) => setPrompt(e.target.value)}
                         placeholder="What melody do you wish to create? "
                       />
-                      <div className={styles.musicButton}>
-                        <img
-                          src={musicbutton}
-                          onClick={(e) => handleOnSubmit(e)}
-                        />
+                      <div
+                        className={styles.musicButton}
+                        onClick={(e) => handleOnSubmit(e)}
+                      >
+                        <img src={musicbutton} />
                         <div className={styles.generate}>Generate</div>
                       </div>
                     </div>

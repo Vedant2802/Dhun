@@ -6,7 +6,7 @@ import DhunIcon from "../../../public/icons/Dhun Icon.svg";
 import { useGenerateStore } from "../../stores/generateStore";
 import { useNavigate } from "react-router";
 
-const MonetizeTunes = () => {
+const MonetizeTunes: React.FC<any> = ({ setShowContactPopup }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const userData = useGenerateStore((state) => state.userData);
   const navigate = useNavigate();
@@ -28,6 +28,10 @@ const MonetizeTunes = () => {
       document.removeEventListener("keydown", handleEscapeKeyPress);
     };
   }, []);
+
+  const openContact = () => {
+    setShowContactPopup(true);
+  };
   return (
     <div>
       <div className={styles.mainTune}>
@@ -36,10 +40,7 @@ const MonetizeTunes = () => {
           <div className={styles.text}>
             Music creation made easy for everyone
           </div>
-          <button
-            onClick={() => alert("Let's talk")}
-            className={styles.exportbtn}
-          >
+          <button onClick={openContact} className={styles.exportbtn}>
             <span className={styles.exportbtnText}>Let's talk</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,26 +61,39 @@ const MonetizeTunes = () => {
       </div>
 
       <div className={styles.footer}>
-        <div className={styles.footerHead1}>
-          <span>SITEMAP</span>
-          <span className={styles.footerHeadmap1}>Product / Let's Talk /</span>
-          {/* <span className={styles.footerHeadmap2}>Login / Register</span> */}
-        </div>
-        <div className={styles.footerHead2}>
-          <div className={styles.footerContact}>
+        <div className={styles.footerDetails}>
+          <div className={styles.footerFlex}>
+            <span className={styles.sitemap}>SITEMAP</span>
+            <span className={styles.footerHeadmap1}>
+              Product / Let's Talk /
+            </span>
+          </div>
+
+          <div className={styles.footerFlex}>
             <span>CONTACT US</span>
             <span className={styles.footerDetailsContact}>
               +1 891 989-11-91
             </span>
-            <span className={styles.footerDetails2}>hello@adpod.ai</span>
+            <span className={styles.footerDetails2}>hello@dhun.ai</span>
+          </div>
+
+          <div className={styles.footerFlex}>
+            <span>FOLLOW US</span>
+            <span className={styles.footerDetailsContact}>Whatsapp</span>
+            <span>Instagram</span>
+          </div>
+        </div>
+
+        <div className={styles.footerHead2}>
+          <div className={styles.footerContact}>
             <div className={styles.dhunContainer}>
               <img className={styles.dhunImg} src={DhunIcon} />
               <span className={styles.dhuntext}>Dhun.AI</span>
             </div>
-            <div className={styles.adpod}>
+            {/* <div className={styles.adpod}>
               <img className={styles.adpodImg} src={adpod} />
               <span className={styles.adpodText}>DHUN.AI</span>
-            </div>
+            </div> */}
             <div className={styles.addressBar}>
               <div className={styles.address}>
                 1B, RMZ Ecospace, Bellandur, Bengaluru, Karnataka 560103
@@ -87,9 +101,6 @@ const MonetizeTunes = () => {
             </div>
           </div>
           <div className={styles.footerContact}>
-            <span>FOLLOW US</span>
-            <span className={styles.footerDetails}>Whatsapp</span>
-            <span className={styles.footerDetails2}>Instagram</span>
             <button
               className={styles.arrow}
               onClick={() => window.scrollTo(0, 0)}

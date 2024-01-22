@@ -25,7 +25,7 @@ const DhunAi = () => {
       {/* <DhunAiComponent /> */}
       <VideoComponent />
       <OurFeature />
-      <MonetizeTunes />
+      <MonetizeTunes setShowContactPopup={setShowContactPopup} />
     </div>
   );
 };
