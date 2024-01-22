@@ -145,13 +145,14 @@
   color: #000;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .contactcontainer {
     width: 90%;
     max-height: 100%;
   }
 
   .webDialog {
+    max-height: 100%;
     overflow-y: auto;
   }
 
