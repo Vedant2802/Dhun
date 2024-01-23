@@ -286,7 +286,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                         className={styles.musicButton}
                         onClick={(e) => handleOnSubmit(e)}
                       >
-                        <img src={musicbutton} />
+                        <img src={musicbutton} alt="musicIcon" />
                         <div className={styles.generate}>Generate</div>
                       </div>
                     </div>

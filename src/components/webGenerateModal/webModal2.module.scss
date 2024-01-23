@@ -22,15 +22,27 @@
     cursor: pointer;
   }
 }
+
 .topCardDiv {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-.closeIconwhite {
-  width: 32px;
-  height: 32px;
-  background: white;
+  .topDiv {
+    display: flex;
+    flex-direction: row;
+    .closeIconwhite {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: white;
+    }
+    .topCardText {
+      color: #fff;
+      padding-left: 10px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
 }
 .generatePopup {
   width: 80%;
@@ -39,8 +51,10 @@
   flex-direction: column;
   border-radius: 8px;
   background: #121212;
+  padding: 32px;
   @media screen and (max-width: 600px) {
     width: 100%;
+    padding: 24px 16px;
   }
   .uploadButton {
     display: flex;
@@ -54,14 +68,10 @@
       margin-left: 55px;
     }
   }
-  .topDiv {
-    display: flex;
-    flex-direction: row;
-    width: 75%;
-  }
+
   .topCard {
-    padding-top: 32px;
-    padding-left: 32px;
+    // padding-top: 32px;
+    // padding-left: 32px;
     .topCardText {
       color: #fff;
       padding-left: 10px;
@@ -87,8 +97,8 @@
     justify-content: center;
     gap: 32px;
     background: #0f0f0f;
-    padding: 24px;
-    padding-bottom: 12px;
+    // padding: 24px;
+    // padding-bottom: 12px;
   }
   .chipinputwrapper {
     display: flex;
@@ -98,7 +108,7 @@
   .chip {
     display: flex;
     height: 48px;
-    gap: 8px;
+    // gap: 8px;
     width: 100%;
     border: 1px solid #48d67e;
     border-radius: 8px;
@@ -313,6 +323,11 @@
     overflow: hidden;
   }
 }
+.libraryMusic {
+  display: flex;
+  gap: 8px;
+  padding: 8px 0px;
+}
 .audiofiles {
   display: flex;
   cursor: pointer;
@@ -321,14 +336,14 @@
 }
 .artistimg {
   display: inline;
-  height: 34px;
+  height: 48px;
 }
 .artistsongtext {
   color: #908da3;
-  font-size: 14px;
-  border-radius: 0 42px 42px 0;
+  font-size: 16px;
+  border-radius: 0px 8px 8px 0px;
   background: rgba(71, 71, 71, 0.3);
-  width: 159px;
+  // width: 159px;
   padding: 12px 16px;
 }
 .uploadPromptmessage {
