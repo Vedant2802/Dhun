@@ -15,6 +15,10 @@
   backdrop-filter: blur(8px);
   background: #000;
   z-index: 10;
+  @media screen and (max-width: 600px) {
+    width: 90%;
+    height: 100%;
+  }
   .closeIcon {
     position: absolute;
     cursor: pointer;
@@ -25,10 +29,21 @@
     right: 0;
     margin-top: 38px;
     margin-right: 20px;
+    @media screen and (max-width: 600px) {
+      // margin-top: 20px;
+      // margin-right: 10px;
+      position: absolute;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+    }
   }
 }
 .contactsuccess {
   height: 574px;
+  @media screen and (max-width: 600px) {
+    height: 100%;
+  }
 }
 .webDialog {
   position: fixed;
@@ -43,6 +58,10 @@
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.8);
   width: 100%;
+  @media screen and (max-width: 600px) {
+    max-height: 100%;
+    overflow-y: auto;
+  }
 }
 
 .contactHeader {
@@ -62,6 +81,9 @@
   font-weight: 700;
   padding: 36px 36px;
   text-transform: capitalize;
+  @media screen and (max-width: 600px) {
+    font-size: 24px;
+  }
 }
 
 .inputbox {
@@ -73,6 +95,9 @@
   box-sizing: border-box;
   border-radius: 8px;
   border: 1px solid #727272;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 }
 
 .inputlabel {
@@ -80,12 +105,19 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+    padding-top: 10px;
+  }
 }
 
 .inputtop {
   display: flex;
   flex-direction: row;
   margin-top: 30px;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 }
 
 .inputContainer {
@@ -96,6 +128,9 @@
   .astrek {
     color: #21ff00;
   }
+  @media screen and (max-width: 600px) {
+    margin-left: 0;
+  }
 }
 
 .inputbottom {
@@ -103,7 +138,12 @@
   margin: 30px 36px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  @media screen and (max-width: 600px) {
+    margin: 0;
+    flex-direction: column;
+    align-self: stretch;
+  }
   .inputnote {
     width: auto;
     height: 117px;
@@ -112,6 +152,9 @@
     border-radius: 8px;
     padding: 10px;
     border: 1px solid #727272;
+    @media screen and (max-width: 600px) {
+      height: 100px;
+    }
   }
 }
 
@@ -121,11 +164,22 @@
   justify-content: space-between;
   padding: 0 36px;
   margin-top: 46px;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
 }
 
 .contactinfo {
   color: #fff;
   font-size: 16px;
+  font-family: Quicksand;
+  @media screen and (max-width: 600px) {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    align-self: stretch;
+  }
 }
 
 .sendButton {
@@ -137,6 +191,9 @@
   gap: 10px;
   border-radius: 8px;
   background-color: #48d67e;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 }
 .successmessage {
   background: #47d24d;
@@ -150,67 +207,7 @@
   border-bottom-left-radius: inherit;
   gap: 10px;
   color: #000;
-}
-
-@media (max-width: 1200px) {
-  .contactcontainer {
-    width: 90%;
-    max-height: 100%;
-  }
-
-  .webDialog {
-    max-height: 100%;
-    overflow-y: auto;
-  }
-
-  .closeIcon {
-    margin-left: 40%;
-  }
-
-  .inputtop {
-    flex-direction: column;
-  }
-
-  .inputContainer {
-    margin-left: 0;
-    margin-top: 20px;
-  }
-
-  .footer {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contactHeader {
-    font-size: 2rem;
-  }
-
-  .inputnote {
-    height: 3rem;
-  }
-
-  .inputbottom {
-    margin: 20px 0;
-  }
-
-  .contactinfo {
-    font-size: 1rem;
-    margin-bottom: 10px;
-  }
-}
-
-/* Additional media queries for further adjustments if needed */
-@media (max-width: 480px) {
-  .contactHeader {
-    font-size: 1.5rem;
-  }
-
-  .inputnote {
-    height: 2rem;
-  }
-
-  .contactinfo {
-    font-size: 0.8rem;
-    margin-bottom: 8px;
+  @media screen and (max-width: 600px) {
+    width: 100%;
   }
 }

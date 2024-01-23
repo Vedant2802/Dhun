@@ -10,6 +10,15 @@
   justify-content: center;
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.4);
+  @media screen and (max-width: 600px) {
+    display: flex;
+    width: 360px;
+    padding-top: 429px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+  }
 
   .formContainer {
     // width: 80%;
@@ -21,14 +30,22 @@
     background: #121212;
     padding: 32px 340px;
     position: relative;
+    @media screen and (max-width: 600px) {
+      padding: 32px 24px;
+    }
     .formContainer:focus {
       box-shadow: 0px 0px 8px 0px rgba(57, 132, 60, 0.25);
+      @media screen and (max-width: 600px) {
+      }
     }
     .formSubContainer {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 32px;
+      @media screen and (max-width: 600px) {
+        gap: 24px;
+      }
 
       .loginHeader {
         color: #fff;
@@ -36,12 +53,18 @@
         font-weight: 600;
         line-height: 32px;
         // margin: 50px 0px 24px 0px;
+        @media screen and (max-width: 600px) {
+          font-size: 20px;
+        }
       }
       .inputField {
         display: flex;
         flex-direction: column;
         gap: 24px;
         width: 100%;
+        @media screen and (max-width: 600px) {
+          gap: 16px;
+        }
       }
 
       .inputContainer {
@@ -49,6 +72,9 @@
         border-radius: 8px;
         border: 1px solid #48d67e;
         background: #0f0f0f;
+        @media screen and (max-width: 600px) {
+          border-radius: 4px;
+        }
       }
 
       .input,
@@ -59,6 +85,9 @@
         border-radius: 4px;
         box-sizing: border-box;
         padding: 16px;
+        @media screen and (max-width: 600px) {
+          height: 40px;
+        }
       }
 
       .label {
@@ -68,6 +97,9 @@
         left: 16px;
         display: flex;
         align-items: center;
+        @media screen and (max-width: 600px) {
+          left: 12px;
+        }
       }
 
       .label {
@@ -80,6 +112,9 @@
         color: #797680;
         background-color: #0f0f0f;
         font-size: 16px;
+        @media screen and (max-width: 600px) {
+          font-size: 14px;
+        }
       }
       .inputMobile,
       .label .text {
@@ -87,6 +122,9 @@
         color: #797680;
         background-color: #0f0f0f;
         font-size: 16px;
+        @media screen and (max-width: 600px) {
+          font-size: 14px;
+        }
       }
       .input {
         border: 1px solid #797680;
@@ -94,6 +132,9 @@
       .inputMobile {
         border: 1px solid #797680;
         padding-left: 50px;
+        @media screen and (max-width: 600px) {
+          padding-left: 48px;
+        }
       }
       .input::placeholder {
         color: green;
@@ -169,6 +210,9 @@
       border: 1px solid #48d67e;
       background: #48d67e;
       cursor: pointer;
+      @media screen and (max-width: 600px) {
+        font-size: 16px;
+      }
     }
     .signupContainer {
       display: flex;
@@ -179,6 +223,9 @@
       font-weight: 500;
       font-size: 14px;
       margin-top: 32px;
+      @media screen and (max-width: 600px) {
+        font-size: 12px;
+      }
     }
     .signupContent {
       color: #000;
@@ -202,61 +249,13 @@
     font-size: 16px;
     font-weight: 400;
   }
-
-  @media screen and (max-width: 1200px) {
-    .formContainer {
-      padding: 5vw 2vw;
-      width: calc(100% - 10%);
-      position: relative;
-    }
-
-    .closeIconWrapper {
-      position: absolute;
-      top: 3%;
-      right: 3%;
-    }
-
-    .formSubContainer {
-      gap: 16px;
-    }
-
-    .loginHeader {
-      font-size: 20px;
-      margin-bottom: 16px;
-    }
-
-    .inputField {
-      gap: 16px;
-    }
-
-    .loginButton {
-      font-size: 20px;
-      padding: 10px 20px;
-    }
-
-    .resendOtp {
-      font-size: 18px;
-    }
-
-    .loginOTPMessage {
-      font-size: 14px;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    .loginHeader {
-      margin-bottom: 8px;
-    }
-
-    .closeIconWrapper {
-      top: 1%;
-      right: 1%;
-    }
-  }
 }
 .closeIconWrapper {
   position: absolute;
   top: 6%;
   right: 3%;
   cursor: pointer;
+  @media screen and (max-width: 600px) {
+    margin-top: 0.8rem;
+  }
 }
