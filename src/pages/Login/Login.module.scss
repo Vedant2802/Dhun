@@ -202,6 +202,57 @@
     font-size: 16px;
     font-weight: 400;
   }
+
+  @media screen and (max-width: 1200px) {
+    .formContainer {
+      padding: 5vw 2vw;
+      width: calc(100% - 10%);
+      position: relative;
+    }
+
+    .closeIconWrapper {
+      position: absolute;
+      top: 3%;
+      right: 3%;
+    }
+
+    .formSubContainer {
+      gap: 16px;
+    }
+
+    .loginHeader {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .inputField {
+      gap: 16px;
+    }
+
+    .loginButton {
+      font-size: 20px;
+      padding: 10px 20px;
+    }
+
+    .resendOtp {
+      font-size: 18px;
+    }
+
+    .loginOTPMessage {
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .loginHeader {
+      margin-bottom: 8px;
+    }
+
+    .closeIconWrapper {
+      top: 1%;
+      right: 1%;
+    }
+  }
 }
 .closeIconWrapper {
   position: absolute;
