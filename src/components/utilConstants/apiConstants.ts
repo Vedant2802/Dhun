@@ -1,8 +1,9 @@
 export enum AUTH_ENDPOINTS {
   register = "/api/auth/register",
   login = "/api/auth/login",
-  getotp = "/api/auth/get-otp",
-  verifyotp = "/api/auth/verify-otp",
+  getotp = "api-test/generate-otp",
+  verifyOtp = "api-test/verify-otp",
+  // getotp = "/api/auth/get-otp",
 }
 
 export enum API_STATUS_TYPES {

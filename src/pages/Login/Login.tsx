@@ -5,32 +5,28 @@ import styles from "./Login.module.scss";
 import { useGenerateStore } from "../../stores/generateStore";
 import closeicon from "../../../public/icons/close.svg";
 import {
-  AUTH_ENDPOINTS,
   API_STATUS_TYPES,
+  AUTH_ENDPOINTS,
   REGISTER_PAGE_CONSTANTS,
 } from "../../components/utilConstants/apiConstants";
 import { useNavigate } from "react-router-dom";
 import { getotp } from "../../services/axiosService";
-import { createPortal } from "react-dom";
-import OtpAuthenticate from "../../components/OtpAuthenticate/OtpAuthenticate";
 
-type webmodalprops = {
-  closePopup: any;
-};
-
-const Login = ({ closePopup }: webmodalprops) => {
+const Login = () => {
+  const { getUserToken } = useGenerateStore((state) => state);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [mobile, setMobile] = useState<string>("");
   const [createPending, setCreatePending] = useState(false);
   const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
-
+  const [otp, setOtp] = useState<string>("");
   const user = useGenerateStore((state) => state.userData);
+  const navigate = useNavigate();
+
   const handleLogin = async () => {
     setCreatePending(true);
     if (!createPending) {
       const requestBody = {
-        mobile: mobile,
+        email: email,
       };
       await getotp({
         requestBody,
@@ -40,83 +36,109 @@ const Login = ({ closePopup }: webmodalprops) => {
     setOpenAuthModal(true);
   };
 
+  const verifyOtp = async () => {
+    const requestBody = {
+      email: email,
+      otp: otp,
+    };
+    getUserToken({
+      requestBody: requestBody,
+      AUTH_ENDPOINT: AUTH_ENDPOINTS.verifyOtp,
+    });
+  };
+
   useEffect(() => {
-    if (openAuthModal) {
-      createPortal(
-        <OtpAuthenticate closePopup={setOpenAuthModal} />,
-        document.body
-      );
+    if (user?.status === API_STATUS_TYPES.success) {
+      setCreatePending(false);
+      navigate("/");
     }
-  }, [openAuthModal]);
+  }, [user]);
 
   return (
-    <div className={styles.loginContainer}>
-      <div className={styles.formContainer}>
-        <div className={styles.formSubContainer}>
-          <div className={styles.loginHeader}>
-            {REGISTER_PAGE_CONSTANTS.login}
-          </div>
-          <div className={styles.inputField}>
-            <div className={styles.inputContainer}>
-              <input
-                className={styles.input}
-                type="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <label className={styles.label} id="label-fname">
-                <div className={styles.text}>Name</div>
-              </label>
+    <>
+      <div className={styles.loginContainer}>
+        <div className={styles.formContainer}>
+          <div className={styles.formSubContainer}>
+            <div className={styles.loginHeader}>
+              {!openAuthModal
+                ? REGISTER_PAGE_CONSTANTS.login
+                : "Verify with OTP"}
+            </div>
+            <div className={styles.inputField}>
+              {openAuthModal ? (
+                <div className={styles.inputContainer}>
+                  <input
+                    className={styles.input}
+                    type="otp"
+                    value={otp}
+                    onChange={(e) => {
+                      const value = e.target.value
+                        .replace(/[^0-9]/g, "")
+                        .slice(0, 6);
+                      setOtp(value);
+                    }}
+                  />
+                  <label className={styles.label} id="label-fname">
+                    <div className={styles.text}>OTP</div>
+                  </label>
+                </div>
+              ) : (
+                <>
+                  <div className={styles.inputContainer}>
+                    <input
+                      className={styles.input}
+                      type="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                    <label className={styles.label} id="label-fname">
+                      <div className={styles.text}>Name</div>
+                    </label>
+                  </div>
+                  <div className={styles.inputContainer}>
+                    <input
+                      className={styles.input}
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <label className={styles.label} id="label-fname">
+                      <div className={styles.text}>Email</div>
+                    </label>
+                  </div>
+                </>
+              )}
             </div>
 
-            <div className={styles.inputContainer}>
-              <input
-                className={styles.input}
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <label className={styles.label} id="label-fname">
-                <div className={styles.text}>Email</div>
-              </label>
-            </div>
+            {openAuthModal ? (
+              <div className={styles.resendOtp}>Resend OTP</div>
+            ) : (
+              <div className={styles.loginOTPMessage}>
+                We will send an OTP on the entered Email Id
+              </div>
+            )}
 
-            <div className={styles.inputContainer}>
-              <label className={styles.label} id="label-fname">
-                <div className={styles.text}>+91</div>
-              </label>
-              <input
-                className={styles.inputMobile}
-                type="mobile"
-                value={mobile}
-                onChange={(e) => {
-                  const value = e.target.value
-                    .replace(/[^0-9]/g, "")
-                    .slice(0, 10);
-                  setMobile(value);
-                }}
-              />
-              <label className={styles.label} id="label-fname">
-                <div className={styles.text}>Mobile Number</div>
-              </label>
-            </div>
+            {openAuthModal ? (
+              <div className={styles.loginButton} onClick={verifyOtp}>
+                Authenticat using OTP
+              </div>
+            ) : (
+              <div className={styles.loginButton} onClick={handleLogin}>
+                Request OTP
+              </div>
+            )}
           </div>
-          <div className={styles.loginOTPMessage}>
-            We will send an OTP on the entered mobile number
+          <div
+            className={styles.closeIconWrapper}
+            onClick={() => navigate("/")}
+          >
+            <img className={styles.closeIcon} src={closeicon} />
           </div>
-          <div className={styles.loginButton} onClick={handleLogin}>
-            Request OTP
-          </div>
-        </div>
-        <div className={styles.closeIconWrapper}>
-          <img
-            className={styles.closeIcon}
-            src={closeicon}
-            onClick={() => closePopup(false)}
-          />
         </div>
       </div>
-    </div>
+
+      {/* {openAuthModal && <OtpAuthenticate closePopup={setOpenAuthModal} />} */}
+    </>
   );
 };
 

@@ -12,13 +12,15 @@
   background-color: rgba(0, 0, 0, 0.4);
 
   .formContainer {
-    width: 80%;
-    height: 75%;
+    // width: 80%;
+    // height: 75%;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
     background: #121212;
+    padding: 32px 340px;
+    position: relative;
     .formContainer:focus {
       box-shadow: 0px 0px 8px 0px rgba(57, 132, 60, 0.25);
     }
@@ -33,7 +35,7 @@
         font-size: 24px;
         font-weight: 600;
         line-height: 32px;
-        margin: 50px 0px 24px 0px;
+        // margin: 50px 0px 24px 0px;
       }
       .inputField {
         display: flex;
@@ -190,19 +192,20 @@
       cursor: pointer;
     }
   }
+  .resendOtp {
+    color: #48d67e;
+    font-size: 20px;
+    font-weight: 500;
+  }
   .loginOTPMessage {
-    color: white;
-    text-align: center;
+    color: #bcbcbc;
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
-    width: 100%;
   }
 }
 .closeIconWrapper {
   position: absolute;
-  top: 17%;
-  right: 13%;
+  top: 6%;
+  right: 3%;
   cursor: pointer;
 }

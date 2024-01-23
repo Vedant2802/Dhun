@@ -17,5 +17,6 @@ export enum API_ENDPOINTS {
   generateTask = "/api-test/music_studio/generate",
   getGeneratedStatus = "/api-test/status/",
   contactus = "/api/contactus",
-  exportMusic = "/api/utils/combineaudio"
+  exportMusic = "/api/utils/combineaudio",
+  verifyOtp = "api-test/verify-otp",
 }

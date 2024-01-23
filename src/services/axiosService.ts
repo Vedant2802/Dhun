@@ -55,7 +55,7 @@ const contactApi = async <T>(contactDetails: any): Promise<T> => {
   }
 };
 
-const registerApi = async ({ requestBody, AUTH_ENDPOINT }: any) => {
+const verifyOtp = async ({ requestBody, AUTH_ENDPOINT }: any) => {
   try {
     const { data } = await axiosInstance.post(AUTH_ENDPOINT, requestBody);
     // if (data?.access_token) {
@@ -117,13 +117,11 @@ const getGeneratedMusic = async <T>(
         },
       }
     );
-    // console.log("response", response)
     return response.data;
   } catch (error) {
     throw error;
   }
 };
-
 
 const exportMusic = async (requestObj: any): Promise<any> => {
   try {
@@ -145,22 +143,49 @@ const exportMusic = async (requestObj: any): Promise<any> => {
 const getotp = async ({ requestBody, AUTH_ENDPOINT }: any) => {
   try {
     const response = await axiosInstance.post(AUTH_ENDPOINT, requestBody);
-    return response.data.token;
+    return response;
   } catch (error) {
     console.error("Error fetching user token:", error);
     throw error;
   }
 };
 
+const getVerifyOtp = async ({ requestBody, AUTH_ENDPOINT }: any) => {
+  try {
+    const response = await axiosInstance.post(AUTH_ENDPOINT, requestBody);
+    return response?.data;
+  } catch (error) {
+    console.error("Error fetching user token:", error);
+    throw error;
+  }
+};
+
+// const getVerifyOtp = async <T>(verifyOtpPayload: any): Promise<T> => {
+//   try {
+//     const response = await axiosInstance.post(
+//       API_ENDPOINTS.verifyOtp,
+//       verifyOtpPayload,
+//       {
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       }
+//     );
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
 export {
   uploadFileApi,
   generateMusicApi,
   generateMusicTask,
   getGeneratedMusic,
-  registerApi,
+  verifyOtp,
   contactApi,
   setAccessToken,
   exportMusic,
   getotp,
-
+  getVerifyOtp
 };

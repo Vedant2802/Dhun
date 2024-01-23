@@ -9,6 +9,7 @@ type webmodalprops = {
 
 const OtpAuthenticate = ({ closePopup }: webmodalprops) => {
   const [otp, setOtp] = useState<string>("");
+
   return (
     <div className={styles.loginContainer}>
       <div className={styles.formContainer}>

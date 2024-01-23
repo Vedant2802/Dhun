@@ -89,7 +89,6 @@ const ResultDashboard = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user") as any);
-    console.log("user", user);
     if (user) {
       setUser(user);
     }

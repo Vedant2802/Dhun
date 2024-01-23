@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import {
+  API_ENDPOINTS,
   API_STATUS_TYPES,
   AUTH_ENDPOINTS,
 } from "../assets/constants/apiContants";
@@ -7,7 +8,7 @@ import {
 import {
   uploadFileApi,
   generateMusicApi,
-  registerApi,
+  verifyOtp,
   setAccessToken,
   exportMusic,
   generateMusicTask,
@@ -243,7 +244,6 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       }));
       const data: any = await generateMusicApi<object>({
         ...requestObj,
-        // duration: 30,
       });
 
       if (get().websiteData.status !== API_STATUS_TYPES.idle) {
@@ -281,7 +281,6 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
         while (status !== 'Completed') {
           try {
             const response: any = await getGeneratedMusic(task_id);
-            console.log('response', response)
             status = response?.status;
             await new Promise(resolve => setTimeout(resolve, 2000)); 
             if (response?.status === 'Completed') {
@@ -296,9 +295,6 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
             console.log(error)
           }
         }
-        // const response: any = await getGeneratedMusic(task_id);
-
-        // console.log('response', response)
       }
 
       // if (get().websiteData.status !== API_STATUS_TYPES.idle) {
@@ -318,21 +314,6 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       }));
     }
   },
-
-  // const pollUntilCompleted = async () => {
-  //   let status = '';
-    
-  //   while (status !== 'Completed') {
-  //     try {
-  //       const response: any = await getGeneratedMusic(task_id);
-  //       console.log('response', response)
-  //       status = response.data.status;
-  
-  //       await new Promise(resolve => setTimeout(resolve, 1000)); 
-  //     } catch (error) {
-  //       error,
-  //     }
-  //   },
 
   playNextTrack: () => {
     const compositionIndex = get().compositionIndex as number;
@@ -355,19 +336,20 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       }));
     }
   },
+  
   getUserToken: async ({ requestBody, AUTH_ENDPOINT }: IUserTokenRequest) => {
     set(() => ({
       status: API_STATUS_TYPES.loading,
     }));
-    const user = await registerApi({ AUTH_ENDPOINT, requestBody });
-    if (AUTH_ENDPOINT == AUTH_ENDPOINTS.login) {
+    const user = await verifyOtp({ AUTH_ENDPOINT, requestBody });
+    if (AUTH_ENDPOINT == API_ENDPOINTS.verifyOtp) {
       set(() => ({
         userData: {
           data: user,
           status: API_STATUS_TYPES.success,
         },
       }));
-      setAccessToken(user?.access_token);
+      setAccessToken(user?.token);
       localStorage.setItem("user", JSON.stringify(user));
     } else {
       set(() => ({
@@ -392,7 +374,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
         status: API_STATUS_TYPES.success,
       },
     }));
-    setAccessToken(user?.access_token);
+    setAccessToken(user?.token);
   },
   removeUser: () => {
     set(() => ({
