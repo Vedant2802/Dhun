@@ -5,7 +5,7 @@
   height: 540px;
   margin: auto;
   position: absolute;
-  border-radius: 42px;
+  border-radius: 8px;
   border: 1px solid rgba(71, 71, 71, 0.6);
   background: radial-gradient(
     102.26% 84.3% at 50% 50%,
@@ -15,15 +15,36 @@
   backdrop-filter: blur(8px);
   background: #000;
   z-index: 10;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    font-size: 24px;
+    padding: 16px;
+  }
   .closeIcon {
     position: absolute;
     cursor: pointer;
-    top: -58px;
-    margin-left: 45%;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    top: 0;
+    right: 0;
+    margin-top: 38px;
+    margin-right: 20px;
+    @media screen and (max-width: 600px) {
+      position: absolute;
+      margin-top: 3rem;
+    }
   }
 }
 .contactsuccess {
   height: 574px;
+  @media screen and (max-width: 600px) {
+    height: 100%;
+  }
 }
 .webDialog {
   position: fixed;
@@ -38,6 +59,22 @@
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.8);
   width: 100%;
+  @media screen and (max-width: 600px) {
+    max-height: 100%;
+    overflow-y: auto;
+    position: fixed;
+    top: 50%;
+    font-family: Work Sans;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+  }
 }
 
 .contactHeader {
@@ -50,11 +87,18 @@
   );
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
+  line-height: 105%;
+  font-family: Quicksand;
   color: #fff;
   font-size: 42px;
-  font-weight: 800;
+  font-weight: 700;
   padding: 36px 36px;
   text-transform: capitalize;
+  @media screen and (max-width: 600px) {
+    font-size: 24px;
+    // padding: 36px 10px;
+    // margin-top: 3rem;
+  }
 }
 
 .inputbox {
@@ -64,8 +108,11 @@
   background-color: black;
   padding: 10px;
   box-sizing: border-box;
-  border-radius: 16px;
+  border-radius: 8px;
   border: 1px solid #727272;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 }
 
 .inputlabel {
@@ -73,12 +120,19 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+    padding-top: 10px;
+  }
 }
 
 .inputtop {
   display: flex;
   flex-direction: row;
   margin-top: 30px;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 }
 
 .inputContainer {
@@ -89,6 +143,9 @@
   .astrek {
     color: #21ff00;
   }
+  @media screen and (max-width: 600px) {
+    margin-left: 0;
+  }
 }
 
 .inputbottom {
@@ -96,15 +153,23 @@
   margin: 30px 36px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  @media screen and (max-width: 600px) {
+    margin: 0;
+    flex-direction: column;
+    align-self: stretch;
+  }
   .inputnote {
     width: auto;
     height: 117px;
     color: white;
     background-color: black;
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 10px;
     border: 1px solid #727272;
+    @media screen and (max-width: 600px) {
+      height: 100px;
+    }
   }
 }
 
@@ -114,11 +179,23 @@
   justify-content: space-between;
   padding: 0 36px;
   margin-top: 46px;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
 }
 
 .contactinfo {
   color: #fff;
   font-size: 16px;
+  font-family: Quicksand;
+  @media screen and (max-width: 600px) {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    align-self: stretch;
+    line-height: 125%;
+  }
 }
 
 .sendButton {
@@ -128,8 +205,11 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border-radius: 100px;
-  background-color: #fff;
+  border-radius: 8px;
+  background-color: #48d67e;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 }
 .successmessage {
   background: #47d24d;
@@ -143,67 +223,7 @@
   border-bottom-left-radius: inherit;
   gap: 10px;
   color: #000;
-}
-
-@media (max-width: 1200px) {
-  .contactcontainer {
-    width: 90%;
-    max-height: 100%;
-  }
-
-  .webDialog {
-    max-height: 100%;
-    overflow-y: auto;
-  }
-
-  .closeIcon {
-    margin-left: 40%;
-  }
-
-  .inputtop {
-    flex-direction: column;
-  }
-
-  .inputContainer {
-    margin-left: 0;
-    margin-top: 20px;
-  }
-
-  .footer {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contactHeader {
-    font-size: 2rem;
-  }
-
-  .inputnote {
-    height: 3rem;
-  }
-
-  .inputbottom {
-    margin: 20px 0;
-  }
-
-  .contactinfo {
-    font-size: 1rem;
-    margin-bottom: 10px;
-  }
-}
-
-/* Additional media queries for further adjustments if needed */
-@media (max-width: 480px) {
-  .contactHeader {
-    font-size: 1.5rem;
-  }
-
-  .inputnote {
-    height: 2rem;
-  }
-
-  .contactinfo {
-    font-size: 0.8rem;
-    margin-bottom: 8px;
+  @media screen and (max-width: 600px) {
+    width: 100%;
   }
 }

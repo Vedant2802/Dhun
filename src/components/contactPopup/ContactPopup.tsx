@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./ContactPopup.module.scss";
-import closeicon from "../../../public/icons/cross-circle.svg";
+// import closeicon from "../../../public/icons/cross-circle.svg";
+import close_contact_page from "../../../public/icons/close_contact_page.svg";
 import check from "../../../public/icons/TickFilled.png";
 import { contactApi } from "../../services/axiosService";
 
@@ -30,7 +31,7 @@ const ContactPopup: React.FC<any> = ({ onClose }) => {
       <div className={styles.contactcontainer}>
         <img
           onClick={() => onClose()}
-          src={closeicon}
+          src={close_contact_page}
           className={styles.closeIcon}
         />
         <div className={styles.contactHeader}>Connect with us for More</div>
@@ -80,8 +81,8 @@ const ContactPopup: React.FC<any> = ({ onClose }) => {
         </div>
         <div className={styles.footer}>
           <span className={styles.contactinfo}>
-            You can call us on +1 891 989-11-91 <br />
-            or write your queries to us at musicstudio@zee.ai{" "}
+            You can call us on +91 9876543210 <br />
+            or write your queries to us at musicstudio@dhun.ai{" "}
           </span>
           <button onClick={() => handleSend()} className={styles.sendButton}>
             {" "}
