@@ -115,14 +115,15 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     if (user) {
       setUser(user);
     }
+    resetState();
   }, []);
 
-  const chibBtnStyle = (selected: boolean) => {
-    // if (prompt) {
-    //   return styles.overlayBtn;
-    // }
-    return selected ? styles.chibBtnActive : styles.chipBtn;
-  };
+  // const chibBtnStyle = (selected: boolean) => {
+  //   // if (prompt) {
+  //   //   return styles.overlayBtn;
+  //   // }
+  //   return selected ? styles.chibBtnActive : styles.chipBtn;
+  // };
 
   const renderLoadingBtns = () => {
     return Array(3)

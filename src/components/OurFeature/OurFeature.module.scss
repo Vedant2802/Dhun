@@ -17,8 +17,11 @@
   width: 100%;
   margin-top: 24px;
   border-radius: 8px;
-  border: 1px solid #fff;
-  color: white;
+  border: none;
+  background: #48d67e;
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
 }
 .featureContainerHead {
   display: flex;
@@ -84,7 +87,7 @@
 .exportbtn:hover {
   background: #48d67e;
   color: black;
-  border: none;
+  border: 1px solid #fff;
 }
 .prompt {
   display: flex;
@@ -179,4 +182,9 @@
       flex-direction: column;
     }
   }
+}
+.disableBtn {
+  background: none;
+  color: #fff;
+  border: 1px solid #fff;
 }

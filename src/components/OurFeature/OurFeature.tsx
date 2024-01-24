@@ -46,10 +46,13 @@ const OurFeature = () => {
     );
   };
   const openPrompt4 = () => {
-    setOpenModal4(true);
+    setOpenModal4(false);
   };
   const getOpenModal4 = () => {
-    return createPortal(<WebModal4 closePopup={setOpenModal4} />, document.body);
+    return createPortal(
+      <WebModal4 closePopup={setOpenModal4} />,
+      document.body
+    );
   };
 
   return (
@@ -228,8 +231,11 @@ const OurFeature = () => {
                   eventually 
                 </span>
               </div>
-              <button onClick={openPrompt4} className={styles.exportbtn}>
-                <span className={styles.exportbtnText}>Sample Now</span>
+              <button
+                onClick={openPrompt4}
+                className={`${styles.exportbtn} ${styles.disableBtn}`}
+              >
+                <span className={styles.exportbtnText}>Coming Soon</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

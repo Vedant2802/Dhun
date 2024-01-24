@@ -7,13 +7,7 @@ import pauseIcon from "../../../public/icons/pauseWhite.svg";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 import closeicon from "../../../public/icons/close.svg";
 import musicbutton from "../../../public/icons/music-button.svg";
-import uploadbutton from "../../../public/icons/upload-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
-
-enum UPLOADED_DEFAULT_MUSIC_REFERENCES {
-  brunoMars = "http://dhun.centralindia.cloudapp.azure.com/storage/grenade 2.wav",
-  gotMusic = "http://dhun.centralindia.cloudapp.azure.com/storage/Game of thrones 1.wav",
-}
 
 enum DEFAULT_PROMPTS {
   prompt1 = "Upbeat, spiritual music",
@@ -35,8 +29,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isChibBtn1Selected, setChibBtn1Selected] = useState<boolean>(false);
   const [isChibBtn2Selected, setChibBtn2Selected] = useState<boolean>(false);
-  const [fileSizeError, setFileSizeError] = useState("");
-  const [fileName, setFileName] = useState("");
   const videoRef: any = useRef<any>(null);
   const [videoPath, setVideoPath] = useState("");
   const uploadFileForWebsite = useGenerateStore(
@@ -65,35 +57,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     generateMusic({ ...defaultReqObj, prompt });
   };
 
-  const onFileUpload = (event: any) => {
-    // if (event.target.files[0].size > 10485760) {
-    //   setFileSizeError("Kindly upload a file under 10mb");
-    //   return;
-    // }
-    const FormD: any = new FormData();
-    const fileName = event.target.files[0].name;
-    setFileName(fileName);
-    setFileSizeError("");
-    FormD.append("file", event.target.files[0]);
-    uploadFileForWebsite(FormD);
-  };
-
-  const audioUpload = (audio: string) => {
-    if (audio === "GOT") {
-      generateMusic({
-        ...defaultReqObj,
-        prompt: prompt || "upbeat, neutral, driving",
-      });
-    } else {
-      generateMusic({
-        ...defaultReqObj,
-        prompt:
-          prompt ||
-          "joyful, medium tempo, high pitch, classical, sitar, tabla, harmonium, uplifting, melodic, rhythmic",
-      });
-    }
-  };
-
   useEffect(() => {
     if (isChibBtn1Selected) {
       generateMusic({ ...defaultReqObj, prompt: DEFAULT_PROMPTS.prompt1 });
@@ -108,12 +71,10 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     if (user) {
       setUser(user);
     }
+    resetState();
   }, []);
 
   const chibBtnStyle = (selected: boolean) => {
-    // if (prompt) {
-    //   return styles.overlayBtn;
-    // }
     return selected ? styles.chibBtnActive : styles.chipBtn;
   };
 
@@ -137,7 +98,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     setChibBtn1Selected(false);
     setChibBtn2Selected(false);
     setPrompt("");
-    setFileName("");
     setVideoPath("");
   };
 
@@ -181,22 +141,22 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     return null;
   };
 
-  const renderVideo = () => {
-    if (videoPath) {
-      return (
-        <video ref={videoRef} width="auto" muted loop>
-          <source src={videoPath} type="video/mp4" />
-        </video>
-      );
-    }
-    return null;
-  };
+  // const renderVideo = () => {
+  //   if (videoPath) {
+  //     return (
+  //       <video ref={videoRef} width="auto" muted loop>
+  //         <source src={videoPath} type="video/mp4" />
+  //       </video>
+  //     );
+  //   }
+  //   return null;
+  // };
 
-  const onVideoFileUpload = (input: any) => {
-    const file = input.target?.files[0];
-    const fileURL = URL.createObjectURL(file);
-    setVideoPath(fileURL);
-  };
+  // const onVideoFileUpload = (input: any) => {
+  //   const file = input.target?.files[0];
+  //   const fileURL = URL.createObjectURL(file);
+  //   setVideoPath(fileURL);
+  // };
 
   useEffect(() => {
     if (currentMusicSrc && isMusicPlaying && videoRef?.current) {
@@ -211,7 +171,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   return (
     <dialog className={styles.webDialog}>
       <form className={styles.generatePopup} onSubmit={handleOnSubmit}>
-        {renderVideo()}
+        {/* {renderVideo()} */}
         {!videoPath && (
           <div
             className={`${styles.topCard} ${
