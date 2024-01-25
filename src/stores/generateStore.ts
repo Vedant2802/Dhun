@@ -125,6 +125,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
   },
 
   uploadFileForWebsite: async (file: any) => {
+    debugger
     try {
       set(() => ({
         websiteData: {
@@ -132,23 +133,39 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
         },
       }));
       const data: any = await uploadFileApi<object>(file);
-      const musicData: any = await generateMusicApi({
-        // email: "",
-        // image_url: "",
-        // prompt: "",
-        // duration: 30,
-        // file_path: data?.gcs_url,
-        generation_type: "text-to-music",
-        file_name: "",
+      const musicData: any = await generateMusicTask({
+        generation_type: "melody-to-music",
+        file_name: data?.file_name,
         prompt: "",
       });
 
-      set(() => ({
-        websiteData: {
-          musicUrls: musicData?.urls,
-          status: API_STATUS_TYPES.success,
-        },
-      }));
+      if(musicData?.message === "Task Submitted") {
+        const task_id = musicData?.task_id;
+        let status = '';
+        while (status !== 'Completed') {
+          try {
+            const response: any = await getGeneratedMusic(task_id);
+            status = response?.status;
+            await new Promise(resolve => setTimeout(resolve, 2000)); 
+            if (response?.status === 'Completed') {
+              set(() => ({
+                websiteData: {
+                  musicUrls: response?.urls,
+                  status: API_STATUS_TYPES.success,
+                },
+              }));
+            }
+          } catch (error) {
+            console.log(error)
+          }
+        }
+      }
+      // set(() => ({
+      //   websiteData: {
+      //     musicUrls: musicData?.urls,
+      //     status: API_STATUS_TYPES.success,
+      //   },
+      // }));
     } catch (error: any) {
       set(() => ({
         websiteData: {
@@ -225,6 +242,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
       set(() => ({ status: API_STATUS_TYPES.failed, error }));
     }
   },
+
   resetWebsiteData: () => {
     set(() => ({
       websiteData: {

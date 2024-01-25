@@ -43,8 +43,11 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
     (state) => state.uploadFileForWebsite
   );
   const setUser = useGenerateStore((state) => state.setUser);
+  // const generateMusic = useGenerateStore(
+  //   (state) => state.generateMusicForWebsite
+  // );
   const generateMusic = useGenerateStore(
-    (state) => state.generateMusicForWebsite
+    (state) => state.generateMusicForWebsiteTask
   );
   const setCurrentMusicSrc = useGenerateStore(
     (state) => state.setCurrentMusicSrc
@@ -65,34 +68,34 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
     generateMusic({ ...defaultReqObj, prompt });
   };
 
-  const onFileUpload = (event: any) => {
-    // if (event.target.files[0].size > 10485760) {
-    //   setFileSizeError("Kindly upload a file under 10mb");
-    //   return;
-    // }
-    const FormD: any = new FormData();
-    const fileName = event.target.files[0].name;
-    setFileName(fileName);
-    setFileSizeError("");
-    FormD.append("file", event.target.files[0]);
-    uploadFileForWebsite(FormD);
-  };
+  // const onFileUpload = (event: any) => {
+  //   // if (event.target.files[0].size > 10485760) {
+  //   //   setFileSizeError("Kindly upload a file under 10mb");
+  //   //   return;
+  //   // }
+  //   const FormD: any = new FormData();
+  //   const fileName = event.target.files[0].name;
+  //   setFileName(fileName);
+  //   setFileSizeError("");
+  //   FormD.append("file", event.target.files[0]);
+  //   uploadFileForWebsite(FormD);
+  // };
 
-  const audioUpload = (audio: string) => {
-    if (audio === "GOT") {
-      generateMusic({
-        ...defaultReqObj,
-        prompt: prompt || "upbeat, neutral, driving",
-      });
-    } else {
-      generateMusic({
-        ...defaultReqObj,
-        prompt:
-          prompt ||
-          "joyful, medium tempo, high pitch, classical, sitar, tabla, harmonium, uplifting, melodic, rhythmic",
-      });
-    }
-  };
+  // const audioUpload = (audio: string) => {
+  //   if (audio === "GOT") {
+  //     generateMusic({
+  //       ...defaultReqObj,
+  //       prompt: prompt || "upbeat, neutral, driving",
+  //     });
+  //   } else {
+  //     generateMusic({
+  //       ...defaultReqObj,
+  //       prompt:
+  //         prompt ||
+  //         "joyful, medium tempo, high pitch, classical, sitar, tabla, harmonium, uplifting, melodic, rhythmic",
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     if (isChibBtn1Selected) {
@@ -108,6 +111,7 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
     if (user) {
       setUser(user);
     }
+    resetState();
   }, []);
 
   const chibBtnStyle = (selected: boolean) => {
@@ -237,7 +241,7 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
               </button>
             </div>
 
-            {status === API_STATUS_TYPES.success && (
+            {/* {status === API_STATUS_TYPES.success && (
               <div className={styles.uploadButton}>
                 <img src={uploadbutton} />
                 <span>Upload your own video </span>
@@ -255,7 +259,7 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
               <div className={styles.uploadButton}>
                 <span className={styles.generating}> Generating . . . </span>
               </div>
-            )}
+            )} */}
           </div>
         )}
         {status === API_STATUS_TYPES.success && musicUrls?.length ? (
@@ -284,11 +288,13 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
                         onChange={(e) => setPrompt(e.target.value)}
                         placeholder="What sound effects do you wish to create? "
                       />
-                      <img
+                      <div
                         className={styles.musicButton}
-                        src={musicbutton}
                         onClick={(e) => handleOnSubmit(e)}
-                      />
+                      >
+                        <img src={musicbutton} />
+                        <div className={styles.generate}>Generate</div>
+                      </div>
                     </div>
                   </div>
                   <div>

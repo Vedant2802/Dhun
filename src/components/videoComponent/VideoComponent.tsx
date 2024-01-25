@@ -22,6 +22,7 @@ const VideoComponent = () => {
     <div className={styles.video}>
       <video
         ref={videoRef}
+        // poster="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190710102234/download3.png"
         src="https://amlzee5sbci1mu5120768980.blob.core.windows.net/dhunai/DHUN_VIDEO_FINAL.mp4?sp=r&st=2024-01-19T10:55:05Z&se=2024-12-31T18:55:05Z&sv=2022-11-02&sr=b&sig=vGS2O9%2FBWyMevhHpyE7py44ew6PdY9onb5zjpkJOG1Y%3D"
         width="100%"
         height="100vh"
@@ -45,7 +46,7 @@ const VideoComponent = () => {
             Make professional-quality music at speed with AI
           </span>
           <span className={styles.bottomHeading}>
-            India’s 1st LLM that makes music in classical, Bollywood & 20+
+            India’s 1st FMM that makes music in classical, Bollywood & 20+
             genres 
           </span>
         </div>
