@@ -11,6 +11,7 @@ import plus from "../../../public/icons/plus.svg";
 import uploadbutton from "../../../public/icons/upload-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
 import artistimage from "../../../public/icons/Artist image.png";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 enum UPLOADED_DEFAULT_MUSIC_REFERENCES {
   brunoMars = "http://dhun.centralindia.cloudapp.azure.com/storage/grenade 2.wav",
@@ -125,13 +126,13 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
   //   return selected ? styles.chibBtnActive : styles.chipBtn;
   // };
 
-  const renderLoadingBtns = () => {
-    return Array(3)
-      .fill("")
-      .map((_, index: number) => {
-        return <div key={index} className={styles.loadingBtn}></div>;
-      });
-  };
+  // const renderLoadingBtns = () => {
+  //   return Array(3)
+  //     .fill("")
+  //     .map((_, index: number) => {
+  //       return <div key={index} className={styles.loadingBtn}></div>;
+  //     });
+  // };
 
   const togglePlay = (musicSrc: string) => {
     if (isMusicPlaying && currentMusicSrc === musicSrc) {
@@ -288,7 +289,17 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
             <div className={styles.chipWrapper}>
               {status === API_STATUS_TYPES.loading ? (
                 <>
-                  {renderLoadingBtns()}
+                  {/* {renderLoadingBtns()} */}
+                  <Player
+                    src="../../../public/animations/visualization1.json"
+                    className="player"
+                    loop
+                    autoplay
+                    style={{ height: "200px", width: "100%" }}
+                  />
+                  <div className={styles.stopCreatingBtn}>
+                    Generating your music tracks...
+                  </div>
                   <button
                     className={styles.stopCreatingBtn}
                     onClick={() => resetState()}

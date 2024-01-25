@@ -11,6 +11,7 @@ import dislikeIcon from "../../../public/icons/dislikeIcon.svg";
 import shareIcon from "../../../public/icons/shareIcon.svg";
 import musicbutton from "../../../public/icons/music-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 enum DEFAULT_PROMPTS {
   prompt1 = "Upbeat, spiritual music",
@@ -34,9 +35,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   const [isChibBtn2Selected, setChibBtn2Selected] = useState<boolean>(false);
   const videoRef: any = useRef<any>(null);
   const [videoPath, setVideoPath] = useState("");
-  const uploadFileForWebsite = useGenerateStore(
-    (state) => state.uploadFileForWebsite
-  );
   const setUser = useGenerateStore((state) => state.setUser);
   const generateMusic = useGenerateStore(
     (state) => state.generateMusicForWebsiteTask
@@ -96,14 +94,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
 
   const chibBtnStyle = (selected: boolean) => {
     return selected ? styles.chibBtnActive : styles.chipBtn;
-  };
-
-  const renderLoadingBtns = () => {
-    return Array(3)
-      .fill("")
-      .map((_, index: number) => {
-        return <div key={index} className={styles.loadingBtn}></div>;
-      });
   };
 
   const togglePlay = (musicSrc: string) => {
@@ -208,23 +198,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     return null;
   };
 
-  // const renderVideo = () => {
-  //   if (videoPath) {
-  //     return (
-  //       <video ref={videoRef} width="auto" muted loop>
-  //         <source src={videoPath} type="video/mp4" />
-  //       </video>
-  //     );
-  //   }
-  //   return null;
-  // };
-
-  // const onVideoFileUpload = (input: any) => {
-  //   const file = input.target?.files[0];
-  //   const fileURL = URL.createObjectURL(file);
-  //   setVideoPath(fileURL);
-  // };
-
   useEffect(() => {
     if (currentMusicSrc && isMusicPlaying && videoRef?.current) {
       videoRef.current.currentTime = 0;
@@ -238,7 +211,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   return (
     <dialog className={styles.webDialog}>
       <form className={styles.generatePopup} onSubmit={handleOnSubmit}>
-        {/* {renderVideo()} */}
         {!videoPath && (
           <div
             className={`${styles.topCard} ${
@@ -261,26 +233,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                 />
               </button>
             </div>
-
-            {/* {status === API_STATUS_TYPES.success && (
-              <div className={styles.uploadButton}>
-                <img src={uploadbutton} />
-                <span>Upload your own video </span>
-                <input
-                  type="file"
-                  id="uploadVideo"
-                  name="filename"
-                  accept="video/mp4,video/x-m4v,video/*"
-                  onChange={onVideoFileUpload}
-                  className={styles.videoUpload}
-                />
-              </div>
-            )} */}
-            {/* {status === API_STATUS_TYPES.loading && (
-              <div className={styles.uploadButton}>
-                <span className={styles.generating}> Generating . . . </span>
-              </div>
-            )} */}
           </div>
         )}
         {status === API_STATUS_TYPES.success && musicUrls?.length ? (
@@ -290,7 +242,16 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <div className={styles.chipWrapper}>
               {status === API_STATUS_TYPES.loading ? (
                 <>
-                  {renderLoadingBtns()}
+                  <Player
+                    src="../../../public/animations/visualization1.json"
+                    className="player"
+                    loop
+                    autoplay
+                    style={{ height: "200px", width: "100%" }}
+                  />
+                  <div className={styles.stopCreatingBtn}>
+                    Generating your music tracks...
+                  </div>
                   <button
                     className={styles.stopCreatingBtn}
                     onClick={() => resetState()}

@@ -125,7 +125,6 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
   },
 
   uploadFileForWebsite: async (file: any) => {
-    debugger
     try {
       set(() => ({
         websiteData: {

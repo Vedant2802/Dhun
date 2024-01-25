@@ -50,6 +50,12 @@
   }
 }
 .mobileMenu {
+  font-size: 20px;
+  padding: 8px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
   @media screen and (min-width: 600px) {
     display: none;
   }
@@ -72,4 +78,44 @@
   gap: 10px;
   border-radius: 8px;
   background: #48d67e;
+}
+
+.sidebar {
+  padding: 16px;
+}
+
+// .toggleButton {
+//   font-size: 20px;
+//   margin: 10px 0;
+//   background: none;
+//   border: none;
+//   color: #fff;
+//   cursor: pointer;
+// }
+
+.sidebarContent {
+  color: white;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 33.6px;
+}
+// .sidenav {
+//   height: 100%;
+//   width: 0;
+//   position: fixed;
+//   z-index: 1;
+//   top: 0;
+//   left: 0;
+//   background-color: red;
+//   overflow-x: hidden;
+//   transition: 0.5s;
+//   padding-top: 60px;
+// }
+.mobileSideMenu {
+  height: 100vh;
+  background: black;
+  width: 100%;
+  position: fixed;
+  z-index: 9999;
+  top: 0px;
 }
