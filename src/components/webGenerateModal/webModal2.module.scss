@@ -50,6 +50,9 @@
       height: 32px;
       border-radius: 50%;
       background: white;
+      @media screen and (max-width: 600px) {
+        padding-right: 32px;
+      }
     }
     .topCardText {
       color: #fff;
