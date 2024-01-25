@@ -6,6 +6,9 @@ import playIcon from "../../../public/icons/play.svg";
 import pauseIcon from "../../../public/icons/pauseWhite.svg";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 import closeicon from "../../../public/icons/close.svg";
+import likeIcon from "../../../public/icons/likeIcon.svg";
+import dislikeIcon from "../../../public/icons/dislikeIcon.svg";
+import shareIcon from "../../../public/icons/shareIcon.svg";
 import musicbutton from "../../../public/icons/music-button.svg";
 import uploadbutton from "../../../public/icons/upload-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
@@ -63,6 +66,23 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
     generateMusic({ ...defaultReqObj, prompt });
+  };
+
+  const [isLinkCopied, setIsLinkCopied] = useState(false);
+  const handleShareClick = async (url: string) => {
+    try {
+      // Use the 'url' parameter
+      await navigator.clipboard.writeText(url);
+      setIsLinkCopied(true);
+
+      setTimeout(() => {
+        setIsLinkCopied(false);
+      }, 3000);
+      console.log("Link copied to clipboard:", url);
+    } catch (error) {
+      console.error("Failed to copy link:", error);
+      alert("Failed to copy link. Please try again.");
+    }
   };
 
   const onFileUpload = (event: any) => {
@@ -157,6 +177,27 @@ const WebModal = ({ closePopup }: webmodalprops) => {
           >
             <img src={getMusicIcon(musicUrls[0])} alt="playIcon" />
             <div>Track 1</div>
+            <div className={styles.iconsWrapper}>
+              {/* <img src={shareIcon} alt="share" />
+               */}
+              <div
+                className={styles.iconWrapper}
+                data-tooltip="Share"
+                onClick={() => handleShareClick(musicUrls[0])}
+              >
+                {/* <button>
+                  <img src={shareIcon} alt="Share" />
+                </button> */}
+                <img src={shareIcon} alt="Share" />
+              </div>
+              <img src={likeIcon} alt="Like" />
+              <img src={dislikeIcon} alt="Dislike" />
+            </div>
+            {isLinkCopied && (
+              <div className={styles.linkCopiedPopup}>
+                Link copied to clipboard!
+              </div>
+            )}
           </div>
           <div
             className={styles.chip1}
@@ -164,6 +205,19 @@ const WebModal = ({ closePopup }: webmodalprops) => {
           >
             <img src={getMusicIcon(musicUrls[1])} alt="playIcon" />
             <div>Track 2</div>
+            <div className={styles.iconsWrapper}>
+              {/* Add your share, like, and dislike icons here */}
+              {/* <img src={shareIcon} alt="share" /> */}
+              <div
+                className={styles.iconWrapper}
+                data-tooltip="Share"
+                onClick={() => handleShareClick(musicUrls[1])}
+              >
+                <img src={shareIcon} alt="Share" />
+              </div>
+              <img src={likeIcon} alt="Like" />
+              <img src={dislikeIcon} alt="Dislike" />
+            </div>
           </div>
           <div
             className={styles.chip1}
@@ -171,6 +225,19 @@ const WebModal = ({ closePopup }: webmodalprops) => {
           >
             <img src={getMusicIcon(musicUrls[2])} alt="playIcon" />
             <div>Track 3</div>
+            <div className={styles.iconsWrapper}>
+              {/* Add your share, like, and dislike icons here */}
+              {/* <img src={shareIcon} alt="share" /> */}
+              <div
+                className={styles.iconWrapper}
+                data-tooltip="Share"
+                onClick={() => handleShareClick(musicUrls[2])}
+              >
+                <img src={shareIcon} alt="Share" />
+              </div>
+              <img src={likeIcon} alt="Like" />
+              <img src={dislikeIcon} alt="Dislike" />
+            </div>
           </div>
           <div className={styles.createButton} onClick={resetState}>
             Create more music
