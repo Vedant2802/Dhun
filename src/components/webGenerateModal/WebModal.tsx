@@ -243,7 +243,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
               {status === API_STATUS_TYPES.loading ? (
                 <>
                   <Player
-                    src="../../../public/animations/visualization1.json"
+                    src="https://assets3.lottiefiles.com/packages/lf20_XZ3pkn.json"
                     className="player"
                     loop
                     autoplay
