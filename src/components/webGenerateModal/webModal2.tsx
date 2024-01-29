@@ -11,9 +11,7 @@ import plus from "../../../public/icons/plus.svg";
 import uploadbutton from "../../../public/icons/upload-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
 import artistimage from "../../../public/icons/Artist image.png";
-// import { Player } from "@lottiefiles/react-lottie-player";
-import Lottie from "react-lottie-player";
-import lottieJson from "./visualization1.json";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 enum UPLOADED_DEFAULT_MUSIC_REFERENCES {
   brunoMars = "http://dhun.centralindia.cloudapp.azure.com/storage/grenade 2.wav",
@@ -291,20 +289,14 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
             <div className={styles.chipWrapper}>
               {status === API_STATUS_TYPES.loading ? (
                 <>
-                  <Lottie
-                    loop
-                    animationData={lottieJson}
-                    play
-                    style={{ width: 300, height: 300, display: "content" }}
-                  />
                   {/* {renderLoadingBtns()} */}
-                  {/* <Player
+                  <Player
                     src="../../../public/animations/visualization1.json"
                     className="player"
                     loop
                     autoplay
                     style={{ height: "200px", width: "100%" }}
-                  /> */}
+                  />
                   <div className={styles.stopCreatingBtn}>
                     Generating your music tracks...
                   </div>
