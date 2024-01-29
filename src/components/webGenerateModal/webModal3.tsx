@@ -271,7 +271,7 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
               {status === API_STATUS_TYPES.loading ? (
                 <>
                   <Player
-                    src="../../../public/animations/visualization1.json"
+                    src="https://amlzee5sbci1mu5120768980.blob.core.windows.net/dhunai/visualization1.json?sp=r&st=2024-01-29T08:08:31Z&se=2025-01-01T16:08:31Z&sv=2022-11-02&sr=b&sig=%2BdhuFDIA4l8f35Rq5Mar1GhNMDq1DNA5HxZ6YTkltu4%3D"
                     className="player"
                     loop
                     autoplay
