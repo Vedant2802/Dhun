@@ -138,16 +138,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <img src={getMusicIcon(musicUrls[0])} alt="playIcon" />
             <div>Track 1</div>
             <div className={styles.iconsWrapper}>
-              {/* <img src={shareIcon} alt="share" />
-               */}
               <div
                 className={styles.iconWrapper}
                 data-tooltip="Share"
                 onClick={() => handleShareClick(musicUrls[0])}
               >
-                {/* <button>
-                  <img src={shareIcon} alt="Share" />
-                </button> */}
                 <img src={shareIcon} alt="Share" />
               </div>
               <img src={likeIcon} alt="Like" />
@@ -166,8 +161,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <img src={getMusicIcon(musicUrls[1])} alt="playIcon" />
             <div>Track 2</div>
             <div className={styles.iconsWrapper}>
-              {/* Add your share, like, and dislike icons here */}
-              {/* <img src={shareIcon} alt="share" /> */}
               <div
                 className={styles.iconWrapper}
                 data-tooltip="Share"
@@ -186,8 +179,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <img src={getMusicIcon(musicUrls[2])} alt="playIcon" />
             <div>Track 3</div>
             <div className={styles.iconsWrapper}>
-              {/* Add your share, like, and dislike icons here */}
-              {/* <img src={shareIcon} alt="share" /> */}
               <div
                 className={styles.iconWrapper}
                 data-tooltip="Share"
