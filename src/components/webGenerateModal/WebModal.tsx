@@ -59,7 +59,8 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   };
 
   const [isLinkCopied, setIsLinkCopied] = useState(false);
-  const handleShareClick = async (url: string) => {
+  const handleShareClick = async (url: string, event?: React.MouseEvent) => {
+    event?.stopPropagation();
     try {
       // Use the 'url' parameter
       await navigator.clipboard.writeText(url);
@@ -128,16 +129,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <img src={getMusicIcon(musicUrls[0])} alt="playIcon" />
             <div>Track 1</div>
             <div className={styles.iconsWrapper}>
-              {/* <img src={shareIcon} alt="share" />
-               */}
               <div
                 className={styles.iconWrapper}
                 data-tooltip="Share"
-                onClick={() => handleShareClick(musicUrls[0])}
+                onClick={(e) => handleShareClick(musicUrls[0], e)}
               >
-                {/* <button>
-                  <img src={shareIcon} alt="Share" />
-                </button> */}
                 <img src={shareIcon} alt="Share" />
               </div>
               <img src={likeIcon} alt="Like" />
@@ -156,12 +152,10 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <img src={getMusicIcon(musicUrls[1])} alt="playIcon" />
             <div>Track 2</div>
             <div className={styles.iconsWrapper}>
-              {/* Add your share, like, and dislike icons here */}
-              {/* <img src={shareIcon} alt="share" /> */}
               <div
                 className={styles.iconWrapper}
                 data-tooltip="Share"
-                onClick={() => handleShareClick(musicUrls[1])}
+                onClick={(e) => handleShareClick(musicUrls[1], e)}
               >
                 <img src={shareIcon} alt="Share" />
               </div>
@@ -176,12 +170,10 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <img src={getMusicIcon(musicUrls[2])} alt="playIcon" />
             <div>Track 3</div>
             <div className={styles.iconsWrapper}>
-              {/* Add your share, like, and dislike icons here */}
-              {/* <img src={shareIcon} alt="share" /> */}
               <div
                 className={styles.iconWrapper}
                 data-tooltip="Share"
-                onClick={() => handleShareClick(musicUrls[2])}
+                onClick={(e) => handleShareClick(musicUrls[2], e)}
               >
                 <img src={shareIcon} alt="Share" />
               </div>

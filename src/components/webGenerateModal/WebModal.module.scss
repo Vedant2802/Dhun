@@ -25,27 +25,59 @@
     width: 25%;
     margin-right: 30px;
     @media screen and (max-width: 600px) {
-      margin-top: 0.8rem;
-      width: auto;
+      padding-left: 14px;
     }
   }
   .closeIcon {
     cursor: pointer;
   }
 }
+// .topCardDiv {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+
 .topCardDiv {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  .topDiv {
+    display: flex;
+    flex-direction: row;
+    .closeIconwhite {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: white;
+      @media screen and (max-width: 600px) {
+        padding-right: 32px;
+      }
+    }
+    .topCardText {
+      color: #fff;
+      padding-left: 10px;
+      font-size: 24px;
+      font-weight: 600;
+      @media screen and (max-width: 600px) {
+        width: auto;
+        font-size: larger;       
+      }
+    }
+  }
 }
-.closeIconwhite {
-  width: 32px;
-  height: 32px;
-  background: white;
-  border-radius: 50%;
-  margin-left: 10px;
-}
+
+// .closeIconwhite {
+//   width: 32px;
+//   height: 32px;
+//   background: white;
+//   border-radius: 50%;
+//   margin-left: 10px;
+//   @media screen and (max-width: 600px) {
+//     padding-right: 32px;
+//   }
+// }
 .generatePopup {
   width: 80%;
   gap: 32px;
@@ -77,26 +109,26 @@
       margin-left: 55px;
     }
   }
-  .topDiv {
-    display: flex;
-    flex-direction: row;
-    width: 75%;
-  }
+  // .topDiv {
+  //   display: flex;
+  //   flex-direction: row;
+  //   width: 75%;
+  // }
   .topCard {
     // padding-top: 32px;
     // padding-left: 32px;
     @media screen and (max-width: 600px) {
       padding-right: 16px;
     }
-    .topCardText {
-      color: #fff;
-      padding-left: 10px;
-      font-size: 24px;
-      font-weight: 600;
-      // width: 50%;
-      white-space: nowrap;
-      flex-grow: 1;
-    }
+    // .topCardText {
+    //   color: #fff;
+    //   padding-left: 10px;
+    //   font-size: 24px;
+    //   font-weight: 600;
+    //   // width: 50%;
+    //   white-space: nowrap;
+    //   flex-grow: 1;
+    // }
     img,
     video {
       max-width: 100%;
@@ -476,6 +508,7 @@
     justify-content: center;
     opacity: 0.9;
     animation: fadeInOut 3s ease-in-out;
+  
   }
 
   @keyframes fadeInOut {
