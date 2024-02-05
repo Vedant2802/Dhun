@@ -317,7 +317,8 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        Laughing baby girl
+                        Generate sound effects of a cat meowing accompanied by
+                        the voice of a young female speaking
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn2Selected)} ${
@@ -328,7 +329,8 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
                           setChibBtn2Selected(!isChibBtn2Selected);
                         }}
                       >
-                        Old man waking
+                        Generate a harmonious blend of whistling accompanied by
+                        the gentle sound of the wind blowing
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn1Selected)} ${
@@ -339,7 +341,8 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        Noise in Mumbai city
+                        Generate sounds of a railroad crossing signal followed
+                        by a train passing and blowing its horn
                       </button>
                     </div>
                   </div>

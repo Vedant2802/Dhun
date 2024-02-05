@@ -281,7 +281,9 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        Upbeat, spiritual music
+                        Create a rock anthem tailored for a charismatic actor
+                        portraying a rockstar, capturing their on-stage energy
+                        and magnetic presence
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn2Selected)} ${
@@ -292,7 +294,8 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn2Selected(!isChibBtn2Selected);
                         }}
                       >
-                        Indian, soulful, timeless, melody
+                        Create an energetic dance track featuring electric
+                        guitar riffs
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn1Selected)} ${
@@ -303,9 +306,10 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        Upbeat, spiritual music, Upbeat music
+                        A suspenseful tale of walking alone at night, feeling an
+                        eerie presence behind you, heartbeat racing with fear
                       </button>
-                      <button
+                      {/* <button
                         className={`${chibBtnStyle(isChibBtn1Selected)} ${
                           styles.chipbtn24
                         }`}
@@ -315,7 +319,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                         }}
                       >
                         Indian, soul
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </>
