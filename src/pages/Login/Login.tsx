@@ -47,6 +47,16 @@ const Login = () => {
     });
   };
 
+  const resendOtp = () => {
+    const requestBody = {
+      email: email,
+    };
+    getotp({
+      requestBody,
+      AUTH_ENDPOINT: AUTH_ENDPOINTS.getotp,
+    });
+  };
+
   useEffect(() => {
     if (user?.status === API_STATUS_TYPES.success) {
       setCreatePending(false);
@@ -111,7 +121,9 @@ const Login = () => {
             </div>
 
             {openAuthModal ? (
-              <div className={styles.resendOtp}>Resend OTP</div>
+              <div className={styles.resendOtp} onClick={resendOtp}>
+                Resend OTP
+              </div>
             ) : (
               <div className={styles.loginOTPMessage}>
                 We will send an OTP on the entered Email Id
@@ -120,7 +132,7 @@ const Login = () => {
 
             {openAuthModal ? (
               <div className={styles.loginButton} onClick={verifyOtp}>
-                Authenticat using OTP
+                Authenticate using OTP
               </div>
             ) : (
               <div className={styles.loginButton} onClick={handleLogin}>
