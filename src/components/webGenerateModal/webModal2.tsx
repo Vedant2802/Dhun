@@ -363,7 +363,7 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                       >
                         <img src={artistimage} className={styles.artistimg} />
                         <span className={styles.artistsongtext}>
-                          Bruno Mars
+                          Grenade by Bruno Mars
                         </span>
                       </div>
                       <div
@@ -371,7 +371,9 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                         className={styles.audiofiles}
                       >
                         <img src={artistimage} className={styles.artistimg} />
-                        <span className={styles.artistsongtext}>GOT Theme</span>
+                        <span className={styles.artistsongtext}>
+                          Streets of London by R McTell
+                        </span>
                       </div>
                     </div>
                   </div>
