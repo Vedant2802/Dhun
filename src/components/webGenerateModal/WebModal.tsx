@@ -281,9 +281,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        Create a rock anthem tailored for a charismatic actor
-                        portraying a rockstar, capturing their on-stage energy
-                        and magnetic presence
+                        <p className={styles.buttonText}>
+                          Create a rock anthem tailored for a charismatic actor
+                          portraying a rockstar, capturing their on-stage energy
+                          and magnetic presence
+                        </p>
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn2Selected)} ${
@@ -294,8 +296,10 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn2Selected(!isChibBtn2Selected);
                         }}
                       >
-                        Create an energetic dance track featuring electric
-                        guitar riffs
+                        <p className={styles.buttonText}>
+                          Create an energetic dance track featuring electric
+                          guitar riffs
+                        </p>
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn1Selected)} ${
@@ -306,8 +310,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        A suspenseful tale of walking alone at night, feeling an
-                        eerie presence behind you, heartbeat racing with fear
+                        <p className={styles.buttonText}>
+                          A suspenseful tale of walking alone at night, feeling
+                          an eerie presence behind you, heartbeat racing with
+                          fear and tension
+                        </p>
                       </button>
                       {/* <button
                         className={`${chibBtnStyle(isChibBtn1Selected)} ${
