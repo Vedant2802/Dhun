@@ -317,8 +317,10 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        Generate sound effects of a cat meowing accompanied by
-                        the voice of a young female speaking
+                        <p className={styles.buttonText}>
+                          Generate sound effects of a cat meowing accompanied by
+                          the voice of a young female speaking
+                        </p>
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn2Selected)} ${
@@ -329,8 +331,10 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
                           setChibBtn2Selected(!isChibBtn2Selected);
                         }}
                       >
-                        Generate a harmonious blend of whistling accompanied by
-                        the gentle sound of the wind blowing
+                        <p className={styles.buttonText}>
+                          Generate a harmonious blend of whistling accompanied
+                          by the gentle sound of the wind blowing
+                        </p>
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn1Selected)} ${
@@ -341,8 +345,10 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        Generate sounds of a railroad crossing signal followed
-                        by a train passing and blowing its horn
+                        <p className={styles.buttonText}>
+                          Generate sounds of a railroad crossing signal followed
+                          by a train passing and blowing its horn
+                        </p>
                       </button>
                     </div>
                   </div>
