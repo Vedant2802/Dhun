@@ -22,12 +22,13 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 25%;
+    // width: 25%;
     margin-right: 30px;
     @media screen and (max-width: 600px) {
       // width:auto;
-      margin-right: 30px;
-      padding-left: 14px;
+      // margin-right: 30px;
+      // padding-left: 14px;
+      margin-right: 0px;
     }
   }
   .closeIcon {
@@ -42,6 +43,7 @@
   .topDiv {
     display: flex;
     flex-direction: row;
+    align-items: center;
     .closeIconwhite {
       width: 32px;
       height: 32px;
@@ -58,7 +60,7 @@
       font-weight: 600;
       @media screen and (max-width: 600px) {
         font-size: 4vw;
-        width:auto;    
+        width: auto;
       }
     }
   }
@@ -70,7 +72,7 @@
   flex-direction: column;
   border-radius: 8px;
   background: #121212;
-  padding: 32px;
+  padding: 16px;
   @media screen and (max-width: 600px) {
     width: 100%;
     display: flex;
