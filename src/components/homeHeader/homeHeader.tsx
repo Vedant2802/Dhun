@@ -70,6 +70,8 @@ const HomeHeader: React.FC<any> = ({ setShowContactPopup }) => {
                   onClick={(e) => {
                     if (item === "Contact") {
                       setShowContactPopup(true);
+                    } else {
+                      setIsOpen(!isOpen);
                     }
                   }}
                   className={styles.menuItems}

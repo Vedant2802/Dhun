@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Login.module.scss";
 import { useGenerateStore } from "../../stores/generateStore";
 import closeicon from "../../../public/icons/close.svg";
+import backArrow from "../../../public/icons/backArrow.svg";
 import {
   API_STATUS_TYPES,
   AUTH_ENDPOINTS,
@@ -72,7 +73,7 @@ const Login = () => {
             <div className={styles.loginHeader}>
               {!openAuthModal
                 ? REGISTER_PAGE_CONSTANTS.login
-                : "Verify with OTP"}
+                : REGISTER_PAGE_CONSTANTS.verifyOtp}
             </div>
             <div className={styles.inputField}>
               {openAuthModal ? (
@@ -146,6 +147,15 @@ const Login = () => {
           >
             <img className={styles.closeIcon} src={closeicon} />
           </div>
+
+          {openAuthModal && (
+            <div
+              className={styles.backArrow}
+              onClick={() => setOpenAuthModal(false)}
+            >
+              <img className={styles.closeIcon} src={backArrow} />
+            </div>
+          )}
         </div>
       </div>
 

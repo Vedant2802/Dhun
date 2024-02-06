@@ -27,4 +27,5 @@ export enum REGISTER_PAGE_CONSTANTS {
   buttonTextPending = "Creating...",
   existingUserText = "Already have an account? ",
   loginLinkText = "Login",
+  verifyOtp = 'Verify with OTP'
 }

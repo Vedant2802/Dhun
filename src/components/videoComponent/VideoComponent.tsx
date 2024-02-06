@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./VideoComponent.module.scss";
 import playIcon from "../../../public/icons/playIcon.svg";
 import pauseIcon from "../../../public/icons/pausegrey.svg";
+import thumbnail from "../../../public/icons/thumbnail.png";
 
 const VideoComponent = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -22,7 +23,7 @@ const VideoComponent = () => {
     <div className={styles.video}>
       <video
         ref={videoRef}
-        // poster="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190710102234/download3.png"
+        poster={thumbnail}
         src="https://amlzee5sbci1mu5120768980.blob.core.windows.net/dhunai/DHUN_VIDEO_FINAL.mp4?sp=r&st=2024-01-19T10:55:05Z&se=2024-12-31T18:55:05Z&sv=2022-11-02&sr=b&sig=vGS2O9%2FBWyMevhHpyE7py44ew6PdY9onb5zjpkJOG1Y%3D"
         width="100%"
         height="100vh"
