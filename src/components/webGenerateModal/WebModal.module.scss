@@ -368,6 +368,8 @@
       display: flex;
       gap: 16px;
     }
+
+    
     .iconsWrapper {
       display: flex;
       gap: 10px;
@@ -508,23 +510,6 @@
   line-height: 20px;
   @media screen and (max-width: 600px) {
     display: none;
-  }
-
-  .linkCopiedPopup {
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px;
-    background-color: #4caf50;
-    color: white;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.9;
-    animation: fadeInOut 3s ease-in-out;
   }
 
   @keyframes fadeInOut {
