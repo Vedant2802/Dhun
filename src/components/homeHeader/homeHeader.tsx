@@ -14,6 +14,22 @@ const HomeHeader: React.FC<any> = ({ setShowContactPopup }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
+  // const renderCTA = () => {
+  //   if (userData?.data) {
+  //     return (
+  //       <div onClick={() => removeUser()} className={styles.login}>
+  //         {"Logout"}
+  //       </div>
+  //     );
+  //   }
+
+  //   return (
+  //     <div onClick={() => navigate("/login")} className={styles.login}>
+  //       {"Login/Register"}
+  //     </div>
+  //   );
+  // };
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 600);
