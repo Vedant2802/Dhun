@@ -237,21 +237,26 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
         className="selected-item-box"
         style={{
           display: "flex",
+          height: "30px",
           alignItems: "center",
           color: "white",
-          backgroundColor: "rgba(240, 240, 240, 0.8)",
-          padding: "22px",
+          backgroundColor: "rgba(240, 240, 240, 0.2)",
+          padding: "5px 25px 5px 5px",
           borderRadius: "5px",
+          margin: "7px",
         }}
       >
-        <span className="selected-item-text" style={{ marginRight: "10px" }}>
+        <span
+          className="selected-item-text"
+          style={{ marginRight: "10px", flexGrow: "1" }}
+        >
           {text}
         </span>
         <img
           src={closeicon}
           alt="Close"
           className="close-icon"
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", marginLeft: "auto" }}
           onClick={onClose}
         />
       </div>
