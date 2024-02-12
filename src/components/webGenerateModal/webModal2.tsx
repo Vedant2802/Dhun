@@ -84,23 +84,23 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
   //   uploadFileForWebsite(FormD);
   // };
 
-  const audioUpload = (audio: string) => {
-    if (audio === "GOT") {
-      generateMusic({
-        ...defaultReqObj,
-        prompt: prompt || "upbeat, neutral, driving",
-        file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.gotMusic,
-      });
-    } else {
-      generateMusic({
-        ...defaultReqObj,
-        prompt:
-          prompt ||
-          "joyful, medium tempo, high pitch, classical, sitar, tabla, harmonium, uplifting, melodic, rhythmic",
-        file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.brunoMars,
-      });
-    }
-  };
+  // const audioUpload = (audio: string) => {
+  //   if (audio === "GOT") {
+  //     generateMusic({
+  //       ...defaultReqObj,
+  //       prompt: prompt || "upbeat, neutral, driving",
+  //       file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.gotMusic,
+  //     });
+  //   } else {
+  //     generateMusic({
+  //       ...defaultReqObj,
+  //       prompt:
+  //         prompt ||
+  //         "joyful, medium tempo, high pitch, classical, sitar, tabla, harmonium, uplifting, melodic, rhythmic",
+  //       file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.brunoMars,
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     if (isChibBtn1Selected) {
@@ -209,6 +209,63 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     FormD.append("file", event.target.files[0]);
     uploadFileForWebsite(FormD);
   };
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileDevice(window.innerWidth <= 600);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const SelectedItemBox = ({
+    text,
+    onClose,
+  }: {
+    text: string;
+    onClose: () => void;
+  }) => {
+    return (
+      <div
+        className="selected-item-box"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          color: "white",
+          backgroundColor: "rgba(240, 240, 240, 0.8)",
+          padding: "22px",
+          borderRadius: "5px",
+        }}
+      >
+        <span className="selected-item-text" style={{ marginRight: "10px" }}>
+          {text}
+        </span>
+        <img
+          src={closeicon}
+          alt="Close"
+          className="close-icon"
+          style={{ cursor: "pointer" }}
+          onClick={onClose}
+        />
+      </div>
+    );
+  };
+
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const selectLibraryItem = (itemName: string) => {
+    setSelectedItem(itemName);
+  };
+
+  const clearSelectedItem = () => {
+    setSelectedItem(null);
+  };
 
   useEffect(() => {
     if (currentMusicSrc && isMusicPlaying && videoRef?.current) {
@@ -310,23 +367,31 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                 </>
               ) : (
                 <>
-                  <div className={styles.chipinputwrapper}>
-                    <div className={styles.chip}>
-                      <input
-                        name="prompt"
-                        className={styles.chipInput}
-                        onChange={(e) => setPrompt(e.target.value)}
-                        placeholder="Describe the music you wish to create. Try an Indian variation of the song"
-                      />
-                      <div
-                        className={styles.musicButton}
-                        onClick={(e) => handleOnSubmit(e)}
-                      >
-                        <img src={musicbutton} />
-                        <div className={styles.generate}>Generate</div>
+                  {isMobileDevice && (
+                    <div className={styles.chipinputwrapper}>
+                      <div className={styles.chip}>
+                        {selectedItem && (
+                          <SelectedItemBox
+                            text={selectedItem}
+                            onClose={clearSelectedItem}
+                          />
+                        )}
+                        <input
+                          name="prompt"
+                          className={styles.chipInput}
+                          onChange={(e) => setPrompt(e.target.value)}
+                          placeholder="Describe the music you wish to create. Try an Indian variation of the song"
+                        />
+                        <div
+                          className={styles.musicButton}
+                          onClick={(e) => handleOnSubmit(e)}
+                        >
+                          <img src={musicbutton} />
+                          <div className={styles.generate}>Generate</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                   <div>
                     <div className={styles.suggestionbtn}>
                       <img src={plus} />
@@ -358,7 +423,7 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                     </div>
                     <div className={styles.libraryMusic}>
                       <div
-                        onClick={() => audioUpload("Bruno")}
+                        onClick={() => selectLibraryItem("Bruno")}
                         className={styles.audiofiles}
                       >
                         <img src={artistimage} className={styles.artistimg} />
@@ -367,7 +432,7 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                         </span>
                       </div>
                       <div
-                        onClick={() => audioUpload("GOT")}
+                        onClick={() => selectLibraryItem("GOT")}
                         className={styles.audiofiles}
                       >
                         <img src={artistimage} className={styles.artistimg} />
@@ -376,6 +441,31 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                         </span>
                       </div>
                     </div>
+                    {!isMobileDevice && (
+                      <div className={styles.chipinputwrapper}>
+                        <div className={styles.chip}>
+                          {selectedItem && (
+                            <SelectedItemBox
+                              text={selectedItem}
+                              onClose={clearSelectedItem}
+                            />
+                          )}
+                          <input
+                            name="prompt"
+                            className={styles.chipInput}
+                            onChange={(e) => setPrompt(e.target.value)}
+                            placeholder="Describe the music you wish to create. Try an Indian variation of the song"
+                          />
+                          <div
+                            className={styles.musicButton}
+                            onClick={(e) => handleOnSubmit(e)}
+                          >
+                            <img src={musicbutton} />
+                            <div className={styles.generate}>Generate</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </>
               )}
