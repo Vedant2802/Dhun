@@ -119,3 +119,25 @@
   z-index: 9999;
   top: 0px;
 }
+
+.mobileHeader {
+  display: flex;
+  align-items: center;
+  margin-top: 20px; /* Adjust margin as needed */
+  padding: 10px; /* Adjust padding as needed */
+  color: #fff;
+  justify-content: space-between;
+}
+
+.mobileHeader .closeIcon {
+  margin-left: auto;
+}
+
+.mobileHeader .iconContainer {
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+.dhunContainer {
+  display: flex;
+  align-items: center;
+}
