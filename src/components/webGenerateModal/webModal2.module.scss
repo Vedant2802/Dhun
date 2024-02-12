@@ -96,6 +96,26 @@
     }
   }
 
+  // .selectedItemBox {
+  //   display: flex;
+  //   height: 30px;
+  //   align-items: center;
+  //   color: white;
+  //   background-color: rgba(240, 240, 240, 0.2);
+  //   padding: 5px 25px 5px 5px;
+  //   border-radius: 5px;
+  //   margin: 7px;
+  // }
+
+  // .selectedItemText {
+  //   margin-right: 10px;
+  //   flex-grow: 1;
+  // }
+
+  // .closeIcon2 {
+  //   cursor: pointer;
+  // }
+
   .topCard {
     // padding-top: 32px;
     // padding-left: 32px;
@@ -471,4 +491,24 @@
   @media screen and (max-width: 600px) {
     display: none;
   }
+}
+
+.selectedItemBox {
+  display: flex;
+  height: 30px;
+  align-items: center;
+  color: white;
+  background-color: rgba(240, 240, 240, 0.2);
+  padding: 5px 25px 5px 5px;
+  border-radius: 5px;
+  margin: 7px;
+}
+
+.selectedItemText {
+  margin-right: 10px;
+  flex-grow: 1;
+}
+
+.closeIcon2 {
+  cursor: pointer;
 }
