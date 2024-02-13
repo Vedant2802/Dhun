@@ -214,7 +214,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
           >
             <div className={styles.topCardDiv}>
               <div className={styles.topDiv}>
-                <p className={styles.closeIconwhite}></p>
+                {/* <p className={styles.closeIconwhite}></p> */}
                 <p className={styles.topCardText}>Create text &rarr; music</p>
               </div>
 

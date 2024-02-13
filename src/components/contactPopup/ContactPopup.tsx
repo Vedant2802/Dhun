@@ -81,8 +81,8 @@ const ContactPopup: React.FC<any> = ({ onClose }) => {
         </div>
         <div className={styles.footer}>
           <span className={styles.contactinfo}>
-            You can call us on +91 9876543210 <br />
-            or write your queries to us at musicstudio@dhun.ai{" "}
+            {/* You can call us on +91 9876543210 <br /> */}
+            Write your queries to us at contact@dhun.ai{" "}
           </span>
           <button onClick={() => handleSend()} className={styles.sendButton}>
             {" "}
