@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import {
-  FacebookShareButton,
-  TwitterShareButton,
-  EmailShareButton,
+  //   FacebookShareButton,
+  //   TwitterShareButton,
+  //   EmailShareButton,
   WhatsappShareButton,
 } from "react-share";
 
@@ -38,7 +38,7 @@ const ShareModal = (props: ShareModalProps) => {
           data-testid="share-modal-wrapper"
           onClick={(e) => e.stopPropagation()}
         >
-          <FacebookShareButton
+          {/* <FacebookShareButton
             title="Facebook"
             url={shareURL}
           ></FacebookShareButton>
@@ -52,7 +52,7 @@ const ShareModal = (props: ShareModalProps) => {
             url={shareURL}
             subject="email"
             body="Check out this content"
-          ></EmailShareButton>
+          ></EmailShareButton> */}
 
           {window.innerWidth <= 600 ? (
             <WhatsappShareButton
