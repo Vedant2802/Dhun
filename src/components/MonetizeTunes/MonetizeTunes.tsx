@@ -79,8 +79,8 @@ const MonetizeTunes: React.FC<any> = ({ setShowContactPopup }) => {
 
           <div className={styles.footerFlex}>
             {/* <span>FOLLOW US</span> */}
-            <span className={styles.footerDetailsContact}>Whatsapp</span>
-            <span>Instagram</span>
+            {/* <span className={styles.footerDetailsContact}>Whatsapp</span>
+            <span>Instagram</span> */}
           </div>
         </div>
 
