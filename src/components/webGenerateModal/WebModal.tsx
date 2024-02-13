@@ -60,23 +60,14 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     generateMusic({ ...defaultReqObj, prompt });
   };
 
-  const [isLinkCopied, setIsLinkCopied] = useState(false);
-  const handleShareClick = (shareURL: string, event?: React.MouseEvent) => {
+  const [shareURL, setShareURL] = useState("");
+  const handleShareClick = (url: string, event?: React.MouseEvent) => {
     event?.stopPropagation();
     showShareModal(true);
-    // try {
-    //   // Use the 'url' parameter
-    //   await navigator.clipboard.writeText(url);
-    //   setIsLinkCopied(true);
-
-    //   setTimeout(() => {
-    //     setIsLinkCopied(false);
-    //   }, 3000);
-    //   console.log("Link copied to clipboard:", url);
-    // } catch (error) {
-    //   console.error("Failed to copy link:", error);
-    //   alert("Failed to copy link. Please try again.");
-    // }
+    setShareURL(url);
+    setTimeout(() => {
+      showShareModal(false);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -125,6 +116,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     if (musicUrls && musicUrls.length) {
       return (
         <div className={styles.loadingChip}>
+          {shareModal && (
+            <div className={styles.linkCopiedPopup}>
+              Link copied to clipboard!
+            </div>
+          )}
           <div
             className={styles.chip1}
             onClick={() => togglePlay(musicUrls[0])}
@@ -142,11 +138,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
               <img src={likeIcon} alt="Like" />
               <img src={dislikeIcon} alt="Dislike" />
             </div>
-            {shareModal && (
-              <div className={styles.linkCopiedPopup}>
-                Link copied to clipboard!
-              </div>
-            )}
           </div>
           <div
             className={styles.chip1}
@@ -331,13 +322,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
           </>
         )}
       </form>
-      {shareModal && (
-        <ShareModal
-          shareURL={
-            "http://dhun.centralindia.cloudapp.azure.com/api-test/download/d68121ca-b5f8-474a-a039-6ac9fd43c6a1.wav"
-          }
-        />
-      )}
+      {shareModal && <ShareModal shareURL={shareURL} />}
       <AudioPlayer />
     </dialog>
   );

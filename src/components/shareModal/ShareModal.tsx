@@ -16,7 +16,7 @@ type ShareModalProps = {
 
 const ShareModal = (props: ShareModalProps) => {
   const { shareURL } = props;
-
+  console.log("shareURL", shareURL);
   const trackSocialMediaSharingMixpanelEvent = (platformName: string) => {
     // handleClose();
   };
