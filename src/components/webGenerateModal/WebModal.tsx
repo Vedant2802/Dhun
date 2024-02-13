@@ -119,12 +119,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     if (musicUrls && musicUrls.length) {
       return (
         <div className={styles.loadingChip}>
-          {isLinkCopied ||
-            (shareModal && (
-              <div className={styles.linkCopiedPopup}>
-                Link copied to clipboard!
-              </div>
-            ))}
+          {(shareModal || isLinkCopied) && (
+            <div className={styles.linkCopiedPopup}>
+              Link copied to clipboard!
+            </div>
+          )}
           <div
             className={styles.chip1}
             onClick={() => togglePlay(musicUrls[0])}
