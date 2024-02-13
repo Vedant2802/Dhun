@@ -12,7 +12,6 @@ import shareIcon from "../../../public/icons/shareIcon.svg";
 import musicbutton from "../../../public/icons/music-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
 import { Player } from "@lottiefiles/react-lottie-player";
-import ShareModal from "../shareModal/ShareModal";
 
 enum DEFAULT_PROMPTS {
   prompt1 = "Upbeat, spiritual music",
@@ -53,31 +52,23 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     status: state.websiteData.status,
     musicUrls: state.websiteData.musicUrls,
   }));
-  const [shareModal, showShareModal] = useState(false);
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
     generateMusic({ ...defaultReqObj, prompt });
   };
 
-  const [shareURL, setShareURL] = useState("");
-  const handleShareClick = (url: string, event?: React.MouseEvent) => {
+  const [isLinkCopied, setIsLinkCopied] = useState(false);
+  const handleShareClick = async (url: string, event?: React.MouseEvent) => {
     event?.stopPropagation();
-<<<<<<< HEAD
-    showShareModal(true);
-    setShareURL(url);
-    setTimeout(() => {
-      showShareModal(false);
-    }, 3000);
-  };
-=======
     try {
+      // Use the 'url' parameter
       await navigator.clipboard.writeText(url);
       setIsLinkCopied(true);
 
       setTimeout(() => {
         setIsLinkCopied(false);
-      }, 3000);
+      }, 30000);
       console.log("Link copied to clipboard:", url);
     } catch (error) {
       console.error("Failed to copy link:", error);
@@ -85,7 +76,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     }
   };
   console.log("first", isLinkCopied);
->>>>>>> 897fb16e1e021f9506caf41a4ef8a5c8a249745d
 
   useEffect(() => {
     if (isChibBtn1Selected) {
@@ -133,11 +123,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     if (musicUrls && musicUrls.length) {
       return (
         <div className={styles.loadingChip}>
-<<<<<<< HEAD
-          {shareModal && (
-=======
           {isLinkCopied && (
->>>>>>> 897fb16e1e021f9506caf41a4ef8a5c8a249745d
             <div className={styles.linkCopiedPopup}>
               Link copied to clipboard!
             </div>
@@ -296,9 +282,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        Create a rock anthem tailored for a charismatic actor
-                        portraying a rockstar, capturing their on-stage energy
-                        and magnetic presence
+                        <p className={styles.buttonText}>
+                          Create a rock anthem tailored for a charismatic actor
+                          portraying a rockstar, capturing their on-stage energy
+                          and magnetic presence
+                        </p>
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn2Selected)} ${
@@ -309,8 +297,10 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn2Selected(!isChibBtn2Selected);
                         }}
                       >
-                        Create an energetic dance track featuring electric
-                        guitar riffs
+                        <p className={styles.buttonText}>
+                          Create an energetic dance track featuring electric
+                          guitar riffs
+                        </p>
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn1Selected)} ${
@@ -321,8 +311,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        A suspenseful tale of walking alone at night, feeling an
-                        eerie presence behind you, heartbeat racing with fear
+                        <p className={styles.buttonText}>
+                          A suspenseful tale of walking alone at night, feeling
+                          an eerie presence behind you, heartbeat racing with
+                          fear and tension
+                        </p>
                       </button>
                       {/* <button
                         className={`${chibBtnStyle(isChibBtn1Selected)} ${
@@ -343,7 +336,6 @@ const WebModal = ({ closePopup }: webmodalprops) => {
           </>
         )}
       </form>
-      {shareModal && <ShareModal shareURL={shareURL} />}
       <AudioPlayer />
     </dialog>
   );
