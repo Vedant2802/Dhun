@@ -403,8 +403,15 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                           placeholder="Describe the music you wish to create. Try an Indian variation of the song"
                         />
                         <div
-                          className={styles.musicButton}
-                          onClick={(e) => handleOnSubmit(e)}
+                          className={`${styles.musicButton} ${
+                            prompt.trim() === "" ? styles.disabled : ""
+                          }`}
+                          onClick={(e) => {
+                            // Check if the prompt is empty or not
+                            if (prompt.trim() !== "") {
+                              handleOnSubmit(e);
+                            }
+                          }}
                         >
                           <img src={musicbutton} />
                           <div className={styles.generate}>Generate</div>
