@@ -209,21 +209,6 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     FormD.append("file", event.target.files[0]);
     uploadFileForWebsite(FormD);
   };
-  const [isMobileDevice, setIsMobileDevice] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobileDevice(window.innerWidth <= 600);
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const SelectedItemBox = ({
     text,
@@ -354,31 +339,6 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                 </>
               ) : (
                 <>
-                  {isMobileDevice && (
-                    <div className={styles.chipinputwrapper}>
-                      <div className={styles.chip}>
-                        {selectedItem && (
-                          <SelectedItemBox
-                            text={selectedItem}
-                            onClose={clearSelectedItem}
-                          />
-                        )}
-                        <input
-                          name="prompt"
-                          className={styles.chipInput}
-                          onChange={(e) => setPrompt(e.target.value)}
-                          placeholder="Describe the music you wish to create. Try an Indian variation of the song"
-                        />
-                        <div
-                          className={styles.musicButton}
-                          onClick={(e) => handleOnSubmit(e)}
-                        >
-                          <img src={musicbutton} />
-                          <div className={styles.generate}>Generate</div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
                   <div>
                     <div className={styles.suggestionbtn}>
                       <img src={plus} />
@@ -428,31 +388,29 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                         </span>
                       </div>
                     </div>
-                    {!isMobileDevice && (
-                      <div className={styles.chipinputwrapper}>
-                        <div className={styles.chip}>
-                          {selectedItem && (
-                            <SelectedItemBox
-                              text={selectedItem}
-                              onClose={clearSelectedItem}
-                            />
-                          )}
-                          <input
-                            name="prompt"
-                            className={styles.chipInput}
-                            onChange={(e) => setPrompt(e.target.value)}
-                            placeholder="Describe the music you wish to create. Try an Indian variation of the song"
+                    <div className={styles.chipinputwrapper}>
+                      <div className={styles.chip}>
+                        {selectedItem && (
+                          <SelectedItemBox
+                            text={selectedItem}
+                            onClose={clearSelectedItem}
                           />
-                          <div
-                            className={styles.musicButton}
-                            onClick={(e) => handleOnSubmit(e)}
-                          >
-                            <img src={musicbutton} />
-                            <div className={styles.generate}>Generate</div>
-                          </div>
+                        )}
+                        <input
+                          name="prompt"
+                          className={styles.chipInput}
+                          onChange={(e) => setPrompt(e.target.value)}
+                          placeholder="Describe the music you wish to create. Try an Indian variation of the song"
+                        />
+                        <div
+                          className={styles.musicButton}
+                          onClick={(e) => handleOnSubmit(e)}
+                        >
+                          <img src={musicbutton} />
+                          <div className={styles.generate}>Generate</div>
                         </div>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </>
               )}
