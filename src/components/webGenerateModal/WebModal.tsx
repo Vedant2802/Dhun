@@ -63,12 +63,29 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   const [shareURL, setShareURL] = useState("");
   const handleShareClick = (url: string, event?: React.MouseEvent) => {
     event?.stopPropagation();
+<<<<<<< HEAD
     showShareModal(true);
     setShareURL(url);
     setTimeout(() => {
       showShareModal(false);
     }, 3000);
   };
+=======
+    try {
+      await navigator.clipboard.writeText(url);
+      setIsLinkCopied(true);
+
+      setTimeout(() => {
+        setIsLinkCopied(false);
+      }, 3000);
+      console.log("Link copied to clipboard:", url);
+    } catch (error) {
+      console.error("Failed to copy link:", error);
+      alert("Failed to copy link. Please try again.");
+    }
+  };
+  console.log("first", isLinkCopied);
+>>>>>>> 897fb16e1e021f9506caf41a4ef8a5c8a249745d
 
   useEffect(() => {
     if (isChibBtn1Selected) {
@@ -116,7 +133,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     if (musicUrls && musicUrls.length) {
       return (
         <div className={styles.loadingChip}>
+<<<<<<< HEAD
           {shareModal && (
+=======
+          {isLinkCopied && (
+>>>>>>> 897fb16e1e021f9506caf41a4ef8a5c8a249745d
             <div className={styles.linkCopiedPopup}>
               Link copied to clipboard!
             </div>
