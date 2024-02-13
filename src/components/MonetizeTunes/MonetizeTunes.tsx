@@ -61,7 +61,7 @@ const MonetizeTunes: React.FC<any> = ({ setShowContactPopup }) => {
       </div>
 
       <div className={styles.footer}>
-       <div className={styles.footerDetails}>
+        <div className={styles.footerDetails}>
           <div className={styles.footerFlex}>
             <span className={styles.sitemap}>SITEMAP</span>
             <span className={styles.footerHeadmap1}>
@@ -72,13 +72,13 @@ const MonetizeTunes: React.FC<any> = ({ setShowContactPopup }) => {
           <div className={styles.footerFlex}>
             <span>CONTACT US</span>
             <span className={styles.footerDetailsContact}>
-              +1 891 989-11-91
+              {/* +1 891 989-11-91 */}
             </span>
-            <span className={styles.footerDetails2}>hello@dhun.ai</span>
+            <span className={styles.footerDetails2}>contact@dhun.ai</span>
           </div>
 
           <div className={styles.footerFlex}>
-            <span>FOLLOW US</span>
+            {/* <span>FOLLOW US</span> */}
             <span className={styles.footerDetailsContact}>Whatsapp</span>
             <span>Instagram</span>
           </div>

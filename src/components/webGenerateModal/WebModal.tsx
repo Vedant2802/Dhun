@@ -75,7 +75,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
       alert("Failed to copy link. Please try again.");
     }
   };
-  console.log("first",isLinkCopied);
+  console.log("first", isLinkCopied);
 
   useEffect(() => {
     if (isChibBtn1Selected) {
@@ -124,81 +124,83 @@ const WebModal = ({ closePopup }: webmodalprops) => {
       return (
         <div className={styles.loadingChip}>
           {isLinkCopied && (
-          <div className={styles.linkCopiedPopup}
-          style={{
-            marginLeft: "80%",
-            padding: "10px",
-            backgroundColor: "white",
-            color: "black",
-            borderRadius: "5px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-            display: "flex",
-            opacity: "0.9",
-            animation: "fadeInOut 15s ease-in-out",
-            justifyContent: "center",
-            width: "15vw",
-          }}>
-            Link copied to clipboard!
-          </div>
-        )}
             <div
-              className={styles.chip1}
-              onClick={() => togglePlay(musicUrls[0])}
+              className={styles.linkCopiedPopup}
+              style={{
+                marginLeft: "80%",
+                padding: "10px",
+                backgroundColor: "white",
+                color: "black",
+                borderRadius: "5px",
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+                display: "flex",
+                opacity: "0.9",
+                animation: "fadeInOut 15s ease-in-out",
+                justifyContent: "center",
+                width: "15vw",
+              }}
             >
-              <img src={getMusicIcon(musicUrls[0])} alt="playIcon" />
-              <div>Track 1</div>
-              <div className={styles.iconsWrapper}>
-                <div
-                  className={styles.iconWrapper}
-                  data-tooltip="Share"
-                  onClick={(e) => handleShareClick(musicUrls[0], e)}
-                >
-                  <img src={shareIcon} alt="Share" />
-                </div>
-                <img src={likeIcon} alt="Like" />
-                <img src={dislikeIcon} alt="Dislike" />
-              </div>
+              Link copied to clipboard!
             </div>
-            <div
-              className={styles.chip1}
-              onClick={() => togglePlay(musicUrls[1])}
-            >
-              <img src={getMusicIcon(musicUrls[1])} alt="playIcon" />
-              <div>Track 2</div>
-              <div className={styles.iconsWrapper}>
-                <div
-                  className={styles.iconWrapper}
-                  data-tooltip="Share"
-                  onClick={(e) => handleShareClick(musicUrls[1], e)}
-                >
-                  <img src={shareIcon} alt="Share" />
-                </div>
-                <img src={likeIcon} alt="Like" />
-                <img src={dislikeIcon} alt="Dislike" />
+          )}
+          <div
+            className={styles.chip1}
+            onClick={() => togglePlay(musicUrls[0])}
+          >
+            <img src={getMusicIcon(musicUrls[0])} alt="playIcon" />
+            <div>Track 1</div>
+            <div className={styles.iconsWrapper}>
+              <div
+                className={styles.iconWrapper}
+                data-tooltip="Share"
+                onClick={(e) => handleShareClick(musicUrls[0], e)}
+              >
+                <img src={shareIcon} alt="Share" />
               </div>
-            </div>
-            <div
-              className={styles.chip1}
-              onClick={() => togglePlay(musicUrls[2])}
-            >
-              <img src={getMusicIcon(musicUrls[2])} alt="playIcon" />
-              <div>Track 3</div>
-              <div className={styles.iconsWrapper}>
-                <div
-                  className={styles.iconWrapper}
-                  data-tooltip="Share"
-                  onClick={(e) => handleShareClick(musicUrls[2], e)}
-                >
-                  <img src={shareIcon} alt="Share" />
-                </div>
-                <img src={likeIcon} alt="Like" />
-                <img src={dislikeIcon} alt="Dislike" />
-              </div>
-            </div>
-            <div className={styles.createButton} onClick={resetState}>
-              Create more music
+              <img src={likeIcon} alt="Like" />
+              <img src={dislikeIcon} alt="Dislike" />
             </div>
           </div>
+          <div
+            className={styles.chip1}
+            onClick={() => togglePlay(musicUrls[1])}
+          >
+            <img src={getMusicIcon(musicUrls[1])} alt="playIcon" />
+            <div>Track 2</div>
+            <div className={styles.iconsWrapper}>
+              <div
+                className={styles.iconWrapper}
+                data-tooltip="Share"
+                onClick={(e) => handleShareClick(musicUrls[1], e)}
+              >
+                <img src={shareIcon} alt="Share" />
+              </div>
+              <img src={likeIcon} alt="Like" />
+              <img src={dislikeIcon} alt="Dislike" />
+            </div>
+          </div>
+          <div
+            className={styles.chip1}
+            onClick={() => togglePlay(musicUrls[2])}
+          >
+            <img src={getMusicIcon(musicUrls[2])} alt="playIcon" />
+            <div>Track 3</div>
+            <div className={styles.iconsWrapper}>
+              <div
+                className={styles.iconWrapper}
+                data-tooltip="Share"
+                onClick={(e) => handleShareClick(musicUrls[2], e)}
+              >
+                <img src={shareIcon} alt="Share" />
+              </div>
+              <img src={likeIcon} alt="Like" />
+              <img src={dislikeIcon} alt="Dislike" />
+            </div>
+          </div>
+          <div className={styles.createButton} onClick={resetState}>
+            Create more music
+          </div>
+        </div>
       );
     }
     return null;
@@ -227,7 +229,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
           >
             <div className={styles.topCardDiv}>
               <div className={styles.topDiv}>
-                <p className={styles.closeIconwhite}></p>
+                {/* <p className={styles.closeIconwhite}></p> */}
                 <p className={styles.topCardText}>Create text &rarr; music</p>
               </div>
 
