@@ -68,13 +68,14 @@ const WebModal = ({ closePopup }: webmodalprops) => {
 
       setTimeout(() => {
         setIsLinkCopied(false);
-      }, 3000);
+      }, 30000);
       console.log("Link copied to clipboard:", url);
     } catch (error) {
       console.error("Failed to copy link:", error);
       alert("Failed to copy link. Please try again.");
     }
   };
+  console.log("first",isLinkCopied);
 
   useEffect(() => {
     if (isChibBtn1Selected) {
@@ -122,69 +123,82 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     if (musicUrls && musicUrls.length) {
       return (
         <div className={styles.loadingChip}>
-          <div
-            className={styles.chip1}
-            onClick={() => togglePlay(musicUrls[0])}
-          >
-            <img src={getMusicIcon(musicUrls[0])} alt="playIcon" />
-            <div>Track 1</div>
-            <div className={styles.iconsWrapper}>
-              <div
-                className={styles.iconWrapper}
-                data-tooltip="Share"
-                onClick={(e) => handleShareClick(musicUrls[0], e)}
-              >
-                <img src={shareIcon} alt="Share" />
+          {isLinkCopied && (
+          <div className={styles.linkCopiedPopup}
+          style={{
+            marginLeft: "80%",
+            padding: "10px",
+            backgroundColor: "white",
+            color: "black",
+            borderRadius: "5px",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+            display: "flex",
+            opacity: "0.9",
+            animation: "fadeInOut 15s ease-in-out",
+            justifyContent: "center",
+            width: "15vw",
+          }}>
+            Link copied to clipboard!
+          </div>
+        )}
+            <div
+              className={styles.chip1}
+              onClick={() => togglePlay(musicUrls[0])}
+            >
+              <img src={getMusicIcon(musicUrls[0])} alt="playIcon" />
+              <div>Track 1</div>
+              <div className={styles.iconsWrapper}>
+                <div
+                  className={styles.iconWrapper}
+                  data-tooltip="Share"
+                  onClick={(e) => handleShareClick(musicUrls[0], e)}
+                >
+                  <img src={shareIcon} alt="Share" />
+                </div>
+                <img src={likeIcon} alt="Like" />
+                <img src={dislikeIcon} alt="Dislike" />
               </div>
-              <img src={likeIcon} alt="Like" />
-              <img src={dislikeIcon} alt="Dislike" />
             </div>
-            {isLinkCopied && (
-              <div className={styles.linkCopiedPopup}>
-                Link copied to clipboard!
+            <div
+              className={styles.chip1}
+              onClick={() => togglePlay(musicUrls[1])}
+            >
+              <img src={getMusicIcon(musicUrls[1])} alt="playIcon" />
+              <div>Track 2</div>
+              <div className={styles.iconsWrapper}>
+                <div
+                  className={styles.iconWrapper}
+                  data-tooltip="Share"
+                  onClick={(e) => handleShareClick(musicUrls[1], e)}
+                >
+                  <img src={shareIcon} alt="Share" />
+                </div>
+                <img src={likeIcon} alt="Like" />
+                <img src={dislikeIcon} alt="Dislike" />
               </div>
-            )}
-          </div>
-          <div
-            className={styles.chip1}
-            onClick={() => togglePlay(musicUrls[1])}
-          >
-            <img src={getMusicIcon(musicUrls[1])} alt="playIcon" />
-            <div>Track 2</div>
-            <div className={styles.iconsWrapper}>
-              <div
-                className={styles.iconWrapper}
-                data-tooltip="Share"
-                onClick={(e) => handleShareClick(musicUrls[1], e)}
-              >
-                <img src={shareIcon} alt="Share" />
+            </div>
+            <div
+              className={styles.chip1}
+              onClick={() => togglePlay(musicUrls[2])}
+            >
+              <img src={getMusicIcon(musicUrls[2])} alt="playIcon" />
+              <div>Track 3</div>
+              <div className={styles.iconsWrapper}>
+                <div
+                  className={styles.iconWrapper}
+                  data-tooltip="Share"
+                  onClick={(e) => handleShareClick(musicUrls[2], e)}
+                >
+                  <img src={shareIcon} alt="Share" />
+                </div>
+                <img src={likeIcon} alt="Like" />
+                <img src={dislikeIcon} alt="Dislike" />
               </div>
-              <img src={likeIcon} alt="Like" />
-              <img src={dislikeIcon} alt="Dislike" />
+            </div>
+            <div className={styles.createButton} onClick={resetState}>
+              Create more music
             </div>
           </div>
-          <div
-            className={styles.chip1}
-            onClick={() => togglePlay(musicUrls[2])}
-          >
-            <img src={getMusicIcon(musicUrls[2])} alt="playIcon" />
-            <div>Track 3</div>
-            <div className={styles.iconsWrapper}>
-              <div
-                className={styles.iconWrapper}
-                data-tooltip="Share"
-                onClick={(e) => handleShareClick(musicUrls[2], e)}
-              >
-                <img src={shareIcon} alt="Share" />
-              </div>
-              <img src={likeIcon} alt="Like" />
-              <img src={dislikeIcon} alt="Dislike" />
-            </div>
-          </div>
-          <div className={styles.createButton} onClick={resetState}>
-            Create more music
-          </div>
-        </div>
       );
     }
     return null;
