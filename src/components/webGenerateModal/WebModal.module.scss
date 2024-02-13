@@ -88,6 +88,7 @@
   border-radius: 8px;
   background: #121212;
   padding: 16px;
+  position: relative;
   @media screen and (max-width: 600px) {
     width: 100%;
     gap: 24px;
@@ -369,7 +370,6 @@
       gap: 16px;
     }
 
-    
     .iconsWrapper {
       display: flex;
       gap: 10px;
@@ -522,4 +522,20 @@
       opacity: 1;
     }
   }
+}
+.linkCopiedPopup {
+  padding: 10px;
+  background: white;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  opacity: 0.9;
+  animation: fadeInOut 15s ease-in-out;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  position: absolute;
+  top: 33px;
+  right: 18px;
 }

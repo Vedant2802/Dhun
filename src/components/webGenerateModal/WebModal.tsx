@@ -124,22 +124,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
       return (
         <div className={styles.loadingChip}>
           {isLinkCopied && (
-            <div
-              className={styles.linkCopiedPopup}
-              style={{
-                marginLeft: "80%",
-                padding: "10px",
-                backgroundColor: "white",
-                color: "black",
-                borderRadius: "5px",
-                boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-                display: "flex",
-                opacity: "0.9",
-                animation: "fadeInOut 15s ease-in-out",
-                justifyContent: "center",
-                width: "15vw",
-              }}
-            >
+            <div className={styles.linkCopiedPopup}>
               Link copied to clipboard!
             </div>
           )}
@@ -297,9 +282,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        Create a rock anthem tailored for a charismatic actor
-                        portraying a rockstar, capturing their on-stage energy
-                        and magnetic presence
+                        <p className={styles.buttonText}>
+                          Create a rock anthem tailored for a charismatic actor
+                          portraying a rockstar, capturing their on-stage energy
+                          and magnetic presence
+                        </p>
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn2Selected)} ${
@@ -310,8 +297,10 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn2Selected(!isChibBtn2Selected);
                         }}
                       >
-                        Create an energetic dance track featuring electric
-                        guitar riffs
+                        <p className={styles.buttonText}>
+                          Create an energetic dance track featuring electric
+                          guitar riffs
+                        </p>
                       </button>
                       <button
                         className={`${chibBtnStyle(isChibBtn1Selected)} ${
@@ -322,8 +311,11 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
-                        A suspenseful tale of walking alone at night, feeling an
-                        eerie presence behind you, heartbeat racing with fear
+                        <p className={styles.buttonText}>
+                          A suspenseful tale of walking alone at night, feeling
+                          an eerie presence behind you, heartbeat racing with
+                          fear and tension
+                        </p>
                       </button>
                       {/* <button
                         className={`${chibBtnStyle(isChibBtn1Selected)} ${
