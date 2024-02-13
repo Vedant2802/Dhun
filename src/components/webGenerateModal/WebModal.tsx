@@ -12,6 +12,7 @@ import shareIcon from "../../../public/icons/shareIcon.svg";
 import musicbutton from "../../../public/icons/music-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
 import { Player } from "@lottiefiles/react-lottie-player";
+import ShareModal from "../shareModal/ShareModal";
 
 enum DEFAULT_PROMPTS {
   prompt1 = "Upbeat, spiritual music",
@@ -52,6 +53,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     status: state.websiteData.status,
     musicUrls: state.websiteData.musicUrls,
   }));
+  const [shareModal, showShareModal] = useState(false);
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
@@ -59,21 +61,22 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   };
 
   const [isLinkCopied, setIsLinkCopied] = useState(false);
-  const handleShareClick = async (url: string, event?: React.MouseEvent) => {
+  const handleShareClick = (shareURL: string, event?: React.MouseEvent) => {
     event?.stopPropagation();
-    try {
-      // Use the 'url' parameter
-      await navigator.clipboard.writeText(url);
-      setIsLinkCopied(true);
+    showShareModal(true);
+    // try {
+    //   // Use the 'url' parameter
+    //   await navigator.clipboard.writeText(url);
+    //   setIsLinkCopied(true);
 
-      setTimeout(() => {
-        setIsLinkCopied(false);
-      }, 3000);
-      console.log("Link copied to clipboard:", url);
-    } catch (error) {
-      console.error("Failed to copy link:", error);
-      alert("Failed to copy link. Please try again.");
-    }
+    //   setTimeout(() => {
+    //     setIsLinkCopied(false);
+    //   }, 3000);
+    //   console.log("Link copied to clipboard:", url);
+    // } catch (error) {
+    //   console.error("Failed to copy link:", error);
+    //   alert("Failed to copy link. Please try again.");
+    // }
   };
 
   useEffect(() => {
@@ -139,7 +142,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
               <img src={likeIcon} alt="Like" />
               <img src={dislikeIcon} alt="Dislike" />
             </div>
-            {isLinkCopied && (
+            {shareModal && (
               <div className={styles.linkCopiedPopup}>
                 Link copied to clipboard!
               </div>
@@ -328,6 +331,13 @@ const WebModal = ({ closePopup }: webmodalprops) => {
           </>
         )}
       </form>
+      {shareModal && (
+        <ShareModal
+          shareURL={
+            "http://dhun.centralindia.cloudapp.azure.com/api-test/download/d68121ca-b5f8-474a-a039-6ac9fd43c6a1.wav"
+          }
+        />
+      )}
       <AudioPlayer />
     </dialog>
   );
