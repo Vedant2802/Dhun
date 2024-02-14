@@ -226,7 +226,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
 
       setTimeout(() => {
         setIsLinkCopied(false);
-      }, 30000);
+      }, 1000);
       console.log("Link copied to clipboard:", url);
     } catch (error) {
       console.error("Failed to copy link:", error);

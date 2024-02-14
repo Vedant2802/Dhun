@@ -22,9 +22,10 @@ const VideoComponent = () => {
   return (
     <div className={styles.video}>
       <video
+        className={styles.video}
         ref={videoRef}
         poster={thumbnail}
-        src="https://amlzee5sbci1mu5120768980.blob.core.windows.net/dhunai/DHUN_VIDEO_FINAL.mp4?sp=r&st=2024-01-19T10:55:05Z&se=2024-12-31T18:55:05Z&sv=2022-11-02&sr=b&sig=vGS2O9%2FBWyMevhHpyE7py44ew6PdY9onb5zjpkJOG1Y%3D"
+        src="https://amlzee5sbci1mu5120768980.blob.core.windows.net/dhunai/video/DHUN_AI_VIDEO_FINAL_HD.mp4?sp=r&st=2024-02-09T08:17:13Z&se=2025-01-31T16:17:13Z&sv=2022-11-02&sr=c&sig=6zNf1uiC5J8pWr13HKp7%2Bh2OzoyacHPsT4DeG2W3ozo%3D"
         width="100%"
         height="100vh"
         onClick={playVideoPlayer}

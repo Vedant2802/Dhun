@@ -63,6 +63,13 @@
 .menuItems {
   font-size: 14px;
   cursor: pointer;
+  @media screen and (max-width: 600px) {
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 33.6px;
+    padding: 12px;
+  }
 }
 .login {
   color: #000;
