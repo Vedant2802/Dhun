@@ -103,7 +103,7 @@ const OurFeature = () => {
         </div>
       </div>
 
-      <div className={styles.featureContainer}>
+      <div className={styles.featureContainer} id="feature-section">
         <div className={styles.exploreText}>
           Explore Dhun.ai’s possibilities
         </div>

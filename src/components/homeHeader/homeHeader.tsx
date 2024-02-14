@@ -51,6 +51,18 @@ const HomeHeader: React.FC<any> = ({ setShowContactPopup }) => {
     setIsOpen(false);
   };
 
+  const handleMenuItemClick = (item: string) => {
+    if (item === "Contact") {
+      setShowContactPopup(true);
+    } else if (item === "Features") {
+      // Navigate to the featureContainerdiv
+      const featureContainerDiv = document.getElementById("feature-section");
+      if (featureContainerDiv) {
+        featureContainerDiv.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <>
       <div className={styles.header}>
@@ -62,11 +74,7 @@ const HomeHeader: React.FC<any> = ({ setShowContactPopup }) => {
           <div className={styles.normalMenu}>
             {MENUITEMS.map((item, index) => (
               <div
-                onClick={(e) => {
-                  if (item === "Contact") {
-                    setShowContactPopup(true);
-                  }
-                }}
+                onClick={() => handleMenuItemClick(item)}
                 className={styles.menuItems}
                 id={String(index)}
                 key={index}
@@ -108,8 +116,9 @@ const HomeHeader: React.FC<any> = ({ setShowContactPopup }) => {
                   onClick={(e) => {
                     if (item === "Contact") {
                       setShowContactPopup(true);
-                    } else {
-                      setIsOpen(!isOpen);
+                    } else if (item === "Features") {
+                      handleMenuItemClick(item);
+                      setIsOpen(false); // Close the sidebar after clicking on "Features"
                     }
                   }}
                   className={styles.menuItems}
