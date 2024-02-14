@@ -95,7 +95,21 @@
       margin-left: 55px;
     }
   }
-
+  .uploadedFileClose {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 92%;
+    @media screen and (max-width: 600px) {
+      width: 80%;
+    }
+  }
+  .uploadedMusic {
+    color: #bcbcbc;
+    font-size: 16px;
+    font-family: Work Sans;
+    font-weight: 400;
+  }
   .topCard {
     // padding-top: 32px;
     // padding-left: 32px;
@@ -438,7 +452,7 @@
   background-color: #48d67e;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  padding: 12px;
+  padding: 12px 9px;
 }
 .uploadIcon {
   width: 24px;
@@ -497,4 +511,7 @@
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
+}
+.closeIcon {
+  cursor: pointer;
 }

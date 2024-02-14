@@ -12,6 +12,7 @@ import uploadbutton from "../../../public/icons/upload-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
 import artistimage from "../../../public/icons/Artist image.png";
 import { Player } from "@lottiefiles/react-lottie-player";
+import playBlack from "../../../public/icons/playBlack.svg";
 
 enum UPLOADED_DEFAULT_MUSIC_REFERENCES {
   brunoMars = "http://dhun.centralindia.cloudapp.azure.com/storage/grenade 2.wav",
@@ -27,7 +28,6 @@ enum DEFAULT_PROMPTS {
 
 const defaultReqObj = {
   generation_type: "melody-to-music",
-  file_name: "",
 };
 
 type webmodalprops = {
@@ -41,10 +41,8 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
   const [fileSizeError, setFileSizeError] = useState("");
   const [fileName, setFileName] = useState("");
   const videoRef: any = useRef<any>(null);
-  const [videoPath, setVideoPath] = useState("");
-  const uploadFileForWebsite = useGenerateStore(
-    (state) => state.uploadFileForWebsite
-  );
+  const [filePath, setFilePath] = useState("");
+  const uploadFile = useGenerateStore((state) => state.uploadFile);
   const setUser = useGenerateStore((state) => state.setUser);
   // const generateMusic = useGenerateStore(
   //   (state) => state.generateMusicForWebsite
@@ -60,47 +58,23 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
   );
   const currentMusicSrc = useGenerateStore((state) => state.currentMusicSrc);
   const isMusicPlaying = useGenerateStore((state) => state.isMusicPlaying);
+  const uploadfile = useGenerateStore((state) => state?.file);
   const resetWebsiteData = useGenerateStore((state) => state.resetWebsiteData);
   const { status, musicUrls } = useGenerateStore((state) => ({
     status: state.websiteData.status,
     musicUrls: state.websiteData.musicUrls,
   }));
 
+  console.log("uploadfile", uploadfile);
+
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
-    generateMusic({ ...defaultReqObj, prompt });
+    const fileObject = {
+      ...defaultReqObj,
+      file_name: uploadfile?.file_name,
+    };
+    generateMusic({ ...fileObject, prompt });
   };
-
-  // const onFileUpload = (event: any) => {
-  //   // if (event.target.files[0].size > 10485760) {
-  //   //   setFileSizeError("Kindly upload a file under 10mb");
-  //   //   return;
-  //   // }
-  //   const FormD: any = new FormData();
-  //   const fileName = event.target.files[0].name;
-  //   setFileName(fileName);
-  //   setFileSizeError("");
-  //   FormD.append("file", event.target.files[0]);
-  //   uploadFileForWebsite(FormD);
-  // };
-
-  // const audioUpload = (audio: string) => {
-  //   if (audio === "GOT") {
-  //     generateMusic({
-  //       ...defaultReqObj,
-  //       prompt: prompt || "upbeat, neutral, driving",
-  //       file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.gotMusic,
-  //     });
-  //   } else {
-  //     generateMusic({
-  //       ...defaultReqObj,
-  //       prompt:
-  //         prompt ||
-  //         "joyful, medium tempo, high pitch, classical, sitar, tabla, harmonium, uplifting, melodic, rhythmic",
-  //       file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.brunoMars,
-  //     });
-  //   }
-  // };
 
   useEffect(() => {
     if (isChibBtn1Selected) {
@@ -119,21 +93,6 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     resetState();
   }, []);
 
-  // const chibBtnStyle = (selected: boolean) => {
-  //   // if (prompt) {
-  //   //   return styles.overlayBtn;
-  //   // }
-  //   return selected ? styles.chibBtnActive : styles.chipBtn;
-  // };
-
-  // const renderLoadingBtns = () => {
-  //   return Array(3)
-  //     .fill("")
-  //     .map((_, index: number) => {
-  //       return <div key={index} className={styles.loadingBtn}></div>;
-  //     });
-  // };
-
   const togglePlay = (musicSrc: string) => {
     if (isMusicPlaying && currentMusicSrc === musicSrc) {
       return updateMusicPlayingStatus(false);
@@ -147,7 +106,7 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     setChibBtn2Selected(false);
     setPrompt("");
     setFileName("");
-    setVideoPath("");
+    // setVideoPath("");
   };
 
   const getMusicIcon = (musicSrc: string) => {
@@ -190,24 +149,13 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     return null;
   };
 
-  // const renderVideo = () => {
-  //   if (videoPath) {
-  //     return (
-  //       <video ref={videoRef} width="auto" muted loop>
-  //         <source src={videoPath} type="video/mp4" />
-  //       </video>
-  //     );
-  //   }
-  //   return null;
-  // };
-
   const onVideoFileUpload = (event: any) => {
     const FormD: any = new FormData();
     const fileName = event.target.files[0].name;
     setFileName(fileName);
     setFileSizeError("");
     FormD.append("file", event.target.files[0]);
-    uploadFileForWebsite(FormD);
+    uploadFile(FormD, fileName);
   };
 
   const SelectedItemBox = ({
@@ -249,54 +197,11 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     }
   }, [currentMusicSrc, isMusicPlaying]);
 
+  const clearUpload = () => {};
+
   return (
     <dialog className={styles.webDialog}>
       <form className={styles.generatePopup} onSubmit={handleOnSubmit}>
-        {/* {renderVideo()} */}
-        {/* {!videoPath && (
-          <div
-            className={`${styles.topCard} ${
-              ((musicUrls && musicUrls?.length > 0) ||
-                status === API_STATUS_TYPES.loading) &&
-              `${styles.topcardloaded}`
-            }  `}
-          >
-            <div className={styles.topCardDiv}>
-              <div className={styles.topDiv}>
-                <p className={styles.closeIconwhite}></p>
-                <p className={styles.topCardText}>Create melody &rarr; music</p>
-              </div>
-
-              <button className={styles.closeIconWrapper}>
-                <img
-                  className={styles.closeIcon}
-                  src={closeicon}
-                  onClick={() => closePopup(false)}
-                />
-              </button>
-            </div>
-
-            {status === API_STATUS_TYPES.success && (
-              <div className={styles.uploadButton}>
-                <img src={uploadbutton} />
-                <span>Upload your own video </span>
-                <input
-                  type="file"
-                  id="uploadVideo"
-                  name="filename"
-                  accept="video/mp4,video/x-m4v,video/*"
-                  onChange={onVideoFileUpload}
-                  className={styles.videoUpload}
-                />
-              </div>
-            )}
-            {status === API_STATUS_TYPES.loading && (
-              <div className={styles.uploadButton}>
-                <span className={styles.generating}> Generating . . . </span>
-              </div>
-            )}
-          </div>
-        )} */}
         <div className={styles.topCardDiv}>
           <div className={styles.topDiv}>
             <p className={styles.closeIconwhite}></p>
@@ -339,30 +244,61 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                 </>
               ) : (
                 <>
-                  <div>
-                    <div className={styles.suggestionbtn}>
-                      <img src={plus} />
-                      <p className={styles.suggestiontext}>
-                        Add reference music
-                      </p>
-                    </div>
-                    <div className={styles.uploadButton}>
-                      <div className={styles.musicButtonUpload}>
-                        <img className={styles.uploadIcon} src={uploadbutton} />
+                  {uploadfile?.file_name ? (
+                    <div
+                      className={`${styles.uploadButton} ${styles.uploadedMusic}`}
+                    >
+                      <div
+                        className={styles.musicButtonUpload}
+                        onClick={() =>
+                          togglePlay(
+                            "http://dhun.centralindia.cloudapp.azure.com/api-test/download/5f3cfb62-1fcd-4eeb-880b-add761689950.wav"
+                          )
+                        }
+                      >
+                        <img className={styles.uploadIcon} src={playBlack} />
                       </div>
-                      <span className={styles.musicButtonText}>
-                        Upload your music
-                      </span>
-                      <input
-                        type="file"
-                        id="uploadVideo"
-                        name="filename"
-                        // accept="video/mp4,video/x-m4v,video/*"
-                        onChange={onVideoFileUpload}
-                        className={styles.videoUpload}
-                      />
+                      <div className={styles.uploadedFileClose}>
+                        <span className={styles.musicButtonText}>
+                          Uploaded music
+                        </span>
+                        <img
+                          className={styles.closeIcon}
+                          src={closeicon}
+                          alt="closeIcon"
+                          onClick={clearUpload}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div>
+                      <div className={styles.suggestionbtn}>
+                        <img src={plus} />
+                        <p className={styles.suggestiontext}>
+                          Add reference music
+                        </p>
+                      </div>
+                      <div className={styles.uploadButton}>
+                        <div className={styles.musicButtonUpload}>
+                          <img
+                            className={styles.uploadIcon}
+                            src={uploadbutton}
+                          />
+                        </div>
+                        <span className={styles.musicButtonText}>
+                          Upload your music
+                        </span>
+                        <input
+                          type="file"
+                          id="uploadVideo"
+                          name="filename"
+                          // accept="video/mp4,video/x-m4v,video/*"
+                          onChange={onVideoFileUpload}
+                          className={styles.videoUpload}
+                        />
+                      </div>
+                    </div>
+                  )}
 
                   <div>
                     <div className={styles.suggestiontext}>
