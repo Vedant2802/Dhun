@@ -12,6 +12,7 @@ import shareIcon from "../../../public/icons/shareIcon.svg";
 import musicbutton from "../../../public/icons/music-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
 import { Player } from "@lottiefiles/react-lottie-player";
+import ShareModal from "../shareModal/ShareModal";
 
 enum DEFAULT_PROMPTS {
   prompt1 = "Upbeat, spiritual music",
@@ -52,28 +53,23 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     status: state.websiteData.status,
     musicUrls: state.websiteData.musicUrls,
   }));
+  const [shareModal, showShareModal] = useState(false);
+  const [isLinkCopied, setIsLinkCopied] = useState(false);
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
     generateMusic({ ...defaultReqObj, prompt });
   };
 
-  const [isLinkCopied, setIsLinkCopied] = useState(false);
-  const handleShareClick = async (url: string, event?: React.MouseEvent) => {
-    event?.stopPropagation();
-    try {
-      // Use the 'url' parameter
-      await navigator.clipboard.writeText(url);
-      setIsLinkCopied(true);
+  const [shareURL, setShareURL] = useState("");
 
-      setTimeout(() => {
-        setIsLinkCopied(false);
-      }, 30000);
-      console.log("Link copied to clipboard:", url);
-    } catch (error) {
-      console.error("Failed to copy link:", error);
-      alert("Failed to copy link. Please try again.");
-    }
+  const handleShareClick = (url: string, event?: React.MouseEvent) => {
+    event?.stopPropagation();
+    showShareModal(true);
+    setShareURL(url);
+    // setTimeout(() => {
+    //   showShareModal(false);
+    // }, 3000);
   };
   console.log("first", isLinkCopied);
 
@@ -123,7 +119,7 @@ const WebModal = ({ closePopup }: webmodalprops) => {
     if (musicUrls && musicUrls.length) {
       return (
         <div className={styles.loadingChip}>
-          {isLinkCopied && (
+          {(shareModal || isLinkCopied) && (
             <div className={styles.linkCopiedPopup}>
               Link copied to clipboard!
             </div>
@@ -135,13 +131,23 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <img src={getMusicIcon(musicUrls[0])} alt="playIcon" />
             <div>Track 1</div>
             <div className={styles.iconsWrapper}>
-              <div
-                className={styles.iconWrapper}
-                data-tooltip="Share"
-                onClick={(e) => handleShareClick(musicUrls[0], e)}
-              >
-                <img src={shareIcon} alt="Share" />
-              </div>
+              {window.innerWidth <= 600 ? (
+                <div
+                  className={styles.iconWrapper}
+                  data-tooltip="Share"
+                  onClick={(e) => handleShareClick(musicUrls[0], e)}
+                >
+                  <img src={shareIcon} alt="Share" />
+                </div>
+              ) : (
+                <div
+                  className={styles.iconWrapper}
+                  data-tooltip="Share"
+                  onClick={(e) => copyShareUrl(musicUrls[0], e)}
+                >
+                  <img src={shareIcon} alt="Share" />
+                </div>
+              )}
               <img src={likeIcon} alt="Like" />
               <img src={dislikeIcon} alt="Dislike" />
             </div>
@@ -153,13 +159,23 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <img src={getMusicIcon(musicUrls[1])} alt="playIcon" />
             <div>Track 2</div>
             <div className={styles.iconsWrapper}>
-              <div
-                className={styles.iconWrapper}
-                data-tooltip="Share"
-                onClick={(e) => handleShareClick(musicUrls[1], e)}
-              >
-                <img src={shareIcon} alt="Share" />
-              </div>
+              {window.innerWidth <= 600 ? (
+                <div
+                  className={styles.iconWrapper}
+                  data-tooltip="Share"
+                  onClick={(e) => handleShareClick(musicUrls[1], e)}
+                >
+                  <img src={shareIcon} alt="Share" />
+                </div>
+              ) : (
+                <div
+                  className={styles.iconWrapper}
+                  data-tooltip="Share"
+                  onClick={(e) => copyShareUrl(musicUrls[1], e)}
+                >
+                  <img src={shareIcon} alt="Share" />
+                </div>
+              )}
               <img src={likeIcon} alt="Like" />
               <img src={dislikeIcon} alt="Dislike" />
             </div>
@@ -171,13 +187,23 @@ const WebModal = ({ closePopup }: webmodalprops) => {
             <img src={getMusicIcon(musicUrls[2])} alt="playIcon" />
             <div>Track 3</div>
             <div className={styles.iconsWrapper}>
-              <div
-                className={styles.iconWrapper}
-                data-tooltip="Share"
-                onClick={(e) => handleShareClick(musicUrls[2], e)}
-              >
-                <img src={shareIcon} alt="Share" />
-              </div>
+              {window.innerWidth <= 600 ? (
+                <div
+                  className={styles.iconWrapper}
+                  data-tooltip="Share"
+                  onClick={(e) => handleShareClick(musicUrls[2], e)}
+                >
+                  <img src={shareIcon} alt="Share" />
+                </div>
+              ) : (
+                <div
+                  className={styles.iconWrapper}
+                  data-tooltip="Share"
+                  onClick={(e) => copyShareUrl(musicUrls[2], e)}
+                >
+                  <img src={shareIcon} alt="Share" />
+                </div>
+              )}
               <img src={likeIcon} alt="Like" />
               <img src={dislikeIcon} alt="Dislike" />
             </div>
@@ -189,6 +215,22 @@ const WebModal = ({ closePopup }: webmodalprops) => {
       );
     }
     return null;
+  };
+
+  const copyShareUrl = async (url: string, event?: React.MouseEvent) => {
+    event?.stopPropagation();
+    try {
+      // Use the 'url' parameter
+      await navigator.clipboard.writeText(url);
+      setIsLinkCopied(true);
+
+      setTimeout(() => {
+        setIsLinkCopied(false);
+      }, 1000);
+      console.log("Link copied to clipboard:", url);
+    } catch (error) {
+      console.error("Failed to copy link:", error);
+    }
   };
 
   useEffect(() => {
@@ -336,6 +378,15 @@ const WebModal = ({ closePopup }: webmodalprops) => {
           </>
         )}
       </form>
+      {shareModal && window.innerWidth <= 600 ? (
+        <ShareModal
+          shareURL={shareURL}
+          shareModal={shareModal}
+          showShareModal={showShareModal}
+        />
+      ) : (
+        ""
+      )}
       <AudioPlayer />
     </dialog>
   );

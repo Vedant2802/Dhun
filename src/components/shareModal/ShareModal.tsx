@@ -1,71 +1,93 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  //   FacebookShareButton,
-  //   TwitterShareButton,
-  //   EmailShareButton,
+  FacebookShareButton,
   WhatsappShareButton,
+  TwitterShareButton,
+  EmailShareButton,
+  InstapaperShareButton,
+  LinkedinShareButton,
+  InstapaperIcon,
+  EmailIcon,
+  WhatsappIcon,
+  FacebookIcon,
+  XIcon,
+  LinkedinIcon,
 } from "react-share";
 
+import copyIcon from "../../../public/icons/copyIcon.svg";
+import close from "../../../public/icons/closeSocial.svg";
+
+import styles from "./ShareModal.module.scss";
+
 type ShareModalProps = {
-  //   isOpen: boolean;
-  //   handleClose: () => void;
-  //   isSportsLiveEvent: boolean;
   shareURL: string;
-  //   toastMsgHandler: () => void;
+  showShareModal: any;
+  shareModal: any;
 };
 
 const ShareModal = (props: ShareModalProps) => {
-  const { shareURL } = props;
+  const { shareURL, showShareModal } = props;
   console.log("shareURL", shareURL);
-  const trackSocialMediaSharingMixpanelEvent = (platformName: string) => {
-    // handleClose();
-  };
 
   const copyToClipBoard = (url: string) => {
     navigator.clipboard.writeText(url);
     console.log("copymsg", navigator.clipboard.writeText(url));
-    // toastMsgHandler();
+  };
+
+  const closeIcon = () => {
+    showShareModal(false);
   };
 
   return (
-    <div
-      data-testid="share-model-container"
-
-      //   ref={wrapperRef}
-    >
-      <div>
-        <div
-          data-testid="share-modal-wrapper"
-          onClick={(e) => e.stopPropagation()}
+    <div className={styles.shareModal}>
+      <div className={styles.closeModal}>
+        <img src={close} alt="closeIcon" onClick={closeIcon} />
+      </div>
+      <div
+        onClick={() => copyToClipBoard(shareURL)}
+        className={styles.copylink}
+      >
+        <div> dhun link</div>
+        <img src={copyIcon} alt="copyIcon" className={styles.copyIcon} />
+      </div>
+      <div className={styles.shareModalContainer}>
+        <FacebookShareButton
+          url={shareURL}
+          title="Facebook"
+          className={styles.shareButton}
         >
-          {/* <FacebookShareButton
-            title="Facebook"
-            url={shareURL}
-          ></FacebookShareButton>
+          <FacebookIcon size={40} />
+          <div className={styles.socialName}>Facebook</div>
+        </FacebookShareButton>
 
-          <TwitterShareButton
-            title="twitter"
-            url={shareURL}
-          ></TwitterShareButton>
+        <EmailShareButton
+          url={shareURL}
+          body="body"
+          className={styles.shareButton}
+        >
+          <EmailIcon size={40} />
+          <div className={styles.socialName}>Email</div>
+        </EmailShareButton>
 
-          <EmailShareButton
-            url={shareURL}
-            subject="email"
-            body="Check out this content"
-          ></EmailShareButton> */}
+        <WhatsappShareButton url={shareURL} className={styles.shareButton}>
+          <WhatsappIcon size={40} />
+          <div className={styles.socialName}>Whatsapp</div>
+        </WhatsappShareButton>
 
-          {window.innerWidth <= 600 ? (
-            <WhatsappShareButton
-              title="whatsapp"
-              url={shareURL}
-              children={undefined}
-            ></WhatsappShareButton>
-          ) : null}
-          <div
-            data-testid="copy-link"
-            onClick={() => copyToClipBoard(shareURL)}
-          ></div>
-        </div>
+        {/* <InstapaperShareButton url={shareURL}>
+          <InstapaperIcon size={40} />
+          <div>Instagram</div>
+        </InstapaperShareButton> */}
+
+        <LinkedinShareButton url={shareURL} className={styles.shareButton}>
+          <LinkedinIcon size={40} />
+          <div className={styles.socialName}>LinkedIn</div>
+        </LinkedinShareButton>
+
+        <TwitterShareButton url={shareURL} className={styles.shareButton}>
+          <XIcon size={40} />
+          <div className={styles.socialName}>Twitter</div>
+        </TwitterShareButton>
       </div>
     </div>
   );
