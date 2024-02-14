@@ -257,6 +257,7 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                   className={styles.chipInput}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe the music you wish to create. Try an Indian variation of the song"
+                  value={prompt}
                 />
                 <div
                   className={`${styles.musicButton} ${
