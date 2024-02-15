@@ -65,7 +65,7 @@ const VideoComponent = () => {
         <div
           className={styles.heading}
           style={{
-            display: isPlaying && !isSmallScreen() ? "none" : "block",
+            display: isPlaying && !isSmallScreen() ? "none" : "flex",
           }}
         >
           <span className={styles.topHeading}>
