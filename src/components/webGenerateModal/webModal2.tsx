@@ -65,6 +65,7 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     musicUrls: state.websiteData.musicUrls,
   }));
   const [isUploadFile, setUploadFile] = useState<boolean>(false);
+  const [loadingTextIndex, setLoadingTextIndex] = useState(0);
 
   console.log("uploadfile", uploadfile);
 
@@ -122,6 +123,28 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
       ? pauseIcon
       : playIcon;
   };
+
+  const loadingTexts = [
+    "Waiting to start…",
+    "Analyzing your melody to understand its unique characteristics...",
+    "Experimenting with harmonies and rhythms to develop fresh interpretations..",
+    "Refining the harmonies and chord progressions to evoke the right emotions...",
+    "Polishing the arrangement to create a captivating musical journey..",
+    "Mastering the final mix to achieve professional-grade sound quality...",
+  ];
+
+  useEffect(() => {
+    let timeout: number | undefined;
+    if (status === "loading") {
+      // Update loading text index every 10 seconds
+      timeout = setTimeout(() => {
+        setLoadingTextIndex(
+          (prevIndex) => (prevIndex + 1) % loadingTexts.length
+        );
+      }, 10000);
+    }
+    return () => clearTimeout(timeout);
+  }, [status, loadingTextIndex]);
 
   const renderMusicUrls = () => {
     if (musicUrls && musicUrls.length) {
@@ -226,14 +249,70 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
             />
           </button>
         </div>
-        {status === API_STATUS_TYPES.success && musicUrls?.length ? (
-          renderMusicUrls()
+        {/* {status === API_STATUS_TYPES.success && musicUrls?.length ? (
+          renderMusicUrls() */}
+        {status === API_STATUS_TYPES.success ? (
+          <>
+            {/* Render prompt with selected item box */}
+            <div className={styles.chipinputwrapper}>
+              <div className={styles.chip}>
+                {selectedItem && (
+                  <SelectedItemBox
+                    text={selectedItem}
+                    onClose={clearSelectedItem}
+                  />
+                )}
+                <input
+                  name="prompt"
+                  className={styles.chipInput}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  placeholder="Describe the music you wish to create. Try an Indian variation of the song"
+                  value={prompt}
+                />
+                <div
+                  className={`${styles.musicButton} ${
+                    prompt.trim() === "" ? styles.disabled : ""
+                  }`}
+                  onClick={(e) => {
+                    // Check if the prompt is empty or not
+                    if (prompt.trim() !== "") {
+                      handleOnSubmit(e);
+                    }
+                  }}
+                >
+                  <img src={musicbutton} />
+                  <div className={styles.generate}>Generate</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Render musicUrls if available */}
+            {musicUrls && musicUrls?.length > 0 && renderMusicUrls()}
+          </>
         ) : (
           <>
             <div className={styles.chipWrapper}>
               {status === API_STATUS_TYPES.loading ? (
                 <>
                   {/* {renderLoadingBtns()} */}
+                  {prompt && (
+                    <div className={styles.promptContainer}>
+                      {selectedItem && (
+                        <SelectedItemBox
+                          text={selectedItem}
+                          onClose={clearSelectedItem}
+                        />
+                      )}
+                      {/* Render the divider if both prompt and selected item are present */}
+                      {prompt && selectedItem && (
+                        <div className={styles.divider}></div>
+                      )}
+                      <div>{prompt}</div>
+                    </div>
+                  )}
+                  <div className={styles.loadingText}>
+                    {loadingTexts[loadingTextIndex]}
+                  </div>
                   <Player
                     src="https://amlzee5sbci1mu5120768980.blob.core.windows.net/dhunai/visualization1.json?sp=r&st=2024-01-29T08:08:31Z&se=2025-01-01T16:08:31Z&sv=2022-11-02&sr=b&sig=%2BdhuFDIA4l8f35Rq5Mar1GhNMDq1DNA5HxZ6YTkltu4%3D"
                     className="player"
@@ -241,7 +320,7 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                     autoplay
                     style={{ height: "200px", width: "100%" }}
                   />
-                  <div className={styles.stopCreatingBtn}>
+                  {/* <div className={styles.stopCreatingBtn}>
                     Generating your music tracks...
                   </div>
                   <button
@@ -250,7 +329,7 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                   >
                     <img src={stopCreatingSvg} alt="stop creating" />
                     Stop creating
-                  </button>
+                  </button> */}
                 </>
               ) : (
                 <>
