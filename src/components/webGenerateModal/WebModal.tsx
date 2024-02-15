@@ -57,9 +57,13 @@ const WebModal = ({ closePopup }: webmodalprops) => {
   const [isLinkCopied, setIsLinkCopied] = useState(false);
   const [loadingTextIndex, setLoadingTextIndex] = useState(0);
 
-  const handleOnSubmit = (e: any) => {
+  const handleOnSubmit = (e: any, suggestionText: string | null = null) => {
     e.preventDefault();
-    generateMusic({ ...defaultReqObj, prompt });
+    setLoadingTextIndex(0);
+    if (suggestionText) {
+      setPrompt(suggestionText);
+    }
+    generateMusic({ ...defaultReqObj, prompt: suggestionText || prompt });
   };
 
   const [shareURL, setShareURL] = useState("");
@@ -326,35 +330,9 @@ const WebModal = ({ closePopup }: webmodalprops) => {
               {status === API_STATUS_TYPES.loading ? (
                 <>
                   {prompt && (
-                    <div
-                      style={{
-                        display: "flex",
-                        color: "#FFF",
-                        fontFamily: "Quicksand",
-                        fontSize: "16px",
-                        fontWeight: "400",
-                        lineHeight: "normal",
-                        paddingLeft: "16px",
-                        borderRadius: "8px",
-                        border: "1px solid #1F1F1F",
-                        height: "64px",
-                        background: "#121212",
-                        alignItems: "center",
-                      }}
-                    >
-                      {prompt}
-                    </div>
+                    <div className={styles.promptContainer}>{prompt}</div>
                   )}
-                  <div
-                    style={{
-                      color: "#BCBCBC",
-                      fontFamily: "Quicksand",
-                      fontSize: "16px",
-                      fontWeight: "400",
-                      lineHeight: "normal",
-                      paddingLeft: "16px",
-                    }}
-                  >
+                  <div className={styles.loadingText}>
                     {loadingTexts[loadingTextIndex]}
                   </div>
                   <Player
@@ -402,6 +380,10 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                         onClick={(e) => {
                           e.preventDefault();
                           setChibBtn1Selected(!isChibBtn1Selected);
+                          handleOnSubmit(
+                            e,
+                            "Create a rock anthem tailored for a charismatic actor portraying a rockstar, capturing their on-stage energy and magnetic presence"
+                          );
                         }}
                       >
                         <p className={styles.buttonText}>
@@ -417,6 +399,10 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                         onClick={(e) => {
                           e.preventDefault();
                           setChibBtn2Selected(!isChibBtn2Selected);
+                          handleOnSubmit(
+                            e,
+                            "Create an energetic dance track featuring electric guitar riffs"
+                          );
                         }}
                       >
                         <p className={styles.buttonText}>
@@ -431,6 +417,10 @@ const WebModal = ({ closePopup }: webmodalprops) => {
                         onClick={(e) => {
                           e.preventDefault();
                           setChibBtn1Selected(!isChibBtn1Selected);
+                          handleOnSubmit(
+                            e,
+                            "A suspenseful tale of walking alone at night, feeling an eerie presence behind you, heartbeat racing with fear and tension"
+                          );
                         }}
                       >
                         <p className={styles.buttonText}>

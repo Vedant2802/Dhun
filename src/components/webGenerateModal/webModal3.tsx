@@ -65,9 +65,13 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
   }));
   const [loadingTextIndex, setLoadingTextIndex] = useState(0);
 
-  const handleOnSubmit = (e: any) => {
+  const handleOnSubmit = (e: any, suggestionText: string | null = null) => {
     e.preventDefault();
-    generateMusic({ ...defaultReqObj, prompt });
+    setLoadingTextIndex(0);
+    if (suggestionText) {
+      setPrompt(suggestionText);
+    }
+    generateMusic({ ...defaultReqObj, prompt: suggestionText || prompt });
   };
 
   // const onFileUpload = (event: any) => {
@@ -318,35 +322,9 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
               {status === API_STATUS_TYPES.loading ? (
                 <>
                   {prompt && (
-                    <div
-                      style={{
-                        display: "flex",
-                        color: "#FFF",
-                        fontFamily: "Quicksand",
-                        fontSize: "16px",
-                        fontWeight: "400",
-                        lineHeight: "normal",
-                        paddingLeft: "16px",
-                        borderRadius: "8px",
-                        border: "1px solid #1F1F1F",
-                        height: "64px",
-                        background: "#121212",
-                        alignItems: "center",
-                      }}
-                    >
-                      {prompt}
-                    </div>
+                    <div className={styles.promptContainer}>{prompt}</div>
                   )}
-                  <div
-                    style={{
-                      color: "#BCBCBC",
-                      fontFamily: "Quicksand",
-                      fontSize: "16px",
-                      fontWeight: "400",
-                      lineHeight: "normal",
-                      paddingLeft: "16px",
-                    }}
-                  >
+                  <div className={styles.loadingText}>
                     {loadingTexts[loadingTextIndex]}
                   </div>
                   <Player
@@ -393,6 +371,10 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
                         className={chibBtnStyle(isChibBtn1Selected)}
                         onClick={(e) => {
                           e.preventDefault();
+                          handleOnSubmit(
+                            e,
+                            "Generate sound effects of a cat meowing accompanied by the voice of a young female speaking"
+                          );
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
@@ -407,6 +389,10 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
+                          handleOnSubmit(
+                            e,
+                            "Generate a harmonious blend of whistling accompanied by the gentle sound of the wind blowing"
+                          );
                           setChibBtn2Selected(!isChibBtn2Selected);
                         }}
                       >
@@ -421,6 +407,10 @@ const WebModal3 = ({ closePopup }: webmodalprops) => {
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
+                          handleOnSubmit(
+                            e,
+                            "Generate sounds of a railroad crossing signal followed by a train passing and blowing its horn"
+                          );
                           setChibBtn1Selected(!isChibBtn1Selected);
                         }}
                       >
