@@ -15,8 +15,8 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import playBlack from "../../../public/icons/playBlack.svg";
 
 enum UPLOADED_DEFAULT_MUSIC_REFERENCES {
-  brunoMars = "http://dhun.centralindia.cloudapp.azure.com/storage/grenade 2.wav",
-  gotMusic = "http://dhun.centralindia.cloudapp.azure.com/storage/Game of thrones 1.wav",
+  brunoMars = "http://dhun.centralindia.cloudapp.azure.com/api-test/download/cdfe2626-aabf-44ac-8d00-f0441dd92503.wav",
+  gotMusic = "http://dhun.centralindia.cloudapp.azure.com/api-test/download/20240215081754_abc.wav",
 }
 
 enum DEFAULT_PROMPTS {
@@ -58,12 +58,13 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
   );
   const currentMusicSrc = useGenerateStore((state) => state.currentMusicSrc);
   const isMusicPlaying = useGenerateStore((state) => state.isMusicPlaying);
-  const uploadfile = useGenerateStore((state) => state?.file);
+  const uploadfile = useGenerateStore((state) => state?.file?.file_name);
   const resetWebsiteData = useGenerateStore((state) => state.resetWebsiteData);
   const { status, musicUrls } = useGenerateStore((state) => ({
     status: state.websiteData.status,
     musicUrls: state.websiteData.musicUrls,
   }));
+  const [isUploadFile, setUploadFile] = useState<boolean>(false);
 
   console.log("uploadfile", uploadfile);
 
@@ -71,7 +72,7 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     e.preventDefault();
     const fileObject = {
       ...defaultReqObj,
-      file_name: uploadfile?.file_name,
+      file_name: uploadfile,
     };
     generateMusic({ ...fileObject, prompt });
   };
@@ -93,7 +94,14 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     resetState();
   }, []);
 
+  useEffect(() => {
+    if (uploadfile) {
+      setUploadFile(true);
+    }
+  }, [uploadfile]);
+
   const togglePlay = (musicSrc: string) => {
+    console.log("musicSrc", musicSrc);
     if (isMusicPlaying && currentMusicSrc === musicSrc) {
       return updateMusicPlayingStatus(false);
     }
@@ -197,7 +205,9 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     }
   }, [currentMusicSrc, isMusicPlaying]);
 
-  const clearUpload = () => {};
+  const clearUpload = () => {
+    setUploadFile(false);
+  };
 
   return (
     <dialog className={styles.webDialog}>
@@ -244,17 +254,16 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                 </>
               ) : (
                 <>
-                  {uploadfile?.file_name ? (
+                  {isUploadFile ? (
                     <div
                       className={`${styles.uploadButton} ${styles.uploadedMusic}`}
                     >
                       <div
                         className={styles.musicButtonUpload}
-                        onClick={() =>
-                          togglePlay(
-                            "http://dhun.centralindia.cloudapp.azure.com/api-test/download/5f3cfb62-1fcd-4eeb-880b-add761689950.wav"
-                          )
-                        }
+                        // onClick={() =>
+                        //   togglePlay({uploadFile})
+                        // }
+                        onClick={() => togglePlay(uploadFile)}
                       >
                         <img className={styles.uploadIcon} src={playBlack} />
                       </div>
@@ -310,6 +319,18 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                         className={styles.audiofiles}
                       >
                         <img src={artistimage} className={styles.artistimg} />
+                        <img
+                          className={styles.suggestionIcon}
+                          src={getMusicIcon(
+                            UPLOADED_DEFAULT_MUSIC_REFERENCES.brunoMars
+                          )}
+                          // src={playIcon}
+                          onClick={() =>
+                            togglePlay(
+                              UPLOADED_DEFAULT_MUSIC_REFERENCES.brunoMars
+                            )
+                          }
+                        />
                         <span className={styles.artistsongtext}>
                           Grenade by Bruno Mars
                         </span>
@@ -319,6 +340,17 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                         className={styles.audiofiles}
                       >
                         <img src={artistimage} className={styles.artistimg} />
+                        <img
+                          className={styles.suggestionIcon}
+                          src={getMusicIcon(
+                            UPLOADED_DEFAULT_MUSIC_REFERENCES.gotMusic
+                          )}
+                          onClick={() =>
+                            togglePlay(
+                              UPLOADED_DEFAULT_MUSIC_REFERENCES.gotMusic
+                            )
+                          }
+                        />
                         <span className={styles.artistsongtext}>
                           Streets of London by R McTell
                         </span>

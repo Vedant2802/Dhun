@@ -515,3 +515,11 @@
 .closeIcon {
   cursor: pointer;
 }
+.suggestionIcon {
+  position: absolute;
+  padding: 6px;
+  // background: grey;
+  border-radius: 50px;
+  margin: 4px;
+  border: 1px solid #47d67e;
+}
