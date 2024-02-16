@@ -13,6 +13,9 @@ import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
 import artistimage from "../../../public/icons/Artist image.png";
 import { Player } from "@lottiefiles/react-lottie-player";
 import playBlack from "../../../public/icons/playBlack.svg";
+import GOT from "../../../public/audio/GOT music.wav";
+import BRUNO from "../../../public/audio/Bruno-Mars grenade.wav";
+import TURKISH_MARCH from "../../../public/audio/Turkish March-Mozart.wav";
 
 enum UPLOADED_DEFAULT_MUSIC_REFERENCES {
   brunoMars = "http://dhun.centralindia.cloudapp.azure.com/api-test/download/cdfe2626-aabf-44ac-8d00-f0441dd92503.wav",
@@ -67,7 +70,29 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
   const [isUploadFile, setUploadFile] = useState<boolean>(false);
   const [loadingTextIndex, setLoadingTextIndex] = useState(0);
 
-  console.log("uploadfile", uploadfile);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") as any);
+    if (user) {
+      setUser(user);
+    }
+    resetState();
+  }, []);
+
+  useEffect(() => {
+    if (uploadfile) {
+      setUploadFile(true);
+      // setSelectedItem(fileName);
+    }
+  }, [uploadfile]);
+
+  const onVideoFileUpload = (event: any) => {
+    const FormD: any = new FormData();
+    const fileName = event.target.files[0].name;
+    setFileName(fileName);
+    setFileSizeError("");
+    FormD.append("file", event.target.files[0]);
+    uploadFile(FormD, fileName);
+  };
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
@@ -86,20 +111,6 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
       generateMusic({ ...defaultReqObj, prompt: DEFAULT_PROMPTS.prompt2 });
     }
   }, [isChibBtn1Selected, isChibBtn2Selected]);
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user") as any);
-    if (user) {
-      setUser(user);
-    }
-    resetState();
-  }, []);
-
-  useEffect(() => {
-    if (uploadfile) {
-      setUploadFile(true);
-    }
-  }, [uploadfile]);
 
   const togglePlay = (musicSrc: string) => {
     console.log("musicSrc", musicSrc);
@@ -178,15 +189,6 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
       );
     }
     return null;
-  };
-
-  const onVideoFileUpload = (event: any) => {
-    const FormD: any = new FormData();
-    const fileName = event.target.files[0].name;
-    setFileName(fileName);
-    setFileSizeError("");
-    FormD.append("file", event.target.files[0]);
-    uploadFile(FormD, fileName);
   };
 
   const SelectedItemBox = ({
@@ -333,22 +335,19 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                 </>
               ) : (
                 <>
-                  {isUploadFile ? (
+                  {/* {isUploadFile ? (
                     <div
                       className={`${styles.uploadButton} ${styles.uploadedMusic}`}
                     >
                       <div
                         className={styles.musicButtonUpload}
-                        // onClick={() =>
-                        //   togglePlay({uploadFile})
-                        // }
                         onClick={() => togglePlay(uploadFile)}
                       >
                         <img className={styles.uploadIcon} src={playBlack} />
                       </div>
                       <div className={styles.uploadedFileClose}>
                         <span className={styles.musicButtonText}>
-                          Uploaded music
+                          {fileName}
                         </span>
                         <img
                           className={styles.closeIcon}
@@ -386,53 +385,54 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                         />
                       </div>
                     </div>
-                  )}
+                  )} */}
 
                   <div>
                     <div className={styles.suggestiontext}>
                       or choose from our library
                     </div>
                     <div className={styles.libraryMusic}>
-                      <div
-                        onClick={() => selectLibraryItem("Bruno")}
-                        className={styles.audiofiles}
-                      >
+                      <div className={styles.audiofiles}>
                         <img src={artistimage} className={styles.artistimg} />
                         <img
                           className={styles.suggestionIcon}
-                          src={getMusicIcon(
-                            UPLOADED_DEFAULT_MUSIC_REFERENCES.brunoMars
-                          )}
-                          // src={playIcon}
-                          onClick={() =>
-                            togglePlay(
-                              UPLOADED_DEFAULT_MUSIC_REFERENCES.brunoMars
-                            )
-                          }
+                          src={getMusicIcon(BRUNO)}
+                          onClick={() => togglePlay(BRUNO)}
                         />
-                        <span className={styles.artistsongtext}>
+                        <div
+                          className={styles.artistsongtext}
+                          onClick={() => selectLibraryItem("BRUNO")}
+                        >
                           Grenade by Bruno Mars
-                        </span>
+                        </div>
                       </div>
-                      <div
-                        onClick={() => selectLibraryItem("GOT")}
-                        className={styles.audiofiles}
-                      >
+                      <div className={styles.audiofiles}>
                         <img src={artistimage} className={styles.artistimg} />
                         <img
                           className={styles.suggestionIcon}
-                          src={getMusicIcon(
-                            UPLOADED_DEFAULT_MUSIC_REFERENCES.gotMusic
-                          )}
-                          onClick={() =>
-                            togglePlay(
-                              UPLOADED_DEFAULT_MUSIC_REFERENCES.gotMusic
-                            )
-                          }
+                          src={getMusicIcon(GOT)}
+                          onClick={() => togglePlay(GOT)}
                         />
-                        <span className={styles.artistsongtext}>
+                        <div
+                          className={styles.artistsongtext}
+                          onClick={() => selectLibraryItem("GOT")}
+                        >
                           Streets of London by R McTell
-                        </span>
+                        </div>
+                      </div>
+                      <div className={styles.audiofiles}>
+                        <img src={artistimage} className={styles.artistimg} />
+                        <img
+                          className={styles.suggestionIcon}
+                          src={getMusicIcon(TURKISH_MARCH)}
+                          onClick={() => togglePlay(TURKISH_MARCH)}
+                        />
+                        <div
+                          className={styles.artistsongtext}
+                          onClick={() => selectLibraryItem("TURKISH_MARCH")}
+                        >
+                          Turkish March Mozart
+                        </div>
                       </div>
                     </div>
                     <div className={styles.chipinputwrapper}>
