@@ -70,7 +70,6 @@ const verifyOtp = async ({ requestBody, AUTH_ENDPOINT }: any) => {
 const generateMusicApi = async <T>(
   requestObj: GenerateMusicRequestObj
 ): Promise<T> => {
-  debugger
   try {
     const response = await axiosInstance.post(
       API_ENDPOINTS.generateMusicV3,
