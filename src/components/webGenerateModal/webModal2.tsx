@@ -98,7 +98,9 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     e.preventDefault();
     const fileObject = {
       ...defaultReqObj,
-      file_name: uploadfile,
+      file_name: uploadfile || "",
+      file_path:
+        "http://dhun.centralindia.cloudapp.azure.com/storage/grenade 2.wav", // for now have added static url once upload api fixed will make it dynamic
     };
     generateMusic({ ...fileObject, prompt });
   };
@@ -113,7 +115,6 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
   }, [isChibBtn1Selected, isChibBtn2Selected]);
 
   const togglePlay = (musicSrc: string) => {
-    console.log("musicSrc", musicSrc);
     if (isMusicPlaying && currentMusicSrc === musicSrc) {
       return updateMusicPlayingStatus(false);
     }
@@ -389,7 +390,7 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
 
                   <div>
                     <div className={styles.suggestiontext}>
-                      or choose from our library
+                      Choose from our library
                     </div>
                     <div className={styles.libraryMusic}>
                       <div className={styles.audiofiles}>
