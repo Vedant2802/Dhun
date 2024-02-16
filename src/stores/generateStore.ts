@@ -216,6 +216,7 @@ export const useGenerateStore = create<IGenerateStore>((set, get) => ({
   },
 
   generateMusic: async (requestObj: GenerateMusicRequestObj) => {
+    debugger
     try {
       set(() => ({ status: API_STATUS_TYPES.loading }));
       const data: any = await generateMusicApi<object>({
