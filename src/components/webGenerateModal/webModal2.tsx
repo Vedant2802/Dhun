@@ -12,10 +12,14 @@ import uploadbutton from "../../../public/icons/upload-button.svg";
 import stopCreatingSvg from "../../../public/icons/stopCreating.svg";
 import artistimage from "../../../public/icons/Artist image.png";
 import { Player } from "@lottiefiles/react-lottie-player";
+import playBlack from "../../../public/icons/playBlack.svg";
+import GOT from "../../../public/audio/GOT music.wav";
+import BRUNO from "../../../public/audio/Bruno-Mars grenade.wav";
+import TURKISH_MARCH from "../../../public/audio/Turkish March-Mozart.wav";
 
 enum UPLOADED_DEFAULT_MUSIC_REFERENCES {
-  brunoMars = "http://dhun.centralindia.cloudapp.azure.com/storage/grenade 2.wav",
-  gotMusic = "http://dhun.centralindia.cloudapp.azure.com/storage/Game of thrones 1.wav",
+  brunoMars = "http://dhun.centralindia.cloudapp.azure.com/api-test/download/cdfe2626-aabf-44ac-8d00-f0441dd92503.wav",
+  gotMusic = "http://dhun.centralindia.cloudapp.azure.com/api-test/download/20240215081754_abc.wav",
 }
 
 enum DEFAULT_PROMPTS {
@@ -27,7 +31,6 @@ enum DEFAULT_PROMPTS {
 
 const defaultReqObj = {
   generation_type: "melody-to-music",
-  file_name: "",
 };
 
 type webmodalprops = {
@@ -41,10 +44,8 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
   const [fileSizeError, setFileSizeError] = useState("");
   const [fileName, setFileName] = useState("");
   const videoRef: any = useRef<any>(null);
-  const [videoPath, setVideoPath] = useState("");
-  const uploadFileForWebsite = useGenerateStore(
-    (state) => state.uploadFileForWebsite
-  );
+  const [filePath, setFilePath] = useState("");
+  const uploadFile = useGenerateStore((state) => state.uploadFile);
   const setUser = useGenerateStore((state) => state.setUser);
   // const generateMusic = useGenerateStore(
   //   (state) => state.generateMusicForWebsite
@@ -60,46 +61,46 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
   );
   const currentMusicSrc = useGenerateStore((state) => state.currentMusicSrc);
   const isMusicPlaying = useGenerateStore((state) => state.isMusicPlaying);
+  const uploadfile = useGenerateStore((state) => state?.file?.file_name);
   const resetWebsiteData = useGenerateStore((state) => state.resetWebsiteData);
   const { status, musicUrls } = useGenerateStore((state) => ({
     status: state.websiteData.status,
     musicUrls: state.websiteData.musicUrls,
   }));
+  const [isUploadFile, setUploadFile] = useState<boolean>(false);
+  const [loadingTextIndex, setLoadingTextIndex] = useState(0);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") as any);
+    if (user) {
+      setUser(user);
+    }
+    resetState();
+  }, []);
+
+  useEffect(() => {
+    if (uploadfile) {
+      setUploadFile(true);
+      // setSelectedItem(fileName);
+    }
+  }, [uploadfile]);
+
+  const onVideoFileUpload = (event: any) => {
+    const FormD: any = new FormData();
+    const fileName = event.target.files[0].name;
+    setFileName(fileName);
+    setFileSizeError("");
+    FormD.append("file", event.target.files[0]);
+    uploadFile(FormD, fileName);
+  };
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
-    generateMusic({ ...defaultReqObj, prompt });
-  };
-
-  // const onFileUpload = (event: any) => {
-  //   // if (event.target.files[0].size > 10485760) {
-  //   //   setFileSizeError("Kindly upload a file under 10mb");
-  //   //   return;
-  //   // }
-  //   const FormD: any = new FormData();
-  //   const fileName = event.target.files[0].name;
-  //   setFileName(fileName);
-  //   setFileSizeError("");
-  //   FormD.append("file", event.target.files[0]);
-  //   uploadFileForWebsite(FormD);
-  // };
-
-  const audioUpload = (audio: string) => {
-    if (audio === "GOT") {
-      generateMusic({
-        ...defaultReqObj,
-        prompt: prompt || "upbeat, neutral, driving",
-        file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.gotMusic,
-      });
-    } else {
-      generateMusic({
-        ...defaultReqObj,
-        prompt:
-          prompt ||
-          "joyful, medium tempo, high pitch, classical, sitar, tabla, harmonium, uplifting, melodic, rhythmic",
-        file_path: UPLOADED_DEFAULT_MUSIC_REFERENCES.brunoMars,
-      });
-    }
+    const fileObject = {
+      ...defaultReqObj,
+      file_name: uploadfile,
+    };
+    generateMusic({ ...fileObject, prompt });
   };
 
   useEffect(() => {
@@ -111,30 +112,8 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     }
   }, [isChibBtn1Selected, isChibBtn2Selected]);
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user") as any);
-    if (user) {
-      setUser(user);
-    }
-    resetState();
-  }, []);
-
-  // const chibBtnStyle = (selected: boolean) => {
-  //   // if (prompt) {
-  //   //   return styles.overlayBtn;
-  //   // }
-  //   return selected ? styles.chibBtnActive : styles.chipBtn;
-  // };
-
-  // const renderLoadingBtns = () => {
-  //   return Array(3)
-  //     .fill("")
-  //     .map((_, index: number) => {
-  //       return <div key={index} className={styles.loadingBtn}></div>;
-  //     });
-  // };
-
   const togglePlay = (musicSrc: string) => {
+    console.log("musicSrc", musicSrc);
     if (isMusicPlaying && currentMusicSrc === musicSrc) {
       return updateMusicPlayingStatus(false);
     }
@@ -147,7 +126,7 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     setChibBtn2Selected(false);
     setPrompt("");
     setFileName("");
-    setVideoPath("");
+    // setVideoPath("");
   };
 
   const getMusicIcon = (musicSrc: string) => {
@@ -155,6 +134,28 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
       ? pauseIcon
       : playIcon;
   };
+
+  const loadingTexts = [
+    "Waiting to start…",
+    "Analyzing your melody to understand its unique characteristics...",
+    "Experimenting with harmonies and rhythms to develop fresh interpretations..",
+    "Refining the harmonies and chord progressions to evoke the right emotions...",
+    "Polishing the arrangement to create a captivating musical journey..",
+    "Mastering the final mix to achieve professional-grade sound quality...",
+  ];
+
+  useEffect(() => {
+    let timeout: number | undefined;
+    if (status === "loading") {
+      // Update loading text index every 10 seconds
+      timeout = setTimeout(() => {
+        setLoadingTextIndex(
+          (prevIndex) => (prevIndex + 1) % loadingTexts.length
+        );
+      }, 10000);
+    }
+    return () => clearTimeout(timeout);
+  }, [status, loadingTextIndex]);
 
   const renderMusicUrls = () => {
     if (musicUrls && musicUrls.length) {
@@ -190,24 +191,33 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     return null;
   };
 
-  // const renderVideo = () => {
-  //   if (videoPath) {
-  //     return (
-  //       <video ref={videoRef} width="auto" muted loop>
-  //         <source src={videoPath} type="video/mp4" />
-  //       </video>
-  //     );
-  //   }
-  //   return null;
-  // };
+  const SelectedItemBox = ({
+    text,
+    onClose,
+  }: {
+    text: string;
+    onClose: () => void;
+  }) => {
+    return (
+      <div className={styles.selectedItemBox}>
+        <span className={styles.selectedItemText}>{text}</span>
+        <img
+          src={closeicon}
+          alt="Close"
+          className={styles.closeIcon2}
+          onClick={onClose}
+        />
+      </div>
+    );
+  };
 
-  const onVideoFileUpload = (event: any) => {
-    const FormD: any = new FormData();
-    const fileName = event.target.files[0].name;
-    setFileName(fileName);
-    setFileSizeError("");
-    FormD.append("file", event.target.files[0]);
-    uploadFileForWebsite(FormD);
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const selectLibraryItem = (itemName: string) => {
+    setSelectedItem(itemName);
+  };
+
+  const clearSelectedItem = () => {
+    setSelectedItem(null);
   };
 
   useEffect(() => {
@@ -220,54 +230,13 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
     }
   }, [currentMusicSrc, isMusicPlaying]);
 
+  const clearUpload = () => {
+    setUploadFile(false);
+  };
+
   return (
     <dialog className={styles.webDialog}>
       <form className={styles.generatePopup} onSubmit={handleOnSubmit}>
-        {/* {renderVideo()} */}
-        {/* {!videoPath && (
-          <div
-            className={`${styles.topCard} ${
-              ((musicUrls && musicUrls?.length > 0) ||
-                status === API_STATUS_TYPES.loading) &&
-              `${styles.topcardloaded}`
-            }  `}
-          >
-            <div className={styles.topCardDiv}>
-              <div className={styles.topDiv}>
-                <p className={styles.closeIconwhite}></p>
-                <p className={styles.topCardText}>Create melody &rarr; music</p>
-              </div>
-
-              <button className={styles.closeIconWrapper}>
-                <img
-                  className={styles.closeIcon}
-                  src={closeicon}
-                  onClick={() => closePopup(false)}
-                />
-              </button>
-            </div>
-
-            {status === API_STATUS_TYPES.success && (
-              <div className={styles.uploadButton}>
-                <img src={uploadbutton} />
-                <span>Upload your own video </span>
-                <input
-                  type="file"
-                  id="uploadVideo"
-                  name="filename"
-                  accept="video/mp4,video/x-m4v,video/*"
-                  onChange={onVideoFileUpload}
-                  className={styles.videoUpload}
-                />
-              </div>
-            )}
-            {status === API_STATUS_TYPES.loading && (
-              <div className={styles.uploadButton}>
-                <span className={styles.generating}> Generating . . . </span>
-              </div>
-            )}
-          </div>
-        )} */}
         <div className={styles.topCardDiv}>
           <div className={styles.topDiv}>
             {/* <p className={styles.closeIconwhite}></p> */}
@@ -282,14 +251,70 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
             />
           </button>
         </div>
-        {status === API_STATUS_TYPES.success && musicUrls?.length ? (
-          renderMusicUrls()
+        {/* {status === API_STATUS_TYPES.success && musicUrls?.length ? (
+          renderMusicUrls() */}
+        {status === API_STATUS_TYPES.success ? (
+          <>
+            {/* Render prompt with selected item box */}
+            <div className={styles.chipinputwrapper}>
+              <div className={styles.chip}>
+                {selectedItem && (
+                  <SelectedItemBox
+                    text={selectedItem}
+                    onClose={clearSelectedItem}
+                  />
+                )}
+                <input
+                  name="prompt"
+                  className={styles.chipInput}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  placeholder="Describe the music you wish to create. Try an Indian variation of the song"
+                  value={prompt}
+                />
+                <div
+                  className={`${styles.musicButton} ${
+                    prompt.trim() === "" ? styles.disabled : ""
+                  }`}
+                  onClick={(e) => {
+                    // Check if the prompt is empty or not
+                    if (prompt.trim() !== "") {
+                      handleOnSubmit(e);
+                    }
+                  }}
+                >
+                  <img src={musicbutton} />
+                  <div className={styles.generate}>Generate</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Render musicUrls if available */}
+            {musicUrls && musicUrls?.length > 0 && renderMusicUrls()}
+          </>
         ) : (
           <>
             <div className={styles.chipWrapper}>
               {status === API_STATUS_TYPES.loading ? (
                 <>
                   {/* {renderLoadingBtns()} */}
+                  {prompt && (
+                    <div className={styles.promptContainer}>
+                      {selectedItem && (
+                        <SelectedItemBox
+                          text={selectedItem}
+                          onClose={clearSelectedItem}
+                        />
+                      )}
+                      {/* Render the divider if both prompt and selected item are present */}
+                      {prompt && selectedItem && (
+                        <div className={styles.divider}></div>
+                      )}
+                      <div>{prompt}</div>
+                    </div>
+                  )}
+                  <div className={styles.loadingText}>
+                    {loadingTexts[loadingTextIndex]}
+                  </div>
                   <Player
                     src="https://amlzee5sbci1mu5120768980.blob.core.windows.net/dhunai/visualization1.json?sp=r&st=2024-01-29T08:08:31Z&se=2025-01-01T16:08:31Z&sv=2022-11-02&sr=b&sig=%2BdhuFDIA4l8f35Rq5Mar1GhNMDq1DNA5HxZ6YTkltu4%3D"
                     className="player"
@@ -297,7 +322,7 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                     autoplay
                     style={{ height: "200px", width: "100%" }}
                   />
-                  <div className={styles.stopCreatingBtn}>
+                  {/* <div className={styles.stopCreatingBtn}>
                     Generating your music tracks...
                   </div>
                   <button
@@ -306,74 +331,138 @@ const WebModal2 = ({ closePopup }: webmodalprops) => {
                   >
                     <img src={stopCreatingSvg} alt="stop creating" />
                     Stop creating
-                  </button>
+                  </button> */}
                 </>
               ) : (
                 <>
-                  <div className={styles.chipinputwrapper}>
-                    <div className={styles.chip}>
-                      <input
-                        name="prompt"
-                        className={styles.chipInput}
-                        onChange={(e) => setPrompt(e.target.value)}
-                        placeholder="Describe the music you wish to create. Try an Indian variation of the song"
-                      />
+                  {/* {isUploadFile ? (
+                    <div
+                      className={`${styles.uploadButton} ${styles.uploadedMusic}`}
+                    >
                       <div
-                        className={styles.musicButton}
-                        onClick={(e) => handleOnSubmit(e)}
+                        className={styles.musicButtonUpload}
+                        onClick={() => togglePlay(uploadFile)}
                       >
-                        <img src={musicbutton} />
-                        <div className={styles.generate}>Generate</div>
+                        <img className={styles.uploadIcon} src={playBlack} />
+                      </div>
+                      <div className={styles.uploadedFileClose}>
+                        <span className={styles.musicButtonText}>
+                          {fileName}
+                        </span>
+                        <img
+                          className={styles.closeIcon}
+                          src={closeicon}
+                          alt="closeIcon"
+                          onClick={clearUpload}
+                        />
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    <div className={styles.suggestionbtn}>
-                      <img src={plus} />
-                      <p className={styles.suggestiontext}>
-                        Add reference music
-                      </p>
-                    </div>
-                    <div className={styles.uploadButton}>
-                      <div className={styles.musicButtonUpload}>
-                        <img className={styles.uploadIcon} src={uploadbutton} />
+                  ) : (
+                    <div>
+                      <div className={styles.suggestionbtn}>
+                        <img src={plus} />
+                        <p className={styles.suggestiontext}>
+                          Add reference music
+                        </p>
                       </div>
-                      <span className={styles.musicButtonText}>
-                        Upload your music
-                      </span>
-                      <input
-                        type="file"
-                        id="uploadVideo"
-                        name="filename"
-                        // accept="video/mp4,video/x-m4v,video/*"
-                        onChange={onVideoFileUpload}
-                        className={styles.videoUpload}
-                      />
+                      <div className={styles.uploadButton}>
+                        <div className={styles.musicButtonUpload}>
+                          <img
+                            className={styles.uploadIcon}
+                            src={uploadbutton}
+                          />
+                        </div>
+                        <span className={styles.musicButtonText}>
+                          Upload your music
+                        </span>
+                        <input
+                          type="file"
+                          id="uploadVideo"
+                          name="filename"
+                          // accept="video/mp4,video/x-m4v,video/*"
+                          onChange={onVideoFileUpload}
+                          className={styles.videoUpload}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )} */}
 
                   <div>
                     <div className={styles.suggestiontext}>
                       or choose from our library
                     </div>
                     <div className={styles.libraryMusic}>
-                      <div
-                        onClick={() => audioUpload("Bruno")}
-                        className={styles.audiofiles}
-                      >
+                      <div className={styles.audiofiles}>
                         <img src={artistimage} className={styles.artistimg} />
-                        <span className={styles.artistsongtext}>
+                        <img
+                          className={styles.suggestionIcon}
+                          src={getMusicIcon(BRUNO)}
+                          onClick={() => togglePlay(BRUNO)}
+                        />
+                        <div
+                          className={styles.artistsongtext}
+                          onClick={() => selectLibraryItem("BRUNO")}
+                        >
                           Grenade by Bruno Mars
-                        </span>
+                        </div>
                       </div>
-                      <div
-                        onClick={() => audioUpload("GOT")}
-                        className={styles.audiofiles}
-                      >
+                      <div className={styles.audiofiles}>
                         <img src={artistimage} className={styles.artistimg} />
-                        <span className={styles.artistsongtext}>
+                        <img
+                          className={styles.suggestionIcon}
+                          src={getMusicIcon(GOT)}
+                          onClick={() => togglePlay(GOT)}
+                        />
+                        <div
+                          className={styles.artistsongtext}
+                          onClick={() => selectLibraryItem("GOT")}
+                        >
                           Streets of London by R McTell
-                        </span>
+                        </div>
+                      </div>
+                      <div className={styles.audiofiles}>
+                        <img src={artistimage} className={styles.artistimg} />
+                        <img
+                          className={styles.suggestionIcon}
+                          src={getMusicIcon(TURKISH_MARCH)}
+                          onClick={() => togglePlay(TURKISH_MARCH)}
+                        />
+                        <div
+                          className={styles.artistsongtext}
+                          onClick={() => selectLibraryItem("TURKISH_MARCH")}
+                        >
+                          Turkish March Mozart
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.chipinputwrapper}>
+                      <div className={styles.chip}>
+                        {selectedItem && (
+                          <SelectedItemBox
+                            text={selectedItem}
+                            onClose={clearSelectedItem}
+                          />
+                        )}
+                        <input
+                          name="prompt"
+                          className={styles.chipInput}
+                          onChange={(e) => setPrompt(e.target.value)}
+                          placeholder="Describe the music you wish to create. Try an Indian variation of the song"
+                        />
+                        <div
+                          className={`${styles.musicButton} ${
+                            prompt.trim() === "" ? styles.disabled : ""
+                          }`}
+                          onClick={(e) => {
+                            // Check if the prompt is empty or not
+                            if (prompt.trim() !== "") {
+                              handleOnSubmit(e);
+                            }
+                          }}
+                        >
+                          <img src={musicbutton} />
+                          <div className={styles.generate}>Generate</div>
+                        </div>
                       </div>
                     </div>
                   </div>
