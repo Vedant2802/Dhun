@@ -54,7 +54,7 @@ const VideoComponent = () => {
       {isPlaying && (
         <img
           // src={isMuted ? muteIcon : volumeIcon}
-          src={volumeIcon}
+          src={isMuted ? muteIcon : volumeIcon}
           alt="muteIcon"
           onClick={toggleMute}
           className={styles.muteButton}

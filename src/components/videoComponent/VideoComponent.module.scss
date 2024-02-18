@@ -8,12 +8,15 @@
 }
 
 .muteButton {
-  border-radius: 50%;
   position: absolute;
-  top: 50%;
-  right: 10%;
-  transform: translate(50%, -50%);
-  z-index: 99;
+  height: 40px;
+  width: 40px;
+  bottom: 20px; // Adjust this value to position it vertically
+  left: 20px; // Adjust this value to position it horizontally
+  z-index: 10;
+  @media screen and (max-width: 600px) {
+    bottom: 11rem;
+  }
 }
 
 .video {
