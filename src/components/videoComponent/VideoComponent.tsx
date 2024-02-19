@@ -3,9 +3,12 @@ import styles from "./VideoComponent.module.scss";
 import playIcon from "../../../public/icons/playIcon.svg";
 import pauseIcon from "../../../public/icons/pausegrey.svg";
 import thumbnail from "../../../public/icons/thumbnail.png";
+import volumeIcon from "../../../public/icons/volumeIcon.svg";
+import muteIcon from "../../../public/icons/muteIcon.svg";
 
 const VideoComponent = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -17,6 +20,13 @@ const VideoComponent = () => {
     } else {
       videoRef.current?.play();
     }
+  };
+
+  const isSmallScreen = () => window.innerWidth <= 600;
+
+  const toggleMute = () => {
+    setIsMuted((prev: boolean) => !prev);
+    videoRef.current!.muted = !isMuted;
   };
 
   return (
@@ -41,8 +51,23 @@ const VideoComponent = () => {
           className={styles.playPause}
         />
       )}
+      {isPlaying && (
+        <img
+          // src={isMuted ? muteIcon : volumeIcon}
+          src={volumeIcon}
+          alt="muteIcon"
+          onClick={toggleMute}
+          className={styles.muteButton}
+        />
+      )}
+
       <div className={styles.topContainer}>
-        <div className={styles.heading}>
+        <div
+          className={styles.heading}
+          style={{
+            display: isPlaying && !isSmallScreen() ? "none" : "flex",
+          }}
+        >
           <span className={styles.topHeading}>
             {" "}
             Make professional-quality music at speed with AI
