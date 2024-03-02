@@ -128,9 +128,15 @@ const MonetizeTunes: React.FC<any> = ({ setShowContactPopup }) => {
           &copy; 2023 - Copyright belong to ZEEL
         </div>
         <div className={styles.copyrightContent2}>
-          <span>Privacy</span>
-          <span>Legal</span>
-          <span>Terms & Conditions</span>
+          <button onClick={() => navigate("/PrivacyPolicy")}>
+            <span>Privacy Policy</span>
+          </button>
+          <button onClick={() => navigate("/Disclaimer")}>
+            <span>Disclaimer</span>
+          </button>
+          <button onClick={() => navigate("/ResponsibleAi")}>
+            <span>Resposible AI</span>
+          </button>
           <span> All rights reserved</span>
         </div>
       </div>

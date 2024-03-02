@@ -8,6 +8,9 @@ import DhunAi from "./pages/DhunAi/DhunAi";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import * as React from "react";
 import AudioPlayer from "./components/audioPlayer/AudioPlayer";
+import ResponsibleAiPage from "./pages/StaticPages/ResponsibleAi";
+import PrivacyPolicyPage from "./pages/StaticPages/PrivacyPolicy";
+import DisclaimerPage from "./pages/StaticPages/Disclaimer";
 
 function App() {
   return (
@@ -28,6 +31,10 @@ function App() {
             }
           />
           <Route path="/" element={<DhunAi />} />
+          <Route path="/ResponsibleAi" element={<ResponsibleAiPage />} />
+          <Route path="/PrivacyPolicy" element={<PrivacyPolicyPage />} />
+          <Route path="/Disclaimer" element={<DisclaimerPage/>} />
+          debugger
         </Routes>
       </BrowserRouter>
     </div>
