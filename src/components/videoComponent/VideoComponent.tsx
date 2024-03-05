@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./VideoComponent.module.scss";
-import playIcon from "../../../public/icons/playIcon.svg";
+// import playIcon from "../../../public/icons/playIcon.svg";
 import pauseIcon from "../../../public/icons/pausegrey.svg";
 import thumbnail from "../../../public/icons/thumbnail.png";
 import volumeIcon from "../../../public/icons/volumeIcon.svg";
@@ -53,8 +53,7 @@ const VideoComponent = () => {
       )}
       {isPlaying && (
         <img
-          // src={isMuted ? muteIcon : volumeIcon}
-          src={volumeIcon}
+          src={isMuted ? muteIcon : volumeIcon}
           alt="muteIcon"
           onClick={toggleMute}
           className={styles.muteButton}
