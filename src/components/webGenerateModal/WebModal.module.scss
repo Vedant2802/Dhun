@@ -541,6 +541,11 @@
   right: 18px;
 }
 
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .promptContainer {
   display: flex;
   color: #fff;
