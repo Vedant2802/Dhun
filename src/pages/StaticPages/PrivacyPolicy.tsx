@@ -1,9 +1,10 @@
 import React from "react";
+import Footer from "../../components/footer/footer";
 
 const PrivacyPolicyPage = () => {
   return (
     <div>
-      <h1>Responsible AI</h1>
+      <h1>Privacy Policy</h1>
       <p>
         Introduction    Welcome to Dhun.ai. Introducing Dhun.ai, a cutting-edge
         content marketing suite tailored for marketers in the television &
@@ -31,11 +32,11 @@ const PrivacyPolicyPage = () => {
         applicable privacy laws.  All capitalized terms that have not been
         specifically defined herein shall have the same meaning as provided
         under the Terms of Use.  This Privacy Policy should be read in
-        conjunction and together with the Terms of Use.   Objective & Scope 
-        This notice applies to Visitors, Customers, Prospective Customers etc.
-        For the purposes of this notice, a "visitor" of Dhun.ai refers to an
+        conjunction and together with the Terms of Use.   Objective & Scope This
+        notice applies to Visitors, Customers, Prospective Customers etc. For
+        the purposes of this notice, a "visitor" of Dhun.ai refers to an
         individual who accesses the website, or who provides personal data to
-        Dhun.ai through other means, such as filling out a contact form online. 
+        Dhun.ai through other means, such as filling out a contact form online.
         A “Customer” of Dhun.ai refers to an individual who has entered into a
         valid contract to avail the services being provided on this website.
         Both these above-listed categories of individuals are potential
@@ -94,7 +95,7 @@ const PrivacyPolicyPage = () => {
         content of such payment gateways and their privacy practices, nor do we
         endorse them. We encourage you to familiarize yourself with the privacy
         statements provided by such payment gateways prior to providing them
-        with information about you or entering into any transactions with them. 
+        with information about you or entering into any transactions with them.
         Dhun.ai shall not be liable, accountable, or responsible for your
         Personal Information, Sensitive Personal Data and Financial Information
         which you provide to these payment gateways.  How We Utilize Information
@@ -250,7 +251,7 @@ const PrivacyPolicyPage = () => {
         to data portability – You have a right to receive the Personal Data you
         have provided to us in a structured, commonly used and machine-readable
         format. You are also entitled to the right to transmit your Personal
-        Data to another controller to another where it is technically feasible. 
+        Data to another controller to another where it is technically feasible.
         Right to object – You have a right to object to the processing of your
         Personal Data. Yx ou have a right to object where your Personal Data is
         processed for marketing purposes. Additional Terms for UK Citizens:
@@ -277,7 +278,7 @@ const PrivacyPolicyPage = () => {
         portability – You have a right to receive the Personal Data you have
         provided to us in a structured, commonly used and machine-readable
         format. You are also entitled to the right to transmit your Personal
-        Data to another controller to another where it is technically feasible. 
+        Data to another controller to another where it is technically feasible.
         Right to object – You have a right to object to the processing of your
         Personal Data.  You may exercise any of the rights enlisted above by
         contacting us at the contact details provided below. In exercise of your
@@ -285,7 +286,7 @@ const PrivacyPolicyPage = () => {
         for us to confirm your identity, which shall include but shall not be
         limited to your full name, address, username or registration details. In
         addition to the above you will also be required to confirm the right you
-        wish to exercise and the Personal Data to which your request relates. 
+        wish to exercise and the Personal Data to which your request relates.
         Specific Provisions for California Users   If you are a resident of
         California, we shall handle your Personal Data in consonance with the
         California Consumer Privacy Act (CCPA) and California Privacy Rights Act
@@ -316,7 +317,7 @@ const PrivacyPolicyPage = () => {
         collecting Personal Data, categories of third parties with whom Personal
         Data is shared. You have a right not to be discriminated against for
         exercising certain rights under California law. You may exercise your
-        rights by contacting us at the contact details provided herein under. 
+        rights by contacting us at the contact details provided herein under.
         Changes to this Privacy Statement Dhun.ai may periodically update this
         Privacy Statement to reflect any changes in the processing of your
         Personal Data. Where material changes are made to this Privacy
@@ -343,7 +344,7 @@ const PrivacyPolicyPage = () => {
         information or this privacy policy or grievances with respect to use of
         your personal information, please email us at Dhun.ai Address for
         receiving notices:  ZEE Entertainment Enterprises Limited, 8th Floor, A
-        Wing, Marathon Futurex, N M Joshi Marg, Lower Parel, Mumbai – 400013 
+        Wing, Marathon Futurex, N M Joshi Marg, Lower Parel, Mumbai – 400013
         Privacy Policy Last Updated - 10/01/2024
       </p>
     </div>

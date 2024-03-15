@@ -11,6 +11,9 @@ import AudioPlayer from "./components/audioPlayer/AudioPlayer";
 import ResponsibleAiPage from "./pages/StaticPages/ResponsibleAi";
 import PrivacyPolicyPage from "./pages/StaticPages/PrivacyPolicy";
 import DisclaimerPage from "./pages/StaticPages/Disclaimer";
+import Footer from "./components/footer/footer";
+import HomeHeader from "./components/homeHeader/homeHeader";
+import HomePageHeader from "./components/homePageHeader/homePageHeader";
 
 function App() {
   return (
@@ -24,17 +27,43 @@ function App() {
             path="/editor-dashboard"
             element={
               <main className="dashboardContainer">
-                <Header />
+                <HomePageHeader />
                 <MainDashboard />
                 <AudioPlayer />
               </main>
             }
           />
           <Route path="/" element={<DhunAi />} />
-          <Route path="/ResponsibleAi" element={<ResponsibleAiPage />} />
-          <Route path="/PrivacyPolicy" element={<PrivacyPolicyPage />} />
-          <Route path="/Disclaimer" element={<DisclaimerPage/>} />
-          debugger
+          <Route
+            path="/ResponsibleAi"
+            element={
+              <main className="dashboardContainer">
+                <HomePageHeader />
+                <ResponsibleAiPage />
+                {/* <Footer /> */}
+              </main>
+            }
+          />
+          <Route
+            path="/PrivacyPolicy"
+            element={
+              <main className="dashboardContainer">
+                <HomePageHeader />
+                <PrivacyPolicyPage />
+                <Footer />
+              </main>
+            }
+          />
+          <Route
+            path="/Disclaimer"
+            element={
+              <main className="dashboardContainer">
+                <HomePageHeader />
+                <DisclaimerPage />
+                <Footer />
+              </main>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

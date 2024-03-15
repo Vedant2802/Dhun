@@ -1,8 +1,9 @@
 import React from "react";
+import Footer from "../../components/footer/footer";
 
 const ResponsibleAiPage = () => {
   return (
-    <div>
+    <div className="responsible-ai-page">
       <h1>Responsible AI</h1>
       <p>
         At SubDub.Ai, we prioritize ethical considerations in generating
@@ -17,6 +18,7 @@ const ResponsibleAiPage = () => {
         commitment to accessibility is further emphasized by aligning with
         accessibility standards, ensuring the inclusivity of subtitles
       </p>
+      <Footer />
     </div>
   );
 };
