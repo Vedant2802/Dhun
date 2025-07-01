@@ -35,11 +35,21 @@ const VideoComponent = () => {
         className={styles.video}
         ref={videoRef}
         poster={thumbnail}
-        src="https://amlzee5sbci1mu5120768980.blob.core.windows.net/dhunai/video/DHUN_AI_VIDEO_FINAL_HD.mp4?sp=r&st=2024-02-09T08:17:13Z&se=2025-01-31T16:17:13Z&sv=2022-11-02&sr=c&sig=6zNf1uiC5J8pWr13HKp7%2Bh2OzoyacHPsT4DeG2W3ozo%3D"
         width="100%"
         height="100vh"
         onClick={playVideoPlayer}
+        onError={(e) => {
+          const video = e.currentTarget;
+          if (video.error) {
+            console.error(
+              `Video error code: ${video.error.code}, message: ${video.error.message}`
+            );
+          } else {
+            console.error("Unknown video error");
+          }
+        }}
       >
+        <source src="/video/hummed.mp4" type="video/mp4" />
         Sorry, your browser doesn't support embedded videos and watch it with
         your favorite video player!
       </video>
@@ -72,7 +82,7 @@ const VideoComponent = () => {
             Make professional-quality music at speed with AI
           </span>
           <span className={styles.bottomHeading}>
-            India’s 1st FMM that makes music in classical, Bollywood & 20+
+            India's 1st FMM that makes music in classical, Bollywood & 20+
             genres 
           </span>
         </div>
