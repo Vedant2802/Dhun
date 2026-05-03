@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import DhunAiComponent from "../../components/DhunAiComponent/DhunAiComponent";
 import OurFeature from "../../components/OurFeature/OurFeature";
 import MonetizeTunes from "../../components/MonetizeTunes/MonetizeTunes";
 import HomeHeader from "../../components/homeHeader/homeHeader";
@@ -22,7 +21,6 @@ const DhunAi = () => {
       <div className={styles.popup}>
         {showContactPopup && <ContactPopup onClose={handleTogglePopup} />}
       </div>
-      {/* <DhunAiComponent /> */}
       <VideoComponent />
       <OurFeature />
       <MonetizeTunes setShowContactPopup={setShowContactPopup} />

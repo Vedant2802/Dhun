@@ -159,7 +159,6 @@ const Login = () => {
         </div>
       </div>
 
-      {/* {openAuthModal && <OtpAuthenticate closePopup={setOpenAuthModal} />} */}
     </>
   );
 };
